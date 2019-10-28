@@ -1,0 +1,83 @@
+
+
+<div fxLayout="row" fxLayoutAlign="center center">
+
+    <mat-card class="card">
+        <mat-card-header class="header">
+            <mat-card-title class="header-title">Create New Acount</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <mat-vertical-stepper [linear]="true" #stepper>
+                <mat-step [stepControl]="emailForm">
+                    <form [formGroup]="emailForm">
+                        <ng-template matStepLabel>Fill out your Email</ng-template>
+                        <mat-form-field class="email-form">
+                            <input matInput placeholder="Email" formControlName="email" required>
+                        </mat-form-field>
+                        <mat-error *ngIf="emailForm.get('email').hasError('required') && emailForm.touched">
+                            Email required
+                        </mat-error>
+                        <mat-error *ngIf="emailForm.get('email').hasError('email') && emailForm.touched">
+                            Email invalid
+                        </mat-error>
+                        <div>
+                            <button mat-raised-button color="warn" (click)="checkEmail()" class="btn">
+                                Check email
+                            </button>
+                            <button mat-raised-button color="primary" matStepperNext class="btn"
+                                [disabled]="!emailOk && emailForm.invalid">Next</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step [stepControl]="passwordForm">
+                    <form [formGroup]="passwordForm">
+                        <ng-template matStepLabel>Fill out your password</ng-template>
+                        <mat-form-field class="password-form">
+                            <input matInput placeholder="password" formControlName="password" required>
+                            </mat-form-field>
+                            <mat-form-field class="password-form">
+                                <input matInput placeholder="password" formControlName="confirmPassword" required>
+                            </mat-form-field>
+                            <div>
+                                <mat-error *ngIf="passwordForm.get('password').hasError('required') && passwordForm.touched">
+                                    Password required
+                                </mat-error>
+                                <mat-error *ngIf="passwordForm.get('password').hasError('minlength') && passwordForm.touched">
+                                    Minimum length is six caracter
+                                </mat-error>
+                                <mat-error *ngIf="passwordForm.get('password').hasError('mustContainUpperCase') && passwordForm.touched">
+                                    Must Contain An Upper Case
+                                </mat-error>
+                                <mat-error *ngIf="passwordForm.get('password').hasError('mustContainLowerCase') && passwordForm.touched">
+                                    Must Contain A Lower Case
+                                </mat-error>
+                                <mat-error *ngIf="passwordForm.get('password').hasError('mustContainNumber') && passwordForm.touched">
+                                    Must Contain A Number
+                                </mat-error>
+                                <mat-error *ngIf="passwordForm.get('password').hasError('mustContainSpecialCaracter') && passwordForm.touched">
+                                    Must Contain Special Caracter
+                                </mat-error>
+                                <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('mustMatch') && passwordForm.touched">
+                                    Password Must Match
+                                </mat-error>
+                            </div>
+                        <div>
+                            <button mat-raised-button color="warn" matStepperPrevious class="btn">Back</button>
+                            <button mat-raised-button color="primary" matStepperNext (click)="createAccount()" class="btn">Create Account</button>
+                        </div>
+                    </form>
+                </mat-step>
+                <mat-step>
+                    <ng-template matStepLabel>Done</ng-template>
+                    <div class="message">
+                        {{accountCreatedResult}}
+                    </div>
+                    <div>
+                        <button mat-raised-button color="warn" (click)="stepper.reset()" class="btn">Start over</button>
+                        <button mat-raised-button color="primary" (click)="routeToHome()" class="btn">Home Page</button>
+                    </div>
+                </mat-step>
+            </mat-vertical-stepper>
+        </mat-card-content>
+    </mat-card>
+</div>
