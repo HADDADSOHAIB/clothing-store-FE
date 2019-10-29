@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { AuthRoutingModule } from './auth-routing.module';
 import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http'
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -16,6 +16,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from './service/auth-service/auth.service';
 import { SignInComponent } from './component/sign-in/sign-in.component';
+import { AuthInterceptor } from '../http.interceptor';
 
 
 @NgModule({
@@ -39,7 +40,12 @@ import { SignInComponent } from './component/sign-in/sign-in.component';
   ],
   providers: [
     AuthService,
-    HttpClient
+    HttpClient,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:AuthInterceptor,
+      multi:true
+    }
   ]
 })
 export class AuthModule { }
