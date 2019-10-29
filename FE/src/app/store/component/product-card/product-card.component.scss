@@ -1,0 +1,28 @@
+.card{
+    margin:5px;
+    width:300px;
+    float:left;
+}
+
+.header{
+    justify-content: center;
+}
+
+.btn{
+    width:100%;
+}
+
+.divbtn{
+    width:100%;
+    margin-bottom:2px;
+}
+
+img{
+    height:150px;
+}
+
+@media only screen and (max-width: 300px) {
+    .card{
+        width: 100%;
+    } 
+}

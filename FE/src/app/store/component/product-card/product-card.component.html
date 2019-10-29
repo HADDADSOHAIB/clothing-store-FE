@@ -1,0 +1,16 @@
+<mat-card class="card">
+    <mat-card-header class="header">
+        <mat-card-title>{{product.title}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image src="{{product.image}}" alt="Photo of item">
+    <div class="content">{{product.price}}</div>
+    <div class="content">{{product.vendorName}}</div>
+    <mat-card-actions fxLayout="column" fxLayoutAlign="start start">
+        <div class="divbtn">
+            <button mat-raised-button color="primary" class="btn">Buy</button>
+        </div>
+        <div class="divbtn">
+            <button mat-raised-button color="accent" class="btn">Details</button>
+        </div>
+    </mat-card-actions>
+</mat-card>

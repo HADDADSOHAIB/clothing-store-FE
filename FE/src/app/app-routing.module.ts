@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'store', 
-    loadChildren: './store/store.module#AuthModule'
+    loadChildren: './store/store.module#StoreModule'
   }
 ];
 
