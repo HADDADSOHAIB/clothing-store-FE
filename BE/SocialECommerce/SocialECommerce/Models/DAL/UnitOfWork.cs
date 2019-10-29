@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using SEC.Models.DAL.User;
+using SocialECommerce.Models.DAL.User;
 
-namespace SEC.Models.DAL
+namespace SocialECommerce.Models.DAL
 {
     public class UnitOfWork : IUnitOfWork
     {

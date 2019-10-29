@@ -5,9 +5,8 @@ using System.Threading.Tasks;
 
 namespace SocialECommerce.Models.DTO
 {
-    public class CredentialsDto
+    public class EmailDto
     {
         public string Email { get; set; }
-        public string Password { get; set; }
     }
 }

@@ -1,10 +1,10 @@
-﻿using SEC.Models.DAL.User;
+﻿using SocialECommerce.Models.DAL.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SEC.Models.DAL
+namespace SocialECommerce.Models.DAL
 {
     interface IUnitOfWork:IDisposable
     {

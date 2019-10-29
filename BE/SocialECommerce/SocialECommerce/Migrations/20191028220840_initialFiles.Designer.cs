@@ -5,13 +5,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using SEC.Models.DAL;
+using SocialECommerce.Models.DAL;
 
 namespace SocialECommerce.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20191027192059_initial")]
-    partial class initial
+    [Migration("20191028220840_initialFiles")]
+    partial class initialFiles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

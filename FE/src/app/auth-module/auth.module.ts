@@ -15,11 +15,13 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from './service/auth-service/auth.service';
+import { SignInComponent } from './component/sign-in/sign-in.component';
 
 
 @NgModule({
   declarations: [
-    SignUpComponent
+    SignUpComponent,
+    SignInComponent
   ],
   imports: [
     CommonModule,

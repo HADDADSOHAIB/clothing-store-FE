@@ -1,12 +1,12 @@
 ﻿using AutoMapper;
-using SEC.Models.Business_Models;
-using SEC.Models.DTO;
+using SocialECommerce.Models.Business_Models;
+using SocialECommerce.Models.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SEC.Auto_mapper
+namespace SocialECommerce.Auto_mapper
 {
     public class CredentialsProfile:Profile
     {

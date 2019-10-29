@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using SEC.Models.DTO;
-using SEC.Services;
+using SocialECommerce.Models.DTO;
+using SocialECommerce.Services;
 
 namespace SocialECommerce.Controllers
 {
@@ -50,13 +50,12 @@ namespace SocialECommerce.Controllers
 
             await _signInManager.SignInAsync(user, false);
 
-            //user.Id;
-            return Ok(_authService.GenerateJwtToken(user));
+            return Ok("{\"token\":\"" + _authService.GenerateJwtToken(user) + "\"}");
 
         }
 
         [HttpPost("login")]
-        public async Task<object> Login([FromBody] CredentialsDto credentialsDto)
+        public async Task<ActionResult> Login([FromBody] CredentialsDto credentialsDto)
         {
             var result = await _signInManager.PasswordSignInAsync(credentialsDto.Email, credentialsDto.Password, false, false);
 
@@ -66,18 +65,17 @@ namespace SocialECommerce.Controllers
             }
 
             var appUser = _userManager.Users.SingleOrDefault(r => r.Email == credentialsDto.Email);
-            return Ok(_authService.GenerateJwtToken(appUser));
+            return Ok("{\"token\":\""+ _authService.GenerateJwtToken(appUser) + "\"}");
         }
         [HttpPost("check")]
-        public async Task<object> check([FromBody] string email)
+        public async Task<IActionResult> check([FromBody] EmailDto emailDto)
         {
-            var result = await _userManager.FindByEmailAsync(email);
-
-            if (result.Email != null)
+            var result = await _userManager.FindByEmailAsync(emailDto.Email);
+            if (result != null)
             {
-                return BadRequest("Already an account exist with the email");
+                return BadRequest();
             }
-            return Ok();
+            return Ok("{\"result\":\"email is ok\"}");
         }
     }
 }

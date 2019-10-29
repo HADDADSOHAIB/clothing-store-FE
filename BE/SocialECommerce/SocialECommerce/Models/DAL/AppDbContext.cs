@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace SEC.Models.DAL
+namespace SocialECommerce.Models.DAL
 {
     public class AppDbContext:IdentityDbContext<IdentityUser>
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace SEC.Models.DAL
+namespace SocialECommerce.Models.DAL
 {
     interface IRepository<T> where T: class
     {

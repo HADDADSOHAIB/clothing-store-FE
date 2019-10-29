@@ -15,10 +15,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using SEC.Auto_mapper;
-using SEC.Models.DAL;
+using SocialECommerce.Auto_mapper;
+using SocialECommerce.Models.DAL;
 using Microsoft.EntityFrameworkCore;
-using SEC.Services;
+using SocialECommerce.Services;
 
 namespace SocialECommerce
 {
@@ -59,7 +59,7 @@ namespace SocialECommerce
                 config.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Secret")),
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Secret"])),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };

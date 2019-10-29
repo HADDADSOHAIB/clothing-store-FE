@@ -9,7 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SEC.Services
+namespace SocialECommerce.Services
 {
     public class AuthService : IAuthService
     {
@@ -26,7 +26,7 @@ namespace SEC.Services
                 new Claim(JwtRegisteredClaimNames.Sub,user.Id)
             };
 
-            var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("Secret"));
+            var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Secret"]));
             var signingCredentials = new SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256);
             var jwt = new JwtSecurityToken(signingCredentials: signingCredentials, claims: claims);
             return new JwtSecurityTokenHandler().WriteToken(jwt);

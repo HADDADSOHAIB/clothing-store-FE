@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace SEC.Models.Business_Models
+namespace SocialECommerce.Models.Business_Models
 {
     public class Credentials
     {

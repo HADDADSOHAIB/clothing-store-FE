@@ -7,6 +7,8 @@ import { AuthService } from '../../service/auth-service/auth.service';
 import { take } from 'rxjs/Operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { Email } from '../../Model/email';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,8 +20,8 @@ export class SignUpComponent implements OnInit {
   emailForm: FormGroup;
   passwordForm: FormGroup;
   emailOk:boolean=false;
-  accountCreatedResult:string="";
   accountCreated:boolean=false;
+  creationResult$:Subject<string>=new Subject<string>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -45,14 +47,15 @@ export class SignUpComponent implements OnInit {
   }
 
   checkEmail(){
-    this.authService.checkEmail(this.emailForm.get('email').value)
+    this.authService.checkEmail(new Email(this.emailForm.get('email').value))
       .pipe(take(1)).subscribe(resp=>{
-        console.log(resp);
-        this.emailOk?this.openSnackBar('Email is Ok'):this.openSnackBar('There is already an account with this email');
+        this.emailOk=true;
+        this.openSnackBar('email OK');
       },
       error=>{
         console.log(error);
-        this.openSnackBar('unexpected error');
+        this.emailOk=false;
+        this.openSnackBar('Email NOK');
       });
   }
 
@@ -64,11 +67,14 @@ export class SignUpComponent implements OnInit {
 
     this.authService.createAccount(this.credentials)
       .pipe(take(1)).subscribe(resp=>{
-        this.accountCreatedResult=resp;
+        this.accountCreated=true;
+        localStorage.setItem("token",resp.token);
+        this.creationResult$.next("Account created, un email is sent to your inbox for verification");
       },
       error=>{
         console.log(error);
-        this.accountCreatedResult='unexpected error';
+        this.accountCreated=false;
+        this.creationResult$.next("Unexpected error, please check your internet connection or try later");
       });
   }
 

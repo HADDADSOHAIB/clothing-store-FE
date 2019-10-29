@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 
-namespace SEC.Services
+namespace SocialECommerce.Services
 {
     public interface IAuthService
     {

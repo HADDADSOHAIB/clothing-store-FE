@@ -21,11 +21,12 @@
                             Email invalid
                         </mat-error>
                         <div>
-                            <button mat-raised-button color="warn" (click)="checkEmail()" class="btn">
+                            <button mat-raised-button color="warn" (click)="checkEmail()" 
+                            [disabled]="emailForm.invalid" class="btn">
                                 Check email
                             </button>
                             <button mat-raised-button color="primary" matStepperNext class="btn"
-                                [disabled]="!emailOk && emailForm.invalid">Next</button>
+                                [disabled]="!emailOk">Next</button>
                         </div>
                     </form>
                 </mat-step>
@@ -33,34 +34,34 @@
                     <form [formGroup]="passwordForm">
                         <ng-template matStepLabel>Fill out your password</ng-template>
                         <mat-form-field class="password-form">
-                            <input matInput placeholder="password" formControlName="password" required>
-                            </mat-form-field>
-                            <mat-form-field class="password-form">
-                                <input matInput placeholder="password" formControlName="confirmPassword" required>
-                            </mat-form-field>
-                            <div>
-                                <mat-error *ngIf="passwordForm.get('password').hasError('required') && passwordForm.touched">
-                                    Password required
-                                </mat-error>
-                                <mat-error *ngIf="passwordForm.get('password').hasError('minlength') && passwordForm.touched">
-                                    Minimum length is six caracter
-                                </mat-error>
-                                <mat-error *ngIf="passwordForm.get('password').hasError('mustContainUpperCase') && passwordForm.touched">
-                                    Must Contain An Upper Case
-                                </mat-error>
-                                <mat-error *ngIf="passwordForm.get('password').hasError('mustContainLowerCase') && passwordForm.touched">
-                                    Must Contain A Lower Case
-                                </mat-error>
-                                <mat-error *ngIf="passwordForm.get('password').hasError('mustContainNumber') && passwordForm.touched">
-                                    Must Contain A Number
-                                </mat-error>
-                                <mat-error *ngIf="passwordForm.get('password').hasError('mustContainSpecialCaracter') && passwordForm.touched">
-                                    Must Contain Special Caracter
-                                </mat-error>
-                                <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('mustMatch') && passwordForm.touched">
-                                    Password Must Match
-                                </mat-error>
-                            </div>
+                            <input matInput placeholder="password" formControlName="password" type="password" required>
+                        </mat-form-field>
+                        <mat-form-field class="password-form">
+                            <input matInput placeholder="password" formControlName="confirmPassword" type="password" required>
+                        </mat-form-field>
+                        <div>
+                            <mat-error *ngIf="passwordForm.get('password').hasError('required') && passwordForm.touched">
+                                Password required
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('password').hasError('minlength') && passwordForm.touched">
+                                Minimum length is six caracter
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('password').hasError('mustContainUpperCase') && passwordForm.touched">
+                                Must Contain An Upper Case
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('password').hasError('mustContainLowerCase') && passwordForm.touched">
+                                Must Contain A Lower Case
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('password').hasError('mustContainNumber') && passwordForm.touched">
+                                Must Contain A Number
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('password').hasError('mustContainSpecialCaracter') && passwordForm.touched">
+                                Must Contain Special Caracter
+                            </mat-error>
+                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('mustMatch') && passwordForm.touched">
+                                Password Must Match
+                            </mat-error>
+                        </div>
                         <div>
                             <button mat-raised-button color="warn" matStepperPrevious class="btn">Back</button>
                             <button mat-raised-button color="primary" matStepperNext (click)="createAccount()" class="btn">Create Account</button>
@@ -70,10 +71,9 @@
                 <mat-step>
                     <ng-template matStepLabel>Done</ng-template>
                     <div class="message">
-                        {{accountCreatedResult}}
+                        {{creationResult$ | async}}
                     </div>
                     <div>
-                        <button mat-raised-button color="warn" (click)="stepper.reset()" class="btn">Start over</button>
                         <button mat-raised-button color="primary" (click)="routeToHome()" class="btn">Home Page</button>
                     </div>
                 </mat-step>

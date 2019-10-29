@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SocialECommerce.Migrations
 {
-    public partial class initial : Migration
+    public partial class initialFiles : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
