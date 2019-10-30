@@ -1,0 +1,31 @@
+<div fxLayout="row" fxLayoutAlign="space-evenly center">
+    <mat-form-field>
+        <mat-label>show items per page</mat-label>
+        <mat-select [(value)]="itemsPerPage" (selectionChange)="emitItemsPerPage()">
+            <mat-option value="5">5</mat-option>
+            <mat-option value="10">10</mat-option>
+            <mat-option value="20">20</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <div>
+        <button mat-mini-fab>
+            <mat-icon>first_page</mat-icon>
+        </button>
+        <button mat-mini-fab>
+            <mat-icon>navigate_before</mat-icon>
+        </button>
+        <button mat-button>{{currentPage}}</button>
+        <button mat-mini-fab>
+            <mat-icon>navigate_next</mat-icon>
+        </button>
+        <button mat-mini-fab>
+            <mat-icon>last_page</mat-icon>
+        </button>
+    </div>
+    <mat-form-field>
+        <mat-label>Go to page</mat-label>
+        <mat-select [(value)]="currentPage" (selectionChange)="emitPageNumber()">
+            <mat-option [value]="page" *ngFor="let page of pagesList">{{page}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+</div>

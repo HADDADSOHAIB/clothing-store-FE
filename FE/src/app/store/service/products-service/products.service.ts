@@ -7,7 +7,7 @@ import { Product } from '../../model/product';
   providedIn: 'root'
 })
 export class ProductsService {
-  getProducts() {
+  getProducts(itemsPerPage: number,pageNumber: number) {
     return this.httpClient.get("") as Observable<Product[]>;
   }
   getAvailableProductCount() {
