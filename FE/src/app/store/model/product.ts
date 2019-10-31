@@ -3,6 +3,7 @@ import { ProductReview } from './product-review';
 export class Product{
     
     constructor(
+        public productId: number,
         public title:string,
         public vendorName: string,
         public vendorId: number,

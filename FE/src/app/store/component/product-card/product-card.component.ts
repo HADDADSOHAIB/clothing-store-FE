@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Product } from '../../model/product';
+import { CartService } from '../../service/cart-service/cart.service';
+import { Cart } from '../../model/cart';
+import { CartItem } from '../../model/CartItem';
 
 @Component({
   selector: 'product-card',
@@ -8,12 +11,46 @@ import { Product } from '../../model/product';
 })
 export class ProductCardComponent implements OnInit {
   @Input() product: Product;
+  cart: Cart;
+  itemIndex: number=-1;
 
-  constructor() {
-    this.product
+  constructor(
+    private cartService: CartService
+  ) {
    }
 
   ngOnInit() {
+    this.cartService.cartStatus().subscribe(cart=>{
+      this.cart=cart;
+      this.findOrUpdateIndex();
+    });
   }
 
+  addToCart(){
+    this.cart.items.push(new CartItem(
+      this.product.productId,
+      this.product.price,
+      this.product.title,
+      1
+    ));
+    this.cartService.updateCart(this.cart);
+  }
+
+  increment(){
+    this.findOrUpdateIndex();
+    this.cart.items[this.itemIndex].itemQuantity++;
+    this.cartService.updateCart(this.cart);
+  }
+
+  decrement(){
+    this.findOrUpdateIndex();
+    this.cart.items[this.itemIndex].itemQuantity--;
+    if(this.cart.items[this.itemIndex].itemQuantity===0)
+      this.cart.items.splice(this.itemIndex,1);
+    this.cartService.updateCart(this.cart);
+  }
+
+  private findOrUpdateIndex(){
+    this.itemIndex=this.cart.items.findIndex(item=>item.itemId===this.product.productId);
+  }
 }

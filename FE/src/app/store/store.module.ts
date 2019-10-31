@@ -14,13 +14,22 @@ import { PaginatorComponent } from './component/paginator/paginator.component';
 import { MatSelectModule } from '@angular/material/select';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatBadgeModule } from '@angular/material/badge';
+import { CartService } from './service/cart-service/cart.service';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatDividerModule } from '@angular/material/divider';
+
+import { StoreHeaderComponent } from './component/store-header/store-header.component';
+import { StoreComponent } from './store.component';
 
 
 @NgModule({
   declarations: [
     StoreFrontComponent, 
     ProductCardComponent, 
-    PaginatorComponent
+    PaginatorComponent,
+    StoreHeaderComponent,
+    StoreComponent
   ],
   imports: [
     CommonModule,
@@ -33,13 +42,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatIconModule,
     MatSelectModule,
     MatGridListModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatBadgeModule,
+    MatToolbarModule,
+    MatDividerModule
   ],
   providers: [
     ProductsService,
-    HttpClient
+    HttpClient,
+    CartService
   ]
-
 })
 export class StoreModule { }
 

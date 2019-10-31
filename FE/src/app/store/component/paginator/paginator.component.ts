@@ -28,4 +28,24 @@ export class PaginatorComponent implements OnInit {
   emitPageNumber(){
     this.pageNumberEmitter.emit(this.currentPage);
   }
+
+  firstPage(){
+    this.currentPage=1;
+    this.emitPageNumber();
+  }
+
+  beforePage(){
+    this.currentPage--;
+    this.emitPageNumber();
+  }
+
+  nextPage(){
+    this.currentPage++;
+    this.emitPageNumber();
+  }
+
+  lastPage(){
+    this.currentPage=parseInt(this.pagesList[this.pagesList.length-1]);
+    this.emitPageNumber();
+  }
 }

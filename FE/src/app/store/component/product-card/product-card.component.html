@@ -6,8 +6,15 @@
     <div class="content">{{product.price}}</div>
     <div class="content">{{product.vendorName}}</div>
     <mat-card-actions fxLayout="column" fxLayoutAlign="start start">
-        <div class="divbtn">
-            <button mat-raised-button color="primary" class="btn">Buy</button>
+        <div class="divbtn" *ngIf="itemIndex===-1">
+            <button mat-raised-button color="primary" (click)="addToCart()" class="btn">Buy</button>
+        </div>
+        <div class="divbtn" *ngIf="itemIndex!==-1">
+            <button mat-raised-button color="primary" (click)="increment()" class="btn-left">+</button>
+            <button mat-button class="btn-mid">
+                <mat-icon matBadge="{{cart.itemCount(this.product.productId)}}">shopping_cart</mat-icon>
+            </button>
+            <button mat-raised-button color="primary" (click)="decrement()" class="btn-right">-</button>
         </div>
         <div class="divbtn">
             <button mat-raised-button color="warn" class="btn">Details</button>

@@ -11,6 +11,23 @@
 .btn{
     width:100%;
 }
+.mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
+    margin: 0 0px;
+}
+.btn-left{
+    width:40%;
+    float:left;
+}
+.btn-right{
+    width:40%;
+    float:right;
+}
+.btn-mid{
+    width:20%;
+}
+.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
+    min-width: 0px;
+}
 
 .divbtn{
     width:100%;
