@@ -21,6 +21,7 @@ import { MatDividerModule } from '@angular/material/divider';
 
 import { StoreHeaderComponent } from './component/store-header/store-header.component';
 import { StoreComponent } from './store.component';
+import { ProductFormComponent } from './component/product-form/product-form.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { StoreComponent } from './store.component';
     ProductCardComponent, 
     PaginatorComponent,
     StoreHeaderComponent,
-    StoreComponent
+    StoreComponent,
+    ProductFormComponent
   ],
   imports: [
     CommonModule,
