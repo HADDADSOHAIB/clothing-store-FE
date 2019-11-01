@@ -21,4 +21,8 @@ export class Cart{
         this.items.forEach(item=>total+=item.itemQuantity);
         return total;
     }
+
+    indexByProduct(id){
+        return this.items.findIndex(item=>item.itemId===id);
+      }
 }

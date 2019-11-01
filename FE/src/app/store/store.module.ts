@@ -18,6 +18,7 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { CartService } from './service/cart-service/cart.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { StoreHeaderComponent } from './component/store-header/store-header.component';
 import { StoreComponent } from './store.component';
@@ -47,12 +48,16 @@ import { ProductFormComponent } from './component/product-form/product-form.comp
     MatFormFieldModule,
     MatBadgeModule,
     MatToolbarModule,
-    MatDividerModule
+    MatDividerModule,
+    MatDialogModule
   ],
   providers: [
     ProductsService,
     HttpClient,
     CartService
+  ],
+  entryComponents:[
+    ProductFormComponent
   ]
 })
 export class StoreModule { }

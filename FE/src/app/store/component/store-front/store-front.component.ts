@@ -4,6 +4,8 @@ import { take } from 'rxjs/Operators';
 import { Product } from '../../model/product';
 import { CartService } from '../../service/cart-service/cart.service';
 import { Cart } from '../../model/cart';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductFormComponent } from '../product-form/product-form.component';
 
 @Component({
   selector: 'app-store-front',
@@ -19,7 +21,7 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
   
   constructor(
     private productsService: ProductsService,
-    private cartService: CartService
+    private cartService: CartService 
   ) { }
 
   ngOnInit() {
