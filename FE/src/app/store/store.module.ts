@@ -23,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { StoreHeaderComponent } from './component/store-header/store-header.component';
 import { StoreComponent } from './store.component';
 import { ProductFormComponent } from './component/product-form/product-form.component';
+import { ActivatedRoute } from '@angular/router';
 
 
 @NgModule({

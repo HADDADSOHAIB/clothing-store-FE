@@ -5,6 +5,7 @@ import { Cart } from '../../model/cart';
 import { CartItem } from '../../model/CartItem';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductFormComponent } from '../product-form/product-form.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'product-card',
@@ -18,7 +19,7 @@ export class ProductCardComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    public dialog: MatDialog
+    private router: Router
   ) {
    }
 
@@ -57,10 +58,8 @@ export class ProductCardComponent implements OnInit {
     this.itemIndex=this.cart.items.findIndex(item=>item.itemId===this.product.productId);
   }
 
-  openDialog(){
-    this.dialog.open(ProductFormComponent, {
-      height:'100%',
-      data: this.product
-    });
+  details(){
+    console.log("navigate");
+    this.router.navigate(["store/product/",this.product.productId]);
   }
 }

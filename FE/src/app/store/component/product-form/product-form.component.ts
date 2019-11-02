@@ -4,6 +4,9 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Cart } from '../../model/cart';
 import { CartService } from '../../service/cart-service/cart.service';
 import { CartItem } from '../../model/CartItem';
+import { ActivatedRoute } from '@angular/router';
+import { take } from 'rxjs/Operators';
+import { ProductsService } from '../../service/products-service/products.service';
 
 @Component({
   selector: 'app-product-form',
@@ -12,20 +15,22 @@ import { CartItem } from '../../model/CartItem';
 })
 export class ProductFormComponent implements OnInit {
   cart: Cart;
-  
+  product:Product;
+
   constructor(
-    public dialogRef: MatDialogRef<ProductFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public product: Product,
-    private cartService: CartService
+    private cartService: CartService,
+    private activatedRoute: ActivatedRoute,
+    private productService:ProductsService
   ) {}
 
-  onNoClick(){
-    this.dialogRef.close();
-  }
-
-  ngOnInit() {
+  async ngOnInit() {
     this.cartService.cartStatus().subscribe(cart=>{
       this.cart=cart;
+    });
+
+    await this.activatedRoute.paramMap.pipe(take(1)).toPromise().then(async params=>{
+      if(params.get('id'))
+        this.product=await this.productService.get(parseInt(params.get('id'))).toPromise();
     });
   }
 

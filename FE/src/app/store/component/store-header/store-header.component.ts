@@ -2,6 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Cart } from '../../model/cart';
 import { CartService } from '../../service/cart-service/cart.service';
 import { take } from 'rxjs/Operators';
+import { Product } from '../../model/product';
+import { ProductsService } from '../../service/products-service/products.service';
 
 @Component({
   selector: 'store-header',
@@ -19,9 +21,7 @@ export class StoreHeaderComponent implements OnInit,OnDestroy {
     this.cart.ownerToken=localStorage.getItem("token");
 
     this.cartService.updateCart(this.cart);
-
     this.cartService.cartStatus().subscribe(cart=>this.cart=cart);
-
     this.cartService.loadCart().pipe(take(1)).subscribe(cartDb=>this.cartService.updateCart(cartDb));
   }
 

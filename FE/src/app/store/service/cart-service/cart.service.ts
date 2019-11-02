@@ -19,7 +19,7 @@ export class CartService {
   loadCart() {
     return this.httpClient.get("") as Observable<Cart>;
   }
-
+  
   cartStatus(){
     return this.cartSubject;
   }
