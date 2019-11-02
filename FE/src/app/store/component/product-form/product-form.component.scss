@@ -27,34 +27,16 @@
   width:100%;
   margin-bottom:2px;
 }
-
-.card-image{
-  width: 600px;
-  float: left;
-}
-
-.card-actions{
-  float:left;
-  width:400px;
-}
-
-.card-description{
-  float:left;
-  width: 400px;
-}
-
-.image{
-  height: 400px;
-}
-
-.global{
-  margin-left:50px;
-}
-
 mat-card{
   margin:5px;
+  width:500px;
 }
 
+.main{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: center;
+}
 .mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
   margin: 0 0px;
 }
