@@ -42,8 +42,13 @@
   float:left;
   width: 400px;
 }
+
+.image{
+  height: 400px;
+}
+
 .global{
-  margin-left:calc(100%-1000px);
+  margin-left:50px;
 }
 
 mat-card{

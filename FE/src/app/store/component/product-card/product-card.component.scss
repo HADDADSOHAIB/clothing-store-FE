@@ -1,8 +1,12 @@
 .card{
-    margin:5px;
     width:250px;
-    float:right;
+    margin:5px;
 }
+
+img{
+    height:200px;
+}
+    
 
 .header{
     justify-content: center;
@@ -34,12 +38,39 @@
     margin-bottom:2px;
 }
 
-img{
-    height:150px;
-}
+// 
+// @media only screen and (max-width: 1040px){
+//     .card{
+//         width: 21%;
+//     } 
+// }
 
-@media only screen and (max-width: 250px) {
+// @media only screen and (max-width: 780px)  {
+//     .card{
+//         width: 27%;
+//     } 
+// }
+// @media only screen and (max-width: 520px) {
+//     .card{
+//         width: 43%;
+//     } 
+// }
+@media only screen and (max-width: 260px) {
     .card{
         width: 100%;
     } 
+    img{
+        height:150px;
+    }
 }
+
+
+
+
+
+
+
+
+
+
+

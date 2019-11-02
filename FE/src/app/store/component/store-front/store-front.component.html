@@ -1,10 +1,11 @@
-<div fxLayout="column" fxLayoutAlign="start stretch" class="main">
-    <div class="front">
-        <product-card *ngFor="let product of products" [product]="product"></product-card>
-    </div>
-    <div class="btns">
-        <paginator [currentPage]="currentPage" (ItemsPerPageEmitter)="changeItemsPerPage($event)"
-        [availableProductCount]="availableProductCount" (pageNumberEmitter)="changePageNumber($event)" >
-        </paginator>
-    </div>
+<div  class="product-list">
+    <product-card *ngFor="let product of products" [product]="product" class="product">
+    </product-card>
 </div>
+<div class="btns">
+    <paginator [currentPage]="currentPage" (ItemsPerPageEmitter)="changeItemsPerPage($event)"
+        [availableProductCount]="availableProductCount" (pageNumberEmitter)="changePageNumber($event)">
+    </paginator>
+</div>
+
+
