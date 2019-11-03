@@ -24,8 +24,6 @@ export class CheckOutComponent implements OnInit {
   }
 
   changeQuantity(id:number,quantity:string){
-    console.log(id);
-    console.log(quantity);
     let index=this.cart.items.findIndex(item=>item.itemId===id);
     if(parseInt(quantity)<0)
       console.log("error");

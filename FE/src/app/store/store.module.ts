@@ -28,6 +28,7 @@ import { SharedModule } from '../shared/shared.module';
     ProductFormComponent,
     CheckOutComponent,
     ShippingFormComponent
+    
   ],
   imports: [
     CommonModule,
@@ -43,4 +44,3 @@ import { SharedModule } from '../shared/shared.module';
   ]
 })
 export class StoreModule { }
-

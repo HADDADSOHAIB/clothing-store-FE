@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ShippingFormComponent } from './shipping-form.component';
 
-describe('ShippingFormComponent', () => {
+xdescribe('ShippingFormComponent', () => {
   let component: ShippingFormComponent;
   let fixture: ComponentFixture<ShippingFormComponent>;
 
