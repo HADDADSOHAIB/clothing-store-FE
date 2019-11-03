@@ -6,17 +6,11 @@ import { SignUpComponent } from './component/sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatCardModule } from '@angular/material/card';
-import { MatStepperModule } from '@angular/material/stepper';
-import { MatSnackBarModule } from '@angular/material/snack-bar';
 
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { AuthService } from './service/auth-service/auth.service';
 import { SignInComponent } from './component/sign-in/sign-in.component';
 import { AuthInterceptor } from '../http.interceptor';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -28,15 +22,8 @@ import { AuthInterceptor } from '../http.interceptor';
     CommonModule,
     AuthRoutingModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
     HttpClientModule,
-
-    MatButtonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatCardModule,
-    MatStepperModule,
-    MatSnackBarModule
+    SharedModule
   ],
   providers: [
     AuthService,
