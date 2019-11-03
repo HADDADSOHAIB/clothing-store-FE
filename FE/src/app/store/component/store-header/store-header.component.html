@@ -1,23 +1,19 @@
-<mat-divider></mat-divider>
-<mat-toolbar color="primary">
-    <div>
-        <ul fxLayout fxLayoutGap="30px" class="navigation-items">
+<mat-toolbar  class="header">
+    <div >
+        <ul fxLayoutGap="100px" class="navigation-items" fxLayout="row" fxLayoutAlign="center center">
             <li>
-                <a routerLink="/">
-                    <mat-icon >store</mat-icon>
+                <a routerLink="/store">
+                    <mat-icon>store</mat-icon>
                     <span class="nav-caption">Store</span>
                 </a>
             </li>
-            
-        </ul>
-    </div>
-    <div fxFlex fxLayout fxLayoutAlign="end centre" fxHide.xs>
-        <ul fxLayout fxLayoutGap="30px" class="navigation-items">
             <li>
                 <a routerLink="checkout">
                     <mat-icon matBadge="{{cart.totalCount()}}" matBadgeColor="accent">local_grocery_store</mat-icon>
+                    <span class="nav-caption">Checkout</span>
                 </a>
             </li>
         </ul>
     </div>
+    
 </mat-toolbar>

@@ -8,6 +8,11 @@ a:hover, a:active{
     color: lightgray;
 }
  
+mat-toolbar{
+    background-color: #0000D6;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+
 .navigation-items{
     list-style-type: none;
     padding: 0;
@@ -19,12 +24,3 @@ a:hover, a:active{
     padding-left: 6px;
 }
  
-mat-toolbar{
-    border-radius: 3px;
-}
- 
-@media(max-width: 959px){
-    mat-toolbar{
-        border-radius: 0px;
-    }
-}

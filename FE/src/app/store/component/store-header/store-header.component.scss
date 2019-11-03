@@ -1,4 +1,3 @@
-
 a {
     text-decoration: none;
     color: white;
@@ -7,7 +6,13 @@ a {
 a:hover, a:active{
     color: lightgray;
 }
- 
+
+mat-toolbar{
+    background-color: #4A26FD;
+    opacity:0.8;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+
 .navigation-items{
     list-style-type: none;
     padding: 0;
@@ -18,13 +23,8 @@ a:hover, a:active{
     display: inline-block;
     padding-left: 6px;
 }
- 
-mat-toolbar{
-    border-radius: 3px;
-}
- 
-@media(max-width: 959px){
-    mat-toolbar{
-        border-radius: 0px;
-    }
+
+.header{
+    display:flex;
+    justify-content: center;
 }
