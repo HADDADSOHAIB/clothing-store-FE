@@ -4,6 +4,7 @@ import { StoreFrontComponent } from './component/store-front/store-front.compone
 import { StoreComponent } from './store.component';
 import { ProductFormComponent } from './component/product-form/product-form.component';
 import { CheckOutComponent } from './component/check-out/check-out.component';
+import { ShippingFormComponent } from './component/shipping-form/shipping-form.component';
 
 
 const routes: Routes = [
@@ -17,6 +18,9 @@ const routes: Routes = [
       },
       {
         path: 'checkout', component: CheckOutComponent
+      },
+      {
+        path: 'shipping', component: ShippingFormComponent
       }
     ]
   }

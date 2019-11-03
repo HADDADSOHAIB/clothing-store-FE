@@ -22,6 +22,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatTableModule } from '@angular/material/table';
 
+import { ReactiveFormsModule } from '@angular/forms';
 import { StoreHeaderComponent } from './component/store-header/store-header.component';
 import { StoreComponent } from './store.component';
 import { ProductFormComponent } from './component/product-form/product-form.component';
@@ -46,6 +47,7 @@ import { ShippingFormComponent } from './component/shipping-form/shipping-form.c
     CommonModule,
     StoreRoutingModule,
     HttpClientModule,
+    ReactiveFormsModule,
 
     FlexLayoutModule,
     MatCardModule,

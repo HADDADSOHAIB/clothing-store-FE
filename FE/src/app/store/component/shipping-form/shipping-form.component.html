@@ -1,1 +1,28 @@
-<p>shipping-form works!</p>
+<div class="main">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Shipping informations</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start start">
+                <mat-form-field >
+                    <input matInput placeholder="first name" formControlName="firstName" >
+                </mat-form-field>
+                <mat-form-field >
+                    <input matInput placeholder="last name" formControlName="lasttName" >
+                </mat-form-field >
+                <mat-form-field >
+                    <input matInput placeholder="phone number" formControlName="phoneNumber" >
+                </mat-form-field>
+                <mat-form-field >
+                    <textarea matInput placeholder="address" formControlName="addressName" ></textarea>
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button mat-raised-button color="warn" (click)="goStore()">Continue Shopping</button>
+            <button mat-raised-button color="warn" (click)="goCart()">Go to cart</button>
+            <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="placeOrder()">Place Order</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

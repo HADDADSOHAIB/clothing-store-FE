@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../service/cart-service/cart.service';
 import { Cart } from '../../model/cart';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-check-out',
@@ -12,7 +13,8 @@ export class CheckOutComponent implements OnInit {
   displayedColumns: string[] = ['Product', 'Quantity',' ','Price'];
 
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -29,5 +31,12 @@ export class CheckOutComponent implements OnInit {
       console.log("error");
     else
     this.cart.items[index].itemQuantity=parseInt(quantity);
+  }
+
+  goShipping(){
+    this.router.navigate(["store/shipping"]);
+  }
+  goStore(){
+    this.router.navigate(["store"]);
   }
 }
