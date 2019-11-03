@@ -1,0 +1,33 @@
+table{
+    width:700px;
+    margin:20px;
+}
+
+div.table{
+    display:flex;
+    justify-content: center;
+}
+
+.price{
+    width:10%;
+    text-align:end;
+}
+
+mat-form-field{
+    width:50%;
+}
+button{
+    margin: 5px;
+}
+.totalPrice{
+    text-align:end; 
+}
+.quantity-head{
+    width:10%;
+    text-align:end;
+}
+
+.quantity-row{
+    width:10%;
+    text-align:center;
+}

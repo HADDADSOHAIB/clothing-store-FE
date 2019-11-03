@@ -19,11 +19,16 @@ import { CartService } from './service/cart-service/cart.service';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTableModule } from '@angular/material/table';
 
 import { StoreHeaderComponent } from './component/store-header/store-header.component';
 import { StoreComponent } from './store.component';
 import { ProductFormComponent } from './component/product-form/product-form.component';
 import { ActivatedRoute } from '@angular/router';
+import { CheckOutComponent } from './component/check-out/check-out.component';
+import { MatInputModule } from '@angular/material/input';
+import { ShippingFormComponent } from './component/shipping-form/shipping-form.component';
 
 
 @NgModule({
@@ -33,7 +38,9 @@ import { ActivatedRoute } from '@angular/router';
     PaginatorComponent,
     StoreHeaderComponent,
     StoreComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    CheckOutComponent,
+    ShippingFormComponent
   ],
   imports: [
     CommonModule,
@@ -50,7 +57,10 @@ import { ActivatedRoute } from '@angular/router';
     MatBadgeModule,
     MatToolbarModule,
     MatDividerModule,
-    MatDialogModule
+    MatDialogModule,
+    MatExpansionModule,
+    MatInputModule,
+    MatTableModule
   ],
   providers: [
     ProductsService,

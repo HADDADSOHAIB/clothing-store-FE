@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { StoreFrontComponent } from './component/store-front/store-front.component';
 import { StoreComponent } from './store.component';
 import { ProductFormComponent } from './component/product-form/product-form.component';
+import { CheckOutComponent } from './component/check-out/check-out.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,9 @@ const routes: Routes = [
       },
       {
         path: 'product/:id', component: ProductFormComponent
+      },
+      {
+        path: 'checkout', component: CheckOutComponent
       }
     ]
   }

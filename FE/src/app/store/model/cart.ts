@@ -24,5 +24,11 @@ export class Cart{
 
     indexByProduct(id){
         return this.items.findIndex(item=>item.itemId===id);
-      }
+    }
+
+    totalPrice(){
+        let sum=0;
+        this.items.forEach(item=>sum+=item.itemQuantity*item.itemPrice);
+        return sum;
+    }
 }

@@ -25,7 +25,6 @@ export class CartService {
   }
 
   updateCart(cart: Cart){
-    console.log(cart);
     this.cartSubject.next(cart);
   }
 }
