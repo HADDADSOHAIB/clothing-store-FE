@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { SharedRoutingModule } from './shared-routing.module';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -19,10 +19,17 @@ import { MatTableModule } from '@angular/material/table';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 
+import { HeaderComponent } from './Component/header/header.component';
+
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    HeaderComponent
+  ],
   imports: [
+    CommonModule,
+    SharedRoutingModule,
+
     FlexLayoutModule,
     MatCardModule,
     MatButtonModule,
@@ -62,7 +69,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatButtonModule,
     MatCardModule,
     MatStepperModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+
+    HeaderComponent
   ]
 
 })

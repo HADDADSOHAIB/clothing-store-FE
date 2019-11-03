@@ -9,7 +9,7 @@ import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common
 
 import { AuthService } from './service/auth-service/auth.service';
 import { SignInComponent } from './component/sign-in/sign-in.component';
-import { AuthInterceptor } from '../http.interceptor';
+import { AuthInterceptor } from '../shared/interceptors/http.interceptor';
 import { SharedModule } from '../shared/shared.module';
 
 
