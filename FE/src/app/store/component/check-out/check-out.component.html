@@ -4,8 +4,8 @@
             <th mat-header-cell *matHeaderCellDef> Product </th>
             <td mat-cell *matCellDef="let item"> {{item.itemName}} </td>
             <td mat-footer-cell *matFooterCellDef>
-                <button mat-raised-button fxFlex color="primary" (click)="goShipping()">Go to shipping</button>
-                <button mat-raised-button fxFlex color="accent" (click)="goStore()">Continue Shopping</button>
+                <button class="go-shipping" mat-raised-button fxFlex color="primary" (click)="goShipping()">Go to shipping</button>
+                <button class="go-store" mat-raised-button fxFlex color="accent" (click)="goStore()">Continue Shopping</button>
             </td>
         </ng-container>
 

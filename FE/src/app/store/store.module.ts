@@ -16,6 +16,7 @@ import { ProductFormComponent } from './component/product-form/product-form.comp
 import { CheckOutComponent } from './component/check-out/check-out.component';
 import { ShippingFormComponent } from './component/shipping-form/shipping-form.component';
 import { SharedModule } from '../shared/shared.module';
+import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { SharedModule } from '../shared/shared.module';
     StoreRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
+    BrowserModule,
     SharedModule
   ],
   providers: [
