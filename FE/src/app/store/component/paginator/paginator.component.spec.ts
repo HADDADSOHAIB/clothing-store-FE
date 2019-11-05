@@ -1,6 +1,13 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
 import { PaginatorComponent } from './paginator.component';
+import { CommonModule } from '@angular/common';
+import { StoreRoutingModule } from '../../store-routing.module';
+import { HttpClientModule } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterTestingModule } from '@angular/router/testing';
 import { StoreFrontComponent } from '../store-front/store-front.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { StoreHeaderComponent } from '../store-header/store-header.component';
@@ -8,17 +15,6 @@ import { StoreComponent } from '../../store.component';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { CheckOutComponent } from '../check-out/check-out.component';
 import { ShippingFormComponent } from '../shipping-form/shipping-form.component';
-import { CommonModule } from '@angular/common';
-import { StoreRoutingModule } from '../../store-routing.module';
-import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserModule } from '@angular/platform-browser';
-import { SharedModule } from 'src/app/shared/shared.module';
-import { ProductsService } from '../../service/products-service/products.service';
-import { HttpClient } from 'selenium-webdriver/http';
-import { CartService } from '../../service/cart-service/cart.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RouterTestingModule } from '@angular/router/testing';
 
 describe('PaginatorComponent', () => {
   let component: PaginatorComponent;
@@ -35,16 +31,13 @@ describe('PaginatorComponent', () => {
         ProductFormComponent,
         CheckOutComponent,
         ShippingFormComponent
-        
       ],
       imports: [
         CommonModule,
-        StoreRoutingModule,
-        HttpClientModule,
-        ReactiveFormsModule,
         RouterTestingModule,
         SharedModule,
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ReactiveFormsModule
       ],
       providers: [
       ]
@@ -58,7 +51,7 @@ describe('PaginatorComponent', () => {
     component.availableProductCount=80;
     component.currentPage=3;
 
-    spyOn(component,'emitPageNumber');
+    spyOn(component,'emitPageNumber').and.callThrough();
 
     compiled=fixture.debugElement.nativeElement;
     fixture.detectChanges();
@@ -114,18 +107,19 @@ describe('PaginatorComponent', () => {
 
   it('emitPageNumber() should emit using pageNumberEmitter the current page whent called', () => {
     spyOn(component.pageNumberEmitter,'emit');
+    component.currentPage=5;
     component.emitPageNumber();
-    expect(component.pageNumberEmitter.emit).toHaveBeenCalledWith(component.currentPage);
+    expect(component.pageNumberEmitter.emit).toHaveBeenCalledWith(5);
   });
 
   it('emitItemsPerPage() should emit using ItemsPerPageEmitter the itemsPerPage whent called', () => {
     spyOn(component.itemsPerPageEmitter,'emit');
     component.emitItemsPerPage();
-    expect(component.itemsPerPageEmitter.emit).toHaveBeenCalledWith(component.itemsPerPage);
+    expect(component.itemsPerPageEmitter.emit).toHaveBeenCalledWith(parseInt(component.itemsPerPage));
   });
 
   it('should render a list with all pages options', () => {
-    let options=compiled.querySelectorAll("mat-option");
+    let options=compiled.querySelectorAll(".page-options");
     expect(options.length).toEqual(component.availablePagesList.length);
   });
 });

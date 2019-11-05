@@ -25,7 +25,9 @@
     <mat-form-field>
         <mat-label>Go to page</mat-label>
         <mat-select [(value)]="currentPage" (selectionChange)="emitPageNumber()">
-            <mat-option [value]="page" *ngFor="let page of pagesList">{{page}}</mat-option>
+            <mat-option class="page-options" [value]="page" *ngFor="let page of availablePagesList">
+                {{page}}
+            </mat-option>
         </mat-select>
     </mat-form-field>
 </div>
