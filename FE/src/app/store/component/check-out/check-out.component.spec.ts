@@ -6,8 +6,6 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CartService } from '../../service/cart-service/cart.service';
 import { DebugElement } from '@angular/core';
-import { Cart } from '../../model/cart';
-import { CartItem } from '../../model/CartItem';
 import { BehaviorSubject } from 'rxjs';
 import { StoreRoutingModule } from '../../store-routing.module';
 import { CommonModule } from '@angular/common';
@@ -19,9 +17,11 @@ import { PaginatorComponent } from '../paginator/paginator.component';
 import { StoreHeaderComponent } from '../store-header/store-header.component';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { ShippingFormComponent } from '../shipping-form/shipping-form.component';
-import { ProductsService } from '../../service/products-service/products.service';
+import { ProductsService } from '../../../core/services/products-service/products.service';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Cart } from 'src/app/core/Models/cart';
+import { CartItem } from 'src/app/core/Models/CartItem';
 
 describe('CheckOutComponent', () => {
   let component: CheckOutComponent;

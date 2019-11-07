@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Credentials } from '../../Model/credentials';
+import { Credentials } from '../../../core/Models/credentials';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Email } from '../../Model/email';
-import { Token } from '../../Model/token';
+import { Email } from '../../../core/Models/email';
+import { Token } from '../../../core/Models/token';
 
 @Injectable({
   providedIn: 'root'

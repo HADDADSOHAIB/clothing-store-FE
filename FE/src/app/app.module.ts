@@ -1,32 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AuthInterceptor } from './shared/interceptors/http.interceptor';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HeaderComponent } from './shared/Component/header/header.component';
 
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { SharedModule } from './shared/shared.module';
+import { HeaderComponent } from './core/Component/header/header.component';
+import { AuthInterceptor } from './core/interceptors/http.interceptor';
+import { ProductsService } from './core/services/products-service/products.service';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HeaderComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-   
-    SharedModule
-
+    SharedModule,
+    BrowserModule,
+    BrowserAnimationsModule
   ],
   providers: [
+    ProductsService,
     {
       provide:HTTP_INTERCEPTORS,
       useClass:AuthInterceptor,

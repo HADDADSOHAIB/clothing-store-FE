@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class OrderService {
-  placeOrder(arg0: import("../../component/shipping-form/order").Order) {
+  placeOrder(arg0: import("../../../core/Models/order").Order) {
     throw new Error("Method not implemented.");
   }
 

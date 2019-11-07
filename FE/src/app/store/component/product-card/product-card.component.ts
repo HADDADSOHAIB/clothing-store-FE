@@ -1,11 +1,9 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Product } from '../../model/product';
+import { Component, OnInit, Input } from '@angular/core';
 import { CartService } from '../../service/cart-service/cart.service';
-import { Cart } from '../../model/cart';
-import { CartItem } from '../../model/CartItem';
-import { MatDialog } from '@angular/material/dialog';
-import { ProductFormComponent } from '../product-form/product-form.component';
 import { Router } from '@angular/router';
+import { Product } from 'src/app/core/Models/product';
+import { Cart } from 'src/app/core/Models/cart';
+import { CartItem } from 'src/app/core/Models/CartItem';
 
 @Component({
   selector: 'product-card',

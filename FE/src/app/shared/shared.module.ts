@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { SharedRoutingModule } from './shared-routing.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
@@ -18,17 +18,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-
-import { HeaderComponent } from './Component/header/header.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    HeaderComponent
-  ],
   imports: [
-    CommonModule,
     SharedRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    CommonModule,
 
     FlexLayoutModule,
     MatCardModule,
@@ -49,8 +48,14 @@ import { HeaderComponent } from './Component/header/header.component';
     MatCardModule,
     MatStepperModule,
     MatSnackBarModule
+
   ],
   exports:[
+    SharedRoutingModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    CommonModule,
+
     FlexLayoutModule,
     MatCardModule,
     MatButtonModule,
@@ -69,10 +74,7 @@ import { HeaderComponent } from './Component/header/header.component';
     MatButtonModule,
     MatCardModule,
     MatStepperModule,
-    MatSnackBarModule,
-
-    HeaderComponent
+    MatSnackBarModule
   ]
-
 })
 export class SharedModule { }

@@ -1,11 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductsService } from '../../service/products-service/products.service';
+import { ProductsService } from '../../../core/services/products-service/products.service';
 import { take } from 'rxjs/Operators';
-import { Product } from '../../model/product';
 import { CartService } from '../../service/cart-service/cart.service';
-import { Cart } from '../../model/cart';
-import { MatDialog } from '@angular/material/dialog';
-import { ProductFormComponent } from '../product-form/product-form.component';
+import { Product } from 'src/app/core/Models/product';
 
 @Component({
   selector: 'app-store-front',
@@ -20,9 +17,7 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
   currentPage: number=1;
   
   constructor(
-    private productsService: ProductsService,
-    private cartService: CartService 
-  ) { }
+    private productsService: ProductsService  ) { }
 
   ngOnInit() {
     this.productsService.getAvailableProductCount().pipe(take(1))

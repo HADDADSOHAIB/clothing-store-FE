@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Credentials } from '../../Model/credentials';
+import { Credentials } from '../../../core/Models/credentials';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms'
 import { MustMatch } from '../../custom-validators/password-must-match';
 import { mustContainUpperCase, mustContainNumber, mustContainLowerCase, mustContainSpecialCaracter } from '../../custom-validators/password-pattern';
@@ -7,7 +7,7 @@ import { AuthService } from '../../service/auth-service/auth.service';
 import { take } from 'rxjs/Operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Email } from '../../Model/email';
+import { Email } from '../../../core/Models/email';
 import { Subject } from 'rxjs';
 
 @Component({

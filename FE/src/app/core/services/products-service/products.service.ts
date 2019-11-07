@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, ReplaySubject, BehaviorSubject } from 'rxjs';
-import { Product } from '../../model/product';
+import { BehaviorSubject } from 'rxjs';
 import { map, take } from 'rxjs/Operators';
+import { Product } from '../../Models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +29,7 @@ export class ProductsService {
   //after retrieving the product from db, the subject distribute them.
   productSubject:BehaviorSubject<Product[]>=new BehaviorSubject([]);
 
-  constructor(private httpClient:HttpClient) { console.log("hoal")}
+  constructor() { console.log("hoal")}
 
   loadProducts(itemsPerPage: number,pageNumber: number) {
     //return this.httpClient.get("") as Observable<Product[]>;

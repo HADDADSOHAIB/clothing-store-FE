@@ -1,12 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { Product } from '../../model/product';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Cart } from '../../model/cart';
 import { CartService } from '../../service/cart-service/cart.service';
-import { CartItem } from '../../model/CartItem';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/Operators';
-import { ProductsService } from '../../service/products-service/products.service';
+import { ProductsService } from '../../../core/services/products-service/products.service';
+import { Cart } from 'src/app/core/Models/cart';
+import { Product } from 'src/app/core/Models/product';
+import { CartItem } from 'src/app/core/Models/CartItem';
 
 @Component({
   selector: 'app-product-form',

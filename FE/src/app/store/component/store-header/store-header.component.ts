@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Cart } from '../../model/cart';
 import { CartService } from '../../service/cart-service/cart.service';
 import { take } from 'rxjs/Operators';
-import { Product } from '../../model/product';
-import { ProductsService } from '../../service/products-service/products.service';
+import { Cart } from 'src/app/core/Models/cart';
 
 @Component({
   selector: 'store-header',

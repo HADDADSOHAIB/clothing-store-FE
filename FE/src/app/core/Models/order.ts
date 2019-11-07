@@ -1,5 +1,6 @@
-import { Cart } from '../../model/cart';
-import { ShippingInfos } from '../../model/shipping-info';
+import { Cart } from './cart';
+import { ShippingInfos } from './shipping-info';
+
 
 export class Order{
     constructor(

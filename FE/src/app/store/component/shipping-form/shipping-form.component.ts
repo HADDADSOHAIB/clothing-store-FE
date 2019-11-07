@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Cart } from '../../model/cart';
-import { ShippingInfos } from '../../model/shipping-info';
 import { CartService } from '../../service/cart-service/cart.service';
 import { take } from 'rxjs/Operators';
 import { OrderService } from '../../service/order-service/order.service';
-import { Order } from './order';
+import { Order } from '../../../core/Models/order';
 import { Router } from '@angular/router';
+import { Cart } from 'src/app/core/Models/cart';
+import { ShippingInfos } from 'src/app/core/Models/shipping-info';
 
 @Component({
   selector: 'app-shipping-form',
