@@ -25,6 +25,7 @@ import { PaginatorComponent } from './Component/paginator/paginator.component';
 import { HeaderComponent } from './Component/header/header.component';
 import { ProductsService } from './services/products-service/products.service';
 import { AuthInterceptor } from './interceptors/http.interceptor';
+import { OrderService } from './services/order-service/order.service';
 
 @NgModule({
   declarations:[
@@ -98,7 +99,8 @@ export class SharedModule {
           provide:HTTP_INTERCEPTORS,
           useClass:AuthInterceptor,
           multi:true
-        }
+        },
+        OrderService
       ]
     };
   }

@@ -9,6 +9,7 @@ import { CategoryService } from './service/category-service/category.service';
 import { AdminHeaderComponent } from './component/admin-header/admin-header.component';
 import { AdminComponent } from './admin.component';
 import { ManageStoreComponent } from './component/manage-store/manage-store.component';
+import { OrdersListComponent } from './component/orders-list/orders-list.component';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ManageStoreComponent } from './component/manage-store/manage-store.comp
     ProductManagementFormComponent,
     AdminHeaderComponent,
     AdminComponent,
-    ManageStoreComponent
+    ManageStoreComponent,
+    OrdersListComponent
   ],
   imports: [
     CommonModule,

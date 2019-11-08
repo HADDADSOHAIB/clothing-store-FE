@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CartService } from '../../service/cart-service/cart.service';
 import { take } from 'rxjs/Operators';
-import { OrderService } from '../../service/order-service/order.service';
+import { OrderService } from '../../../shared/services/order-service/order.service';
 import { Order } from '../../../shared/Models/order';
 import { Router } from '@angular/router';
 import { Cart } from 'src/app/shared/Models/cart';
@@ -28,9 +28,9 @@ export class ShippingFormComponent implements OnInit {
     this.cartService.cartStatus().pipe(take(1)).subscribe(cart=>this.cart=cart);
     this.form=this.formBuilder.group({
       firstName:['',Validators.required],
-      lasttName:['',Validators.required],
+      lastName:['',Validators.required],
       phoneNumber:['',Validators.required],
-      addressName:['',Validators.required]
+      address:['',Validators.required]
     });
   }
 
@@ -38,8 +38,8 @@ export class ShippingFormComponent implements OnInit {
     this.shippingInfo=new ShippingInfos(
       this.form.get('firstName').value,
       this.form.get('lastName').value,
-      this.form.get('phoneName').value,
-      this.form.get('addressName').value
+      this.form.get('phoneNumber').value,
+      this.form.get('address').value
     );
     
     this.orderService.placeOrder(new Order(this.cart,this.shippingInfo));

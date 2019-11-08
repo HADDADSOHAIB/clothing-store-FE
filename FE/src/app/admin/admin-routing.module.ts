@@ -5,6 +5,7 @@ import { ProductManagementFormComponent } from './component/product-management-f
 import { AdminHeaderComponent } from './component/admin-header/admin-header.component';
 import { ManageStoreComponent } from './component/manage-store/manage-store.component';
 import { AdminComponent } from './admin.component';
+import { OrdersListComponent } from './component/orders-list/orders-list.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,10 @@ const routes: Routes = [
         path:"products",
         component:ProductListComponent
       },
+      {
+        path:"orders",
+        component:OrdersListComponent
+      }
     ]
   }
 ];
