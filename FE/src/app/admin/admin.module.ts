@@ -10,6 +10,7 @@ import { AdminHeaderComponent } from './component/admin-header/admin-header.comp
 import { AdminComponent } from './admin.component';
 import { ManageStoreComponent } from './component/manage-store/manage-store.component';
 import { OrdersListComponent } from './component/orders-list/orders-list.component';
+import { OrderFormComponent } from './component/order-form/order-form.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { OrdersListComponent } from './component/orders-list/orders-list.compone
     AdminHeaderComponent,
     AdminComponent,
     ManageStoreComponent,
-    OrdersListComponent
+    OrdersListComponent,
+    OrderFormComponent
   ],
   imports: [
     CommonModule,
