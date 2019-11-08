@@ -12,6 +12,7 @@ import { ProductFormComponent } from './component/product-form/product-form.comp
 import { CheckOutComponent } from './component/check-out/check-out.component';
 import { ShippingFormComponent } from './component/shipping-form/shipping-form.component';
 import { SharedModule } from '../shared/shared.module';
+import { PaginatorComponent } from '../shared/Component/paginator/paginator.component';
 
 
 @NgModule({
@@ -23,7 +24,6 @@ import { SharedModule } from '../shared/shared.module';
     ProductFormComponent,
     CheckOutComponent,
     ShippingFormComponent
-    
   ],
   imports: [
     StoreRoutingModule,

@@ -8,8 +8,8 @@
     <div fxLayout="column" fxLayoutAlign="space-evenly center">
         <mat-card class="card-actions">
             <mat-card-header>
-                <mat-card-title>Beans</mat-card-title>
-                <mat-card-subtitle>The best beans with the best prices 15$/kg</mat-card-subtitle>
+                <mat-card-title>{{product.productName}}</mat-card-title>
+                <mat-card-subtitle>{{product.productName}} price: {{product.price}}</mat-card-subtitle>
             </mat-card-header>
             <mat-card-actions>
                 <div class="divbtn" *ngIf="cart.indexByProduct(this.product.productId)===-1">

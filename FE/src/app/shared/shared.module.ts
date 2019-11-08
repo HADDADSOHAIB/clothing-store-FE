@@ -21,8 +21,12 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { PaginatorComponent } from './Component/paginator/paginator.component';
 
 @NgModule({
+  declarations:[
+    PaginatorComponent
+  ],
   imports: [
     SharedRoutingModule,
     ReactiveFormsModule,
@@ -51,6 +55,8 @@ import { CommonModule } from '@angular/common';
 
   ],
   exports:[
+    PaginatorComponent,
+    
     SharedRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,

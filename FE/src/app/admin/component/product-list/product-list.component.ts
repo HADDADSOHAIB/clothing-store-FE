@@ -13,11 +13,11 @@ export class ProductListComponent implements OnInit {
   availableProductCount: number;
   itemsPerPage:number=20;
   currentPage: number=1;
-  displayedColumns: string[] = ['Product Name', 'Price','Quantity','Options'];
+  displayedColumns: string[] = ['ProductName', 'Price','Quantity','Options'];
 
   constructor(
     private productService: ProductsService
-  ) { this.products[0].price}
+  ) { }
 
   ngOnInit() {
     this.productService.getAvailableProductCount().pipe(take(1)).subscribe(count=>this.availableProductCount=count);

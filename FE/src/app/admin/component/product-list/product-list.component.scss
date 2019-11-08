@@ -8,26 +8,14 @@ div.table{
     justify-content: center;
 }
 
-.price{
-    width:10%;
-    text-align:end;
-}
 
-mat-form-field{
-    width:50%;
-}
 button{
     margin: 5px;
 }
-.totalPrice{
-    text-align:end; 
-}
-.quantity-head{
-    width:10%;
-    text-align:end;
+.options{
+    width: 20%;
 }
 
-.quantity-row{
-    width:10%;
-    text-align:center;
+.paginator{
+    display:block;
 }

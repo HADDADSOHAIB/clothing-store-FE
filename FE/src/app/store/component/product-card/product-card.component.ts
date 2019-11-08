@@ -32,7 +32,7 @@ export class ProductCardComponent implements OnInit {
     this.cart.items.push(new CartItem(
       this.product.productId,
       this.product.price,
-      this.product.title,
+      this.product.productName,
       1
     ));
     this.cartService.updateCart(this.cart);
