@@ -8,6 +8,7 @@ import { Product } from '../../Models/product';
 })
 export class ProductsService {
   
+  
   //Mock for call to the backend to load products
   productsDb:Product[]=[
     new Product().setProductId(1).setProductName('Cheese').setCategoryName('Dairy')
@@ -56,7 +57,7 @@ export class ProductsService {
   //after retrieving the product from db, the subject distribute them.
   productSubject:BehaviorSubject<Product[]>=new BehaviorSubject([]);
 
-  constructor() { console.log("hoal")}
+  constructor() {}
 
   loadProducts(itemsPerPage: number,pageNumber: number) {
     //return this.httpClient.get("") as Observable<Product[]>;
@@ -75,5 +76,20 @@ export class ProductsService {
 
   get(id: number) {
     return this.productDbSubject.pipe(map(prods=>prods.find(prod=>prod.productId===id)),take(1));
+  }
+
+  update(product: Product) {
+    let index=this.productsDb.findIndex(prod=>prod.productId===product.productId);
+    this.productsDb[index]=product;
+    this.productDbSubject.next(this.productsDb);
+  }
+  add(product: Product) {
+    this.productsDb.push(product);
+    this.productDbSubject.next(this.productsDb);
+  }
+  delete(id: number) {
+    let index=this.productsDb.findIndex(prod=>prod.productId===id);
+    this.productsDb.splice(index,1);
+    this.productDbSubject.next(this.productsDb);
   }
 }

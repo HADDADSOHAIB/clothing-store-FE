@@ -3,10 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CartService } from '../../service/cart-service/cart.service';
 import { take } from 'rxjs/Operators';
 import { OrderService } from '../../service/order-service/order.service';
-import { Order } from '../../../core/Models/order';
+import { Order } from '../../../shared/Models/order';
 import { Router } from '@angular/router';
-import { Cart } from 'src/app/core/Models/cart';
-import { ShippingInfos } from 'src/app/core/Models/shipping-info';
+import { Cart } from 'src/app/shared/Models/cart';
+import { ShippingInfos } from 'src/app/shared/Models/shipping-info';
 
 @Component({
   selector: 'app-shipping-form',

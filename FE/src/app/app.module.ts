@@ -6,16 +6,15 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './shared/Component/header/header.component';
-import { AuthInterceptor } from './core/interceptors/http.interceptor';
-import { ProductsService } from './core/services/products-service/products.service';
+import { AuthInterceptor } from './shared/interceptors/http.interceptor';
+import { ProductsService } from './shared/services/products-service/products.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PaginatorComponent } from './shared/Component/paginator/paginator.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HeaderComponent
+    AppComponent
   ],
   imports: [
     AppRoutingModule,
@@ -23,14 +22,7 @@ import { PaginatorComponent } from './shared/Component/paginator/paginator.compo
     BrowserModule,
     BrowserAnimationsModule
   ],
-  providers: [
-    ProductsService,
-    {
-      provide:HTTP_INTERCEPTORS,
-      useClass:AuthInterceptor,
-      multi:true
-    }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

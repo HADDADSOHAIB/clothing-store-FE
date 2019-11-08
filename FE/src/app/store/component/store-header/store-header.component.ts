@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartService } from '../../service/cart-service/cart.service';
 import { take } from 'rxjs/Operators';
-import { Cart } from 'src/app/core/Models/cart';
+import { Cart } from 'src/app/shared/Models/cart';
 
 @Component({
   selector: 'store-header',

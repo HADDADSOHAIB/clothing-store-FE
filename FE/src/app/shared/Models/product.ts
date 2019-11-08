@@ -10,6 +10,7 @@ export class Product{
     rating:number=2.5;
     image:string;
     reviews: ProductReview[]=[];
+    quantity: number;
 
     constructor() {
         this.productId=0;
@@ -20,6 +21,7 @@ export class Product{
         this.rating=0;
         this.categoryName="";
         this.categoryId=0;
+        this.quantity=0;
     }
 
     setProductId(id:number){
@@ -48,6 +50,10 @@ export class Product{
     }
     setImage(img:string){
         this.image=img;
+        return this;
+    }
+    setNumber(quantity:number){
+        this.quantity=quantity;
         return this;
     }
 }

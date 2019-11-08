@@ -1,1 +1,26 @@
-<p>product-management-form works!</p>
+<form [formGroup]="form" fxLayout="column" fxLayoutAlign="center centre">
+    <mat-form-field>
+        <input matInput placeholder="Name" formControlName="name">
+    </mat-form-field>
+
+    <mat-form-field>
+        <textarea matInput placeholder="Description" formControlName="description"></textarea>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Price" formControlName="price">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-select placeholder="Category">
+            <mat-option value="option">Dairy</mat-option>
+            <mat-option value="option">Vegetables</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Quantity" formControlName="quantity">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="save()">Save</button>
+</form>

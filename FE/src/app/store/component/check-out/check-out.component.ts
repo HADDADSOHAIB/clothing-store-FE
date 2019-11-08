@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../service/cart-service/cart.service';
 import { Router } from '@angular/router';
-import { Cart } from 'src/app/core/Models/cart';
+import { Cart } from 'src/app/shared/Models/cart';
 
 @Component({
   selector: 'app-check-out',

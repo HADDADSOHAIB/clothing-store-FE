@@ -2,10 +2,10 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { CartService } from '../../service/cart-service/cart.service';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/Operators';
-import { ProductsService } from '../../../core/services/products-service/products.service';
-import { Cart } from 'src/app/core/Models/cart';
-import { Product } from 'src/app/core/Models/product';
-import { CartItem } from 'src/app/core/Models/CartItem';
+import { ProductsService } from '../../../shared/services/products-service/products.service';
+import { Cart } from 'src/app/shared/Models/cart';
+import { Product } from 'src/app/shared/Models/product';
+import { CartItem } from 'src/app/shared/Models/CartItem';
 
 @Component({
   selector: 'app-product-form',

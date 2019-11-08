@@ -1,8 +1,8 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ProductsService } from '../../../core/services/products-service/products.service';
+import { ProductsService } from '../../../shared/services/products-service/products.service';
 import { take } from 'rxjs/Operators';
 import { CartService } from '../../service/cart-service/cart.service';
-import { Product } from 'src/app/core/Models/product';
+import { Product } from 'src/app/shared/Models/product';
 
 @Component({
   selector: 'app-store-front',

@@ -15,7 +15,7 @@ import { ProductManagementFormComponent } from './component/product-management-f
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule.forRoot()
   ]
 })
 export class AdminModule { }

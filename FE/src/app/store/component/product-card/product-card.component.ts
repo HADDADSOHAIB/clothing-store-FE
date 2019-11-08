@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { CartService } from '../../service/cart-service/cart.service';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/core/Models/product';
-import { Cart } from 'src/app/core/Models/cart';
-import { CartItem } from 'src/app/core/Models/CartItem';
+import { Product } from 'src/app/shared/Models/product';
+import { Cart } from 'src/app/shared/Models/cart';
+import { CartItem } from 'src/app/shared/Models/CartItem';
 
 @Component({
   selector: 'product-card',

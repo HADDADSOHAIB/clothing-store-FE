@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { SharedRoutingModule } from './shared-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -19,13 +19,17 @@ import { MatTableModule } from '@angular/material/table';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { PaginatorComponent } from './Component/paginator/paginator.component';
+import { HeaderComponent } from './Component/header/header.component';
+import { ProductsService } from './services/products-service/products.service';
+import { AuthInterceptor } from './interceptors/http.interceptor';
 
 @NgModule({
   declarations:[
-    PaginatorComponent
+    PaginatorComponent,
+    HeaderComponent
   ],
   imports: [
     SharedRoutingModule,
@@ -56,6 +60,7 @@ import { PaginatorComponent } from './Component/paginator/paginator.component';
   ],
   exports:[
     PaginatorComponent,
+    HeaderComponent,
     
     SharedRoutingModule,
     ReactiveFormsModule,
@@ -83,4 +88,18 @@ import { PaginatorComponent } from './Component/paginator/paginator.component';
     MatSnackBarModule
   ]
 })
-export class SharedModule { }
+export class SharedModule { 
+  static forRoot(): ModuleWithProviders {
+    return {
+      ngModule: SharedModule,
+      providers: [ 
+        ProductsService,
+        {
+          provide:HTTP_INTERCEPTORS,
+          useClass:AuthInterceptor,
+          multi:true
+        }
+      ]
+    };
+  }
+}

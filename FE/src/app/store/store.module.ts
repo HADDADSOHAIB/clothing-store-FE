@@ -27,7 +27,7 @@ import { PaginatorComponent } from '../shared/Component/paginator/paginator.comp
   ],
   imports: [
     StoreRoutingModule,
-    SharedModule
+    SharedModule.forRoot()
   ],
   providers: [
     HttpClient,

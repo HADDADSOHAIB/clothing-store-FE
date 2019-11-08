@@ -13,15 +13,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { StoreComponent } from '../../store.component';
 import { StoreFrontComponent } from '../store-front/store-front.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
-import { PaginatorComponent } from '../paginator/paginator.component';
 import { StoreHeaderComponent } from '../store-header/store-header.component';
 import { ProductFormComponent } from '../product-form/product-form.component';
 import { ShippingFormComponent } from '../shipping-form/shipping-form.component';
-import { ProductsService } from '../../../core/services/products-service/products.service';
+import { ProductsService } from '../../../shared/services/products-service/products.service';
 import { Router } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Cart } from 'src/app/core/Models/cart';
-import { CartItem } from 'src/app/core/Models/CartItem';
+import { Cart } from 'src/app/shared/Models/cart';
+import { CartItem } from 'src/app/shared/Models/CartItem';
 
 describe('CheckOutComponent', () => {
   let component: CheckOutComponent;
@@ -36,7 +35,6 @@ describe('CheckOutComponent', () => {
       declarations: [ 
         StoreFrontComponent, 
         ProductCardComponent, 
-        PaginatorComponent,
         StoreHeaderComponent,
         StoreComponent,
         ProductFormComponent,

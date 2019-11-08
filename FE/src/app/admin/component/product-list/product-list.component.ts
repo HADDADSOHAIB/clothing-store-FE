@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from 'src/app/core/services/products-service/products.service';
-import { Product } from 'src/app/core/Models/product';
+import { ProductsService } from 'src/app/shared/services/products-service/products.service';
+import { Product } from 'src/app/shared/Models/product';
 import { take } from 'rxjs/Operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-list',
@@ -16,7 +17,8 @@ export class ProductListComponent implements OnInit {
   displayedColumns: string[] = ['ProductName', 'Price','Quantity','Options'];
 
   constructor(
-    private productService: ProductsService
+    private productService: ProductsService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -36,5 +38,12 @@ export class ProductListComponent implements OnInit {
   changePageNumber($event:string){
     this.currentPage=parseInt($event);
     this.productService.loadProducts(this.itemsPerPage,this.currentPage);
+  }
+
+  edit(id: string){
+    this.router.navigate(["admin/product/"+id]);
+  }
+  delete(id: number){
+    this.productService.delete(id);
   }
 }

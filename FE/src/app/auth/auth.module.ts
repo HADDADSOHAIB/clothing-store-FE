@@ -19,7 +19,7 @@ import { BrowserModule } from '@angular/platform-browser';
   ],
   imports: [
     AuthRoutingModule,
-    SharedModule
+    SharedModule.forRoot()
   ],
   providers: [
     AuthService,
