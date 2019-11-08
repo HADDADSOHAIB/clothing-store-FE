@@ -8,14 +8,15 @@ import { SharedModule } from './shared/shared.module';
 import { HeaderComponent } from './core/Component/header/header.component';
 import { AuthInterceptor } from './core/interceptors/http.interceptor';
 import { ProductsService } from './core/services/products-service/products.service';
-import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { PaginatorComponent } from './core/Component/paginator/paginator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    PaginatorComponent
   ],
   imports: [
     AppRoutingModule,

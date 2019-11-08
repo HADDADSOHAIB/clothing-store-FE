@@ -37,7 +37,6 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
   }
 
   changePageNumber($event){
-    console.log($event);
     this.currentPage=$event;
     this.getProducts(this.itemsPerPage, this.currentPage);
   }

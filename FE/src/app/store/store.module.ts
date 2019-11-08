@@ -4,7 +4,6 @@ import { StoreFrontComponent } from './component/store-front/store-front.compone
 
 import { HttpClient } from '@angular/common/http';
 import { ProductCardComponent } from './component/product-card/product-card.component';
-import { PaginatorComponent } from './component/paginator/paginator.component';
 import { CartService } from './service/cart-service/cart.service';
 
 import { StoreHeaderComponent } from './component/store-header/store-header.component';
@@ -13,15 +12,12 @@ import { ProductFormComponent } from './component/product-form/product-form.comp
 import { CheckOutComponent } from './component/check-out/check-out.component';
 import { ShippingFormComponent } from './component/shipping-form/shipping-form.component';
 import { SharedModule } from '../shared/shared.module';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
 
 
 @NgModule({
   declarations: [
     StoreFrontComponent, 
     ProductCardComponent, 
-    PaginatorComponent,
     StoreHeaderComponent,
     StoreComponent,
     ProductFormComponent,

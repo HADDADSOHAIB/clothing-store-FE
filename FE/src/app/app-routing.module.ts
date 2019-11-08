@@ -10,6 +10,10 @@ const routes: Routes = [
   {
     path: 'store', 
     loadChildren: './store/store.module#StoreModule'
+  },
+  {
+    path: 'admin', 
+    loadChildren: './admin/admin.module#AdminModule'
   }
 ];
 

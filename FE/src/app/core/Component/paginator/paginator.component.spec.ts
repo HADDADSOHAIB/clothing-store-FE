@@ -2,19 +2,17 @@ import { ComponentFixture, TestBed, async } from '@angular/core/testing';
 
 import { PaginatorComponent } from './paginator.component';
 import { CommonModule } from '@angular/common';
-import { StoreRoutingModule } from '../../store-routing.module';
-import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
-import { StoreFrontComponent } from '../store-front/store-front.component';
-import { ProductCardComponent } from '../product-card/product-card.component';
-import { StoreHeaderComponent } from '../store-header/store-header.component';
-import { StoreComponent } from '../../store.component';
-import { ProductFormComponent } from '../product-form/product-form.component';
-import { CheckOutComponent } from '../check-out/check-out.component';
-import { ShippingFormComponent } from '../shipping-form/shipping-form.component';
+import { StoreFrontComponent } from 'src/app/store/component/store-front/store-front.component';
+import { ProductCardComponent } from 'src/app/store/component/product-card/product-card.component';
+import { StoreHeaderComponent } from 'src/app/store/component/store-header/store-header.component';
+import { StoreComponent } from 'src/app/store/store.component';
+import { ProductFormComponent } from 'src/app/store/component/product-form/product-form.component';
+import { CheckOutComponent } from 'src/app/store/component/check-out/check-out.component';
+import { ShippingFormComponent } from 'src/app/store/component/shipping-form/shipping-form.component';
 
 describe('PaginatorComponent', () => {
   let component: PaginatorComponent;
