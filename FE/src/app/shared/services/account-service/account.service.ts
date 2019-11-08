@@ -13,11 +13,30 @@ currentUser:User=new User("Haddadsoh@gmail.com","HadddadSohaib","Sohaib","Haddad
   new Address(1,"TANJA EL BALIA DHAR EL MERSE","rue 14 N 9","Tanger","Tanger-Asilah","Maroc","90000"),
   new Address(1,"TANJA EL BALIA ","rue 05  N 08","Tanger","Tanger-Asilah","Maroc","90010")
 ]);
+
+users:User[]=[
+  new User("Haddadsoh@gmail.com","HadddadSohaib","Sohaib","Haddad","+212613667379",[
+  new Address(1,"TANJA EL BALIA DHAR EL MERSE","rue 14 N 9","Tanger","Tanger-Asilah","Maroc","90000"),
+  new Address(1,"TANJA EL BALIA ","rue 05  N 08","Tanger","Tanger-Asilah","Maroc","90010")
+]),
+new User("amigo@gmail.com","AmigoSohaib","Sohaib","Amigo","+212613667380",[
+  new Address(1,"ValFlouri","rue 14 N 9","Tanger","Tanger-Asilah","Maroc","90020"),
+  new Address(1,"TANJA EL BALIA ","rue 05  N 08","Tanger","Tanger-Asilah","Maroc","90010")
+]),
+new User("Hassan@gmail.com","HassanSohaib","Sohaib","Hassan","+212613667390",[
+  new Address(1,"ouazzane","rue 14 N 9","Tanger","Tanger-Asilah","Maroc","80020"),
+  new Address(1,"TANJA EL BALIA ","rue 05  N 08","Tanger","Tanger-Asilah","Maroc","90010")
+]),
+]
 //-----------------------------------------------------
-  userSubject: BehaviorSubject<User>=new BehaviorSubject(this.currentUser);
+  currentUserSubject: BehaviorSubject<User>=new BehaviorSubject(this.currentUser);
+  usersSubject: BehaviorSubject<User[]>=new BehaviorSubject(this.users);
   constructor() { }
 
-  getUser(){
-    return this.userSubject;
+  getCurrentUser(){
+    return this.currentUserSubject;
+  }
+  getUsers(){
+    return this.usersSubject;
   }
 }
