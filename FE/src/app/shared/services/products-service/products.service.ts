@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { map, take } from 'rxjs/Operators';
 import { Product } from '../../Models/product';
+import { Category } from '../../Models/category';
 
 @Injectable({
   providedIn: 'root'
@@ -11,40 +12,40 @@ export class ProductsService {
   
   //Mock for call to the backend to load products
   productsDb:Product[]=[
-    new Product().setProductId(1).setProductName('Cheese').setCategoryName('Dairy')
-    .setCategoryId(1).setPrice(15).setDescription('Best cheese')
+    new Product().setProductId(1).setProductName('Cheese').setCategory(new Category(1,"dairy"))
+    .setPrice(15).setDescription('Best cheese')
     .setImage("https://www.kaaskamer.nl/wp-content/uploads/2019/01/kaaskamer_van_"
       +"amsterdam_70_boerenkaas_pakket-1.jpg"),
-    new Product().setProductId(2).setProductName('Milk').setCategoryName('Dairy')
-    .setCategoryId(1).setPrice(8).setDescription('Best milk')
+    new Product().setProductId(2).setProductName('Milk').setCategory(new Category(1,"dairy"))
+    .setPrice(8).setDescription('Best milk')
     .setImage("https://article.images.consumerreports.org/f_auto/prod/content/dam/"
     +"CRO%20Images%202019/Health/06June/CR-Health-Inlinehero-a2-milk-0619"),
-    new Product().setProductId(3).setProductName('Yogarut').setCategoryName('Dairy')
-    .setCategoryId(1).setPrice(5).setDescription('Best Yogurut')
+    new Product().setProductId(3).setProductName('Yogarut').setCategory(new Category(1,"dairy"))
+    .setPrice(5).setDescription('Best Yogurut')
     .setImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsv8vseT1LhY0kycx"
     +"Aw7jJbBe2g24p-NUS13o3teR7YchuFhAWFg&s"),
-    new Product().setProductId(4).setProductName('Cheese').setCategoryName('Dairy')
-    .setCategoryId(1).setPrice(15).setDescription('Best cheese')
+    new Product().setProductId(4).setProductName('Cheese').setCategory(new Category(1,"dairy"))
+    .setPrice(15).setDescription('Best cheese')
     .setImage("https://www.kaaskamer.nl/wp-content/uploads/2019/01/kaaskamer_van_"
       +"amsterdam_70_boerenkaas_pakket-1.jpg"),
-    new Product().setProductId(5).setProductName('Milk').setCategoryName('Dairy')
-    .setCategoryId(1).setPrice(8).setDescription('Best milk')
+    new Product().setProductId(5).setProductName('Milk').setCategory(new Category(1,"dairy"))
+    .setPrice(8).setDescription('Best milk')
     .setImage("https://article.images.consumerreports.org/f_auto/prod/content/dam/"
     +"CRO%20Images%202019/Health/06June/CR-Health-Inlinehero-a2-milk-0619"),
-    new Product().setProductId(6).setProductName('Yogarut').setCategoryName('Dairy')
-    .setCategoryId(1).setPrice(5).setDescription('Best Yogurut')
+    new Product().setProductId(6).setProductName('Yogarut').setCategory(new Category(1,"dairy"))
+    .setPrice(5).setDescription('Best Yogurut')
     .setImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsv8vseT1LhY0kycx"
     +"Aw7jJbBe2g24p-NUS13o3teR7YchuFhAWFg&s"),
-    new Product().setProductId(7).setProductName('Cheese').setCategoryName('Dairy')
-    .setCategoryId(1).setPrice(15).setDescription('Best cheese')
+    new Product().setProductId(7).setProductName('Cheese').setCategory(new Category(1,"dairy"))
+    .setPrice(15).setDescription('Best cheese')
     .setImage("https://www.kaaskamer.nl/wp-content/uploads/2019/01/kaaskamer_van_"
       +"amsterdam_70_boerenkaas_pakket-1.jpg"),
-    new Product().setProductId(8).setProductName('Milk').setCategoryName('Dairy')
-    .setCategoryId(1).setPrice(8).setDescription('Best milk')
+    new Product().setProductId(8).setProductName('Milk').setCategory(new Category(1,"dairy"))
+    .setPrice(8).setDescription('Best milk')
     .setImage("https://article.images.consumerreports.org/f_auto/prod/content/dam/"
     +"CRO%20Images%202019/Health/06June/CR-Health-Inlinehero-a2-milk-0619"),
-    new Product().setProductId(9).setProductName('Yogarut').setCategoryName('Dairy')
-    .setCategoryId(1).setPrice(5).setDescription('Best Yogurut')
+    new Product().setProductId(9).setProductName('Yogarut').setCategory(new Category(1,"dairy"))
+    .setPrice(5).setDescription('Best Yogurut')
     .setImage("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsv8vseT1LhY0kycx"
     +"Aw7jJbBe2g24p-NUS13o3teR7YchuFhAWFg&s")
   ];
@@ -84,6 +85,7 @@ export class ProductsService {
     this.productDbSubject.next(this.productsDb);
   }
   add(product: Product) {
+    product.productId=this.productsDb.length;
     this.productsDb.push(product);
     this.productDbSubject.next(this.productsDb);
   }

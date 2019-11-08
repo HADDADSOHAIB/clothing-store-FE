@@ -1,26 +1,51 @@
-<form [formGroup]="form" fxLayout="column" fxLayoutAlign="center centre">
-    <mat-form-field>
-        <input matInput placeholder="Name" formControlName="name">
-    </mat-form-field>
+<div fxLayout="row" fxLayoutAlign="space-around center">
+    <div class="form">
+        <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center centre">
+            <mat-form-field>
+                <input matInput placeholder="Name" formControlName="name" (keyup)="updateProduct()">
+            </mat-form-field>
 
-    <mat-form-field>
-        <textarea matInput placeholder="Description" formControlName="description"></textarea>
-    </mat-form-field>
+            <mat-form-field>
+                <textarea matInput placeholder="Description" formControlName="description" (keyup)="updateProduct()">
 
-    <mat-form-field>
-        <input matInput placeholder="Price" formControlName="price">
-    </mat-form-field>
+                        </textarea>
+            </mat-form-field>
 
-    <mat-form-field>
-        <mat-select placeholder="Category">
-            <mat-option value="option">Dairy</mat-option>
-            <mat-option value="option">Vegetables</mat-option>
-        </mat-select>
-    </mat-form-field>
+            <mat-form-field>
+                <input matInput placeholder="Price" formControlName="price" (keyup)="updateProduct()">
+            </mat-form-field>
 
-    <mat-form-field>
-        <input matInput placeholder="Quantity" formControlName="quantity">
-    </mat-form-field>
+            <mat-form-field>
+                <mat-select placeholder="Category" [value]="product.category.id" formControlName="category">
+                    <mat-option value="{{category.id}}" *ngFor="let category of categories">{{category.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
 
-    <button mat-raised-button color="primary" (click)="save()">Save</button>
-</form>
+            <mat-form-field>
+                <input matInput placeholder="Quantity" formControlName="quantity" (keyup)="updateProduct()">
+            </mat-form-field>
+
+            <mat-form-field>
+                <input matInput placeholder="Image" formControlName="image" (keyup)="updateProduct()">
+            </mat-form-field>
+
+            <button mat-raised-button color="primary" (click)="save()">Save</button>
+        </form>
+    </div>
+    <div class="card">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>{{product.productName}}</mat-card-title>
+            </mat-card-header>
+            <img mat-card-image src="{{product.image}}" alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <p>
+                    {{product.description}}
+                </p>
+                <p *ngIf="product.price!==0">
+                    Price: {{product.price}}
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </div>
+</div>

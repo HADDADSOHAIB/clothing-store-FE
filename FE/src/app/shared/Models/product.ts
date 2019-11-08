@@ -1,17 +1,17 @@
 import { ProductReview } from './product-review';
+import { Category } from './category';
 
 export class Product{
     productId: number;
     productName:string;
     description: string;
     price: number;
-    categoryName:string;
-    categoryId:number;
+    category: Category;
     rating:number=2.5;
     image:string;
     reviews: ProductReview[]=[];
     quantity: number;
-
+    
     constructor() {
         this.productId=0;
         this.productName="";
@@ -19,8 +19,7 @@ export class Product{
         this.image="";
         this.price=0;
         this.rating=0;
-        this.categoryName="";
-        this.categoryId=0;
+        this.category=new Category(0,"");
         this.quantity=0;
     }
 
@@ -40,12 +39,8 @@ export class Product{
         this.price=price;
         return this;
     }
-    setCategoryName(name:string){
-        this.categoryName=name;
-        return this;
-    }
-    setCategoryId(id:number){
-        this.categoryId=id;
+    setCategory(category: Category){
+        this.category=category;
         return this;
     }
     setImage(img:string){
