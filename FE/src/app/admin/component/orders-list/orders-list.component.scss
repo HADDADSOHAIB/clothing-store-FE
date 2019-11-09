@@ -1,7 +1,14 @@
 div.table{
-    width:700px;
+    display: flex;
+    justify-content: center;
 }
+
+
 table{
-    width:100%;
+    width:700px;
     margin:10px;
+}
+
+button{
+    margin: 5px;
 }
