@@ -1,0 +1,47 @@
+mat-card.new-category{
+    width:300px;
+    margin: 10px;
+}
+
+mat-card-header.new-category{
+    justify-content: center;
+}
+
+mat-form-field.new-category{
+    width: 100%;
+}
+
+button.new-category{
+    display: block;
+    width: 100%;
+}
+
+mat-card.manage-category{
+    width:300px;
+    margin: 10px;;
+}
+
+mat-card-header.manage-category{
+    justify-content: center;
+}
+
+mat-form-field.manage-category{
+    width: 100%;
+}
+
+button.manage-category{
+    display: block;
+    width: 100%;
+    margin-bottom: 2px;
+}
+table{
+    width:500px;
+    margin: 10px;
+}
+td.product{
+    justify-content: center;
+}
+div.options{
+    position: sticky;
+    top: 10px;
+}

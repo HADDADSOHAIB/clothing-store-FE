@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/shared/Models/order';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs/Operators';
+import { take } from 'rxjs/operators';
 import { OrderService } from 'src/app/shared/services/order-service/order.service';
 
 @Component({

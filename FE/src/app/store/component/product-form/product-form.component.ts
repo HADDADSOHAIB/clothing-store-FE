@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { CartService } from '../../service/cart-service/cart.service';
 import { ActivatedRoute } from '@angular/router';
-import { take } from 'rxjs/Operators';
+import { take } from 'rxjs/operators';
 import { ProductsService } from '../../../shared/services/products-service/products.service';
 import { Cart } from 'src/app/shared/Models/cart';
 import { Product } from 'src/app/shared/Models/product';
@@ -29,7 +29,7 @@ export class ProductFormComponent implements OnInit {
 
     await this.activatedRoute.paramMap.pipe(take(1)).toPromise().then(async params=>{
       if(params.get('id'))
-        this.product=await this.productService.get(parseInt(params.get('id'))).toPromise();
+        this.product=await this.productService.getProduct(parseInt(params.get('id'))).toPromise();
     });
   }
 

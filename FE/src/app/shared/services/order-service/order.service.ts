@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Order } from '../../Models/order';
 import { BehaviorSubject } from 'rxjs';
-import { map, switchMap } from 'rxjs/Operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Cart } from '../../Models/cart';
 import { CartItem } from '../../Models/CartItem';
 import { ShippingInfos } from '../../Models/shipping-info';

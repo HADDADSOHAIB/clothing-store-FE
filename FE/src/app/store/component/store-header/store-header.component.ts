@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartService } from '../../service/cart-service/cart.service';
-import { take } from 'rxjs/Operators';
+import { take } from 'rxjs/operators';
 import { Cart } from 'src/app/shared/Models/cart';
 
 @Component({

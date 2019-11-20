@@ -6,7 +6,7 @@ export class Product{
     productName:string;
     description: string;
     price: number;
-    category: Category;
+    categories: Category[]=[];
     rating:number=2.5;
     image:string;
     reviews: ProductReview[]=[];
@@ -19,7 +19,6 @@ export class Product{
         this.image="";
         this.price=0;
         this.rating=0;
-        this.category=new Category(0,"");
         this.quantity=0;
     }
 
@@ -39,10 +38,7 @@ export class Product{
         this.price=price;
         return this;
     }
-    setCategory(category: Category){
-        this.category=category;
-        return this;
-    }
+    
     setImage(img:string){
         this.image=img;
         return this;

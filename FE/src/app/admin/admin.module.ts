@@ -11,6 +11,7 @@ import { AdminComponent } from './admin.component';
 import { ManageStoreComponent } from './component/manage-store/manage-store.component';
 import { OrdersListComponent } from './component/orders-list/orders-list.component';
 import { OrderFormComponent } from './component/order-form/order-form.component';
+import { CategoryFormComponent } from './component/category-form/category-form.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { OrderFormComponent } from './component/order-form/order-form.component'
     AdminComponent,
     ManageStoreComponent,
     OrdersListComponent,
-    OrderFormComponent
+    OrderFormComponent,
+    CategoryFormComponent
   ],
   imports: [
     CommonModule,

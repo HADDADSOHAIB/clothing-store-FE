@@ -10,5 +10,4 @@ export class Order{
         public orderDate: Date=new Date(),
         public isProccessed: Boolean=false
     ){}
-
 }

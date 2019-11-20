@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CartService } from '../../service/cart-service/cart.service';
-import { take } from 'rxjs/Operators';
+import { take } from 'rxjs/operators';
 import { OrderService } from '../../../shared/services/order-service/order.service';
 import { Order } from '../../../shared/Models/order';
 import { Router } from '@angular/router';
@@ -42,7 +42,7 @@ export class ShippingFormComponent implements OnInit {
       this.form.get('address').value
     );
     
-    this.orderService.placeOrder(new Order(this.cart,this.shippingInfo));
+    this.orderService.placeOrder(new Order(0,this.cart,this.shippingInfo));
   }
 
   goStore(){

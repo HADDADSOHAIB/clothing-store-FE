@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/shared/services/products-service/products.service';
 import { Product } from 'src/app/shared/Models/product';
-import { take } from 'rxjs/Operators';
+import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
@@ -44,6 +44,9 @@ export class ProductListComponent implements OnInit {
     this.router.navigate(["admin/product/"+id]);
   }
   delete(id: number){
-    this.productService.delete(id);
+    this.productService.deleteProduct(id);
+  }
+  goProductForm(){
+    this.router.navigate(["/admin/product/new"])
   }
 }

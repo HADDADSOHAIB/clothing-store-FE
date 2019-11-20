@@ -7,6 +7,7 @@ import { ManageStoreComponent } from './component/manage-store/manage-store.comp
 import { AdminComponent } from './admin.component';
 import { OrdersListComponent } from './component/orders-list/orders-list.component';
 import { OrderFormComponent } from './component/order-form/order-form.component';
+import { CategoryFormComponent } from './component/category-form/category-form.component';
 
 
 const routes: Routes = [
@@ -19,7 +20,15 @@ const routes: Routes = [
         component:ManageStoreComponent
       },
       {
+        path:"categories",
+        component:CategoryFormComponent
+      },
+      {
         path:"product/:id",
+        component:ProductManagementFormComponent
+      },
+      {
+        path:"product/new",
         component:ProductManagementFormComponent
       },
       {

@@ -1,3 +1,6 @@
+<div>
+    <button mat-raised-button color="accent" (click)="goCategory()">manage categories</button>
+</div>
 <div fxLayout="row" fxLayoutAlign="space-around center">
     <div class="form">
         <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center centre">
@@ -37,7 +40,7 @@
             <mat-card-header>
                 <mat-card-title>{{product.productName}}</mat-card-title>
             </mat-card-header>
-            <img mat-card-image src="{{product.image}}" alt="Photo of a Shiba Inu">
+            <img  *ngIf="product.image" mat-card-image src="{{product.image}}" alt="product">
             <mat-card-content>
                 <p>
                     {{product.description}}

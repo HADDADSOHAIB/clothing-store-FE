@@ -1,6 +1,6 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/Operators';
+import { map } from 'rxjs/operators';
 
 export class AuthInterceptor implements HttpInterceptor{
 
