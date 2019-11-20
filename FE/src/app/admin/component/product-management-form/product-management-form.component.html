@@ -1,54 +1,55 @@
-<div>
-    <button mat-raised-button color="accent" (click)="goCategory()">manage categories</button>
-</div>
-<div fxLayout="row" fxLayoutAlign="space-around center">
-    <div class="form">
-        <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center centre">
-            <mat-form-field>
-                <input matInput placeholder="Name" formControlName="name" (keyup)="updateProduct()">
-            </mat-form-field>
+<div fxLayout="row" fxLayoutAlign="center start">
+    <mat-card class="form-card">
+        <mat-card-header class="form-card">
+            <mat-card-title>Product Details</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center centre">
+                <mat-form-field class="form-card">
+                    <input matInput placeholder="Name" formControlName="name" (keyup)="updateProduct()">
+                </mat-form-field>
 
-            <mat-form-field>
-                <textarea matInput placeholder="Description" formControlName="description" (keyup)="updateProduct()">
+                <mat-form-field class="form-card">
+                    <textarea matInput placeholder="Description" formControlName="description"
+                        (keyup)="updateProduct()">
+                    </textarea>
+                </mat-form-field>
 
-                        </textarea>
-            </mat-form-field>
+                <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
+                    <mat-form-field class="form-card">
+                        <input matInput placeholder="Price" formControlName="price" (keyup)="updateProduct()">
+                    </mat-form-field>
+                    <mat-form-field class="form-card">
+                        <input matInput placeholder="Quantity" formControlName="quantity" (keyup)="updateProduct()">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
+                    <mat-form-field class="form-card-category">
+                        <mat-select placeholder="Select Category" formControlName="category" (selectionChange)="updateProduct()">
+                            <mat-option value="{{category.categoryId}}" *ngFor="let category of categories">
+                                {{category.categoryName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <button mat-raised-button (click)="goCategories()">Add category</button>
+                </div>
+                
+                <mat-form-field class="form-card">
+                    <mat-chip-list >
+                        <mat-chip color="primary" *ngFor="let category of product.categories" [removable]="true"
+                            (removed)="removeCategory(category.categoryId)" [selectable]="true">
+                            {{category.categoryName}}
+                            <mat-icon matChipRemove>cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </mat-form-field>
 
-            <mat-form-field>
-                <input matInput placeholder="Price" formControlName="price" (keyup)="updateProduct()">
-            </mat-form-field>
+                <mat-form-field class="form-card">
+                    <input matInput placeholder="Image url" formControlName="image" (keyup)="updateProduct()">
+                </mat-form-field>
 
-            <mat-form-field>
-                <mat-select placeholder="Category" [value]="product.category.id" formControlName="category">
-                    <mat-option value="{{category.id}}" *ngFor="let category of categories">{{category.name}}</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-            <mat-form-field>
-                <input matInput placeholder="Quantity" formControlName="quantity" (keyup)="updateProduct()">
-            </mat-form-field>
-
-            <mat-form-field>
-                <input matInput placeholder="Image" formControlName="image" (keyup)="updateProduct()">
-            </mat-form-field>
-
-            <button mat-raised-button color="primary" (click)="save()">Save</button>
-        </form>
-    </div>
-    <div class="card">
-        <mat-card>
-            <mat-card-header>
-                <mat-card-title>{{product.productName}}</mat-card-title>
-            </mat-card-header>
-            <img  *ngIf="product.image" mat-card-image src="{{product.image}}" alt="product">
-            <mat-card-content>
-                <p>
-                    {{product.description}}
-                </p>
-                <p *ngIf="product.price!==0">
-                    Price: {{product.price}}
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </div>
+                <button mat-raised-button color="primary" (click)="save()">Save</button>
+                <button mat-raised-button color="warn" (click)="delete()">delete</button>
+            </form>
+        </mat-card-content>
+    </mat-card>
 </div>

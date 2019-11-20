@@ -23,17 +23,20 @@ export class ProductsService {
   }
 
   getAvailableProductCount() {
-    return this.httpClient.get(BACK_END+"/productscount") as Observable<number>;
+    return this.httpClient.get(BACK_END+"productscount") as Observable<number>;
   }
 
   getProduct(id: number) {
-    return this.httpClient.get(BACK_END+"/products/"+id) as Observable<Product>;
+    return this.httpClient.get(BACK_END+"products/"+id) as Observable<Product>;
   }
 
   addProduct(product:Product){
-    return this.httpClient.post(BACK_END+"/products",product) as Observable<Product>;
+    return this.httpClient.post(BACK_END+"products",product) as Observable<Product>;
   }
   deleteProduct(id: number) {
     this.httpClient.get(BACK_END).pipe(take(1));
+  }
+  updateProduct(product:Product){
+    return this.httpClient.post(BACK_END+"products/"+product.productId,product) as Observable<Product>;
   }
 }

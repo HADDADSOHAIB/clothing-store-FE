@@ -1,17 +1,20 @@
-div.form{
-    margin:10px;
-    width:50%;
-    justify-content: center;
+mat-card.form-card{
+    width:400px;
+    margin: 10px;
 }
-div.card{
-    margin:10px;
-    width:50%;
+
+mat-card-header.form-card{
     justify-content: center;
 }
 
-form{
-    width:80%;
+mat-form-field.form-card{
+    width: 100%;
 }
-mat-card{
-    width:80%;
+
+button{
+    margin: 3px;
+}
+
+mat-form-field.form-card-category{
+    width: 75%;
 }

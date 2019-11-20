@@ -28,25 +28,27 @@ export class ProductManagementFormComponent implements OnInit {
   ngOnInit() {
     this.updateForm();
 
-    // this.activatedRoute.paramMap.pipe(take(1)).subscribe(param=>{
-    //   this.id=parseInt(param.get("id"));
-    //   this.productService.get(this.id).pipe(take(1)).subscribe(prod=>{
-    //     this.product=prod;
-    //     this.updateForm();
-    //   });
-    // });
+    this.activatedRoute.paramMap.pipe(take(1)).subscribe(param => {
+      if (param.get("id") != 'new') {
+        this.id = parseInt(param.get("id"));
+        this.productService.getProduct(this.id).pipe(take(1)).subscribe(prod => {
+          this.product = prod;
+          this.updateForm();
+        });
+      }
+    });
 
-    this.categoryService.load().subscribe(cats=>this.categories=cats);
+    this.categoryService.getCategories().pipe(take(1)).subscribe(cats=>this.categories=cats);
   }
 
-  updateForm(){
+  private updateForm(){
     this.form=this.formBuilder.group({
       name:[this.product.productName],
       description:[this.product.description],
       price:[this.product.price],
       quantity:[this.product.quantity],
       image:[this.product.image],
-      category:[this.product]
+      category:['']
     });
   }
   updateProduct(){
@@ -54,7 +56,18 @@ export class ProductManagementFormComponent implements OnInit {
     this.product.description=this.form.get("description").value;
     this.product.quantity=parseInt(this.form.get("quantity").value);
     this.product.price=parseInt(this.form.get("price").value);
-    // this.product.category=this.categories.find(cat=>cat.id===parseInt(this.form.get("category").value));
+    let categoryId=parseInt(this.form.get('category').value);
+    if(categoryId){
+      let category=this.categories.find(category=>category.categoryId===categoryId);
+      let index=this.product.categories.findIndex(category=>category.categoryId==categoryId);
+      if(index==-1)
+        this.product.categories.push(category);
+    }
+  }
+
+  removeCategory(categoryId:number){
+    let index=this.product.categories.findIndex(category=>category.categoryId===categoryId);
+    this.product.categories.splice(index,1);
   }
 
   save(){
@@ -62,11 +75,11 @@ export class ProductManagementFormComponent implements OnInit {
     this.productService.addProduct(this.product);
     else{
       this.product.productId=this.id;
-      // this.productService.update(this.product);
+      this.productService.updateProduct(this.product);
     }
   }
 
-  goCategory(){
+  goCategories(){
     this.router.navigate(["/admin/categories"]);
   }
 }

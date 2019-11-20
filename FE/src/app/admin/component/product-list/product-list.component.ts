@@ -46,7 +46,4 @@ export class ProductListComponent implements OnInit {
   delete(id: number){
     this.productService.deleteProduct(id);
   }
-  goProductForm(){
-    this.router.navigate(["/admin/product/new"])
-  }
 }

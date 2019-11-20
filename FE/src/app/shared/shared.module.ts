@@ -2,6 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { SharedRoutingModule } from './shared-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatChipsModule } from '@angular/material/chips';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
@@ -56,7 +57,8 @@ import { OrderService } from './services/order-service/order.service';
     MatButtonModule,
     MatCardModule,
     MatStepperModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule
 
   ],
   exports:[
@@ -86,7 +88,8 @@ import { OrderService } from './services/order-service/order.service';
     MatButtonModule,
     MatCardModule,
     MatStepperModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule
   ]
 })
 export class SharedModule { 
