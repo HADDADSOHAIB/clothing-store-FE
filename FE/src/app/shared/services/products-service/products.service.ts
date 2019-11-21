@@ -34,7 +34,7 @@ export class ProductsService {
     return this.httpClient.post(BACK_END+"products",product) as Observable<Product>;
   }
   deleteProduct(id: number) {
-    this.httpClient.get(BACK_END).pipe(take(1));
+    return this.httpClient.delete(BACK_END+"products/"+id) as Observable<Product>;
   }
   updateProduct(product:Product){
     return this.httpClient.post(BACK_END+"products/"+product.productId,product) as Observable<Product>;

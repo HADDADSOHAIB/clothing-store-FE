@@ -16,7 +16,7 @@ export class PaginatorComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    for(let i=1;i<(this.availableProductCount/parseInt(this.itemsPerPage))+1;i++)
+    for(let i=1;i<=(this.availableProductCount/parseInt(this.itemsPerPage))+1;i++)
       this.availablePagesList.push(i.toString());
   }
 
@@ -34,13 +34,21 @@ export class PaginatorComponent implements OnInit {
   }
 
   beforePage(){
-    this.currentPage--;
-    this.emitPageNumber();
+    if(this.currentPage===1)
+      this.emitPageNumber();
+    else{
+      this.currentPage--;
+      this.emitPageNumber();
+    }
   }
 
   nextPage(){
-    this.currentPage++;
-    this.emitPageNumber();
+    if(this.currentPage==parseInt(this.availablePagesList[this.availablePagesList.length-1]))
+      this.emitPageNumber();
+    else{
+      this.currentPage++;
+      this.emitPageNumber();
+    }
   }
 
   lastPage(){

@@ -15,6 +15,35 @@ button{
     margin: 3px;
 }
 
+button.card-form{
+    display: block;
+    width:100%;
+    margin: 2px;
+}
 mat-form-field.form-card-category{
     width: 75%;
+}
+
+mat-card.card-title{
+    width:400px;
+    margin: 10px;
+    margin-bottom: 2px;
+}
+
+mat-card.card-image{
+    width:400px;
+    margin: 10px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+mat-card.card-info{
+    width:400px;
+    margin: 10px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+}
+
+.mat-card-image:first-child {
+    margin-top: 0;
 }

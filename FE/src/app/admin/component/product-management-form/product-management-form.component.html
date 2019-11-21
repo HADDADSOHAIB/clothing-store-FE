@@ -1,10 +1,10 @@
-<div fxLayout="row" fxLayoutAlign="center start">
-    <mat-card class="form-card">
+<div fxLayout="row" fxLayoutAlign="center stretch">
+    <mat-card class="form-card" fxLayout="column" fxLayoutAlign="space-around centre">
         <mat-card-header class="form-card">
             <mat-card-title>Product Details</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-            <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center centre">
+        <mat-card-content >
+            <form [formGroup]="form" fxLayout="column" fxLayoutAlign="space-between centre" >
                 <mat-form-field class="form-card">
                     <input matInput placeholder="Name" formControlName="name" (keyup)="updateProduct()">
                 </mat-form-field>
@@ -46,10 +46,27 @@
                 <mat-form-field class="form-card">
                     <input matInput placeholder="Image url" formControlName="image" (keyup)="updateProduct()">
                 </mat-form-field>
-
-                <button mat-raised-button color="primary" (click)="save()">Save</button>
-                <button mat-raised-button color="warn" (click)="delete()">delete</button>
             </form>
         </mat-card-content>
+        <div>
+            <button class="card-form" mat-raised-button color="primary" (click)="save()">Save</button>
+            <button class="card-form" mat-raised-button color="warn" (click)="delete()">delete</button>
+        </div>
     </mat-card>
+    <div fxLayout="column" fxLayoutAlign="space-between center"  >
+        <mat-card class="card-title">
+            <mat-card-header>
+                <mat-card-title>{{product.productName}}</mat-card-title>
+            </mat-card-header>
+        </mat-card>
+        <mat-card class="card-image">
+            <img mat-card-image src="{{product.image}}" class="card-image">
+        </mat-card>
+        <mat-card class="card-info">
+            <mat-card-content>
+            <div>{{product.price | currency:'MAD'}}</div>
+            <div>{{product.description | formatTitleDescription:''}}</div>
+            </mat-card-content>
+        </mat-card>
+    </div>
 </div>

@@ -1,8 +1,11 @@
 table{
     width:700px;
     margin:20px;
+    text-align: center;
 }
-
+th.mat-header-cell {
+    text-align: center;
+}
 div.table{
     display:flex;
     justify-content: center;

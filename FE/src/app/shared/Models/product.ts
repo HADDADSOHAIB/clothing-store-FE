@@ -21,30 +21,4 @@ export class Product{
         this.rating=0;
         this.quantity=0;
     }
-
-    setProductId(id:number){
-        this.productId=id;
-        return this;
-    }
-    setProductName(name:string){
-        this.productName=name;
-        return this;
-    }
-    setDescription(desc:string){
-        this.description=desc;
-        return this;
-    }
-    setPrice(price:number){
-        this.price=price;
-        return this;
-    }
-    
-    setImage(img:string){
-        this.image=img;
-        return this;
-    }
-    setNumber(quantity:number){
-        this.quantity=quantity;
-        return this;
-    }
 }

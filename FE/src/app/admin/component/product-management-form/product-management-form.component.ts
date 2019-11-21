@@ -6,6 +6,7 @@ import { take } from 'rxjs/operators';
 import { Product } from 'src/app/shared/Models/product';
 import { Category } from 'src/app/shared/Models/category';
 import { CategoryService } from '../../service/category-service/category.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-product-management-form',
@@ -22,7 +23,8 @@ export class ProductManagementFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute, 
     private categoryService: CategoryService,
-    private router:Router
+    private router:Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -56,6 +58,7 @@ export class ProductManagementFormComponent implements OnInit {
     this.product.description=this.form.get("description").value;
     this.product.quantity=parseInt(this.form.get("quantity").value);
     this.product.price=parseInt(this.form.get("price").value);
+    this.product.image=this.form.get("image").value;
     let categoryId=parseInt(this.form.get('category').value);
     if(categoryId){
       let category=this.categories.find(category=>category.categoryId===categoryId);
@@ -72,13 +75,25 @@ export class ProductManagementFormComponent implements OnInit {
 
   save(){
     if(this.id===0)
-    this.productService.addProduct(this.product);
+    this.productService.addProduct(this.product).pipe(take(1)).subscribe(product=>{
+      this.snackBar.open("saved succesfully", 'OK', {
+        duration: 2000,
+      });
+      this.product=new Product();
+      this.updateForm();
+    },error=>{
+      this.snackBar.open("error try later", 'OK', {
+        duration: 2000,
+      });
+    });
     else{
       this.product.productId=this.id;
       this.productService.updateProduct(this.product);
     }
   }
-
+  delete(){
+    
+  }
   goCategories(){
     this.router.navigate(["/admin/categories"]);
   }

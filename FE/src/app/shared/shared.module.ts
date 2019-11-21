@@ -27,11 +27,13 @@ import { HeaderComponent } from './Component/header/header.component';
 import { ProductsService } from './services/products-service/products.service';
 import { AuthInterceptor } from './interceptors/http.interceptor';
 import { OrderService } from './services/order-service/order.service';
+import { TitleDescriptionPipe } from './pipes/title-description.pipe';
 
 @NgModule({
   declarations:[
     PaginatorComponent,
-    HeaderComponent
+    HeaderComponent,
+    TitleDescriptionPipe
   ],
   imports: [
     SharedRoutingModule,
@@ -64,6 +66,7 @@ import { OrderService } from './services/order-service/order.service';
   exports:[
     PaginatorComponent,
     HeaderComponent,
+    TitleDescriptionPipe,
     
     SharedRoutingModule,
     ReactiveFormsModule,
