@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 
 @Component({
-  selector: 'app-user-header',
+  selector: 'user-header',
   templateUrl: './user-header.component.html',
   styleUrls: ['./user-header.component.scss']
 })
