@@ -33,14 +33,18 @@ export class ProductManagementFormComponent implements OnInit {
     this.activatedRoute.paramMap.pipe(take(1)).subscribe(param => {
       if (param.get("id") != 'new') {
         this.id = parseInt(param.get("id"));
-        this.productService.getProduct(this.id).pipe(take(1)).subscribe(prod => {
-          this.product = prod;
-          this.updateForm();
-        });
+        this.loadProduct();
       }
     });
 
     this.categoryService.getCategories().pipe(take(1)).subscribe(cats=>this.categories=cats);
+  }
+
+  private loadProduct() {
+    this.productService.getProduct(this.id).pipe(take(1)).subscribe(prod => {
+      this.product = prod;
+      this.updateForm();
+    });
   }
 
   private updateForm(){
@@ -88,11 +92,30 @@ export class ProductManagementFormComponent implements OnInit {
     });
     else{
       this.product.productId=this.id;
-      this.productService.updateProduct(this.product);
+      this.productService.updateProduct(this.product).pipe(take(1)).subscribe(product=>{
+        this.snackBar.open("saved succesfully", 'OK', {
+          duration: 2000,
+        });
+        this.loadProduct();
+        this.updateForm();
+      },error=>{
+        this.snackBar.open("error try later", 'OK', {
+          duration: 2000,
+        });
+      });
     }
   }
   delete(){
-    
+    this.productService.deleteProduct(this.id).pipe(take(1)).subscribe(resp=>{
+      this.snackBar.open("Delete success", 'OK', {
+        duration: 2000,
+      });
+      this.router.navigate(["admin/products"]);
+    }, error=>{
+      this.snackBar.open("error try later", 'OK', {
+        duration: 2000,
+      });
+    });
   }
   goCategories(){
     this.router.navigate(["/admin/categories"]);

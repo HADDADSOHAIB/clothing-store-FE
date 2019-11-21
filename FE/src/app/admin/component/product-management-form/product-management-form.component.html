@@ -53,19 +53,19 @@
             <button class="card-form" mat-raised-button color="warn" (click)="delete()">delete</button>
         </div>
     </mat-card>
-    <div fxLayout="column" fxLayoutAlign="space-between center"  >
-        <mat-card class="card-title">
+    <div fxLayout="column" fxLayoutAlign="space-between center" >
+        <mat-card class="card-title" *ngIf="product.productName">
             <mat-card-header>
                 <mat-card-title>{{product.productName}}</mat-card-title>
             </mat-card-header>
         </mat-card>
-        <mat-card class="card-image">
+        <mat-card class="card-image" *ngIf="product.image">
             <img mat-card-image src="{{product.image}}" class="card-image">
         </mat-card>
-        <mat-card class="card-info">
+        <mat-card class="card-info" *ngIf="product.price || product.description">
             <mat-card-content>
-            <div>{{product.price | currency:'MAD'}}</div>
-            <div>{{product.description | formatTitleDescription:''}}</div>
+            <div *ngIf="product.price">{{product.price | currency:'MAD'}}</div>
+            <div *ngIf="product.description">{{product.description | formatTitleDescription:''}}</div>
             </mat-card-content>
         </mat-card>
     </div>
