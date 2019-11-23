@@ -27,13 +27,13 @@ import { HeaderComponent } from './Component/header/header.component';
 import { ProductsService } from './services/products-service/products.service';
 import { AuthInterceptor } from './interceptors/http.interceptor';
 import { OrderService } from './services/order-service/order.service';
-import { TitleDescriptionPipe } from './pipes/title-description.pipe';
+import { AccountService } from './services/account-service/account.service';
 
 @NgModule({
   declarations:[
     PaginatorComponent,
     HeaderComponent,
-    TitleDescriptionPipe
+
   ],
   imports: [
     SharedRoutingModule,
@@ -66,7 +66,7 @@ import { TitleDescriptionPipe } from './pipes/title-description.pipe';
   exports:[
     PaginatorComponent,
     HeaderComponent,
-    TitleDescriptionPipe,
+    
     
     SharedRoutingModule,
     ReactiveFormsModule,
@@ -106,7 +106,8 @@ export class SharedModule {
           useClass:AuthInterceptor,
           multi:true
         },
-        OrderService
+        OrderService,
+        AccountService
       ]
     };
   }

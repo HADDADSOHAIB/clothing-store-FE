@@ -6,10 +6,11 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class TitleDescriptionPipe implements PipeTransform {
 
   transform(title:string, description:string, size:number=50): string {
+    let titleDescription:string="";
     if(description.length!==0){
-      var titleDescription=title+": "+description;
+      titleDescription=title+": "+description;
     } else{
-      var titleDescription=title;
+      titleDescription=title;
     }
     if(titleDescription.length<size)
       return titleDescription;

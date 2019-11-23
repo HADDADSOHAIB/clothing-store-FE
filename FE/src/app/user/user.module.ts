@@ -7,14 +7,21 @@ import { UserHeaderComponent } from './component/user-header/user-header.compone
 import { AccountComponent } from './component/account/account.component';
 import { MyOrdersComponent } from './component/my-orders/my-orders.component';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [UserComponent, UserHeaderComponent, AccountComponent, MyOrdersComponent],
+  declarations: [
+    UserComponent, 
+    UserHeaderComponent, 
+    AccountComponent, 
+    MyOrdersComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
-    SharedModule
+    SharedModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class UserModule { }

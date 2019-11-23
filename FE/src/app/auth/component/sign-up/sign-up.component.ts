@@ -20,6 +20,7 @@ export class SignUpComponent implements OnInit {
   emailForm: FormGroup;
   passwordForm: FormGroup;
   emailOk:boolean=false;
+  emailDisabled:boolean=false;
   accountCreated:boolean=false;
   creationResult$:Subject<string>=new Subject<string>();
 
@@ -47,25 +48,38 @@ export class SignUpComponent implements OnInit {
   }
 
   checkEmail(){
-    this.authService.checkEmail(new Email(this.emailForm.get('email').value))
+    this.credentials=new Credentials(
+      this.emailForm.get('email').value,
+      this.passwordForm.get('password').value
+    );
+    this.authService.checkEmail(this.credentials)
       .pipe(take(1)).subscribe(resp=>{
         this.emailOk=true;
+        this.emailDisabled=true;
         this.openSnackBar('email OK');
       },
       error=>{
         console.log(error);
         this.emailOk=false;
-        this.openSnackBar('Email NOK');
+        this.openSnackBar('Email Not OK');
       });
   }
 
+  changeEmail(){
+    this.emailOk=false;
+    this.emailDisabled=false;
+  }
   createAccount(){
     this.credentials=new Credentials(
       this.emailForm.get('email').value,
       this.passwordForm.get('password').value
     );
-
-    this.authService.createAccount(this.credentials)
+    
+    if(!this.emailOk){
+      this.openSnackBar("Email is not Ok");
+    }
+    else{
+      this.authService.createAccount(this.credentials)
       .pipe(take(1)).subscribe(resp=>{
         this.accountCreated=true;
         localStorage.setItem("token",resp.token);
@@ -76,6 +90,8 @@ export class SignUpComponent implements OnInit {
         this.accountCreated=false;
         this.creationResult$.next("Unexpected error, please check your internet connection or try later");
       });
+    }
+    
   }
 
   openSnackBar(message:string) {

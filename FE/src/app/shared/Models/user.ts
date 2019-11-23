@@ -3,6 +3,7 @@ import { Address } from './address';
 export class User{
     
     constructor(
+        public id:number,
         public userEmail:string,
         public userName:string,
         public firstName: string,

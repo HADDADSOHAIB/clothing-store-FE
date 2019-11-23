@@ -12,6 +12,7 @@ import { ManageStoreComponent } from './component/manage-store/manage-store.comp
 import { OrdersListComponent } from './component/orders-list/orders-list.component';
 import { OrderFormComponent } from './component/order-form/order-form.component';
 import { CategoryFormComponent } from './component/category-form/category-form.component';
+import { TitleDescriptionPipe } from './pipes/title-description.pipe';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CategoryFormComponent } from './component/category-form/category-form.c
     ManageStoreComponent,
     OrdersListComponent,
     OrderFormComponent,
-    CategoryFormComponent
+    CategoryFormComponent,
+    TitleDescriptionPipe
   ],
   imports: [
     CommonModule,

@@ -1,42 +1,44 @@
 import { Injectable } from '@angular/core';
-import { User } from 'src/app/shared/Models/user';
-import { Address } from 'src/app/shared/Models/address';
-import { BehaviorSubject } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { BACK_END } from 'backend';
+import { Observable, BehaviorSubject } from 'rxjs';
+import { User } from '../../Models/user';
+import { take } from 'rxjs/operators';
+import { Token } from '../../Models/token';
+import { Address } from '../../Models/address';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  //--------------------fake Data----------------------
-currentUser:User=new User("Haddadsoh@gmail.com","HadddadSohaib","Sohaib","Haddad",
-"+212613667379",[
-  new Address(1,"TANJA EL BALIA DHAR EL MERSE","rue 14 N 9","Tanger","Tanger-Asilah","Maroc","90000"),
-  new Address(1,"TANJA EL BALIA ","rue 05  N 08","Tanger","Tanger-Asilah","Maroc","90010")
-]);
-
-users:User[]=[
-  new User("Haddadsoh@gmail.com","HadddadSohaib","Sohaib","Haddad","+212613667379",[
-  new Address(1,"TANJA EL BALIA DHAR EL MERSE","rue 14 N 9","Tanger","Tanger-Asilah","Maroc","90000"),
-  new Address(1,"TANJA EL BALIA ","rue 05  N 08","Tanger","Tanger-Asilah","Maroc","90010")
-]),
-new User("amigo@gmail.com","AmigoSohaib","Sohaib","Amigo","+212613667380",[
-  new Address(1,"ValFlouri","rue 14 N 9","Tanger","Tanger-Asilah","Maroc","90020"),
-  new Address(1,"TANJA EL BALIA ","rue 05  N 08","Tanger","Tanger-Asilah","Maroc","90010")
-]),
-new User("Hassan@gmail.com","HassanSohaib","Sohaib","Hassan","+212613667390",[
-  new Address(1,"ouazzane","rue 14 N 9","Tanger","Tanger-Asilah","Maroc","80020"),
-  new Address(1,"TANJA EL BALIA ","rue 05  N 08","Tanger","Tanger-Asilah","Maroc","90010")
-]),
-]
-//-----------------------------------------------------
-  currentUserSubject: BehaviorSubject<User>=new BehaviorSubject(this.currentUser);
-  usersSubject: BehaviorSubject<User[]>=new BehaviorSubject(this.users);
-  constructor() { }
+  subject:BehaviorSubject<User>=new BehaviorSubject<User>(new User(0,'','','','','',[]));
+  constructor(private httpClient:HttpClient) { }
 
   getCurrentUser(){
-    return this.currentUserSubject;
+    return this.subject;
   }
-  getUsers(){
-    return this.usersSubject;
+ 
+  loadCurrentUser(){
+    let token=new Token(localStorage.getItem('token'));
+    this.httpClient.post(BACK_END+"users",token).pipe(take(1)).subscribe((user:User)=>{
+      console.log(user);
+      this.subject.next(user);
+    },error=>{
+      console.log(error);
+      this.subject.next(new User(0,'','','','','',[]));
+    });
+  }
+
+  updateUserProfile(user:User){
+    return this.httpClient.put(BACK_END+"users/"+user.id,user) as Observable<User>;
+  }
+
+  addAddress(id:number, address:Address){
+    return this.httpClient.post(BACK_END+"addresses/"+id,address);
+  }
+
+  deleteAddress(id:number){
+    return this.httpClient.delete(BACK_END+"addresses/"+id);
   }
 }

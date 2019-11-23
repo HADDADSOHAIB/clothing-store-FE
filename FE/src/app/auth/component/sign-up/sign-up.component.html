@@ -1,7 +1,4 @@
-
-
 <div fxLayout="row" fxLayoutAlign="center center">
-
     <mat-card class="card">
         <mat-card-header class="header">
             <mat-card-title class="header-title">Create New Acount</mat-card-title>
@@ -11,8 +8,8 @@
                 <mat-step [stepControl]="emailForm">
                     <form [formGroup]="emailForm">
                         <ng-template matStepLabel>Fill out your Email</ng-template>
-                        <mat-form-field class="email-form">
-                            <input matInput placeholder="Email" formControlName="email" required>
+                        <mat-form-field class="email-form" >
+                            <input matInput placeholder="Email" formControlName="email" (keyup)="changeEmail()" required>
                         </mat-form-field>
                         <mat-error *ngIf="emailForm.get('email').hasError('required') && emailForm.touched">
                             Email required
@@ -22,7 +19,7 @@
                         </mat-error>
                         <div>
                             <button mat-raised-button color="warn" (click)="checkEmail()" 
-                            [disabled]="emailForm.invalid" class="btn">
+                            [disabled]="emailForm.invalid" class="btn" >
                                 Check email
                             </button>
                             <button mat-raised-button color="primary" matStepperNext class="btn"

@@ -1,0 +1,50 @@
+mat-card-header.account-card{
+    justify-content: center;
+}
+
+mat-card.account-card{
+    width: 600px;
+    margin: 10px;
+}
+
+mat-form-field.account-card{
+    width: 80%;
+}
+button.account-card{
+    width: 80%;
+}
+div.account-name{
+    width: 80%;
+}
+
+mat-form-field.account-name{
+    margin: 2px;
+}
+
+mat-card-header.address-card{
+    justify-content: center;
+}
+
+mat-card.address-card{
+    width: 600px;
+    margin: 10px;
+    margin-top: 0px;
+}
+
+mat-form-field.address-card{
+    width: 80%;
+}
+button.address-card{
+    width: 80%;
+}
+div.address-name{
+    width: 80%;
+}
+
+mat-form-field.address-name{
+    margin: 2px;
+}
+
+button.account-card-delete{
+    float: right;
+}

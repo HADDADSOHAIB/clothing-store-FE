@@ -2,7 +2,7 @@ export class Address{
 
     constructor(
         public id: number,
-        public fisrtLine: string,
+        public firstLine: string,
         public secondLine: string,
         public city: string,
         public state: string,
