@@ -2,6 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CartService } from '../../service/cart-service/cart.service';
 import { take } from 'rxjs/operators';
 import { Cart } from 'src/app/shared/Models/cart';
+import { UUID } from 'angular2-uuid';
+import { User } from 'src/app/shared/Models/user';
+import { AccountService } from 'src/app/shared/services/account-service/account.service';
 
 @Component({
   selector: 'store-header',
@@ -9,21 +12,19 @@ import { Cart } from 'src/app/shared/Models/cart';
   styleUrls: ['./store-header.component.scss']
 })
 export class StoreHeaderComponent implements OnInit,OnDestroy {
-  cart: Cart=new Cart(-1,"",[]);
+  cart: Cart;
+  user:User;
   constructor(
-    private cartService: CartService
+    private cartService: CartService,
+    private accountService: AccountService
   ) { }
 
   ngOnInit() {
-    if(localStorage.getItem("token")!=="")
-    this.cart.ownerToken=localStorage.getItem("token");
-
-    this.cartService.updateCart(this.cart);
-    this.cartService.cartStatus().subscribe(cart=>this.cart=cart);
-    this.cartService.loadCart().pipe(take(1)).subscribe(cartDb=>this.cartService.updateCart(cartDb));
+    this.cartService.loadCart();
+    this.cartService.getCart().subscribe(cart=>this.cart=cart);
   }
 
   ngOnDestroy(){
-    this.cartService.upLoadCart(this.cart);
+    this.cartService.upLoadCart(this.cart).pipe(take(1)).subscribe(cart=>console.log("succes"));
   }
 }

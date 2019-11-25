@@ -25,7 +25,7 @@ export class ShippingFormComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cartService.cartStatus().pipe(take(1)).subscribe(cart=>this.cart=cart);
+    // this.cartService.cartStatus().pipe(take(1)).subscribe(cart=>this.cart=cart);
     this.form=this.formBuilder.group({
       firstName:['',Validators.required],
       lastName:['',Validators.required],

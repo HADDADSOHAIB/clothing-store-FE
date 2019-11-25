@@ -22,7 +22,10 @@ export class ProductCardComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.cartService.cartStatus().subscribe(cart=>{
+    this.cartService.loadCart();
+    this.cartService.getCart().subscribe(cart=>{
+      console.log(this.cart);
+      console.log(15);
       this.cart=cart;
       this.findOrUpdateIndex();
     });
@@ -30,6 +33,7 @@ export class ProductCardComponent implements OnInit {
 
   addToCart(){
     this.cart.items.push(new CartItem(
+      0,
       this.product.productId,
       this.product.price,
       this.product.productName,

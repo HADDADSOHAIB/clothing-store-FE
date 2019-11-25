@@ -23,9 +23,9 @@ export class ProductFormComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    this.cartService.cartStatus().subscribe(cart=>{
-      this.cart=cart;
-    });
+    // this.cartService.cartStatus().subscribe(cart=>{
+    //   this.cart=cart;
+    // });
 
     await this.activatedRoute.paramMap.pipe(take(1)).toPromise().then(async params=>{
       if(params.get('id'))

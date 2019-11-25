@@ -13,8 +13,8 @@ export class OrderService {
   
   //--------------------------------fake data-----------------------
   static ordersDb: Order[]=[
-    new Order(1, new Cart(1,"hhsajks",[new CartItem(1,15,"heat",5)]),new ShippingInfos("haddad","sohaib","0613667379","hhsashaj")),
-    new Order(2, new Cart(2,"hhsajks",[new CartItem(1,15,"heat",5)]),new ShippingInfos("haddad","sohaib","0613667379","hhsashaj"))
+    new Order(1, new Cart('1',"hhsajks",[new CartItem(1,15,"heat",5)]),new ShippingInfos("haddad","sohaib","0613667379","hhsashaj")),
+    new Order(2, new Cart('2',"hhsajks",[new CartItem(1,15,"heat",5)]),new ShippingInfos("haddad","sohaib","0613667379","hhsashaj"))
   ];
   //------------------------------
   ordersSubject: BehaviorSubject<Order[]>=new BehaviorSubject(OrderService.ordersDb);

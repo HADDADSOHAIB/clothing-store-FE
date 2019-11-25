@@ -18,9 +18,9 @@ export class CheckOutComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.cartService.cartStatus().subscribe(cart=>{
-      this.cart=cart;
-    });
+    // this.cartService.cartStatus().subscribe(cart=>{
+    //   this.cart=cart;
+    // });
   }
 
   changeQuantity(id:number,quantity:string){

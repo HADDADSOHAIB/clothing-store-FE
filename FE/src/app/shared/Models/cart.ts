@@ -3,8 +3,8 @@ import { CartItem } from './CartItem';
 export class Cart{
     
     constructor(
-        public cartId:number, 
-        public ownerToken:string,
+        public cartId:String, 
+        public userEmail:string,
         public items:CartItem[]
     ) {}
 
