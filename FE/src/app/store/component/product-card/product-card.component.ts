@@ -34,10 +34,9 @@ export class ProductCardComponent implements OnInit {
   addToCart(){
     this.cart.items.push(new CartItem(
       0,
-      this.product.productId,
       this.product.price,
-      this.product.productName,
-      1
+      1,
+      this.product
     ));
     this.cartService.updateCart(this.cart);
   }
@@ -57,7 +56,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   private findOrUpdateIndex(){
-    this.itemIndex=this.cart.items.findIndex(item=>item.itemId===this.product.productId);
+    this.itemIndex=this.cart.items.findIndex(item=>item.product.productId===this.product.productId);
   }
 
   details(){

@@ -6,6 +6,7 @@ import { ProductsService } from '../../../shared/services/products-service/produ
 import { Cart } from 'src/app/shared/Models/cart';
 import { Product } from 'src/app/shared/Models/product';
 import { CartItem } from 'src/app/shared/Models/CartItem';
+import { ProductReview } from 'src/app/shared/Models/product-review';
 
 @Component({
   selector: 'app-product-form',
@@ -15,6 +16,7 @@ import { CartItem } from 'src/app/shared/Models/CartItem';
 export class ProductFormComponent implements OnInit {
   cart: Cart;
   product:Product;
+  productReview:ProductReview=new ProductReview(null,2.5,"");
 
   constructor(
     private cartService: CartService,
@@ -23,9 +25,9 @@ export class ProductFormComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
-    // this.cartService.cartStatus().subscribe(cart=>{
-    //   this.cart=cart;
-    // });
+    this.cartService.getCart().subscribe(cart=>{
+      this.cart=cart;
+    });
 
     await this.activatedRoute.paramMap.pipe(take(1)).toPromise().then(async params=>{
       if(params.get('id'))
@@ -35,10 +37,10 @@ export class ProductFormComponent implements OnInit {
 
   addToCart(){
     this.cart.items.push(new CartItem(
-      this.product.productId,
+      0,
       this.product.price,
-      this.product.productName,
-      1
+      1,
+      this.product
     ));
     this.cartService.updateCart(this.cart);
   }

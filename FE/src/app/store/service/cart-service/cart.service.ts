@@ -12,14 +12,17 @@ import { AccountService } from 'src/app/shared/services/account-service/account.
 })
 export class CartService {
   private cartSubject:BehaviorSubject<Cart>=new BehaviorSubject<Cart>(new Cart(localStorage.getItem('cartId')?localStorage.getItem('cartId'):UUID.UUID(),'',[]));
-
+  private isCartInDb:boolean=false;
   constructor(
     private httpClient: HttpClient,
     private accountService: AccountService
   ) { }
 
   upLoadCart(cart: Cart) {
-    return this.httpClient.put(BACK_END+"carts",cart);
+    if(this.isCartInDb)
+    return this.httpClient.put(BACK_END+"carts/"+cart.cartId,cart);
+    else
+      return this.httpClient.post(BACK_END+"carts",cart);
   }
 
   loadCart(){
@@ -38,13 +41,23 @@ export class CartService {
   private loadCartByUserEmail(email:String) {
     this.httpClient.get(BACK_END+"carts/email/"+email).pipe(take(1)).subscribe((cartDb: Cart)=>{
       let cart=new Cart(cartDb.cartId,cartDb.userEmail,cartDb.items);
+      this.isCartInDb=true;
       this.cartSubject.next(cart);
+    }, error=>{
+      console.log(error);
+      this.getCart().pipe(take(1)).subscribe(cartDb=>{
+        let cart=new Cart(cartDb.cartId,email.toString(),cartDb.items);
+        this.isCartInDb=true;
+        this.upLoadCart(cart).pipe(take(1)).subscribe(cart=>console.log("succes"));
+        this.cartSubject.next(cart);
+      });
     });
   }
 
   private loadCartById(id:String) {
     this.httpClient.get(BACK_END+"carts/"+id).pipe(take(1)).subscribe((cartDb: Cart)=>{
       let cart=new Cart(cartDb.cartId,cartDb.userEmail,cartDb.items);
+      this.isCartInDb=true;
       this.cartSubject.next(cart);
     },error=>console.log(error));
   }

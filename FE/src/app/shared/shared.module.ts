@@ -19,7 +19,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { PaginatorComponent } from './Component/paginator/paginator.component';
@@ -28,6 +28,7 @@ import { ProductsService } from './services/products-service/products.service';
 import { AuthInterceptor } from './interceptors/http.interceptor';
 import { OrderService } from './services/order-service/order.service';
 import { AccountService } from './services/account-service/account.service';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations:[
@@ -38,6 +39,7 @@ import { AccountService } from './services/account-service/account.service';
   imports: [
     SharedRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     CommonModule,
 
@@ -60,7 +62,8 @@ import { AccountService } from './services/account-service/account.service';
     MatCardModule,
     MatStepperModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSliderModule
 
   ],
   exports:[
@@ -70,6 +73,7 @@ import { AccountService } from './services/account-service/account.service';
     
     SharedRoutingModule,
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     CommonModule,
 
@@ -92,7 +96,8 @@ import { AccountService } from './services/account-service/account.service';
     MatCardModule,
     MatStepperModule,
     MatSnackBarModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSliderModule
   ]
 })
 export class SharedModule { 

@@ -9,7 +9,7 @@ export class Cart{
     ) {}
 
     itemCount(id:number){
-        let index=this.items.findIndex(item=>item.itemId===id);
+        let index=this.items.findIndex(item=>item.product.productId===id);
         if(index===-1)
             return 0;
         return this.items[index].itemQuantity;
@@ -23,7 +23,7 @@ export class Cart{
     }
 
     indexByProduct(id){
-        return this.items.findIndex(item=>item.itemId===id);
+        return this.items.findIndex(item=>item.product.productId===id);
     }
 
     totalPrice(){

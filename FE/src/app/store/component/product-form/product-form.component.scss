@@ -1,10 +1,4 @@
 
-.preview{
-  max-width:50px;
-  max-height: 50px;
-  margin-left: 5px;
-}
-
 .image{
   height: 250px;
 }
@@ -32,18 +26,22 @@
   margin-bottom:2px;
 }
 mat-card{
-  margin:5px;
-  width:500px;
+  margin:10px;
+  width:400px;
 }
 
-.main{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content: center;
-}
 .mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
   margin: 0 0px;
 }
 .mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
   min-width: 0px;
+}
+
+mat-card.reviews-section{
+  width:840px;
+  margin:0px;
+  margin-bottom: 20px;
+}
+mat-form-field,mat-slider{
+  width:100%;
 }
