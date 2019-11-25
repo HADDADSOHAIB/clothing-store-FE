@@ -12,7 +12,7 @@ import { take } from 'rxjs/operators';
 })
 export class StoreFrontComponent implements OnInit, OnDestroy {
   
-  availableProductCount: number;
+  availableProductCount: number=0;
   products:Product[]=[];
   itemsPerPage:number=10;
   currentPage: number=1;
@@ -46,5 +46,7 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
     this.productsService.loadProducts(itemsPerPage,pageNumber);
   }
 
-  ngOnDestroy(){}
+  ngOnDestroy(){
+    
+  }
 }

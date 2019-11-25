@@ -1,6 +1,6 @@
 table{
     width:700px;
-    margin:20px;
+    margin:10px;
 }
 
 div.table{
@@ -10,24 +10,18 @@ div.table{
 
 .price{
     width:10%;
-    text-align:end;
+    text-align:center;
 }
 
 mat-form-field{
     width:50%;
 }
 button{
-    margin: 5px;
+    margin-bottom: 0px;
 }
 .totalPrice{
-    text-align:end; 
+    text-align:center; 
 }
 .quantity-head{
-    width:10%;
-    text-align:end;
-}
-
-.quantity-row{
-    width:10%;
     text-align:center;
 }

@@ -1,28 +1,60 @@
-<div class="main">
+<div class="main" fxLayout="column" fxLayoutAlign="start center">
     <mat-card>
         <mat-card-header>
             <mat-card-title>Shipping informations</mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start start">
-                <mat-form-field >
-                    <input matInput placeholder="first name" formControlName="firstName" >
-                </mat-form-field>
-                <mat-form-field >
-                    <input matInput placeholder="last name" formControlName="lastName" >
-                </mat-form-field >
-                <mat-form-field >
+                <div fxLayout="row" fxLayoutAlign="pace-between start" class="sec-field">
+                    <mat-form-field class="sec-field">
+                        <input matInput placeholder="first name" formControlName="firstName" >
+                    </mat-form-field >
+                    <mat-form-field class="sec-field">
+                        <input matInput placeholder="last name" formControlName="lastName">
+                    </mat-form-field>
+                </div>
+                <mat-form-field class="prim-field">
                     <input matInput placeholder="phone number" formControlName="phoneNumber" >
                 </mat-form-field>
-                <mat-form-field >
-                    <textarea matInput placeholder="address" formControlName="address" ></textarea>
+                <mat-form-field class="prim-field">
+                    <mat-label>Select an address</mat-label>
+                    <mat-select (selectionChange)="updateForm($event)">
+                        <mat-option *ngFor="let address of user.addresses" [value]="address.id">
+                            {{address.firstLine}}
+                        </mat-option>
+                    </mat-select>
                 </mat-form-field>
+                <mat-form-field class="prim-field">
+                    <input matInput placeholder="address first line" formControlName="firstLine" >
+                </mat-form-field>
+
+                <mat-form-field class="prim-field">
+                    <input matInput placeholder="address second line" formControlName="secondLine">
+                </mat-form-field>
+                
+                <div fxLayout="row" fxLayoutAlign="pace-between start" class="sec-field">
+                    <mat-form-field class="sec-field">
+                        <input matInput placeholder="city" formControlName="city">
+                    </mat-form-field>
+                    <mat-form-field class="sec-field">
+                        <input matInput placeholder="state" formControlName="state">
+                    </mat-form-field>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="pace-between start" class="sec-field">
+                    <mat-form-field class="sec-field">
+                        <input matInput placeholder="country" formControlName="country">
+                    </mat-form-field>
+                    <mat-form-field class="sec-field">
+                        <input matInput placeholder="zip code" formControlName="zipCode">
+                    </mat-form-field>
+                </div>
+        
             </form>
         </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button color="warn" (click)="goStore()">Continue Shopping</button>
-            <button mat-raised-button color="warn" (click)="goCart()">Go to cart</button>
-            <button mat-raised-button color="primary" [disabled]="form.invalid" (click)="placeOrder()">Place Order</button>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="center start" >
+            <button mat-button color="warn" (click)="goStore()">Continue Shopping</button>
+            <button mat-button color="Accent" (click)="goCart()">Go to checkout</button>
+            <button mat-button color="primary" [disabled]="form.invalid" (click)="placeOrder()">Place Order</button>
         </mat-card-actions>
     </mat-card>
 </div>

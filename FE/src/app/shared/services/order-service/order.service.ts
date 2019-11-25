@@ -17,6 +17,7 @@ export class OrderService {
   }
 
   placeOrder(order: Order) {
+    console.log(order);
 //     OrderService.ordersDb.push(order);
 //     this.ordersSubject.next(OrderService.ordersDb);
 //     console.log(order);
