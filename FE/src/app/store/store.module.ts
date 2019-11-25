@@ -13,6 +13,7 @@ import { CheckOutComponent } from './component/check-out/check-out.component';
 import { ShippingFormComponent } from './component/shipping-form/shipping-form.component';
 import { SharedModule } from '../shared/shared.module';
 import { PaginatorComponent } from '../shared/Component/paginator/paginator.component';
+import { ReviewService } from './service/review-service/review.service';
 
 
 @NgModule({
@@ -31,7 +32,8 @@ import { PaginatorComponent } from '../shared/Component/paginator/paginator.comp
   ],
   providers: [
     HttpClient,
-    CartService
+    CartService,
+    ReviewService
   ]
 })
 export class StoreModule { }

@@ -38,10 +38,26 @@ mat-card{
 }
 
 mat-card.reviews-section{
-  width:840px;
-  margin:0px;
-  margin-bottom: 20px;
+  width:845px;
+  margin:0.5px;
 }
 mat-form-field,mat-slider{
   width:100%;
+}
+
+div.reviews-section{
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
+mat-divider.user-name{
+  justify-content: center;
+  display:block;
+  position: relative;
+}
+
+mat-card.add-review{
+  margin-top: 1px;
+  margin-bottom: 30px;
+  width:845px;
 }
