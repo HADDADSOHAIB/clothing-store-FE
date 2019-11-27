@@ -20,7 +20,7 @@ export class OrderFormComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.paramMap.pipe(take(1)).subscribe(params=>{
       this.id=parseInt(params.get("id"));
-      this.orderService.getOrder(this.id).pipe(take(1)).subscribe(ord=>this.order=ord);
+      // this.orderService.getOrder(this.id).pipe(take(1)).subscribe(ord=>this.order=ord);
     });
   }
 

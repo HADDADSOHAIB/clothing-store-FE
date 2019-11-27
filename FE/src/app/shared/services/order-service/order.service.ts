@@ -5,22 +5,19 @@ import { map, switchMap } from 'rxjs/operators';
 import { Cart } from '../../Models/cart';
 import { CartItem } from '../../Models/CartItem';
 import { ShippingInfos } from '../../Models/shipping-info';
+import { HttpClient } from '@angular/common/http';
+import { BACK_END } from 'backend';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
- 
-
-
-  constructor() { 
+  constructor(private httpClient:HttpClient) { 
   }
 
   placeOrder(order: Order) {
     console.log(order);
-//     OrderService.ordersDb.push(order);
-//     this.ordersSubject.next(OrderService.ordersDb);
-//     console.log(order);
+    return this.httpClient.post(BACK_END+"orders",order);
   }
 
   getUnprocessedOrders() {

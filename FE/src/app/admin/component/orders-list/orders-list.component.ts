@@ -15,7 +15,7 @@ export class OrdersListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.orderService.getUnprocessedOrders().subscribe(orders=>this.unproccessedOrders=orders);
+    // this.orderService.getUnprocessedOrders().subscribe(orders=>this.unproccessedOrders=orders);
   }
 
 }

@@ -10,6 +10,8 @@ import { ShippingInfos } from 'src/app/shared/Models/shipping-info';
 import { User } from 'src/app/shared/Models/user';
 import { AccountService } from 'src/app/shared/services/account-service/account.service';
 import { Address } from 'src/app/shared/Models/address';
+import { OrderItem } from 'src/app/shared/Models/order-item';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-shipping-form',
@@ -26,7 +28,8 @@ export class ShippingFormComponent implements OnInit {
     private cartService: CartService,
     private orderService: OrderService,
     private accountService:AccountService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -48,7 +51,35 @@ export class ShippingFormComponent implements OnInit {
   }
 
   placeOrder(){
-    let address=new Address(
+    this.shippingInfo=new ShippingInfos(
+      0,
+      this.form.get('firstName').value,
+      this.form.get('lastName').value,
+      this.form.get('phoneNumber').value,
+      this.form.get('firstLine').value,
+      this.form.get('secondLine').value,
+      this.form.get('city').value,
+      this.form.get('state').value,
+      this.form.get('country').value,
+      this.form.get('zipCode').value
+    );
+    
+    this.orderService.placeOrder(new Order(0,
+      this.user.userEmail,
+      this.cart.items.map(cartItem=>new OrderItem(0,
+        cartItem.product.productId,
+        cartItem.product.productName,
+        cartItem.itemQuantity,
+        cartItem.itemPrice)),
+      this.shippingInfo)).pipe(take(1)).subscribe(order=>{
+        console.log(order);
+        this.snackBar.open("Order placed succes","Ok",{duration:2000});
+      },error=>{
+        console.log(error);
+        this.snackBar.open("Error try later","Ok",{duration:2000});
+      });
+    
+    let address = new Address(
       parseInt(this.form.get('addressId').value),
       this.form.get('firstLine').value,
       this.form.get('secondLine').value,
@@ -58,18 +89,11 @@ export class ShippingFormComponent implements OnInit {
       this.form.get('zipCode').value
     );
 
-    if(!this.isAddressExistInTheAccount(address)){
-      address.id=0;
+    if (!this.isAddressExistInTheAccount(address)) {
+      address.id = 0;
     }
 
-    this.shippingInfo=new ShippingInfos(
-      this.form.get('firstName').value,
-      this.form.get('lastName').value,
-      this.form.get('phoneNumber').value,
-      address
-    );
-    
-    this.orderService.placeOrder(new Order(0,this.cart,this.shippingInfo));
+    //add the address to the account
   }
 
   updateForm($event){
