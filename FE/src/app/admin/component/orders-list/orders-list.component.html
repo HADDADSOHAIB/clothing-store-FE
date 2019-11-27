@@ -1,5 +1,5 @@
 <div class="table">
-    <table mat-table [dataSource]="unproccessedOrders" class="mat-elevation-z8">
+    <table mat-table [dataSource]="orders" class="mat-elevation-z8">
         <ng-container matColumnDef="OrderDate">
             <th mat-header-cell *matHeaderCellDef> Order Date </th>
             <td mat-cell *matCellDef="let order"> {{order.orderDate | date:'short'}} </td>
@@ -8,7 +8,7 @@
 
         <ng-container matColumnDef="OrderedBy">
             <th mat-header-cell *matHeaderCellDef> Ordered By </th>
-            <td mat-cell *matCellDef="let order">Holalel</td>
+            <td mat-cell *matCellDef="let order">{{order.userEmail}}</td>
             <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>
 
@@ -16,8 +16,8 @@
         <ng-container matColumnDef="Status">
             <th mat-header-cell *matHeaderCellDef>Order Status</th>
             <td mat-cell *matCellDef="let order">
-                <p *ngIf="order.isProccessed">Proccessed</p>
-                <p *ngIf="!order.isProccessed">Unproccessed</p>
+                <p *ngIf="order.isProcessed">Processed</p>
+                <p *ngIf="!order.isProcessed">Not processed</p>
             </td>
             <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>
@@ -26,8 +26,8 @@
             <th mat-header-cell *matHeaderCellDef class="options">Options</th>
             <td mat-cell *matCellDef="let order">
                 <div fxFlex>
-                    <button mat-raised-button color="warn" fxFlex>
-                        Process
+                    <button mat-button color="warn" (click)="goOrder(order.id)">
+                        Details
                     </button>
                 </div>
             </td>

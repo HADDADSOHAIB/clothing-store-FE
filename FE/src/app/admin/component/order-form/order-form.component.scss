@@ -10,14 +10,25 @@ p.product-id {
 }
 
 mat-card{
-    width:50%;
-    margin:10px;
+    width:500px;
+    margin: 2px;
 }
 
+div.main{
+    margin:10px;
+}
 .item{
     margin:5px;
 }
 .mat-card .mat-divider-horizontal {
     width: inherit;
     position: inherit;
+}
+
+mat-form-field.status, div.status{
+    width: 100%;
+}
+
+button.btn-status{
+    width:100%;
 }

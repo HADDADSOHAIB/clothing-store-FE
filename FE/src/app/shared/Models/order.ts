@@ -12,4 +12,16 @@ export class Order{
         public orderDate: Date=new Date(),
         public isProcessed: Boolean=false
     ){}
+
+    totalPrice(){
+        let totalPrice=0;
+        this.orderItems.forEach(item=>totalPrice+=item.price*item.quantity);
+        return totalPrice;
+    }
+
+    totalQuantity(){
+        let totalQuantity=0;
+        this.orderItems.forEach(item=>totalQuantity+=item.quantity);
+        return totalQuantity;
+    }
 }

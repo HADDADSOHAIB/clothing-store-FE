@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Order } from '../../Models/order';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { Cart } from '../../Models/cart';
 import { CartItem } from '../../Models/CartItem';
@@ -20,14 +20,15 @@ export class OrderService {
     return this.httpClient.post(BACK_END+"orders",order);
   }
 
-  getUnprocessedOrders() {
-//     return this.ordersSubject.pipe(map(orders=>orders.filter(order=>order.isProccessed===false)));
+  getOrders() {
+    return this.httpClient.get(BACK_END+"orders") as Observable<Order[]>;
   }
 
   getOrder(id: number) {
-//     return this.ordersSubject.pipe(switchMap(orders=>{
-//       let order=orders[orders.findIndex(ord=>ord.id===id)];
-//       return new BehaviorSubject<Order>(order);
-//     }));
+    return this.httpClient.get(BACK_END+"orders/"+id) as Observable<Order>;
+  }
+
+  UpdateOrder(order:Order){
+    return this.httpClient.put(BACK_END+'orders/'+order.id,order) as Observable<Order>;
   }
 }
