@@ -24,6 +24,10 @@ export class OrderService {
     return this.httpClient.get(BACK_END+"orders") as Observable<Order[]>;
   }
 
+  getOrdersByUser(userEmail:String) {
+    return this.httpClient.get(BACK_END+"orders/email/"+userEmail) as Observable<Order[]>;
+  }
+
   getOrder(id: number) {
     return this.httpClient.get(BACK_END+"orders/"+id) as Observable<Order>;
   }
