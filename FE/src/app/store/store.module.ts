@@ -14,6 +14,7 @@ import { ShippingFormComponent } from './component/shipping-form/shipping-form.c
 import { SharedModule } from '../shared/shared.module';
 import { PaginatorComponent } from '../shared/Component/paginator/paginator.component';
 import { ReviewService } from './service/review-service/review.service';
+import { HeaderFormaterPipe } from './pipes/header-formater/header-formater.pipe';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ReviewService } from './service/review-service/review.service';
     StoreComponent,
     ProductFormComponent,
     CheckOutComponent,
-    ShippingFormComponent
+    ShippingFormComponent,
+    HeaderFormaterPipe
   ],
   imports: [
     StoreRoutingModule,
