@@ -1,11 +1,13 @@
-<div  class="product-list">
-    <product-card *ngFor="let product of products" [product]="product" class="product">
-    </product-card>
-</div>
-<div class="btns">
-    <paginator [currentPage]="currentPage" (ItemsPerPageEmitter)="changeItemsPerPage($event)"
-        [availableProductCount]="availableProductCount" (pageNumberEmitter)="changePageNumber($event)">
-    </paginator>
+<div class="main">
+    <div class="product-list">
+        <product-card *ngFor="let product of products" [product]="product" class="product">
+        </product-card>
+    </div>
+    <div class="btns">
+        <paginator [currentPage]="currentPage" (ItemsPerPageEmitter)="changeItemsPerPage($event)"
+            [availableProductCount]="availableProductCount" (pageNumberEmitter)="changePageNumber($event)">
+        </paginator>
+    </div>
 </div>
 
 

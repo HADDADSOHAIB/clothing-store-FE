@@ -2,19 +2,25 @@
     <div>
         <ul fxLayout fxLayoutGap="30px" class="navigation-items">
             <li>
-                <a routerLink="/">
+                <a routerLink="/" fxLayout="column" fxLayoutAlign="start center">
                     <mat-icon aria-hidden="false">home</mat-icon>
                     <span class="nav-caption">Home</span>
                 </a>
             </li>
             <li>
-                <a routerLink="/store">
+                <a routerLink="/store" fxLayout="column" fxLayoutAlign="start center">
                     <mat-icon>store</mat-icon>
                     <span class="nav-caption">Store</span>
                 </a>
             </li>
             <li>
-                <a routerLink="/admin">
+                <a routerLink="/user" fxLayout="column" fxLayoutAlign="start center">
+                    <mat-icon aria-hidden="false">face</mat-icon>
+                    <span class="nav-caption">My account</span>
+                </a>
+            </li>
+            <li>
+                <a routerLink="/admin" fxLayout="column" fxLayoutAlign="start center">
                     <mat-icon>supervisor_account</mat-icon>
                     <span class="nav-caption">Manage Store</span>
                 </a>
@@ -23,20 +29,20 @@
     </div>
     <div fxFlex fxLayout fxLayoutAlign="end centre" fxHide.xs>
         <ul fxLayout fxLayoutGap="30px" class="navigation-items">
-            <li>
-                <a routerLink="/user">
-                    <mat-icon aria-hidden="false">face</mat-icon>
-                    <span class="nav-caption">My account</span>
+            <li *ngIf="currentUser.userEmail">
+                <a routerLink="/auth/signin" fxLayout="column" fxLayoutAlign="start center">
+                    <mat-icon aria-hidden="false">fingerprint</mat-icon>
+                    <span class="nav-caption">Logout</span>
                 </a>
             </li>
-            <li>
-                <a routerLink="/auth/signin">
+            <li *ngIf="!currentUser.userEmail">
+                <a routerLink="/auth/signin" fxLayout="column" fxLayoutAlign="start center">
                     <mat-icon aria-hidden="false">fingerprint</mat-icon>
                     <span class="nav-caption">Login</span>
                 </a>
             </li>
-            <li>
-                <a routerLink="/auth/signup">
+            <li *ngIf="!currentUser.userEmail">
+                <a routerLink="/auth/signup" fxLayout="column" fxLayoutAlign="start center">
                     <mat-icon aria-hidden="false">account_box</mat-icon>
                     <span class="nav-caption">Register</span>
                 </a>

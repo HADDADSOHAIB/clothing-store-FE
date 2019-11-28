@@ -29,6 +29,7 @@ import { AuthInterceptor } from './interceptors/http.interceptor';
 import { OrderService } from './services/order-service/order.service';
 import { AccountService } from './services/account-service/account.service';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations:[
@@ -63,7 +64,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatStepperModule,
     MatSnackBarModule,
     MatChipsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSidenavModule 
 
   ],
   exports:[
@@ -97,7 +99,8 @@ import { MatSliderModule } from '@angular/material/slider';
     MatStepperModule,
     MatSnackBarModule,
     MatChipsModule,
-    MatSliderModule
+    MatSliderModule,
+    MatSidenavModule 
   ]
 })
 export class SharedModule { 

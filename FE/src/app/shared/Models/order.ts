@@ -10,7 +10,8 @@ export class Order{
         public orderItems: OrderItem[],
         public shippingInfo:ShippingInfos,
         public orderDate: Date=new Date(),
-        public isProcessed: Boolean=false
+        public isProcessed: Boolean=false,
+        public isCanceled: Boolean=false,
     ){}
 
     totalPrice(){

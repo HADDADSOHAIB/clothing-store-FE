@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class MyOrdersComponent implements OnInit {
   orders:Order[]=[];
-  displayedColumns: string[] = ['OrderDate', 'OrderedBy','Status','Options'];
+  displayedColumns: string[] = ['OrderDate', 'OrderedItems','Status','Options'];
   constructor(
     private orderService: OrderService,
     private accountService:AccountService,
@@ -23,7 +23,13 @@ export class MyOrdersComponent implements OnInit {
   ngOnInit() {
     this.accountService.getCurrentUser().pipe(take(1)).subscribe(user=>{
       this.orderService.getOrdersByUser(user.userEmail).pipe(take(1)).subscribe(orders=>{
-        this.orders=orders;
+        this.orders=orders.map(ord=>new Order(ord.id,
+          ord.userEmail,
+          ord.orderItems,
+          ord.shippingInfo,
+          ord.orderDate,
+          ord.isProcessed,
+          ord.isCanceled));
         console.log(orders);
       });
     });
