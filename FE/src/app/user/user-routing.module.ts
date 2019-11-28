@@ -13,7 +13,7 @@ const routes: Routes = [
     component:UserComponent,
     children:[
       {
-        path:'',
+        path:'account',
         component:AccountComponent
       },
       {

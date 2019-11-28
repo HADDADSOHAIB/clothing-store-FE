@@ -1,2 +1,10 @@
-<store-header></store-header>
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+    <mat-sidenav #sidenav opened="true" mode="side">
+        <store-header></store-header>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div style="height: 88vh;">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

@@ -10,9 +10,7 @@ mat-card.account-card{
 mat-form-field.account-card{
     width: 80%;
 }
-button.account-card{
-    width: 80%;
-}
+
 div.account-name{
     width: 80%;
 }
@@ -34,8 +32,8 @@ mat-card.address-card{
 mat-form-field.address-card{
     width: 80%;
 }
-button.address-card{
-    width: 80%;
+button.account-card{
+    width: 150px;
 }
 div.address-name{
     width: 80%;
@@ -45,6 +43,19 @@ mat-form-field.address-name{
     margin: 2px;
 }
 
-button.account-card-delete{
-    float: right;
+span.address-number{
+    font-size: small;
+}
+
+.mat-card .mat-divider-horizontal {
+    position: relative;
+}
+
+mat-card.address-icon{
+    margin-bottom: 0px;
+    width: 600px;
+}
+mat-card.address-form{
+    margin-top: 2px;
+    width: 600px;
 }

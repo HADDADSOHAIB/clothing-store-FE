@@ -30,6 +30,7 @@ import { OrderService } from './services/order-service/order.service';
 import { AccountService } from './services/account-service/account.service';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations:[
@@ -65,8 +66,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSnackBarModule,
     MatChipsModule,
     MatSliderModule,
-    MatSidenavModule 
-
+    MatSidenavModule,
+    MatListModule
   ],
   exports:[
     PaginatorComponent,
@@ -100,7 +101,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatSnackBarModule,
     MatChipsModule,
     MatSliderModule,
-    MatSidenavModule 
+    MatSidenavModule,
+    MatListModule
   ]
 })
 export class SharedModule { 

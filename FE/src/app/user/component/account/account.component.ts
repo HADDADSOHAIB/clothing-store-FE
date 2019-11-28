@@ -16,6 +16,7 @@ export class AccountComponent implements OnInit {
   addAddressForm:FormGroup;
   profileForm:FormGroup;
   addressesForm:FormGroup[]=[];
+  showAddressForm:boolean=false;
   constructor(
     private formBuilder:FormBuilder,
     private snackBar: MatSnackBar,
@@ -138,6 +139,10 @@ export class AccountComponent implements OnInit {
       this.snackBar.open("deleted succes","OK",{duration:2000});
     },error=>this.snackBar.open("error try later","OK",{duration:2000}));
     
+  }
+
+  toggleAddressForm(){
+    this.showAddressForm=!this.showAddressForm;
   }
 }
 

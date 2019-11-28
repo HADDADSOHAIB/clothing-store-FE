@@ -1,30 +1,25 @@
-<mat-toolbar  class="header">
-        <div >
-            <ul fxLayoutGap="100px" class="navigation-items" fxLayout="row" fxLayoutAlign="center center">
-                <li >
-                    <a routerLink="" fxLayout="column" fxLayoutAlign="start center">
-                        <mat-icon>supervisor_account</mat-icon>
-                        <span class="nav-caption">Manage Store</span>
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="product/new" fxLayout="column" fxLayoutAlign="start center">
-                        <mat-icon>add_to_queue</mat-icon>
-                        <span class="nav-caption">new product</span>
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="products" fxLayout="column" fxLayoutAlign="start center">
-                        <mat-icon>playlist_add</mat-icon>
-                        <span class="nav-caption">Product List</span>
-                    </a>
-                </li>
-                <li>
-                    <a routerLink="orders" fxLayout="column" fxLayoutAlign="start center">
-                        <mat-icon>format_list_bulleted</mat-icon>
-                        <span class="nav-caption">Orders</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </mat-toolbar>
+
+<mat-nav-list>
+
+    <a mat-list-item routerLink="">
+        <mat-icon>supervisor_account</mat-icon>
+        <span class="nav-caption">Manage Store</span>
+    </a>
+    <a mat-list-item routerLink="product/new">
+        <mat-icon>add_to_queue</mat-icon>
+        <span class="nav-caption">new product</span>
+    </a>
+    <a mat-list-item routerLink="products">
+        <mat-icon>playlist_add</mat-icon>
+        <span class="nav-caption">Products List</span>
+    </a>
+    <a mat-list-item routerLink="orders">
+        <mat-icon>format_list_bulleted</mat-icon>
+        <span class="nav-caption">Orders List</span>
+    </a>
+    <a mat-list-item (click)="sidenav.toggle()" mat-list-item>
+        <mat-icon aria-hidden="false">close</mat-icon>
+        <span class="nav-caption">Close menu</span>
+    </a>
+
+</mat-nav-list>

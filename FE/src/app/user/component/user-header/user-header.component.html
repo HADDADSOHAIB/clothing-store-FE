@@ -1,25 +1,21 @@
-<mat-toolbar class="header">
-    <div>
-        <ul fxLayoutGap="100px" class="navigation-items" fxLayout="row" fxLayoutAlign="center center">
-            <li>
-                <a routerLink="" fxLayout="column" fxLayoutAlign="start center">
-                    <mat-icon aria-hidden="false">face</mat-icon>
-                    <span class="nav-caption">My account</span>
-                </a>
-            </li>
-            <li>
-                <a routerLink="myorders" fxLayout="column" fxLayoutAlign="start center">
-                    <mat-icon aria-hidden="false">face</mat-icon>
-                    <span class="nav-caption">My orders</span>
-                </a>
-            </li>
-            <li>
-                <a routerLink="" fxLayout="column" fxLayoutAlign="start center">
-                        <mat-icon aria-hidden="false">face</mat-icon>
-                        <span class="nav-caption">My Reviews</span>
-                    </a>
-                </li>
-        </ul>
-    </div>
 
-</mat-toolbar>
+<mat-nav-list>
+
+    <a mat-list-item routerLink="account">
+        <mat-icon aria-hidden="false">face</mat-icon>
+        <span class="nav-caption">My account</span>
+    </a>
+    <a mat-list-item routerLink="myorders">
+        <mat-icon aria-hidden="false">view_compact</mat-icon>
+        <span class="nav-caption">My orders</span>
+    </a>
+    <a mat-list-item routerLink="">
+        <mat-icon aria-hidden="false">rate_review</mat-icon>
+        <span class="nav-caption">My Reviews</span>
+    </a>
+    <a mat-list-item (click)="sidenav.toggle()" mat-list-item>
+        <mat-icon aria-hidden="false">close</mat-icon>
+        <span class="nav-caption">Close menu</span>
+    </a>
+
+</mat-nav-list>
