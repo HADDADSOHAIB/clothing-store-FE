@@ -33,8 +33,6 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     this.router.navigate(["store"]);
   }
   increment(id:number){
-    ;
-
     if(this.cart.items[this.cart.indexByProduct(id)].itemQuantity<this.cart.items[this.cart.indexByProduct(id)].product.quantity){
       this.cart.items[this.cart.indexByProduct(id)].itemQuantity++;
       this.cartService.updateCart(this.cart);

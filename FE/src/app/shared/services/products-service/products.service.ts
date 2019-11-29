@@ -30,11 +30,26 @@ export class ProductsService {
     .pipe(take(1)).subscribe(count=>this.productCountSubject.next(count));
   }
 
-  loadProducts(itemsPerPage: number,pageNumber: number,categoryList:Category[]=[]) {
-    if(categoryList.length!==0){
-      let request=categoryList.map(category=>category.categoryId).join(",");
-      (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="+itemsPerPage+"&&categories="+request) as Observable<Product[]>)
-      .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
+  loadProducts(itemsPerPage: number,pageNumber: number,categoryList:Category[]=[],sort:String[]=[]) {
+    if(categoryList.length!==0 && sort.length!==0){
+      let requestCategory=categoryList.map(category=>category.categoryId).join(",");
+      let requestSort=sort.join(",");
+      (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="
+        +itemsPerPage+"&&categories="+requestCategory+"&&sort="+requestSort) as Observable<Product[]>)
+        .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
+    }
+    else if(sort.length!==0){
+      let requestCategory=categoryList.map(category=>category.categoryId).join(",");
+      let requestSort=sort.join(",");
+      (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="
+        +itemsPerPage+"&&sort="+requestSort) as Observable<Product[]>)
+        .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
+    }
+    else if(categoryList.length!==0){
+      let requestCategory=categoryList.map(category=>category.categoryId).join(",");
+      (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="
+        +itemsPerPage+"&&categories="+requestCategory) as Observable<Product[]>)
+        .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
     }
     else
     (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="+itemsPerPage) as Observable<Product[]>)

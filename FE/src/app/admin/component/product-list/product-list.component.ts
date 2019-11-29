@@ -16,6 +16,8 @@ export class ProductListComponent implements OnInit {
   itemsPerPage:number=10;
   currentPage: number=1;
   displayedColumns: string[] = ['ProductName', 'Price','Quantity','Options'];
+  sort:string[]=[];
+  sortDirection:Map<string,string>=new Map<string,string>();
 
   constructor(
     private productService: ProductsService,
@@ -24,7 +26,11 @@ export class ProductListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
+    this.sortDirection.set("productName","asc");
+    this.sortDirection.set("price","asc");
+    this.sortDirection.set("quantity","asc");
+
+    this.productService.loadProducts(this.itemsPerPage,this.currentPage-1,[],this.sort);
     this.productService.getProducts().subscribe(prods=>this.products=prods);
     this.productService.loadAvailableProductCount();
     this.productService.getAvailableProductCount().subscribe(count=>this.availableProductCount=count);
@@ -33,12 +39,12 @@ export class ProductListComponent implements OnInit {
   changeItemsPerPage($event:string){
     this.itemsPerPage=parseInt($event);
     this.currentPage=1;
-    this.productService.loadProducts(this.itemsPerPage,0);
+    this.productService.loadProducts(this.itemsPerPage,0, [], this.sort);
   }
 
   changePageNumber($event:string){
     this.currentPage=parseInt($event);
-    this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
+    this.productService.loadProducts(this.itemsPerPage,this.currentPage-1, [],this.sort);
   }
 
   edit(id: string){
@@ -55,5 +61,19 @@ export class ProductListComponent implements OnInit {
         duration: 2000,
       });
     });
+  }
+
+  sortBy(sortElement:string){
+    this.displayedColumns.forEach(columnTitle=>{
+      if(columnTitle.toLowerCase()===sortElement.toLowerCase()){
+        this.sortDirection.get(sortElement)==='asc'?
+          this.sortDirection.set(sortElement,'desc'):this.sortDirection.set(sortElement,'asc');
+        this.sort=[];
+        this.sort.push(sortElement);
+        this.sort.push(this.sortDirection.get(sortElement));
+        this.currentPage=1;
+        this.productService.loadProducts(this.itemsPerPage,0, [], this.sort);
+      }
+    })
   }
 }
