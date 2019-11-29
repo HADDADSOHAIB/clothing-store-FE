@@ -1,25 +1,26 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'paginator',
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-export class PaginatorComponent implements OnInit {
+export class PaginatorComponent implements OnChanges{
 
   @Input() currentPage:number=1;
-  @Input() availableProductCount:number;
+  @Input() availableProductCount:number=0;
   @Output() itemsPerPageEmitter:EventEmitter<number>=new EventEmitter<number>();
   @Output() pageNumberEmitter:EventEmitter<number>=new EventEmitter<number>();
   itemsPerPage:string="10";
   availablePagesList:string[]=[];
   constructor() { }
 
-  ngOnInit() {
-    for(let i=1;i<=(this.availableProductCount/parseInt(this.itemsPerPage))+1;i++)
-      this.availablePagesList.push(i.toString());
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.availableProductCount) {
+      for(let i=1;i<=(this.availableProductCount/parseInt(this.itemsPerPage))+1;i++)
+        this.availablePagesList.push(i.toString());
+    }  
   }
-
   emitItemsPerPage(){
     this.itemsPerPageEmitter.emit(parseInt(this.itemsPerPage));
   }

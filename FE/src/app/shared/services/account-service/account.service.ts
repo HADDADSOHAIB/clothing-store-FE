@@ -22,7 +22,6 @@ export class AccountService {
   loadCurrentUser(){
     let token=new Token(localStorage.getItem('token'));
     this.httpClient.post(BACK_END+"users",token).pipe(take(1)).subscribe((user:User)=>{
-      console.log(user);
       this.subject.next(user);
     },error=>{
       console.log(error);

@@ -1,8 +1,15 @@
 <mat-toolbar color="primary">
     <div>
         <ul fxLayout fxLayoutGap="30px" class="navigation-items">
+            <li class="home">
+                <a routerLink="/store">
+                    <mat-icon aria-hidden="false">shopping_basket</mat-icon>
+                    <span class="home">MARKET</span>
+                </a>
+            </li>
+            <mat-divider [vertical]="true"></mat-divider>
             <li>
-                <a routerLink="/" fxLayout="column" fxLayoutAlign="start center">
+                <a routerLink="/store" fxLayout="column" fxLayoutAlign="start center">
                     <mat-icon aria-hidden="false">home</mat-icon>
                     <span class="nav-caption">Home</span>
                 </a>
@@ -25,7 +32,10 @@
                     <span class="nav-caption">Manage Store</span>
                 </a>
             </li>
+            <mat-divider [vertical]="true"></mat-divider>
+            
         </ul>
+
     </div>
     <div fxFlex fxLayout fxLayoutAlign="end centre" fxHide.xs>
         <ul fxLayout fxLayoutGap="30px" class="navigation-items">

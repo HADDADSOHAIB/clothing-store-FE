@@ -12,18 +12,16 @@ import { take } from 'rxjs/operators';
 })
 export class StoreFrontComponent implements OnInit, OnDestroy {
   
-  availableProductCount: number=0;
+  availableProductCount: number;
   products:Product[]=[];
   itemsPerPage:number=10;
   currentPage: number=1;
   
   constructor(
-    private productsService: ProductsService  ) { }
+    private productsService: ProductsService ) { }
 
   ngOnInit() {
-    this.productsService.getAvailableProductCount().pipe(take(1))
-    .subscribe(count=>this.availableProductCount=count);
-    
+    this.productsService.getAvailableProductCount().pipe(take(1)).subscribe(count=>this.availableProductCount=count);
     this.getProducts(this.itemsPerPage, this.currentPage);
     this.productsService.getProducts().subscribe(response => {
         this.products = [];
@@ -43,7 +41,7 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
   }
   
   private getProducts(itemsPerPage: number,pageNumber: number) {
-    this.productsService.loadProducts(itemsPerPage,pageNumber);
+    this.productsService.loadProducts(itemsPerPage,pageNumber-1);
   }
 
   ngOnDestroy(){

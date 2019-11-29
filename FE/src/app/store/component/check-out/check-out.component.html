@@ -1,4 +1,4 @@
-<div class="table">
+<div class="table" fxLayout="column" fxLayoutAlign="start center" >
     <table mat-table [dataSource]="cart.items" class="mat-elevation-z8">
         <ng-container matColumnDef="Product">
             <th mat-header-cell *matHeaderCellDef> Product </th>
@@ -32,8 +32,19 @@
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
     </table>
+    <div  fxLayout="row" fxLayoutAlign="space-between start">
+        <div>
+            <button class="nav" mat-button color="primary" (click)="goStore()">
+                <mat-icon>chevron_left</mat-icon>
+                Continue Shopping
+            </button>
+        </div>
+        <div>
+            <button class="nav" mat-button color="primary" (click)="goShipping()">
+                Go to shipping
+                <mat-icon>chevron_right</mat-icon>
+            </button>
+        </div>
+    </div>
 </div>
-<div class="actions" fxLayout="row" fxLayoutAlign="center start" >
-    <button class="nav" mat-button color="accent" (click)="goStore()">Continue Shopping</button>
-    <button class="nav" mat-button color="primary" (click)="goShipping()">Go to shipping</button>
-</div>
+

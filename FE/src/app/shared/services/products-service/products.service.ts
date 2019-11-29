@@ -14,7 +14,7 @@ export class ProductsService {
   constructor(private httpClient:HttpClient) {}
 
   loadProducts(itemsPerPage: number,pageNumber: number) {
-    (this.httpClient.get(BACK_END+"products?page="+pageNumber+"&&size="+itemsPerPage) as Observable<Product[]>)
+    (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="+itemsPerPage) as Observable<Product[]>)
       .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
   }
 

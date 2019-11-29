@@ -24,8 +24,6 @@ export class ProductCardComponent implements OnInit {
   ngOnInit() {
     this.cartService.loadCart();
     this.cartService.getCart().subscribe(cart=>{
-      console.log(this.cart);
-      console.log(15);
       this.cart=cart;
       this.findOrUpdateIndex();
     });

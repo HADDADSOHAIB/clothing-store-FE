@@ -31,11 +31,13 @@ import { AccountService } from './services/account-service/account.service';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { FooterComponent } from './Component/footer/footer.component';
 
 @NgModule({
   declarations:[
     PaginatorComponent,
     HeaderComponent,
+    FooterComponent,
 
   ],
   imports: [
@@ -72,6 +74,7 @@ import { MatListModule } from '@angular/material/list';
   exports:[
     PaginatorComponent,
     HeaderComponent,
+    FooterComponent,
     
     
     SharedRoutingModule,
