@@ -17,12 +17,16 @@ export class PaginatorComponent implements OnChanges{
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.availableProductCount) {
+      this.availablePagesList=[];
       for(let i=1;i<=(this.availableProductCount/parseInt(this.itemsPerPage))+1;i++)
         this.availablePagesList.push(i.toString());
     }  
   }
   emitItemsPerPage(){
     this.itemsPerPageEmitter.emit(parseInt(this.itemsPerPage));
+    this.availablePagesList=[];
+      for(let i=1;i<=(this.availableProductCount/parseInt(this.itemsPerPage))+1;i++)
+        this.availablePagesList.push(i.toString());
   }
 
   emitPageNumber(){

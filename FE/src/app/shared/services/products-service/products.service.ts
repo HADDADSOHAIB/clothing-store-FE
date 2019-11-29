@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { BACK_END } from 'backend';
 import { take, switchMap } from 'rxjs/operators'
+import { Category } from '../../Models/category';
 
 
 @Injectable({
@@ -11,19 +12,37 @@ import { take, switchMap } from 'rxjs/operators'
 })
 export class ProductsService {
   productSubjects:BehaviorSubject<Product[]>=new BehaviorSubject([]);
+  productCountSubject:BehaviorSubject<number>=new BehaviorSubject(0);
   constructor(private httpClient:HttpClient) {}
 
-  loadProducts(itemsPerPage: number,pageNumber: number) {
+  getAvailableProductCount() {
+    return this.productCountSubject;
+  }
+
+  loadAvailableProductCount(categoryList:Category[]=[]) {
+    if(categoryList.length!==0){
+    let request=categoryList.map(category=>category.categoryId).join(",");
+    (this.httpClient.get(BACK_END+"productscount?categories="+request) as Observable<number>)
+    .pipe(take(1)).subscribe(count=>this.productCountSubject.next(count));
+    }
+    else
+    (this.httpClient.get(BACK_END+"productscount") as Observable<number>)
+    .pipe(take(1)).subscribe(count=>this.productCountSubject.next(count));
+  }
+
+  loadProducts(itemsPerPage: number,pageNumber: number,categoryList:Category[]=[]) {
+    if(categoryList.length!==0){
+      let request=categoryList.map(category=>category.categoryId).join(",");
+      (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="+itemsPerPage+"&&categories="+request) as Observable<Product[]>)
+      .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
+    }
+    else
     (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="+itemsPerPage) as Observable<Product[]>)
       .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
   }
 
   getProducts(){
     return this.productSubjects;
-  }
-
-  getAvailableProductCount() {
-    return this.httpClient.get(BACK_END+"productscount") as Observable<number>;
   }
 
   getProduct(id: number) {
@@ -38,5 +57,8 @@ export class ProductsService {
   }
   updateProduct(product:Product){
     return this.httpClient.put(BACK_END+"products/"+product.productId,product) as Observable<Product>;
+  }
+  getCategories(){
+    return this.httpClient.get(BACK_END+"categories") as Observable<Category[]>;
   }
 }

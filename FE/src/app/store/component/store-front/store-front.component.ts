@@ -21,7 +21,8 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
     private productsService: ProductsService ) { }
 
   ngOnInit() {
-    this.productsService.getAvailableProductCount().pipe(take(1)).subscribe(count=>this.availableProductCount=count);
+    this.productsService.loadAvailableProductCount();
+    this.productsService.getAvailableProductCount().subscribe(count=>this.availableProductCount=count);
     this.getProducts(this.itemsPerPage, this.currentPage);
     this.productsService.getProducts().subscribe(response => {
         this.products = [];
@@ -30,8 +31,9 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
   }
 
   changeItemsPerPage($event){
-    this.currentPage=Math.trunc((this.itemsPerPage/$event)*this.currentPage);
     this.itemsPerPage=$event;
+    this.currentPage=1;
+    this.productsService.loadAvailableProductCount();
     this.getProducts(this.itemsPerPage, this.currentPage);
   }
 

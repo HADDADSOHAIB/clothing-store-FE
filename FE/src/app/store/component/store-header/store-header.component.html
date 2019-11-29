@@ -8,6 +8,32 @@
             <mat-icon matBadge="{{cart.totalCount()}}" matBadgeColor="accent">local_grocery_store</mat-icon>
             <span class="nav-caption">Checkout</span>
         </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item>
+            <mat-icon aria-hidden="false">filter_list</mat-icon>
+            <span class="nav-caption">Filters</span>
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item>
+            <mat-icon aria-hidden="false">category</mat-icon>
+            <span class="nav-caption">By Category</span>
+        </a>
+        <mat-selection-list (selectionChange)="filterCategory($event.option._value,$event.option._selected)">
+            <mat-list-option *ngFor="let category of categoriesToShow" [value]="category.categoryId"
+                checkboxPosition='before'>
+                {{category.categoryName}}
+            </mat-list-option>
+        </mat-selection-list>
+        <a mat-list-item (click)="toggleCategoryOptions()">
+            <span class="nav-caption more-options" *ngIf="!showAllCategories">... show more</span>
+            <span class="nav-caption more-options" *ngIf="showAllCategories">show less</span>
+        </a>
+        <mat-divider></mat-divider>
+        <a mat-list-item>
+            <mat-icon aria-hidden="false">monetization_on</mat-icon>
+            <span class="nav-caption">By Price</span>
+        </a>
+        <mat-divider></mat-divider>
         <a mat-list-item (click)="sidenav.toggle()" mat-list-item>
             <mat-icon aria-hidden="false">close</mat-icon>
             <span class="nav-caption">Close menu</span>

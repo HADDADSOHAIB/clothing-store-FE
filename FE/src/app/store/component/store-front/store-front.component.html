@@ -4,7 +4,7 @@
         </product-card>
     </div>
     <div class="btns">
-        <paginator [currentPage]="currentPage" (ItemsPerPageEmitter)="changeItemsPerPage($event)"
+        <paginator [currentPage]="currentPage" (itemsPerPageEmitter)="changeItemsPerPage($event)"
             [availableProductCount]="availableProductCount" (pageNumberEmitter)="changePageNumber($event)">
         </paginator>
     </div>

@@ -7,14 +7,14 @@
             <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start start">
                 <div fxLayout="row" fxLayoutAlign="pace-between start" class="sec-field">
                     <mat-form-field class="sec-field">
-                        <input matInput placeholder="first name" formControlName="firstName" >
+                        <input matInput placeholder="first name" formControlName="firstName" required>
                     </mat-form-field >
                     <mat-form-field class="sec-field">
-                        <input matInput placeholder="last name" formControlName="lastName">
+                        <input matInput placeholder="last name" formControlName="lastName" required>
                     </mat-form-field>
                 </div>
                 <mat-form-field class="prim-field">
-                    <input matInput placeholder="phone number" formControlName="phoneNumber" >
+                    <input matInput placeholder="phone number" formControlName="phoneNumber" required>
                 </mat-form-field>
                 <mat-form-field class="prim-field">
                     <mat-label>Select an address</mat-label>
@@ -25,7 +25,7 @@
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field class="prim-field">
-                    <input matInput placeholder="address first line" formControlName="firstLine" >
+                    <input matInput placeholder="address first line" formControlName="firstLine" required>
                 </mat-form-field>
 
                 <mat-form-field class="prim-field">
@@ -34,7 +34,7 @@
                 
                 <div fxLayout="row" fxLayoutAlign="pace-between start" class="sec-field">
                     <mat-form-field class="sec-field">
-                        <input matInput placeholder="city" formControlName="city">
+                        <input matInput placeholder="city" formControlName="city" required>
                     </mat-form-field>
                     <mat-form-field class="sec-field">
                         <input matInput placeholder="state" formControlName="state">
@@ -45,16 +45,20 @@
                         <input matInput placeholder="country" formControlName="country">
                     </mat-form-field>
                     <mat-form-field class="sec-field">
-                        <input matInput placeholder="zip code" formControlName="zipCode">
+                        <input matInput placeholder="zip code" formControlName="zipCode" required>
                     </mat-form-field>
                 </div>
-        
             </form>
         </mat-card-content>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="center start" >
-            <button mat-button color="warn" (click)="goStore()">Continue Shopping</button>
-            <button mat-button color="Accent" (click)="goCart()">Go to checkout</button>
-            <button mat-button color="primary" [disabled]="form.invalid" (click)="placeOrder()">Place Order</button>
+        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center" >
+            <button mat-button color="primary" (click)="goStore()">
+                <mat-icon>chevron_left</mat-icon>
+                Continue Shopping
+            </button>
+            <button mat-button color="primary" [disabled]="form.invalid" (click)="placeOrder()">
+                Place Order
+                <mat-icon>chevron_right</mat-icon>
+            </button>
         </mat-card-actions>
     </mat-card>
 </div>
