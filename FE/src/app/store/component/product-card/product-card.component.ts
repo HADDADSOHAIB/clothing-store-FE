@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Product } from 'src/app/shared/Models/product';
 import { Cart } from 'src/app/shared/Models/cart';
 import { CartItem } from 'src/app/shared/Models/CartItem';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'product-card',
@@ -17,7 +18,8 @@ export class ProductCardComponent implements OnInit {
 
   constructor(
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) {
    }
 
@@ -41,8 +43,13 @@ export class ProductCardComponent implements OnInit {
 
   increment(){
     this.findOrUpdateIndex();
-    this.cart.items[this.itemIndex].itemQuantity++;
-    this.cartService.updateCart(this.cart);
+    if(this.cart.items[this.itemIndex].itemQuantity<this.product.quantity){
+      this.cart.items[this.itemIndex].itemQuantity++;
+      this.cartService.updateCart(this.cart);
+    }
+    else{
+      this.snackBar.open("Stock out, there is no more items","Ok",{duration:2000});
+    }
   }
 
   decrement(){

@@ -3,6 +3,7 @@ import { CartService } from '../../service/cart-service/cart.service';
 import { Router } from '@angular/router';
 import { Cart } from 'src/app/shared/Models/cart';
 import { take } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-check-out',
@@ -15,7 +16,8 @@ export class CheckOutComponent implements OnInit, OnDestroy {
 
   constructor(
     private cartService: CartService,
-    private router: Router
+    private router: Router,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -31,8 +33,15 @@ export class CheckOutComponent implements OnInit, OnDestroy {
     this.router.navigate(["store"]);
   }
   increment(id:number){
-    this.cart.items[this.cart.indexByProduct(id)].itemQuantity++;
-    this.cartService.updateCart(this.cart);
+    ;
+
+    if(this.cart.items[this.cart.indexByProduct(id)].itemQuantity<this.cart.items[this.cart.indexByProduct(id)].product.quantity){
+      this.cart.items[this.cart.indexByProduct(id)].itemQuantity++;
+      this.cartService.updateCart(this.cart);
+    }
+    else{
+      this.snackBar.open("Stock out, there is no more items","Ok",{duration:2000});
+    }
   }
 
   decrement(id:number){

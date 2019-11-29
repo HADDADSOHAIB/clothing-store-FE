@@ -55,8 +55,13 @@ export class ProductFormComponent implements OnInit {
   }
 
   increment(){
-    this.cart.items[this.cart.indexByProduct(this.product.productId)].itemQuantity++;
-    this.cartService.updateCart(this.cart);
+    if(this.cart.items[this.cart.indexByProduct(this.product.productId)].itemQuantity<this.product.quantity){
+      this.cart.items[this.cart.indexByProduct(this.product.productId)].itemQuantity++;
+      this.cartService.updateCart(this.cart);
+    }
+    else{
+      this.snackBar.open("Stock out, there is no more items","Ok",{duration:2000});
+    }
   }
 
   decrement(){

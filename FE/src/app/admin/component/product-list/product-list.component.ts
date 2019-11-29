@@ -13,7 +13,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProductListComponent implements OnInit {
   products: Product[]=[];
   availableProductCount: number=0;
-  itemsPerPage:number=20;
+  itemsPerPage:number=10;
   currentPage: number=1;
   displayedColumns: string[] = ['ProductName', 'Price','Quantity','Options'];
 
@@ -24,24 +24,21 @@ export class ProductListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.productService.getAvailableProductCount().pipe(take(1)).subscribe(count=>this.availableProductCount=count);
-    this.productService.loadProducts(this.itemsPerPage,this.currentPage);
-    this.productService.getProducts().subscribe(prods=>{
-      this.products=[];
-      prods.forEach(prod=>this.products.push(prod));
-    });
-
-    this.productService.getAvailableProductCount().pipe(take(1)).subscribe(count=>this.availableProductCount=count);
+    this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
+    this.productService.getProducts().subscribe(prods=>this.products=prods);
+    this.productService.loadAvailableProductCount();
+    this.productService.getAvailableProductCount().subscribe(count=>this.availableProductCount=count);
   }
 
   changeItemsPerPage($event:string){
-    this.currentPage=Math.trunc((this.itemsPerPage/parseInt($event))*this.currentPage);
     this.itemsPerPage=parseInt($event);
+    this.currentPage=1;
+    this.productService.loadProducts(this.itemsPerPage,0);
   }
 
   changePageNumber($event:string){
     this.currentPage=parseInt($event);
-    this.productService.loadProducts(this.itemsPerPage,this.currentPage);
+    this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
   }
 
   edit(id: string){
