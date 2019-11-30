@@ -26,10 +26,7 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
     this.productsService.loadAvailableProductCount();
     this.productsService.getAvailableProductCount().subscribe(count=>this.availableProductCount=count);
     this.getProducts(this.itemsPerPage, this.currentPage);
-    this.productsService.getProducts().subscribe(response => {
-        this.products = [];
-        response.forEach(product => this.products.push(product));
-      });
+    this.productsService.getProducts().subscribe(products => this.products = products);
   }
 
   changeItemsPerPage($event){

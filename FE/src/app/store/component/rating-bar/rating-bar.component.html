@@ -1,0 +1,24 @@
+<div  fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+    <div (mouseover)="changeRating(1)">
+        <mat-icon >star</mat-icon>
+    </div>
+    <div (mouseover)="changeRating(2)">
+        <mat-icon *ngIf="rating>=2">star</mat-icon>
+        <mat-icon *ngIf="rating<=1">star_border</mat-icon>
+    </div>
+    <div (mouseover)="changeRating(3)">
+        <mat-icon *ngIf="rating>=3">star</mat-icon>
+        <mat-icon *ngIf="rating<=2">star_border</mat-icon>
+    </div>
+    <div (mouseover)="changeRating(4)">
+        <mat-icon *ngIf="rating>=4">star</mat-icon>
+        <mat-icon *ngIf="rating<=3">star_border</mat-icon>
+    </div>
+    <div (mouseover)="changeRating(5)">
+        <mat-icon *ngIf="rating==5">star</mat-icon>
+        <mat-icon *ngIf="rating!=5">star_border</mat-icon>
+    </div>
+    <div>
+        <p>{{rating}}/5</p>
+    </div>
+</div>

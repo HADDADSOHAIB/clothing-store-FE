@@ -12,9 +12,11 @@ import { ProductFormComponent } from './component/product-form/product-form.comp
 import { CheckOutComponent } from './component/check-out/check-out.component';
 import { ShippingFormComponent } from './component/shipping-form/shipping-form.component';
 import { SharedModule } from '../shared/shared.module';
-import { PaginatorComponent } from '../shared/Component/paginator/paginator.component';
 import { ReviewService } from './service/review-service/review.service';
 import { HeaderFormaterPipe } from './pipes/header-formater/header-formater.pipe';
+import { RatingBarComponent } from './component/rating-bar/rating-bar.component';
+
+
 
 
 @NgModule({
@@ -26,7 +28,8 @@ import { HeaderFormaterPipe } from './pipes/header-formater/header-formater.pipe
     ProductFormComponent,
     CheckOutComponent,
     ShippingFormComponent,
-    HeaderFormaterPipe
+    HeaderFormaterPipe,
+    RatingBarComponent
   ],
   imports: [
     StoreRoutingModule,

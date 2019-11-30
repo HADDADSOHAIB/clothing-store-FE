@@ -1,7 +1,7 @@
 <mat-card class="card">
-    <h5>{{product.productName | headerFormater}}</h5>
-    <img mat-card-image src="{{product.image}}" alt="Photo of item">
-    <div class="content">{{product.price | currency:'MAD'}}</div>
+    <h5 (click)="details()">{{product.productName | headerFormater}}</h5>
+    <img mat-card-image src="{{product.image}}" alt="Photo of item" (click)="details()">
+    <div class="content" (click)="details()">{{product.price | currency:'MAD'}}</div>
     <mat-card-actions fxLayout="column" fxLayoutAlign="start start">
         <div class="divbtn" *ngIf="itemIndex===-1">
             <button mat-stroked-button color="primary" (click)="addToCart()" class="btn">Buy</button>

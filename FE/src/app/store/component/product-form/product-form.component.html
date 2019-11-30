@@ -29,6 +29,14 @@
                 <p>
                     {{this.product.description}}
                 </p>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
+                    <p>Category:  </p>
+                    <mat-chip-list>
+                        <mat-chip *ngFor="let category of product.categories">
+                            {{category.categoryName}}
+                        </mat-chip>
+                      </mat-chip-list>
+                </div>
             </mat-card-content>
         </mat-card>
     </div>
@@ -36,20 +44,20 @@
 <div class="reviews-section" fxLayout="column" fxLayoutAlign="center center">
     <mat-card class="reviews-section" *ngFor="let review of product.reviews">
         <mat-card-content>
-            <button mat-button class="user-name">{{review.user.firstName+" "+review.user.lastName | lowercase}}</button>
+            <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+                <button mat-button class="user-name">{{review.user.firstName+" "+review.user.lastName | uppercase}}</button>
+                <rating-bar [rating]="review.userRating" readOnly="true"></rating-bar >
+            </div>
             <mat-divider class="user-name"></mat-divider>
-            <p>Rating: {{review.userRating}}/5</p>
             <p>{{review.userReview}}</p>
         </mat-card-content>
     </mat-card>
     <mat-card class="add-review">
-        <mat-card-header>
-            <mat-card-title>Add a review</mat-card-title>
+        <mat-card-header fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+            <mat-card-title>Add a review :</mat-card-title>
+            <rating-bar [rating]="productReview.userRating" (ratingChange)="changeRating($event)"></rating-bar >
         </mat-card-header>
         <mat-card-content>
-            <mat-slider [max]="5" [min]="0" [step]="0.1" [tickInterval]="auto"
-                [(ngModel)]="productReview.userRating" [thumbLabel]="true">
-            </mat-slider>
             <mat-form-field appearance="outline">
                 <mat-label>Comment about the product</mat-label>
                 <textarea matInput  placeholder="Add a comment" cdkTextareaAutosize="true" 
@@ -57,7 +65,7 @@
             </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
-            <button mat-button color='primary' (click)="saveReview()">save</button>
+            <button mat-button color='primary' style="float: right;" (click)="saveReview()">save</button>
         </mat-card-actions>
     </mat-card>
 </div>

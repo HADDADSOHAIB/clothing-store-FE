@@ -20,7 +20,7 @@
         </a>
         <mat-selection-list (selectionChange)="filterCategory($event.option._value,$event.option._selected)">
             <mat-list-option *ngFor="let category of categoriesToShow" [value]="category.categoryId"
-                checkboxPosition='before'>
+                checkboxPosition='before' class="option">
                 {{category.categoryName}}
             </mat-list-option>
         </mat-selection-list>

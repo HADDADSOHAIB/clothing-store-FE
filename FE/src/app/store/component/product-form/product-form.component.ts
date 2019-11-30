@@ -18,8 +18,14 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class ProductFormComponent implements OnInit {
   cart: Cart;
-  product:Product;
-  productReview:ProductReview=new ProductReview(0,null,2.5,"",0);
+  product:Product=new Product();
+  productReview:ProductReview=new ProductReview(0,null,4,"",0);
+
+  options = {
+    maxRating:5,
+    readOnly: false,
+    resetAllowed: true
+  }
 
   constructor(
     private cartService: CartService,
@@ -38,10 +44,11 @@ export class ProductFormComponent implements OnInit {
 
     this.activatedRoute.paramMap.pipe(take(1)).subscribe(params=>{
       if(params.get('id'))
-        this.productService.getProduct(parseInt(params.get('id'))).pipe(take(1)).subscribe(product=>this.product=product);
+        this.productService.getProduct(parseInt(params.get('id'))).pipe(take(1)).subscribe(product=>{
+          this.product=product;
+          console.log(product);
+        });
     });
-    this.product.reviews
-    this.productReview.user.lastName;
   }
 
   addToCart(){
@@ -73,6 +80,11 @@ export class ProductFormComponent implements OnInit {
     this.cartService.updateCart(this.cart);
     this.cartService.updateCart(this.cart);
   }
+
+  changeRating(rating: number){
+    this.productReview.userRating=rating;
+  }
+
   saveReview(){
     this.productReview.productId=this.product.productId;
     this.accountService.getCurrentUser().pipe(take(1)).subscribe(user=>{
@@ -81,7 +93,7 @@ export class ProductFormComponent implements OnInit {
         this.reviewService.addReview(this.productReview).pipe(take(1)).subscribe(review=>{
           this.snackBar.open("Review Added","OK",{duration:2000});
           this.productService.getProduct(this.product.productId).pipe(take(1)).subscribe(product=>this.product=product);
-          this.productReview=new ProductReview(0,null,2.5,"",0);
+          this.productReview=new ProductReview(0,null,4,"",0);
         },error=>{
           console.log(error);
           this.snackBar.open("Error, try later","Ok",{duration:2000});
