@@ -7,6 +7,7 @@ import { User } from 'src/app/shared/Models/user';
 import { AccountService } from 'src/app/shared/services/account-service/account.service';
 import { Category } from 'src/app/shared/Models/category';
 import { ProductsService } from 'src/app/shared/services/products-service/products.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'store-header',
@@ -20,10 +21,13 @@ export class StoreHeaderComponent implements OnInit{
   categoriesToFilter:Category[]=[];
   categoriesToShow:Category[]=[];
   showAllCategories=false;
+  priceStart:number=0;
+  priceEnd:number=1000000;
   constructor(
     private productService:ProductsService,
     private cartService: CartService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
@@ -37,18 +41,21 @@ export class StoreHeaderComponent implements OnInit{
   }
 
   filterCategory(id:number,selected:boolean){
+    let prices:number[]=[];
+    prices.push(this.priceStart);
+    prices.push(this.priceEnd);
     if(selected){
       let category=this.categories.find(category=>category.categoryId===id);
       this.categoriesToFilter.push(category);
-      this.productService.loadAvailableProductCount(this.categoriesToFilter);
-      this.productService.loadProducts(10,0,this.categoriesToFilter);
+      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
+      this.productService.loadProducts(10,0,this.categoriesToFilter,[],prices);
     }
     else{
       let index=this.categoriesToFilter.findIndex(category=>category.categoryId===id);
       this.categoriesToFilter.splice(index,1);
       if(this.categoriesToFilter.length===0){}
-      this.productService.loadAvailableProductCount(this.categoriesToFilter);
-      this.productService.loadProducts(10,0,this.categoriesToFilter);
+      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
+      this.productService.loadProducts(10,0,this.categoriesToFilter,[],prices);
     }
     
   }
@@ -59,5 +66,21 @@ export class StoreHeaderComponent implements OnInit{
       this.categoriesToShow=this.categories;
     else
       this.categoriesToShow=this.categories.slice(0,4);
+  }
+
+  filterByPrice(){
+    if(this.priceEnd<0 || this.priceStart<0){
+      this.snackBar.open("The prices should not be less then 0", "OK",{duration:2000});
+    }
+    else if(this.priceEnd<this.priceStart){
+      this.snackBar.open("The lower limit should always be less then upper limit", "OK",{duration:2000});
+    }
+    else{
+      let prices:number[]=[];
+      prices.push(this.priceStart);
+      prices.push(this.priceEnd);
+      this.productService.loadProducts(10,0,this.categoriesToFilter,[],prices);
+      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
+    }
   }
 }
