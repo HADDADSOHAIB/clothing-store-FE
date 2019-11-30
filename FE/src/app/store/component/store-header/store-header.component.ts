@@ -13,7 +13,7 @@ import { ProductsService } from 'src/app/shared/services/products-service/produc
   templateUrl: './store-header.component.html',
   styleUrls: ['./store-header.component.scss']
 })
-export class StoreHeaderComponent implements OnInit,OnDestroy {
+export class StoreHeaderComponent implements OnInit{
   cart: Cart;
   user:User;
   categories:Category[]=[];
@@ -34,10 +34,6 @@ export class StoreHeaderComponent implements OnInit,OnDestroy {
       this.categoriesToShow=this.categories.slice(0,4);
     });
   
-  }
-
-  ngOnDestroy(){
-    this.cartService.upLoadCart(this.cart).pipe(take(1)).subscribe(cart=>console.log("succes"));
   }
 
   filterCategory(id:number,selected:boolean){

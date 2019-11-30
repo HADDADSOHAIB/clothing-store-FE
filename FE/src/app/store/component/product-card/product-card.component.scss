@@ -1,66 +1,53 @@
 .card{
-    width:250px;
+    width:150px;
     margin:5px;
 }
 
 img{
-    height:200px;
+    height:100px;
 }
     
+.content{
+    font-size: small;
+}
 
-.header{
-    justify-content: center;
+button{
+    font-size: small;
 }
 
 .btn{
     width:100%;
 }
+
 .mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
     margin: 0 0px;
-}
-.btn-left{
-    width:40%;
-    float:left;
-}
-.btn-right{
-    width:40%;
-    float:right;
-}
-.btn-mid{
-    width:20%;
 }
 .mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
     min-width: 0px;
 }
 
+.btn-left{
+    width:50%;
+    float:left;
+}
+.btn-right{
+    width:50%;
+    float:right;
+}
+.btn-mid{
+    width:20%;
+}
 .divbtn{
     width:100%;
     margin-bottom:2px;
 }
 
-// 
-// @media only screen and (max-width: 1040px){
-//     .card{
-//         width: 21%;
-//     } 
-// }
-
-// @media only screen and (max-width: 780px)  {
-//     .card{
-//         width: 27%;
-//     } 
-// }
-// @media only screen and (max-width: 520px) {
-//     .card{
-//         width: 43%;
-//     } 
-// }
 @media only screen and (max-width: 260px) {
     .card{
         width: 100%;
     } 
     img{
-        height:150px;
+        height:100px;
     }
 }
 

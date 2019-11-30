@@ -10,7 +10,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './check-out.component.html',
   styleUrls: ['./check-out.component.scss']
 })
-export class CheckOutComponent implements OnInit, OnDestroy {
+export class CheckOutComponent implements OnInit{
   cart: Cart;
   displayedColumns: string[] = ['Product', 'Quantity','Price'];
 
@@ -35,6 +35,7 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   increment(id:number){
     if(this.cart.items[this.cart.indexByProduct(id)].itemQuantity<this.cart.items[this.cart.indexByProduct(id)].product.quantity){
       this.cart.items[this.cart.indexByProduct(id)].itemQuantity++;
+      this.cartService.upLoadCart(this.cart);
       this.cartService.updateCart(this.cart);
     }
     else{
@@ -45,11 +46,9 @@ export class CheckOutComponent implements OnInit, OnDestroy {
   decrement(id:number){
     if(this.cart.items[this.cart.indexByProduct(id)].itemQuantity>=1){
       this.cart.items[this.cart.indexByProduct(id)].itemQuantity--;
+      this.cartService.upLoadCart(this.cart);
+      this.cartService.updateCart(this.cart);
     }
-    this.cartService.updateCart(this.cart);
-  }
-
-  ngOnDestroy(){
-    this.cartService.upLoadCart(this.cart).pipe(take(1)).subscribe(cart=>console.log('succes'));
+    
   }
 }

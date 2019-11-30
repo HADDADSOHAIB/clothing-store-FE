@@ -18,7 +18,9 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
   currentPage: number=1;
   
   constructor(
-    private productsService: ProductsService ) { }
+    private productsService: ProductsService,
+    private cartService: CartService
+    ) { }
 
   ngOnInit() {
     this.productsService.loadAvailableProductCount();

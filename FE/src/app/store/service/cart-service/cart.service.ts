@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
 import { Cart } from 'src/app/shared/Models/cart';
@@ -10,7 +10,8 @@ import { AccountService } from 'src/app/shared/services/account-service/account.
 @Injectable({
   providedIn: 'root'
 })
-export class CartService {
+export class CartService{
+  
   private cartSubject:BehaviorSubject<Cart>=new BehaviorSubject<Cart>(new Cart(localStorage.getItem('cartId')?localStorage.getItem('cartId'):UUID.UUID(),'',[]));
   private isCartInDb:boolean=false;
   constructor(
@@ -20,9 +21,10 @@ export class CartService {
 
   upLoadCart(cart: Cart) {
     if(this.isCartInDb)
-    return this.httpClient.put(BACK_END+"carts/"+cart.cartId,cart);
-    else
-      return this.httpClient.post(BACK_END+"carts",cart);
+      this.httpClient.put(BACK_END+"carts/"+cart.cartId,cart).pipe(take(1)).subscribe(cart=>cart,error=>console.log(error));
+    else{
+      this.httpClient.post(BACK_END+"carts",cart).pipe(take(1)).subscribe(cart=>this.isCartInDb=true,error=>console.log(error));
+    }
   }
 
   loadCart(){
@@ -48,7 +50,7 @@ export class CartService {
       this.getCart().pipe(take(1)).subscribe(cartDb=>{
         let cart=new Cart(cartDb.cartId,email.toString(),cartDb.items);
         this.isCartInDb=true;
-        this.upLoadCart(cart).pipe(take(1)).subscribe(cart=>console.log("succes"));
+        this.upLoadCart(cart);
         this.cartSubject.next(cart);
       });
     });

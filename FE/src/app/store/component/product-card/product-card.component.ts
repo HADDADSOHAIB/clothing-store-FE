@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { CartService } from '../../service/cart-service/cart.service';
 import { Router } from '@angular/router';
 import { Product } from 'src/app/shared/Models/product';
 import { Cart } from 'src/app/shared/Models/cart';
 import { CartItem } from 'src/app/shared/Models/CartItem';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'product-card',
@@ -38,6 +39,7 @@ export class ProductCardComponent implements OnInit {
       1,
       this.product
     ));
+    this.cartService.upLoadCart(this.cart);
     this.cartService.updateCart(this.cart);
   }
 
@@ -45,6 +47,7 @@ export class ProductCardComponent implements OnInit {
     this.findOrUpdateIndex();
     if(this.cart.items[this.itemIndex].itemQuantity<this.product.quantity){
       this.cart.items[this.itemIndex].itemQuantity++;
+      this.cartService.upLoadCart(this.cart);
       this.cartService.updateCart(this.cart);
     }
     else{
@@ -57,6 +60,7 @@ export class ProductCardComponent implements OnInit {
     this.cart.items[this.itemIndex].itemQuantity--;
     if(this.cart.items[this.itemIndex].itemQuantity===0)
       this.cart.items.splice(this.itemIndex,1);
+    this.cartService.upLoadCart(this.cart);
     this.cartService.updateCart(this.cart);
   }
 
@@ -65,7 +69,6 @@ export class ProductCardComponent implements OnInit {
   }
 
   details(){
-    console.log("navigate");
     this.router.navigate(["store/product/",this.product.productId]);
   }
 }

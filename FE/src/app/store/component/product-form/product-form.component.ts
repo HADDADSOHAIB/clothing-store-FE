@@ -52,11 +52,13 @@ export class ProductFormComponent implements OnInit {
       this.product
     ));
     this.cartService.updateCart(this.cart);
+    this.cartService.updateCart(this.cart);
   }
 
   increment(){
     if(this.cart.items[this.cart.indexByProduct(this.product.productId)].itemQuantity<this.product.quantity){
       this.cart.items[this.cart.indexByProduct(this.product.productId)].itemQuantity++;
+      this.cartService.updateCart(this.cart);
       this.cartService.updateCart(this.cart);
     }
     else{
@@ -68,6 +70,7 @@ export class ProductFormComponent implements OnInit {
     this.cart.items[this.cart.indexByProduct(this.product.productId)].itemQuantity--;
     if(this.cart.items[this.cart.indexByProduct(this.product.productId)].itemQuantity===0)
       this.cart.items.splice(this.cart.indexByProduct(this.product.productId),1);
+    this.cartService.updateCart(this.cart);
     this.cartService.updateCart(this.cart);
   }
   saveReview(){
