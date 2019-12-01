@@ -15,7 +15,7 @@ import { CategoryService } from 'src/app/admin/service/category-service/category
 })
 export class FilterAndSortComponent implements OnInit {
   categories:Category[]=[];
-  categoriesToFilter:Category[]=[];
+  categoriesToFilter:number[]=[];
   categoriesToShow:Category[]=[];
 
   showAllCategories=false;
@@ -47,21 +47,22 @@ export class FilterAndSortComponent implements OnInit {
   }
 
   filterCategory(id:number,selected:boolean){
-    let prices:number[]=[];
-    prices.push(this.priceStart);
-    prices.push(this.priceEnd);
+    
     if(selected){
       let category=this.categories.find(category=>category.categoryId===id);
-      this.categoriesToFilter.push(category);
-      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
-      this.productService.loadProducts(10,0,this.categoriesToFilter,this.sort,prices);
+      this.categoriesToFilter.push(category.categoryId);
+      this.updateFilterAndSortOptions();
+      this.productService.loadAvailableProductCount();
+      this.productService.loadProducts(10,0);
+
     }
     else{
-      let index=this.categoriesToFilter.findIndex(category=>category.categoryId===id);
+      let index=this.categoriesToFilter.findIndex(categoryId=>categoryId===id);
       this.categoriesToFilter.splice(index,1);
       if(this.categoriesToFilter.length===0){}
-      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
-      this.productService.loadProducts(10,0,this.categoriesToFilter,this.sort,prices);
+      this.updateFilterAndSortOptions();
+      this.productService.loadAvailableProductCount();
+      this.productService.loadProducts(10,0);
     }
     
   }
@@ -101,11 +102,9 @@ export class FilterAndSortComponent implements OnInit {
       this.snackBar.open("The lower limit should always be less then upper limit", "OK",{duration:2000});
     }
     else{
-      let prices:number[]=[];
-      prices.push(this.priceStart);
-      prices.push(this.priceEnd);
-      this.productService.loadProducts(10,0,this.categoriesToFilter,this.sort,prices);
-      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
+      this.updateFilterAndSortOptions();
+      this.productService.loadProducts(10,0);
+      this.productService.loadAvailableProductCount();
     }
   }
   clearFilterByPrice(){
@@ -113,29 +112,28 @@ export class FilterAndSortComponent implements OnInit {
     this.priceStart=0;
     this.priceEnd=1000000;
 
-    let prices: number[] = [];
-    prices.push(this.priceStart);
-    prices.push(this.priceEnd);
-    this.productService.loadProducts(10, 0, this.categoriesToFilter, this.sort, prices);
-    this.productService.loadAvailableProductCount(this.categoriesToFilter, prices);
+    this.updateFilterAndSortOptions();
+    this.productService.loadProducts(10, 0);
+    this.productService.loadAvailableProductCount();
   }
 
   sortField(sortField:string){
     this.sort[0]=sortField;
-
-    let prices: number[] = [];
-    prices.push(this.priceStart);
-    prices.push(this.priceEnd);
-    this.productService.loadProducts(10, 0, this.categoriesToFilter, this.sort, prices);
-    this.productService.loadAvailableProductCount(this.categoriesToFilter, prices);
+    this.updateFilterAndSortOptions();
+    this.productService.loadProducts(10, 0);
+    this.productService.loadAvailableProductCount();
   }
   sortDirection(sortDirection:string){
     this.sort[1]=sortDirection;
-
-    let prices: number[] = [];
-    prices.push(this.priceStart);
-    prices.push(this.priceEnd);
-    this.productService.loadProducts(10, 0, this.categoriesToFilter, this.sort, prices);
-    this.productService.loadAvailableProductCount(this.categoriesToFilter, prices);
+    this.updateFilterAndSortOptions();
+    this.productService.loadProducts(10, 0);
+    this.productService.loadAvailableProductCount();
+  }
+  updateFilterAndSortOptions(){
+    this.productService.optionSubject.next({
+      prices:[this.priceStart,this.priceEnd],
+      sort:this.sort,
+      categoryList:this.categoriesToFilter
+    });
   }
 }

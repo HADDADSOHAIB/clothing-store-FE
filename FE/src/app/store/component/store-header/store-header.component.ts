@@ -58,96 +58,96 @@ export class StoreHeaderComponent implements OnInit{
   
   }
 
-  filterCategory(id:number,selected:boolean){
-    let prices:number[]=[];
-    prices.push(this.priceStart);
-    prices.push(this.priceEnd);
-    if(selected){
-      let category=this.categories.find(category=>category.categoryId===id);
-      this.categoriesToFilter.push(category);
-      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
-      this.productService.loadProducts(10,0,this.categoriesToFilter,this.sort,prices);
-    }
-    else{
-      let index=this.categoriesToFilter.findIndex(category=>category.categoryId===id);
-      this.categoriesToFilter.splice(index,1);
-      if(this.categoriesToFilter.length===0){}
-      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
-      this.productService.loadProducts(10,0,this.categoriesToFilter,this.sort,prices);
-    }
+  // filterCategory(id:number,selected:boolean){
+  //   let prices:number[]=[];
+  //   prices.push(this.priceStart);
+  //   prices.push(this.priceEnd);
+  //   if(selected){
+  //     let category=this.categories.find(category=>category.categoryId===id);
+  //     this.categoriesToFilter.push(category);
+  //     this.productService.loadAvailableProductCount();
+  //     this.productService.loadProducts(10,0);
+  //   }
+  //   else{
+  //     let index=this.categoriesToFilter.findIndex(category=>category.categoryId===id);
+  //     this.categoriesToFilter.splice(index,1);
+  //     if(this.categoriesToFilter.length===0){}
+  //     this.productService.loadAvailableProductCount();
+  //     this.productService.loadProducts(10,0);
+  //   }
     
-  }
+  // }
 
-  toggleCategoryOptions(){
-    this.showAllCategories=!this.showAllCategories;
-    if(this.showAllCategories)
-      this.categoriesToShow=this.categories;
-    else
-      this.categoriesToShow=this.categories.slice(0,4);
-  }
-  toggleFilters(){
-    this.showFilters=!this.showFilters;
-  }
-  toggleFilterByCategory(){
-    this.showFilterByCategory=!this.showFilterByCategory;
-  }
-  toggleFilterByPrice(){
-    this.showFilterByPrice=!this.showFilterByPrice;
-  }
-  toggleSortBy(){
-    this.showSortBy=!this.showSortBy;
-  }
+  // toggleCategoryOptions(){
+  //   this.showAllCategories=!this.showAllCategories;
+  //   if(this.showAllCategories)
+  //     this.categoriesToShow=this.categories;
+  //   else
+  //     this.categoriesToShow=this.categories.slice(0,4);
+  // }
+  // toggleFilters(){
+  //   this.showFilters=!this.showFilters;
+  // }
+  // toggleFilterByCategory(){
+  //   this.showFilterByCategory=!this.showFilterByCategory;
+  // }
+  // toggleFilterByPrice(){
+  //   this.showFilterByPrice=!this.showFilterByPrice;
+  // }
+  // toggleSortBy(){
+  //   this.showSortBy=!this.showSortBy;
+  // }
 
-  filterByPrice(){
-    this.isFilterByPriceSet=true;
-    this.priceStart=parseInt(this.priceFilterForm.get('lowerLimit').value);
-    this.priceEnd=parseInt(this.priceFilterForm.get('upperLimit').value);
+  // filterByPrice(){
+  //   this.isFilterByPriceSet=true;
+  //   this.priceStart=parseInt(this.priceFilterForm.get('lowerLimit').value);
+  //   this.priceEnd=parseInt(this.priceFilterForm.get('upperLimit').value);
 
-    this.priceFilterForm.get('lowerLimit').setValue(" ");
-    this.priceFilterForm.get('upperLimit').setValue(" ");
+  //   this.priceFilterForm.get('lowerLimit').setValue(" ");
+  //   this.priceFilterForm.get('upperLimit').setValue(" ");
 
-    if(this.priceEnd<0 || this.priceStart<0){
-      this.snackBar.open("The prices should not be less then 0", "OK",{duration:2000});
-    }
-    else if(this.priceEnd<this.priceStart){
-      this.snackBar.open("The lower limit should always be less then upper limit", "OK",{duration:2000});
-    }
-    else{
-      let prices:number[]=[];
-      prices.push(this.priceStart);
-      prices.push(this.priceEnd);
-      this.productService.loadProducts(10,0,this.categoriesToFilter,this.sort,prices);
-      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
-    }
-  }
-  clearFilterByPrice(){
-    this.isFilterByPriceSet=false;
-    this.priceStart=0;
-    this.priceEnd=1000000;
+  //   if(this.priceEnd<0 || this.priceStart<0){
+  //     this.snackBar.open("The prices should not be less then 0", "OK",{duration:2000});
+  //   }
+  //   else if(this.priceEnd<this.priceStart){
+  //     this.snackBar.open("The lower limit should always be less then upper limit", "OK",{duration:2000});
+  //   }
+  //   else{
+  //     let prices:number[]=[];
+  //     prices.push(this.priceStart);
+  //     prices.push(this.priceEnd);
+  //     this.productService.loadProducts(10,0);
+  //     this.productService.loadAvailableProductCount();
+  //   }
+  // }
+  // clearFilterByPrice(){
+  //   this.isFilterByPriceSet=false;
+  //   this.priceStart=0;
+  //   this.priceEnd=1000000;
 
-    let prices: number[] = [];
-    prices.push(this.priceStart);
-    prices.push(this.priceEnd);
-    this.productService.loadProducts(10, 0, this.categoriesToFilter, this.sort, prices);
-    this.productService.loadAvailableProductCount(this.categoriesToFilter, prices);
-  }
+  //   let prices: number[] = [];
+  //   prices.push(this.priceStart);
+  //   prices.push(this.priceEnd);
+  //   this.productService.loadProducts(10, 0);
+  //   this.productService.loadAvailableProductCount();
+  // }
 
-  sortField(sortField:string){
-    this.sort[0]=sortField;
+  // sortField(sortField:string){
+  //   this.sort[0]=sortField;
 
-    let prices: number[] = [];
-    prices.push(this.priceStart);
-    prices.push(this.priceEnd);
-    this.productService.loadProducts(10, 0, this.categoriesToFilter, this.sort, prices);
-    this.productService.loadAvailableProductCount(this.categoriesToFilter, prices);
-  }
-  sortDirection(sortDirection:string){
-    this.sort[1]=sortDirection;
+  //   let prices: number[] = [];
+  //   prices.push(this.priceStart);
+  //   prices.push(this.priceEnd);
+  //   this.productService.loadProducts(10, 0);
+  //   this.productService.loadAvailableProductCount();
+  // }
+  // sortDirection(sortDirection:string){
+  //   this.sort[1]=sortDirection;
 
-    let prices: number[] = [];
-    prices.push(this.priceStart);
-    prices.push(this.priceEnd);
-    this.productService.loadProducts(10, 0, this.categoriesToFilter, this.sort, prices);
-    this.productService.loadAvailableProductCount(this.categoriesToFilter, prices);
-  }
+  //   let prices: number[] = [];
+  //   prices.push(this.priceStart);
+  //   prices.push(this.priceEnd);
+  //   this.productService.loadProducts(10, 0);
+  //   this.productService.loadAvailableProductCount();
+  // }
 }

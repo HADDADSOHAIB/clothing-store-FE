@@ -36,8 +36,11 @@ export class ProductListComponent implements OnInit {
     this.sortDirection.set("price","asc");
     this.sortDirection.set("quantity","asc");
 
-    this.productService.loadProducts(this.itemsPerPage,this.currentPage-1,[],this.sort);
-    this.productService.getProducts().subscribe(prods=>this.products=prods);
+    this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
+    this.productService.getProducts().subscribe(prods=>{
+      this.products=prods;
+      console.log(prods);
+    });
     this.productService.loadAvailableProductCount();
     this.productService.getAvailableProductCount().subscribe(count=>this.availableProductCount=count);
 
@@ -46,12 +49,12 @@ export class ProductListComponent implements OnInit {
   changeItemsPerPage($event:string){
     this.itemsPerPage=parseInt($event);
     this.currentPage=1;
-    this.productService.loadProducts(this.itemsPerPage,0, [], this.sort);
+    this.productService.loadProducts(this.itemsPerPage,0);
   }
 
   changePageNumber($event:string){
     this.currentPage=parseInt($event);
-    this.productService.loadProducts(this.itemsPerPage,this.currentPage-1, [],this.sort);
+    this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
   }
 
   edit(id: string){
@@ -79,7 +82,7 @@ export class ProductListComponent implements OnInit {
         this.sort.push(sortElement);
         this.sort.push(this.sortDirection.get(sortElement));
         this.currentPage=1;
-        this.productService.loadProducts(this.itemsPerPage,0, [], this.sort);
+        this.productService.loadProducts(this.itemsPerPage,0);
         this.selectedSortElement=sortElement;
       }
     })

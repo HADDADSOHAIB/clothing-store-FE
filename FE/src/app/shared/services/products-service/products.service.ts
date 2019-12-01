@@ -13,16 +13,24 @@ import { Category } from '../../Models/category';
 export class ProductsService {
   productSubjects:BehaviorSubject<Product[]>=new BehaviorSubject([]);
   productCountSubject:BehaviorSubject<number>=new BehaviorSubject(0);
-  constructor(private httpClient:HttpClient) {}
+
+  optionSubject:BehaviorSubject<{prices:number[],sort:string[],categoryList:number[]}>
+    =new BehaviorSubject({ prices:[0,1000000],sort:['productName','asc'],categoryList:[]});
+  
+  constructor(private httpClient:HttpClient) {
+    console.log(this.optionSubject);
+  }
 
   getAvailableProductCount() {
     return this.productCountSubject;
   }
 
-  loadAvailableProductCount(categoryList:Category[]=[],prices:number[]=[0,1000000]) {
-    let requestPrice=prices.join(",");
-    if(categoryList.length!==0){
-    let request=categoryList.map(category=>category.categoryId).join(",");
+  async loadAvailableProductCount() {
+    let options=await this.optionSubject.toPromise();
+    
+    let requestPrice=options.prices.join(",");
+    if(options.categoryList.length!==0){
+    let request=options.categoryList.join(",");
     (this.httpClient.get(BACK_END+"productscount?categories="+request+"&&prices="+requestPrice) as Observable<number>)
     .pipe(take(1)).subscribe(count=>this.productCountSubject.next(count));
     }
@@ -31,24 +39,25 @@ export class ProductsService {
     .pipe(take(1)).subscribe(count=>this.productCountSubject.next(count));
   }
 
-  loadProducts(itemsPerPage: number,pageNumber: number,categoryList:Category[]=[],sort:String[]=[],prices:number[]=[0,1000000]) {
-    let requestPrice=prices.join(",");
-    if(categoryList.length!==0 && sort.length!==0){
-      let requestCategory=categoryList.map(category=>category.categoryId).join(",");
-      let requestSort=sort.join(",");
+  async loadProducts(itemsPerPage: number,pageNumber: number) {
+    let options=await this.optionSubject.toPromise();
+    console.log(options);
+    let requestPrice=options.prices.join(",");
+    if(options.categoryList.length!==0 && options.sort.length!==0){
+      let requestCategory=options.categoryList.join(",");
+      let requestSort=options.sort.join(",");
       (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="
         +itemsPerPage+"&&categories="+requestCategory+"&&sort="+requestSort+"&&prices="+requestPrice) as Observable<Product[]>)
         .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
     }
-    else if(sort.length!==0){
-      let requestCategory=categoryList.map(category=>category.categoryId).join(",");
-      let requestSort=sort.join(",");
+    else if(options.sort.length!==0 && options.categoryList.length===0){
+      let requestSort=options.sort.join(",");
       (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="
         +itemsPerPage+"&&sort="+requestSort+"&&prices="+requestPrice) as Observable<Product[]>)
         .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
     }
-    else if(categoryList.length!==0){
-      let requestCategory=categoryList.map(category=>category.categoryId).join(",");
+    else if(options.categoryList.length!==0 && options.sort.length===0){
+      let requestCategory=options.categoryList.join(",");
       (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="
         +itemsPerPage+"&&categories="+requestCategory+"&&prices="+requestPrice) as Observable<Product[]>)
         .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
@@ -76,5 +85,4 @@ export class ProductsService {
   updateProduct(product:Product){
     return this.httpClient.put(BACK_END+"products/"+product.productId,product) as Observable<Product>;
   }
-  
 }
