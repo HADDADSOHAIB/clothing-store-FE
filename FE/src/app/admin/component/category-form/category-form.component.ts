@@ -4,6 +4,9 @@ import { Category } from 'src/app/shared/Models/category';
 import { CategoryService } from '../../service/category-service/category.service';
 import { take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatTable } from '@angular/material/table';
+
+
 
 @Component({
   selector: 'app-category-form',
@@ -14,11 +17,15 @@ export class CategoryFormComponent implements OnInit {
   displayedColumns: string[] = ['Category', 'Products N°','Options'];
   newCategoryForm:FormGroup;
   manageCategoryForm:FormGroup;
+
+
   categories:Category[]=[];
+  productsNumber:Map<number,number>=new Map<number,number>();
+
   constructor(
     private formeBuilder:FormBuilder,
     private categoryService: CategoryService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
     ) { }
 
   ngOnInit() {
@@ -32,8 +39,12 @@ export class CategoryFormComponent implements OnInit {
     this.loadCategories();
   }
 
-  private loadCategories() {
-    this.categoryService.getCategories().pipe(take(1)).subscribe(categories => this.categories = categories);
+  private async loadCategories() {
+    this.categories = await this.categoryService.getCategories().toPromise();
+    this.categories.forEach(async category=>{
+      let productsNumber=await this.categoryService.getProductsNumberOfCategory(category.categoryId).toPromise();
+      this.productsNumber.set(category.categoryId,productsNumber);
+    });
   }
 
   create(){

@@ -76,7 +76,5 @@ export class ProductsService {
   updateProduct(product:Product){
     return this.httpClient.put(BACK_END+"products/"+product.productId,product) as Observable<Product>;
   }
-  getCategories(){
-    return this.httpClient.get(BACK_END+"categories") as Observable<Category[]>;
-  }
+  
 }

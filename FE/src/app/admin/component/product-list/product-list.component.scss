@@ -14,6 +14,9 @@ div.table{
     display:flex;
     justify-content: center;
 }
+.paginator{
+    display:block;
+}
 
 
 button{
@@ -23,9 +26,6 @@ button{
     width: 20%;
 }
 
-.paginator{
-    display:block;
-}
 mat-card{
     margin-top: 10px;
     padding-top: 0px;
@@ -58,25 +58,4 @@ a:hover, a:active{
     font-size: larger;
 }
 
-.more-options{
-    color:royalblue;
-}
 
-
-mat-list-option.option {
-    height: 20px;
-    width: 100%;
-    font-size: 15px;
-}
-
-.price-form{
-    width:80%;
-    text-align: center;
-    font-size: small;
-}
-
-button.apply{
-    text-align: center;
-    font-size: x-small;
-    margin-bottom: 5px;
-}

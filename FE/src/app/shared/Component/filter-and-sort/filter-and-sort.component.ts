@@ -6,6 +6,7 @@ import { CartService } from 'src/app/store/service/cart-service/cart.service';
 import { AccountService } from '../../services/account-service/account.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
+import { CategoryService } from 'src/app/admin/service/category-service/category.service';
 
 @Component({
   selector: 'filter-and-sort',
@@ -35,12 +36,11 @@ export class FilterAndSortComponent implements OnInit {
   
   constructor(
     private productService:ProductsService,
-    private cartService: CartService,
-    private accountService: AccountService,
+    private categoryService: CategoryService,
     private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.productService.getCategories().pipe(take(1)).subscribe(categories=>{
+    this.categoryService.getCategories().pipe(take(1)).subscribe(categories=>{
       this.categories=categories;
       this.categoriesToShow=this.categories.slice(0,4);
     });

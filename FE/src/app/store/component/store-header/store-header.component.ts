@@ -9,6 +9,7 @@ import { Category } from 'src/app/shared/Models/category';
 import { ProductsService } from 'src/app/shared/services/products-service/products.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CategoryService } from 'src/app/admin/service/category-service/category.service';
 
 @Component({
   selector: 'store-header',
@@ -43,13 +44,14 @@ export class StoreHeaderComponent implements OnInit{
     private productService:ProductsService,
     private cartService: CartService,
     private accountService: AccountService,
+    private categoryService: CategoryService,
     private snackBar: MatSnackBar
   ) { }
 
   ngOnInit() {
     this.cartService.loadCart();
     this.cartService.getCart().subscribe(cart=>this.cart=cart);
-    this.productService.getCategories().pipe(take(1)).subscribe(categories=>{
+    this.categoryService.getCategories().pipe(take(1)).subscribe(categories=>{
       this.categories=categories;
       this.categoriesToShow=this.categories.slice(0,4);
     });

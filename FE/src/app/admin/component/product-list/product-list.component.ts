@@ -23,13 +23,6 @@ export class ProductListComponent implements OnInit {
   sortDirection:Map<string,string>=new Map<string,string>();
   selectedSortElement:string='';
 
-  categories:Category[]=[];
-  categoriesToFilter:Category[]=[];
-  categoriesToShow:Category[]=[];
-  showAllCategories=false;
-  priceStart:number=0;
-  priceEnd:number=1000000;
-
   constructor(
     private productService: ProductsService,
     private router: Router,
@@ -48,10 +41,6 @@ export class ProductListComponent implements OnInit {
     this.productService.loadAvailableProductCount();
     this.productService.getAvailableProductCount().subscribe(count=>this.availableProductCount=count);
 
-    this.productService.getCategories().pipe(take(1)).subscribe(categories=>{
-      this.categories=categories;
-      this.categoriesToShow=this.categories.slice(0,4);
-    });
   }
 
   changeItemsPerPage($event:string){
@@ -96,47 +85,5 @@ export class ProductListComponent implements OnInit {
     })
   }
 
-  filterCategory(id:number,selected:boolean){
-    let prices:number[]=[];
-    prices.push(this.priceStart);
-    prices.push(this.priceEnd);
-    if(selected){
-      let category=this.categories.find(category=>category.categoryId===id);
-      this.categoriesToFilter.push(category);
-      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
-      this.productService.loadProducts(10,0,this.categoriesToFilter,[],prices);
-    }
-    else{
-      let index=this.categoriesToFilter.findIndex(category=>category.categoryId===id);
-      this.categoriesToFilter.splice(index,1);
-      if(this.categoriesToFilter.length===0){}
-      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
-      this.productService.loadProducts(10,0,this.categoriesToFilter,[],prices);
-    }
-    
-  }
 
-  toggleCategoryOptions(){
-    this.showAllCategories=!this.showAllCategories;
-    if(this.showAllCategories)
-      this.categoriesToShow=this.categories;
-    else
-      this.categoriesToShow=this.categories.slice(0,4);
-  }
-
-  filterByPrice(){
-    if(this.priceEnd<0 || this.priceStart<0){
-      this.snackBar.open("The prices should not be less then 0", "OK",{duration:2000});
-    }
-    else if(this.priceEnd<this.priceStart){
-      this.snackBar.open("The lower limit should always be less then upper limit", "OK",{duration:2000});
-    }
-    else{
-      let prices:number[]=[];
-      prices.push(this.priceStart);
-      prices.push(this.priceEnd);
-      this.productService.loadProducts(10,0,this.categoriesToFilter,[],prices);
-      this.productService.loadAvailableProductCount(this.categoriesToFilter,prices);
-    }
-  }
 }

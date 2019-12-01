@@ -24,4 +24,8 @@ export class CategoryService {
   updateCategory(category:Category){
     return this.httpClient.put(BACK_END+"categories/"+category.categoryId,category) as Observable<Category>;
   }
+
+  getProductsNumberOfCategory(id: number){
+    return this.httpClient.get(BACK_END+"categories/"+id+"/productsnumber") as Observable<number>;
+  }
 }

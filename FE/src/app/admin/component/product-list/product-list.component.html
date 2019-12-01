@@ -1,45 +1,7 @@
 <div class="table">
     <mat-card>
         <mat-card-content>
-            <mat-nav-list>
-                <a mat-list-item>
-                    <mat-icon aria-hidden="false">filter_list</mat-icon>
-                    <span class="nav-caption">Filters</span>
-                </a>
-                <mat-divider></mat-divider>
-                <a mat-list-item>
-                    <mat-icon aria-hidden="false">category</mat-icon>
-                    <span class="nav-caption">By Category</span>
-                </a>
-                <mat-selection-list (selectionChange)="filterCategory($event.option._value,$event.option._selected)">
-                    <mat-list-option *ngFor="let category of categoriesToShow" [value]="category.categoryId"
-                        checkboxPosition='before' class="option">
-                        {{category.categoryName}}
-                    </mat-list-option>
-                </mat-selection-list>
-                <a mat-list-item (click)="toggleCategoryOptions()">
-                    <span class="nav-caption more-options" *ngIf="!showAllCategories">... show more</span>
-                    <span class="nav-caption more-options" *ngIf="showAllCategories">show less</span>
-                </a>
-                <mat-divider></mat-divider>
-                <a mat-list-item>
-                    <mat-icon aria-hidden="false">monetization_on</mat-icon>
-                    <span class="nav-caption">By Price</span>
-                </a>
-                <div fxLayout="column" fxLayoutAlign="start center">
-                    <mat-form-field appearance="outline" class="price-form">
-                        <mat-label>Lower limit</mat-label>
-                        <input matInput placeholder="Lower limit" type="number" [(ngModel)]="priceStart" required>
-                        <span matPrefix>MAD&nbsp;</span>
-                    </mat-form-field>
-                    <mat-form-field appearance="outline" class="price-form">
-                        <mat-label>Upper limit</mat-label>
-                        <input matInput placeholder="Upper limit" type="number" [(ngModel)]="priceEnd" required>
-                        <span matPrefix>MAD&nbsp;</span>
-                    </mat-form-field>
-                    <button mat-flat-button color="warn" (click)="filterByPrice()" class="apply">Apply</button>
-                </div>
-            </mat-nav-list>
+            <filter-and-sort></filter-and-sort>
         </mat-card-content>
     </mat-card>
     <table mat-table [dataSource]="products" class="mat-elevation-z8">
