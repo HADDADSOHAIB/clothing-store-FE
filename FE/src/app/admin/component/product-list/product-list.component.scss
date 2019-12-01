@@ -1,11 +1,15 @@
 table{
-    width:700px;
-    margin:20px;
+    width:750px;
+    margin:10px;
     text-align: center;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),
+        0 1px 1px 0 rgba(0,0,0,.14),
+        0 1px 3px 0 rgba(0,0,0,.12);
 }
 th.mat-header-cell {
     text-align: center;
 }
+
 div.table{
     display:flex;
     justify-content: center;
@@ -21,4 +25,58 @@ button{
 
 .paginator{
     display:block;
+}
+mat-card{
+    margin-top: 10px;
+    padding-top: 0px;
+    display: table;
+}
+
+span.header{
+    margin-top:18px;
+    margin-bottom:18px;
+}
+
+mat-icon.header{
+    margin-left:2px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: white;
+}
+ 
+a:hover, a:active{
+    color: lightgray;
+}
+
+.nav-caption{
+    display: inline-block;
+    padding-left: 6px;
+    font-size: larger;
+}
+
+.more-options{
+    color:royalblue;
+}
+
+
+mat-list-option.option {
+    height: 20px;
+    width: 100%;
+    font-size: 15px;
+}
+
+.price-form{
+    width:80%;
+    text-align: center;
+    font-size: small;
+}
+
+button.apply{
+    text-align: center;
+    font-size: x-small;
+    margin-bottom: 5px;
 }

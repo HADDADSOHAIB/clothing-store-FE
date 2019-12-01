@@ -32,6 +32,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { FooterComponent } from './Component/footer/footer.component';
+import { MatRadioModule } from '@angular/material/radio';
 
 @NgModule({
   declarations:[
@@ -69,7 +70,8 @@ import { FooterComponent } from './Component/footer/footer.component';
     MatChipsModule,
     MatSliderModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatRadioModule
   ],
   exports:[
     PaginatorComponent,
@@ -105,7 +107,8 @@ import { FooterComponent } from './Component/footer/footer.component';
     MatChipsModule,
     MatSliderModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatRadioModule
   ]
 })
 export class SharedModule { 

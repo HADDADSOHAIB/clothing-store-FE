@@ -1,18 +1,92 @@
 <div class="table">
+    <mat-card>
+        <mat-card-content>
+            <mat-nav-list>
+                <a mat-list-item>
+                    <mat-icon aria-hidden="false">filter_list</mat-icon>
+                    <span class="nav-caption">Filters</span>
+                </a>
+                <mat-divider></mat-divider>
+                <a mat-list-item>
+                    <mat-icon aria-hidden="false">category</mat-icon>
+                    <span class="nav-caption">By Category</span>
+                </a>
+                <mat-selection-list (selectionChange)="filterCategory($event.option._value,$event.option._selected)">
+                    <mat-list-option *ngFor="let category of categoriesToShow" [value]="category.categoryId"
+                        checkboxPosition='before' class="option">
+                        {{category.categoryName}}
+                    </mat-list-option>
+                </mat-selection-list>
+                <a mat-list-item (click)="toggleCategoryOptions()">
+                    <span class="nav-caption more-options" *ngIf="!showAllCategories">... show more</span>
+                    <span class="nav-caption more-options" *ngIf="showAllCategories">show less</span>
+                </a>
+                <mat-divider></mat-divider>
+                <a mat-list-item>
+                    <mat-icon aria-hidden="false">monetization_on</mat-icon>
+                    <span class="nav-caption">By Price</span>
+                </a>
+                <div fxLayout="column" fxLayoutAlign="start center">
+                    <mat-form-field appearance="outline" class="price-form">
+                        <mat-label>Lower limit</mat-label>
+                        <input matInput placeholder="Lower limit" type="number" [(ngModel)]="priceStart" required>
+                        <span matPrefix>MAD&nbsp;</span>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" class="price-form">
+                        <mat-label>Upper limit</mat-label>
+                        <input matInput placeholder="Upper limit" type="number" [(ngModel)]="priceEnd" required>
+                        <span matPrefix>MAD&nbsp;</span>
+                    </mat-form-field>
+                    <button mat-flat-button color="warn" (click)="filterByPrice()" class="apply">Apply</button>
+                </div>
+            </mat-nav-list>
+        </mat-card-content>
+    </mat-card>
     <table mat-table [dataSource]="products" class="mat-elevation-z8">
         <ng-container matColumnDef="ProductName">
-            <th mat-header-cell *matHeaderCellDef (click)="sortBy('productName')"> Product </th>
+            <th mat-header-cell *matHeaderCellDef (click)="sortBy('productName')" class="header"> 
+                <span class="header">Product</span>
+                <mat-icon class="header" *ngIf="selectedSortElement!=='productName'">
+                    sort
+                </mat-icon>
+                <mat-icon class="header" *ngIf="selectedSortElement==='productName' && sortDirection.get('productName')==='asc'">
+                    arrow_drop_up
+                </mat-icon>
+                <mat-icon class="header" *ngIf="selectedSortElement==='productName' && sortDirection.get('productName')==='desc'">
+                    arrow_drop_down
+                </mat-icon>
+            </th>
             <td mat-cell *matCellDef="let product"> {{product.productName | formatTitleDescription: product.description}} </td>
         </ng-container>
 
         <ng-container matColumnDef="Price">
-            <th mat-header-cell *matHeaderCellDef (click)="sortBy('price')"> Price </th>
+            <th mat-header-cell *matHeaderCellDef (click)="sortBy('price')"> 
+                <span class="header">Price</span>
+                <mat-icon class="header" *ngIf="selectedSortElement!=='price'">
+                    sort
+                </mat-icon>
+                <mat-icon class="header" *ngIf="selectedSortElement==='price' && sortDirection.get('price')==='asc'">
+                    arrow_drop_up
+                </mat-icon>
+                <mat-icon class="header" *ngIf="selectedSortElement==='price' && sortDirection.get('price')==='desc'">
+                    arrow_drop_down
+                </mat-icon>
+            </th>
             <td mat-cell *matCellDef="let product">{{product.price | currency:'MAD'}}</td>
         </ng-container>
         
         <ng-container matColumnDef="Quantity">
             <th mat-header-cell *matHeaderCellDef class="quantity" (click)="sortBy('quantity')">
-                quantity
+                <span class="header">quantity</span>
+                <mat-icon class="header" *ngIf="selectedSortElement!=='quantity'">
+                    sort
+                </mat-icon>
+                <mat-icon class="header" *ngIf="selectedSortElement==='quantity' && sortDirection.get('quantity')==='asc'">
+                    arrow_drop_up
+                </mat-icon>
+                <mat-icon class="header" *ngIf="selectedSortElement==='quantity' && sortDirection.get('quantity')==='desc'">
+                    arrow_drop_down
+                </mat-icon>
             </th>
             <td mat-cell *matCellDef="let product">{{product.quantity}}</td>
         </ng-container>

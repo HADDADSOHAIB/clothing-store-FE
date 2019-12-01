@@ -9,47 +9,74 @@
             <span class="nav-caption">Checkout</span>
         </a>
         <mat-divider></mat-divider>
-        <a mat-list-item>
-            <mat-icon aria-hidden="false">filter_list</mat-icon>
-            <span class="nav-caption">Filters</span>
+        <a mat-list-item (click)="toggleFilters()">
+            <mat-icon aria-hidden="false" >filter_list</mat-icon>
+            <span class="nav-caption" >Filters</span>
         </a>
         <mat-divider></mat-divider>
-        <a mat-list-item>
+        <a mat-list-item *ngIf="showFilters">
             <mat-icon aria-hidden="false">category</mat-icon>
             <span class="nav-caption">By Category</span>
         </a>
-        <mat-selection-list (selectionChange)="filterCategory($event.option._value,$event.option._selected)">
+        <mat-selection-list (selectionChange)="filterCategory($event.option._value,$event.option._selected)"
+            *ngIf="showFilters">
             <mat-list-option *ngFor="let category of categoriesToShow" [value]="category.categoryId"
                 checkboxPosition='before' class="option">
                 {{category.categoryName}}
             </mat-list-option>
         </mat-selection-list>
-        <a mat-list-item (click)="toggleCategoryOptions()">
-            <span class="nav-caption more-options" *ngIf="!showAllCategories">... show more</span>
-            <span class="nav-caption more-options" *ngIf="showAllCategories">show less</span>
+        <a mat-list-item (click)="toggleCategoryOptions()" *ngIf="showFilters">
+            <span class="nav-caption more-options" *ngIf="!showAllCategories && showFilters">... show more</span>
+            <span class="nav-caption more-options" *ngIf="showAllCategories && showFilters">show less</span>
         </a>
-        <mat-divider></mat-divider>
-        <a mat-list-item>
+        <mat-divider *ngIf="showFilters"></mat-divider>
+        <a mat-list-item *ngIf="showFilters">
             <mat-icon aria-hidden="false">monetization_on</mat-icon>
             <span class="nav-caption">By Price</span>
         </a>
-        <div fxLayout="column" fxLayoutAlign="start center">
-            <mat-form-field appearance="outline" class="price-form">
-                <mat-label>Lower limit</mat-label>
-                <input matInput placeholder="Lower limit" type="number" [(ngModel)]="priceStart" required>
-                <span matPrefix>MAD&nbsp;</span>
-            </mat-form-field>
-            <mat-form-field appearance="outline" class="price-form">
-                <mat-label>Upper limit</mat-label>
-                <input matInput placeholder="Upper limit" type="number" [(ngModel)]="priceEnd" required>
-                <span matPrefix>MAD&nbsp;</span>
-            </mat-form-field>
+        <div fxLayout="column" fxLayoutAlign="start center" *ngIf="showFilters">
+            <form [formGroup]="priceFilterForm" class="price-form">
+                <mat-form-field class="price-form" *ngIf="isFilterByPriceSet">
+                    <mat-chip-list #chipList>
+                        <mat-chip  [selectable]="selectable" [removable]="removable"
+                            (click)="clearFilterByPrice()">
+                            MAD{{priceStart}}--MAD{{priceEnd }}
+                            <mat-icon matChipRemove (click)="clearFilterByPrice()">cancel</mat-icon>
+                        </mat-chip>
+                    </mat-chip-list>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="price-form">
+                    <mat-label>Lower limit</mat-label>
+                    <input matInput placeholder="Lower limit" type="number" formControlName="lowerLimit" required>
+                    <span matPrefix>MAD&nbsp;</span>
+                </mat-form-field>
+                <mat-form-field appearance="outline" class="price-form">
+                    <mat-label>Upper limit</mat-label>
+                    <input matInput placeholder="Upper limit" type="number" formControlName="upperLimit" required>
+                    <span matPrefix>MAD&nbsp;</span>
+                </mat-form-field>
+            </form>
             <button mat-flat-button color="warn" (click)="filterByPrice()">Apply</button>
         </div>
+        <mat-divider *ngIf="showFilters"></mat-divider>
+        <a mat-list-item>
+            <mat-icon aria-hidden="false">sort_by_alpha</mat-icon>
+            <span class="nav-caption">Sort By</span>
+        </a>
+
+        <mat-radio-group (change)="sortField($event.value)" fxLayout="column" fxLayoutAlign="start start">
+            <mat-radio-button value="productName" checked>Product Name</mat-radio-button>
+            <mat-radio-button value="price">Product Price</mat-radio-button>
+            <mat-radio-button value="rating">Product Rating</mat-radio-button>
+        </mat-radio-group>
+        <mat-radio-group (change)="sortDirection($event.value)" fxLayout="column" fxLayoutAlign="start start">
+            <mat-radio-button value="asc" checked>Ascending</mat-radio-button>
+            <mat-radio-button value="desc">Descending</mat-radio-button>
+        </mat-radio-group>
+
         <mat-divider></mat-divider>
         <a mat-list-item (click)="sidenav.toggle()" mat-list-item>
             <mat-icon aria-hidden="false">close</mat-icon>
             <span class="nav-caption">Close menu</span>
         </a>
-    
     </mat-nav-list>
