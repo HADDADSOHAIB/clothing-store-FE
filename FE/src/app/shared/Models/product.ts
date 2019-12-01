@@ -21,4 +21,8 @@ export class Product{
         this.rating=0;
         this.quantity=0;
     }
+
+    getReviewsByNumberOfStarsGiving(numberOfStars:number){
+        return this.reviews.filter(review=>review.userRating===numberOfStars);
+    }
 }

@@ -45,6 +45,61 @@
     </div>
 </div>
 <div class="reviews-section" fxLayout="column" fxLayoutAlign="center center">
+    <mat-card class="reviews-section">
+        <mat-card-content fxLayout="row" fxLayoutAlign="space-between center">
+            <div>
+                <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                    <button mat-button class="user-name" matBadge="8" matBadgePosition="after" matBadgeColor="accent">
+                        Great Product
+                    </button>
+                    <rating-bar rating="5" readOnly="true"></rating-bar>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                    <button mat-button class="user-name" matBadge="800" matBadgePosition="after" matBadgeColor="accent">
+                        Good Product
+                    </button>
+                    <rating-bar rating="4" readOnly="true"></rating-bar>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                    <button mat-button class="user-name" matBadge="80" matBadgePosition="after" matBadgeColor="accent">
+                        Ok Product
+                    </button>
+                    <rating-bar rating="3" readOnly="true"></rating-bar>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                    <button mat-button class="user-name" matBadge="20" matBadgePosition="after" matBadgeColor="accent">
+                        Product Not Good
+                    </button>
+                    <rating-bar rating="2" readOnly="true"></rating-bar>
+                </div>
+                <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
+                    <button mat-button class="user-name" matBadge="10" matBadgePosition="after" matBadgeColor="accent">
+                        Bad Product
+                    </button>
+                    <rating-bar rating="1" readOnly="true"></rating-bar>
+                </div>
+            </div>
+            <mat-divider [vertical]="true"></mat-divider>
+            <div fxLayout="column" fxLayoutAlign="start center">
+                <mat-card-header fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
+                    <mat-card-title>Add a review :</mat-card-title>
+                    <rating-bar [rating]="productReview.userRating" (ratingChange)="changeRating($event)"></rating-bar>
+                </mat-card-header>
+                <mat-card-content class="add-review">
+                    <mat-form-field class="add-review" appearance="outline">
+                        <mat-label>Comment about the product</mat-label>
+                        <textarea matInput placeholder="Add a comment" cdkTextareaAutosize="true" matTextareaAutosize="true"
+                            cdkAutosizeMinRows="6" [(ngModel)]="productReview.userReview"></textarea>
+                    </mat-form-field>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button color='primary' style="float: right;" (click)="saveReview()">save</button>
+                </mat-card-actions>
+            </div>
+            
+        </mat-card-content>
+    </mat-card>
+
     <mat-card class="reviews-section" *ngFor="let review of product.reviews">
         <mat-card-content>
             <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
@@ -54,21 +109,5 @@
             <mat-divider class="user-name"></mat-divider>
             <p>{{review.userReview}}</p>
         </mat-card-content>
-    </mat-card>
-    <mat-card class="add-review">
-        <mat-card-header fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <mat-card-title>Add a review :</mat-card-title>
-            <rating-bar [rating]="productReview.userRating" (ratingChange)="changeRating($event)"></rating-bar >
-        </mat-card-header>
-        <mat-card-content>
-            <mat-form-field appearance="outline">
-                <mat-label>Comment about the product</mat-label>
-                <textarea matInput  placeholder="Add a comment" cdkTextareaAutosize="true" 
-                matTextareaAutosize="true" cdkAutosizeMinRows="3" [(ngModel)]="productReview.userReview"></textarea>
-            </mat-form-field>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-button color='primary' style="float: right;" (click)="saveReview()">save</button>
-        </mat-card-actions>
     </mat-card>
 </div>
