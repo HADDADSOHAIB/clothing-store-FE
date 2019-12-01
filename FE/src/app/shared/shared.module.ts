@@ -13,7 +13,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDividerModule } from '@angular/material/divider';
-import { MatDialogModule } from '@angular/material/dialog';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
@@ -60,7 +59,6 @@ import { FilterAndSortComponent } from './Component/filter-and-sort/filter-and-s
     MatBadgeModule,
     MatToolbarModule,
     MatDividerModule,
-    MatDialogModule,
     MatExpansionModule,
     MatInputModule,
     MatTableModule,
@@ -98,7 +96,6 @@ import { FilterAndSortComponent } from './Component/filter-and-sort/filter-and-s
     MatBadgeModule,
     MatToolbarModule,
     MatDividerModule,
-    MatDialogModule,
     MatExpansionModule,
     MatInputModule,
     MatTableModule,

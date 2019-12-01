@@ -15,6 +15,7 @@ import { SharedModule } from '../shared/shared.module';
 import { ReviewService } from './service/review-service/review.service';
 import { HeaderFormaterPipe } from './pipes/header-formater/header-formater.pipe';
 import { RatingBarComponent } from './component/rating-bar/rating-bar.component';
+import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
 
@@ -33,12 +34,18 @@ import { RatingBarComponent } from './component/rating-bar/rating-bar.component'
   ],
   imports: [
     StoreRoutingModule,
-    SharedModule.forRoot()
+    SharedModule.forRoot(),
+    MatDialogModule
+    ],
+  entryComponents:[
+    ProductFormComponent
   ],
   providers: [
     HttpClient,
     CartService,
-    ReviewService
+    ReviewService,
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} }
   ]
 })
 export class StoreModule { }

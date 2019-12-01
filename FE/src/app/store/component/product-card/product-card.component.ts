@@ -6,6 +6,8 @@ import { Cart } from 'src/app/shared/Models/cart';
 import { CartItem } from 'src/app/shared/Models/CartItem';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
+import { MatDialog } from '@angular/material/dialog';
+import { ProductFormComponent } from '../product-form/product-form.component';
 
 @Component({
   selector: 'product-card',
@@ -20,7 +22,8 @@ export class ProductCardComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    public dialog: MatDialog
   ) {
    }
 
@@ -69,6 +72,9 @@ export class ProductCardComponent implements OnInit {
   }
 
   details(){
-    this.router.navigate(["store/product/",this.product.productId]);
+    this.dialog.open(ProductFormComponent, {
+      width: '90%',
+      data: this.product
+    });
   }
 }

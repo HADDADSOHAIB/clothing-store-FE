@@ -52,6 +52,11 @@ export class FilterAndSortComponent implements OnInit {
         this.updateFilterAndSortOptions();
         this.productService.loadAvailableProductCount();
         this.productService.loadProducts(10,0);
+
+        this.showFilters=true;
+        this.showFilterByCategory=true;
+        this.showAllCategories=true;
+        this.categoriesToShow=this.categories;
       }
     });
   }

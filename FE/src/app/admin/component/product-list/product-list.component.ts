@@ -36,6 +36,7 @@ export class ProductListComponent implements OnInit {
     this.sortDirection.set("price","asc");
     this.sortDirection.set("quantity","asc");
 
+    this.productService.optionSubject.next({ prices:[0,1000000],sort:['productName','asc'],categoryList:[]});
     this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
     
     this.productService.getProducts().subscribe(prods=>this.products=prods);

@@ -10,6 +10,7 @@ import { ProductReview } from 'src/app/shared/Models/product-review';
 import { AccountService } from 'src/app/shared/services/account-service/account.service';
 import { ReviewService } from '../../service/review-service/review.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-form',
@@ -34,23 +35,31 @@ export class ProductFormComponent implements OnInit {
     private accountService:AccountService,
     private reviewService: ReviewService,
     private snackBar:MatSnackBar,
-    private router: Router
+    private router: Router,
+    public dialogRef: MatDialogRef<ProductFormComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Product
   ) {}
 
-  async ngOnInit() {
+  ngOnInit() {
     this.cartService.getCart().subscribe(cart=>{
       this.cart=cart;
     });
-
-    this.activatedRoute.paramMap.pipe(take(1)).subscribe(params=>{
-      if(params.get('id'))
-        this.productService.getProduct(parseInt(params.get('id'))).pipe(take(1)).subscribe(product=>{
-          this.product=product;
-          console.log(product);
-        });
-    });
+    if(this.data.productId==undefined){
+      this.activatedRoute.paramMap.pipe(take(1)).subscribe(params=>{
+        if(params.get('id'))
+          this.productService.getProduct(parseInt(params.get('id'))).pipe(take(1)).subscribe(product=>{
+            this.product=product;
+          });
+      });
+    }
+    else{
+      this.product=this.data;
+    }
   }
 
+  close(){
+    this.dialogRef.close();
+  }
   addToCart(){
     this.cart.items.push(new CartItem(
       0,

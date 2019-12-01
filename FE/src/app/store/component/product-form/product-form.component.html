@@ -1,3 +1,6 @@
+<div *ngIf="this.data.productId!=undefined">
+    <mat-icon (click)="close()" class="close">close</mat-icon>
+</div>
 <div class="main"  fxLayout="row" fxLayoutAlign="center stretch" >
     <mat-card class="card-image">
         <img mat-card-image src="{{product.image}}" alt="Photo of a Shiba Inu" class="image">
