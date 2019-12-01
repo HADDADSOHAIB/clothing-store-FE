@@ -26,8 +26,7 @@ export class ProductsService {
   }
 
   async loadAvailableProductCount() {
-    let options=await this.optionSubject.toPromise();
-    
+    this.optionSubject.pipe(take(1)).subscribe(options=>{
     let requestPrice=options.prices.join(",");
     if(options.categoryList.length!==0){
     let request=options.categoryList.join(",");
@@ -37,11 +36,12 @@ export class ProductsService {
     else
     (this.httpClient.get(BACK_END+"productscount?"+"prices="+requestPrice) as Observable<number>)
     .pipe(take(1)).subscribe(count=>this.productCountSubject.next(count));
+  });
   }
 
-  async loadProducts(itemsPerPage: number,pageNumber: number) {
-    let options=await this.optionSubject.toPromise();
-    console.log(options);
+  loadProducts(itemsPerPage: number,pageNumber: number) {
+
+    this.optionSubject.pipe(take(1)).subscribe(options=>{
     let requestPrice=options.prices.join(",");
     if(options.categoryList.length!==0 && options.sort.length!==0){
       let requestCategory=options.categoryList.join(",");
@@ -66,6 +66,7 @@ export class ProductsService {
     (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="+itemsPerPage
       +"&&prices="+requestPrice) as Observable<Product[]>).pipe(take(1))
       .subscribe(productList=>this.productSubjects.next(productList));
+    })
   }
 
   getProducts(){

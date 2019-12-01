@@ -37,6 +37,7 @@ export class ProductListComponent implements OnInit {
     this.sortDirection.set("quantity","asc");
 
     this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
+    
     this.productService.getProducts().subscribe(prods=>{
       this.products=prods;
       console.log(prods);
