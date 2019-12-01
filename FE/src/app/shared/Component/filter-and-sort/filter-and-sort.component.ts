@@ -1,24 +1,18 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CartService } from '../../service/cart-service/cart.service';
-import { take } from 'rxjs/operators';
-import { Cart } from 'src/app/shared/Models/cart';
-import { UUID } from 'angular2-uuid';
-import { User } from 'src/app/shared/Models/user';
-import { AccountService } from 'src/app/shared/services/account-service/account.service';
-import { Category } from 'src/app/shared/Models/category';
-import { ProductsService } from 'src/app/shared/services/products-service/products.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import { Component, OnInit } from '@angular/core';
+import { Category } from '../../Models/category';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ProductsService } from '../../services/products-service/products.service';
+import { CartService } from 'src/app/store/service/cart-service/cart.service';
+import { AccountService } from '../../services/account-service/account.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'store-header',
-  templateUrl: './store-header.component.html',
-  styleUrls: ['./store-header.component.scss']
+  selector: 'filter-and-sort',
+  templateUrl: './filter-and-sort.component.html',
+  styleUrls: ['./filter-and-sort.component.scss']
 })
-export class StoreHeaderComponent implements OnInit{
-  cart: Cart;
-  user:User;
-
+export class FilterAndSortComponent implements OnInit {
   categories:Category[]=[];
   categoriesToFilter:Category[]=[];
   categoriesToShow:Category[]=[];
@@ -43,17 +37,13 @@ export class StoreHeaderComponent implements OnInit{
     private productService:ProductsService,
     private cartService: CartService,
     private accountService: AccountService,
-    private snackBar: MatSnackBar
-  ) { }
+    private snackBar: MatSnackBar) { }
 
   ngOnInit() {
-    this.cartService.loadCart();
-    this.cartService.getCart().subscribe(cart=>this.cart=cart);
     this.productService.getCategories().pipe(take(1)).subscribe(categories=>{
       this.categories=categories;
       this.categoriesToShow=this.categories.slice(0,4);
     });
-  
   }
 
   filterCategory(id:number,selected:boolean){

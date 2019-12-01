@@ -33,12 +33,14 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { FooterComponent } from './Component/footer/footer.component';
 import { MatRadioModule } from '@angular/material/radio';
+import { FilterAndSortComponent } from './Component/filter-and-sort/filter-and-sort.component';
 
 @NgModule({
   declarations:[
     PaginatorComponent,
     HeaderComponent,
     FooterComponent,
+    FilterAndSortComponent,
 
   ],
   imports: [
@@ -77,6 +79,7 @@ import { MatRadioModule } from '@angular/material/radio';
     PaginatorComponent,
     HeaderComponent,
     FooterComponent,
+    FilterAndSortComponent,
     
     
     SharedRoutingModule,
