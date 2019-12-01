@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Category } from '../../Models/category';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProductsService } from '../../services/products-service/products.service';
@@ -14,6 +14,8 @@ import { CategoryService } from 'src/app/admin/service/category-service/category
   styleUrls: ['./filter-and-sort.component.scss']
 })
 export class FilterAndSortComponent implements OnInit {
+  @Input() selectedCategory:number=0;
+
   categories:Category[]=[];
   categoriesToFilter:number[]=[];
   categoriesToShow:Category[]=[];
@@ -37,12 +39,20 @@ export class FilterAndSortComponent implements OnInit {
   constructor(
     private productService:ProductsService,
     private categoryService: CategoryService,
-    private snackBar: MatSnackBar) { }
+    private snackBar: MatSnackBar) { 
+  }
 
   ngOnInit() {
     this.categoryService.getCategories().pipe(take(1)).subscribe(categories=>{
       this.categories=categories;
       this.categoriesToShow=this.categories.slice(0,4);
+      if(this.selectedCategory!==0){
+        let category=this.categories.find(category=>category.categoryId===this.selectedCategory);
+        this.categoriesToFilter.push(category.categoryId);
+        this.updateFilterAndSortOptions();
+        this.productService.loadAvailableProductCount();
+        this.productService.loadProducts(10,0);
+      }
     });
   }
 
@@ -129,7 +139,7 @@ export class FilterAndSortComponent implements OnInit {
     this.productService.loadProducts(10, 0);
     this.productService.loadAvailableProductCount();
   }
-  updateFilterAndSortOptions(){
+  private updateFilterAndSortOptions(){
     this.productService.optionSubject.next({
       prices:[this.priceStart,this.priceEnd],
       sort:this.sort,

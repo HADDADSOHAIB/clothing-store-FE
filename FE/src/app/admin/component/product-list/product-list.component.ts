@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from 'src/app/shared/services/products-service/products.service';
 import { Product } from 'src/app/shared/Models/product';
 import { take } from 'rxjs/operators';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Category } from 'src/app/shared/Models/category';
 import { CartService } from 'src/app/store/service/cart-service/cart.service';
@@ -22,13 +22,13 @@ export class ProductListComponent implements OnInit {
   sort:string[]=[];
   sortDirection:Map<string,string>=new Map<string,string>();
   selectedSortElement:string='';
+  selectedCategory:number=0;
 
   constructor(
     private productService: ProductsService,
     private router: Router,
     private snackBar: MatSnackBar,
-    private cartService: CartService,
-    private accountService: AccountService,
+    private activatedRoute:ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -38,13 +38,13 @@ export class ProductListComponent implements OnInit {
 
     this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
     
-    this.productService.getProducts().subscribe(prods=>{
-      this.products=prods;
-      console.log(prods);
-    });
+    this.productService.getProducts().subscribe(prods=>this.products=prods);
     this.productService.loadAvailableProductCount();
     this.productService.getAvailableProductCount().subscribe(count=>this.availableProductCount=count);
-
+    this.activatedRoute.queryParamMap.pipe(take(1)).subscribe(queryParams=>{
+      if(queryParams.get('categoryId'))
+        this.selectedCategory=parseInt(queryParams.get('categoryId'));
+    });
   }
 
   changeItemsPerPage($event:string){
@@ -83,7 +83,12 @@ export class ProductListComponent implements OnInit {
         this.sort.push(sortElement);
         this.sort.push(this.sortDirection.get(sortElement));
         this.currentPage=1;
-        this.productService.loadProducts(this.itemsPerPage,0);
+        this.productService.optionSubject.pipe(take(1)).subscribe(options=>{
+          let newOptions=options;
+          newOptions.sort=this.sort;
+          this.productService.optionSubject.next(newOptions);
+          this.productService.loadProducts(this.itemsPerPage,0);
+        });
         this.selectedSortElement=sortElement;
       }
     })
