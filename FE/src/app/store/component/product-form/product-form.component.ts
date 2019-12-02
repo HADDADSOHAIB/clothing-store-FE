@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { CartService } from '../../service/cart-service/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { take, find } from 'rxjs/operators';
 import { ProductsService } from '../../../shared/services/products-service/products.service';
 import { Cart } from 'src/app/shared/Models/cart';
 import { Product } from 'src/app/shared/Models/product';
@@ -11,6 +11,8 @@ import { AccountService } from 'src/app/shared/services/account-service/account.
 import { ReviewService } from '../../service/review-service/review.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { User } from 'src/app/shared/Models/user';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-product-form',
@@ -20,13 +22,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export class ProductFormComponent implements OnInit {
   cart: Cart;
   product:Product=new Product();
-  productReview:ProductReview=new ProductReview(0,null,4,"",0);
-
-  options = {
-    maxRating:5,
-    readOnly: false,
-    resetAllowed: true
-  }
+  productReview:ProductReview=new ProductReview(0,null,5,"",0);
+  productReviewModified:ProductReview=new ProductReview(0,null,5,"",0);
+  currentUser:User;
+  idOfReviewToModify=0;
 
   constructor(
     private cartService: CartService,
@@ -41,20 +40,24 @@ export class ProductFormComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.accountService.loadCurrentUser();
+    this.accountService.getCurrentUser().subscribe(user=>{
+      this.currentUser=user;
+      if(this.data.productId==undefined){
+        this.activatedRoute.paramMap.pipe(take(1)).subscribe(params=>{
+          if(params.get('id'))
+            this.productService.getProduct(parseInt(params.get('id'))).pipe(take(1)).subscribe(product=>{
+              this.product=product;
+            });
+        });
+      }
+      else{
+        this.product=this.data;
+      }
+    });
     this.cartService.getCart().subscribe(cart=>{
       this.cart=cart;
     });
-    if(this.data.productId==undefined){
-      this.activatedRoute.paramMap.pipe(take(1)).subscribe(params=>{
-        if(params.get('id'))
-          this.productService.getProduct(parseInt(params.get('id'))).pipe(take(1)).subscribe(product=>{
-            this.product=product;
-          });
-      });
-    }
-    else{
-      this.product=this.data;
-    }
   }
 
   close(){
@@ -93,24 +96,65 @@ export class ProductFormComponent implements OnInit {
   changeRating(rating: number){
     this.productReview.userRating=rating;
   }
+  modifyRating(rating: number){
+    this.productReviewModified.userRating=rating;
+  }
 
-  saveReview(){
-    this.productReview.productId=this.product.productId;
-    this.accountService.getCurrentUser().pipe(take(1)).subscribe(user=>{
-      if(user.userEmail){
-        this.productReview.user=user;
-        this.reviewService.addReview(this.productReview).pipe(take(1)).subscribe(review=>{
-          this.snackBar.open("Review Added","OK",{duration:2000});
-          this.productService.getProduct(this.product.productId).pipe(take(1)).subscribe(product=>this.product=product);
-          this.productReview=new ProductReview(0,null,4,"",0);
-        },error=>{
-          console.log(error);
-          this.snackBar.open("Error, try later","Ok",{duration:2000});
-        });
-      }
-      else{
-        this.router.navigate(["auth/signin"]);
-      }
+  saveModifiedReview() {
+    this.idOfReviewToModify=0;
+    this.productReviewModified.productId = this.product.productId;
+    if (this.currentUser.userEmail) {
+      this.productReviewModified.user = this.currentUser;
+      this.reviewService.updateReview(this.productReviewModified).pipe(take(1)).subscribe(review => {
+        this.snackBar.open("Review Added", "OK", { duration: 2000 });
+        this.productService.getProduct(this.product.productId).pipe(take(1)).subscribe(product => this.product = product);
+        this.productReviewModified = new ProductReview(0, null, 5, "", 0);
+      }, error => {
+        console.log(error);
+        this.snackBar.open("Error, try later", "Ok", { duration: 2000 });
+      });
+    }
+    else {
+      this.router.navigate(["auth/signin"]);
+    }
+  }
+
+  saveReview() {
+    this.productReview.productId = this.product.productId;
+    if (this.currentUser.userEmail) {
+      this.productReview.user = this.currentUser;
+      this.reviewService.addReview(this.productReview).pipe(take(1)).subscribe(review => {
+        this.snackBar.open("Review Added", "OK", { duration: 2000 });
+        this.productService.getProduct(this.product.productId).pipe(take(1)).subscribe(product => this.product = product);
+        this.productReview = new ProductReview(0, null, 4, "", 0);
+      }, error => {
+        console.log(error);
+        this.snackBar.open("Error, try later", "Ok", { duration: 2000 });
+      });
+    }
+    else {
+      this.router.navigate(["auth/signin"]);
+    }
+  }
+
+  deleteReview(reviewId){
+    this.reviewService.deleteReview(reviewId).pipe(take(1)).subscribe(response=>{
+      this.snackBar.open("review removed","Ok");
+      this.productService.getProduct(this.product.productId).pipe(take(1))
+        .subscribe(product => this.product = product);
+    },error=>{
+      console.log(error);
+      this.snackBar.open("error try later","Ok");
     });
+  }
+
+  editReview(reviewId:number){
+    this.productReviewModified=this.product.reviews.find(review=>review.id===reviewId);
+    this.idOfReviewToModify=reviewId;
+  }
+
+  cancelModification(){
+    this.idOfReviewToModify=0;
+    this.productReviewModified=new ProductReview(0,null,5,"",0);
   }
 }
