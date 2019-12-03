@@ -5,6 +5,7 @@ import { UserComponent } from './user.component';
 import { AccountComponent } from './component/account/account.component';
 import { MyOrdersComponent } from './component/my-orders/my-orders.component';
 import { OrderDetailsComponent } from './component/order-details/order-details.component';
+import { OrderInfosComponent } from '../shared/Component/order-infos/order-infos.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,7 @@ const routes: Routes = [
       },
       {
         path:'myorders/:id',
-        component:OrderDetailsComponent
+        component:OrderInfosComponent
       },
       {
         path:'myorders',

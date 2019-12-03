@@ -8,7 +8,6 @@ import { AccountComponent } from './component/account/account.component';
 import { MyOrdersComponent } from './component/my-orders/my-orders.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { OrderDetailsComponent } from './component/order-details/order-details.component';
 
 
 @NgModule({
@@ -16,7 +15,7 @@ import { OrderDetailsComponent } from './component/order-details/order-details.c
     UserComponent, 
     UserHeaderComponent, 
     AccountComponent, 
-    MyOrdersComponent, OrderDetailsComponent],
+    MyOrdersComponent, ],
   imports: [
     CommonModule,
     UserRoutingModule,

@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class MyOrdersComponent implements OnInit {
   orders:Order[]=[];
   displayedColumns: string[] = ['OrderDate', 'OrderedItems','Status','Options'];
+  defaultDate=new Date(2010,0,1);
   constructor(
     private orderService: OrderService,
     private accountService:AccountService,
@@ -21,22 +22,17 @@ export class MyOrdersComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    // this.accountService.getCurrentUser().pipe(take(1)).subscribe(user=>{
-    //   this.orderService.getOrdersByUser(user.userEmail).pipe(take(1)).subscribe(orders=>{
-      //   this.orders=orders.map(ord=>new Order(ord.id,
-      //     ord.userEmail,
-      //     ord.orderItems,
-      //     ord.shippingInfo,
-      //     ord.orderDate,
-      //     ord.isProcessed,
-      //     ord.isCanceled));
-      //   console.log(orders);
-      // });
-    // });
+    this.accountService.loadCurrentUser();
+    this.accountService.getCurrentUser().subscribe(user=>{
+      if(user.userEmail!=="")
+      this.orderService.getOrdersByUser(user.userEmail).pipe(take(1)).subscribe(orders=>{
+        this.orders=orders.map(order=>new Order(order.id, order.userEmail, order.orderItems,
+          order.shippingInfo, new Date(order.orderDate), new Date(order.processedDate), 
+          new Date(order.inRouteDate), new Date(order.deliveryDate), 
+          new Date(order.deliveryConfirmationDate), new Date(order.cancelationDate)));
+        console.log(this.orders);
+        console.log("hola");
+      });
+    });
   }
-  
-  // goOrder(id:number){
-  //   this.router.navigate(["admin/order/"+id]);
-  // }
-
 }

@@ -76,9 +76,7 @@
             <div fxLayout="row" fxLayoutAlign="space-around center"  *ngIf="!inAdminSection">
                 <div>
                     <button mat-stroked-button color='primary' (click)='cancel()'
-                    [disabled]="order.cancelationDate.getTime()!=defaultDate.getTime() && 
-                    order.deliveryConfirmationDate.getTime()!=defaultDate.getTime() && 
-                    order.deliveryDate.getTime()!=defaultDate.getTime()">
+                    [disabled]="(order.deliveryDate.getTime()!=defaultDate.getTime() && order.cancelationDate.getTime()!=defaultDate.getTime())">
                         Cancel
                     </button>
                 </div>
