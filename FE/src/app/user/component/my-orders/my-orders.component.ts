@@ -21,22 +21,22 @@ export class MyOrdersComponent implements OnInit {
     ) { }
 
   ngOnInit() {
-    this.accountService.getCurrentUser().pipe(take(1)).subscribe(user=>{
-      this.orderService.getOrdersByUser(user.userEmail).pipe(take(1)).subscribe(orders=>{
-        this.orders=orders.map(ord=>new Order(ord.id,
-          ord.userEmail,
-          ord.orderItems,
-          ord.shippingInfo,
-          ord.orderDate,
-          ord.isProcessed,
-          ord.isCanceled));
-        console.log(orders);
-      });
-    });
+    // this.accountService.getCurrentUser().pipe(take(1)).subscribe(user=>{
+    //   this.orderService.getOrdersByUser(user.userEmail).pipe(take(1)).subscribe(orders=>{
+      //   this.orders=orders.map(ord=>new Order(ord.id,
+      //     ord.userEmail,
+      //     ord.orderItems,
+      //     ord.shippingInfo,
+      //     ord.orderDate,
+      //     ord.isProcessed,
+      //     ord.isCanceled));
+      //   console.log(orders);
+      // });
+    // });
   }
   
-  goOrder(id:number){
-    this.router.navigate(["admin/order/"+id]);
-  }
+  // goOrder(id:number){
+  //   this.router.navigate(["admin/order/"+id]);
+  // }
 
 }

@@ -6,9 +6,9 @@ import { OrderService } from 'src/app/shared/services/order-service/order.servic
 import { ShippingInfos } from 'src/app/shared/Models/shipping-info';
 
 @Component({
-  selector: 'app-order-form',
-  templateUrl: './order-form.component.html',
-  styleUrls: ['./order-form.component.scss']
+  selector: 'app-order-infos',
+  templateUrl: './order-infos.component.html',
+  styleUrls: ['./order-infos.component.scss']
 })
 export class OrderInfosComponent implements OnInit {
   order: Order=new Order(0,'',[],new ShippingInfos(0,"","","","","","","","",""),
@@ -38,8 +38,8 @@ export class OrderInfosComponent implements OnInit {
       this.order = new Order(ord.id, ord.userEmail, ord.orderItems,
         ord.shippingInfo, new Date(ord.orderDate), new Date(ord.processedDate), 
         new Date(ord.inRouteDate), new Date(ord.deliveryDate), 
-        new Date(ord.deliveryConfirmationDate), new Date(ord.cancelationDate), 
-        ord.isProcessed, ord.isCanceled);
+        new Date(ord.deliveryConfirmationDate), new Date(ord.cancelationDate));
+      console.log(this.order);
     });
   }
 

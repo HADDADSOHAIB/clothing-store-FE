@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class OrdersListComponent implements OnInit {
   orders: Order[]=[];
   displayedColumns: string[] = ['OrderDate', 'OrderedBy','Status','Options'];
+  defaultDate=new Date(2010,0,1);
   constructor(
     private orderService: OrderService,
     private router: Router
@@ -18,7 +19,10 @@ export class OrdersListComponent implements OnInit {
 
   ngOnInit() {
     this.orderService.getOrders().subscribe(orders=>{
-      this.orders=orders;
+      this.orders=orders.map(order=>new Order(order.id, order.userEmail, order.orderItems,
+        order.shippingInfo, new Date(order.orderDate), new Date(order.processedDate), 
+        new Date(order.inRouteDate), new Date(order.deliveryDate), 
+        new Date(order.deliveryConfirmationDate), new Date(order.cancelationDate)));
       console.log(orders);
     });
   }

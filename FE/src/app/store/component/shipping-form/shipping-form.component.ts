@@ -23,6 +23,7 @@ export class ShippingFormComponent implements OnInit {
   cart: Cart;
   shippingInfo: ShippingInfos;
   user:User;
+  defaultDate=new Date(2010,0,1);
   constructor(
     private formBuilder: FormBuilder,
     private cartService: CartService,
@@ -71,7 +72,9 @@ export class ShippingFormComponent implements OnInit {
         cartItem.product.productName,
         cartItem.itemQuantity,
         cartItem.itemPrice)),
-      this.shippingInfo)).pipe(take(1)).subscribe(order=>{
+      this.shippingInfo,new Date(),this.defaultDate,
+      this.defaultDate,this.defaultDate,this.defaultDate,
+      this.defaultDate)).pipe(take(1)).subscribe(order=>{
         console.log(order);
         this.snackBar.open("Order placed succes","Ok",{duration:2000});
       },error=>{
@@ -126,4 +129,5 @@ export class ShippingFormComponent implements OnInit {
     }
     return isAddressExist;
   }
+
 }

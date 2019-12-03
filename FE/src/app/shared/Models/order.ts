@@ -15,9 +15,6 @@ export class Order{
         public deliveryDate:Date,
         public deliveryConfirmationDate:Date,
         public cancelationDate:Date,
-        public isProcessed: Boolean=false,
-        public isCanceled: Boolean=false,
-
     ){}
 
     totalPrice(){

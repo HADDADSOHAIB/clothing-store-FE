@@ -53,36 +53,39 @@
             <mat-card-title>Options</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-            <div fxLayout="row" fxLayoutAlign="space-between center" >
+            <div fxLayout="row" fxLayoutAlign="space-between center" *ngIf="inAdminSection" >
                 <div>
                     <button mat-stroked-button color='primary' (click)='process()'
-                        *ngIf="inAdminSection && order.processedDate==defaultDate">
+                        [disabled]="order.processedDate.getTime()!=defaultDate.getTime()">
                         Mark as processed
                     </button>
                 </div>
                 <div>
                     <button mat-stroked-button color='primary' (click)='send()'
-                        *ngIf="inAdminSection && order.inRouteDate==defaultDate">
+                        [disabled]="order.inRouteDate.getTime()!=defaultDate.getTime()">
                         send the order
                     </button>
                 </div>
                 <div>
                     <button mat-stroked-button color='primary' (click)='delivered()'
-                        *ngIf="inAdminSection && order.deliveryDate==defaultDate">
+                    [disabled]="order.deliveryDate.getTime()!=defaultDate.getTime()">
                         Mark as Delivered
                     </button>
                 </div>
             </div>
-            <div fxLayout="row" fxLayoutAlign="space-between center" >
+            <div fxLayout="row" fxLayoutAlign="space-around center"  *ngIf="!inAdminSection">
                 <div>
                     <button mat-stroked-button color='primary' (click)='cancel()'
-                        *ngIf="!inAdminSection && order.cancelationDate==defaultDate">
+                    [disabled]="order.cancelationDate.getTime()!=defaultDate.getTime() && 
+                    order.deliveryConfirmationDate.getTime()!=defaultDate.getTime() && 
+                    order.deliveryDate.getTime()!=defaultDate.getTime()">
                         Cancel
                     </button>
                 </div>
                 <div>
                     <button mat-stroked-button color='primary' (click)='confirmDelivery()'
-                        *ngIf="!inAdminSection && order.deliveryConfirmationDate==defaultDate">
+                    [disabled]="order.deliveryConfirmationDate.getTime()!=defaultDate.getTime() && 
+                    order.deliveryDate.getTime()==defaultDate.getTime()">
                         Confirm Delivery
                     </button>
                 </div>
