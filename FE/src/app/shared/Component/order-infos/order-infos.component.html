@@ -1,0 +1,92 @@
+<div  class="main" fxLayout="column" fxLayoutAlign="start center" >
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Order Items</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="item" *ngFor="let item of order.orderItems">
+                <div class="header" fxLayout="row" fxLayoutAlign="space-between end">
+                    <h3 class="product-name">{{item.productName}}</h3>
+                    <p class="product-id">Product id: {{item.productId}}</p>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="header" fxLayout="row" fxLayoutAlign="space-between end">
+                    <p class="product-quantity">Quantity: {{item.quantity}}</p>
+                    <p class="product-price">Total item price: {{item.price | currency:'MAD'}}</p>
+                </div>
+            </div>
+            <div class="item" >
+                    <mat-divider></mat-divider>
+                    <div class="header" fxLayout="row" fxLayoutAlign="space-between end">
+                        <p class="product-quantity">Total of items: {{order.totalQuantity()}}</p>
+                        <p class="product-price">Total price: <strong>{{order.totalPrice() | currency:'MAD'}}</strong></p>
+                    </div>
+                </div>
+        </mat-card-content>
+    </mat-card>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Shipping Informations</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="item">
+                <div class="header" fxLayout="row" fxLayoutAlign="space-between end">
+                    <h3 class="product-name">{{order.shippingInfo.firstName}}, {{order.shippingInfo.lastName}}</h3>
+                    <p class="product-id">Phone number: {{order.shippingInfo.phoneNumber}}</p>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="header" fxLayout="row" fxLayoutAlign="center end">
+                    <p class="product-quantity">{{order.shippingInfo.firstLine | lowercase}},
+                        {{order.shippingInfo.secondLine | lowercase}}, {{order.shippingInfo.city | lowercase}}</p>
+                </div>
+                <mat-divider></mat-divider>
+                <div class="header" fxLayout="row" fxLayoutAlign="center end">
+                    <p class="product-quantity">{{order.shippingInfo.state | lowercase}},
+                        {{order.shippingInfo.country | lowercase}}. {{order.shippingInfo.zipCode | lowercase}}</p>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <app-order-status [order]="order"></app-order-status>
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Options</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div fxLayout="row" fxLayoutAlign="space-between center" >
+                <div>
+                    <button mat-stroked-button color='primary' (click)='process()'
+                        *ngIf="inAdminSection && order.processedDate==defaultDate">
+                        Mark as processed
+                    </button>
+                </div>
+                <div>
+                    <button mat-stroked-button color='primary' (click)='send()'
+                        *ngIf="inAdminSection && order.inRouteDate==defaultDate">
+                        send the order
+                    </button>
+                </div>
+                <div>
+                    <button mat-stroked-button color='primary' (click)='delivered()'
+                        *ngIf="inAdminSection && order.deliveryDate==defaultDate">
+                        Mark as Delivered
+                    </button>
+                </div>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="space-between center" >
+                <div>
+                    <button mat-stroked-button color='primary' (click)='cancel()'
+                        *ngIf="!inAdminSection && order.cancelationDate==defaultDate">
+                        Cancel
+                    </button>
+                </div>
+                <div>
+                    <button mat-stroked-button color='primary' (click)='confirmDelivery()'
+                        *ngIf="!inAdminSection && order.deliveryConfirmationDate==defaultDate">
+                        Confirm Delivery
+                    </button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

@@ -9,9 +9,15 @@ export class Order{
         public userEmail:string,
         public orderItems: OrderItem[],
         public shippingInfo:ShippingInfos,
-        public orderDate: Date=new Date(),
+        public orderDate: Date,
+        public processedDate:Date,
+        public inRouteDate:Date,
+        public deliveryDate:Date,
+        public deliveryConfirmationDate:Date,
+        public cancelationDate:Date,
         public isProcessed: Boolean=false,
         public isCanceled: Boolean=false,
+
     ){}
 
     totalPrice(){

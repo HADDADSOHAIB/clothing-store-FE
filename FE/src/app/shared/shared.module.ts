@@ -33,6 +33,8 @@ import { MatListModule } from '@angular/material/list';
 import { FooterComponent } from './Component/footer/footer.component';
 import { MatRadioModule } from '@angular/material/radio';
 import { FilterAndSortComponent } from './Component/filter-and-sort/filter-and-sort.component';
+import { OrderStatusComponent } from './Component/order-status/order-status.component';
+import { OrderInfosComponent } from './Component/order-infos/order-infos.component';
 
 @NgModule({
   declarations:[
@@ -40,6 +42,8 @@ import { FilterAndSortComponent } from './Component/filter-and-sort/filter-and-s
     HeaderComponent,
     FooterComponent,
     FilterAndSortComponent,
+    OrderStatusComponent,
+    OrderInfosComponent
 
   ],
   imports: [
@@ -78,6 +82,8 @@ import { FilterAndSortComponent } from './Component/filter-and-sort/filter-and-s
     HeaderComponent,
     FooterComponent,
     FilterAndSortComponent,
+    OrderStatusComponent,
+    OrderInfosComponent,
     
     
     SharedRoutingModule,

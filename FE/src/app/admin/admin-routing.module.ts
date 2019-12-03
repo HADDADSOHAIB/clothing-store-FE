@@ -6,7 +6,7 @@ import { AdminHeaderComponent } from './component/admin-header/admin-header.comp
 import { ManageStoreComponent } from './component/manage-store/manage-store.component';
 import { AdminComponent } from './admin.component';
 import { OrdersListComponent } from './component/orders-list/orders-list.component';
-import { OrderFormComponent } from './component/order-form/order-form.component';
+import { OrderInfosComponent } from '../shared/Component/order-infos/order-infos.component';
 import { CategoryFormComponent } from './component/category-form/category-form.component';
 
 
@@ -37,7 +37,7 @@ const routes: Routes = [
       },
       {
         path:"order/:id",
-        component:OrderFormComponent
+        component:OrderInfosComponent
       },
       {
         path:"orders",
