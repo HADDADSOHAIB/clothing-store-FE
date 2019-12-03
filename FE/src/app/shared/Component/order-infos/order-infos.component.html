@@ -74,16 +74,25 @@
                 </div>
             </div>
             <div fxLayout="row" fxLayoutAlign="space-around center"  *ngIf="!inAdminSection">
-                <div>
-                    <button mat-stroked-button color='primary' (click)='cancel()'
-                    [disabled]="(order.deliveryDate.getTime()!=defaultDate.getTime() && order.cancelationDate.getTime()!=defaultDate.getTime())">
-                        Cancel
+                <div *ngIf="order.cancelationDate.getTime()!=defaultDate.getTime()">
+                    <button mat-stroked-button color='primary' (click)='cancel()' disabled>
+                        Cancel Order
                     </button>
                 </div>
-                <div>
+                <div *ngIf="order.cancelationDate.getTime()==defaultDate.getTime()">
+                    <button mat-stroked-button color='primary' (click)='cancel()'
+                        [disabled]="order.deliveryDate.getTime()!=defaultDate.getTime()">
+                        Cancel Order
+                    </button>
+                </div>
+                <div *ngIf="order.deliveryConfirmationDate.getTime()==defaultDate.getTime()" >
                     <button mat-stroked-button color='primary' (click)='confirmDelivery()'
-                    [disabled]="order.deliveryConfirmationDate.getTime()!=defaultDate.getTime() && 
-                    order.deliveryDate.getTime()==defaultDate.getTime()">
+                    [disabled]="order.deliveryDate.getTime()==defaultDate.getTime()">
+                        Confirm Delivery
+                    </button>
+                </div>
+                <div *ngIf="order.deliveryConfirmationDate.getTime()!=defaultDate.getTime()">
+                    <button mat-stroked-button color='primary' (click)='confirmDelivery()' disabled>
                         Confirm Delivery
                     </button>
                 </div>

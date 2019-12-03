@@ -20,8 +20,11 @@ export class OrderService {
     return this.httpClient.post(BACK_END+"orders",order);
   }
 
-  getOrders() {
-    return this.httpClient.get(BACK_END+"orders") as Observable<Order[]>;
+  getOrders(pageNumber:number,pageSize:number,sort:string[]=['orderDate','desc']) {
+    console.log(BACK_END+"orders?page="+pageNumber+"&&size="+pageSize+
+    "&&sort="+sort.join(','));
+    return this.httpClient.get(BACK_END+"orders?page="+pageNumber+"&&size="+pageSize+
+      "&&sort="+sort.join(',')) as Observable<Order[]>;
   }
 
   getOrdersByUser(userEmail:String) {
