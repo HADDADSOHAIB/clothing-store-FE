@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { Order } from 'src/app/shared/Models/order';
 import { OrderService } from 'src/app/shared/services/order-service/order.service';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { pipe } from 'rxjs';
 
 @Component({
   selector: 'app-orders-list',
@@ -10,11 +11,14 @@ import { take } from 'rxjs/operators';
   styleUrls: ['./orders-list.component.scss']
 })
 export class OrdersListComponent implements OnInit {
+
   orders: Order[]=[];
   displayedColumns: string[] = ['OrderDate', 'OrderedBy','Status','Options'];
   defaultDate=new Date(2010,0,1);
 
   currentPage=1;
+  availableOrdersCount:number=0;
+  itemsPerPage:number=10;
 
   sort:string[]=[];
   sortDirection:Map<string,string>=new Map<string,string>();
@@ -25,16 +29,18 @@ export class OrdersListComponent implements OnInit {
     private router: Router
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     this.sortDirection.set("userEmail","asc");
     this.sortDirection.set("orderDate","asc");
-    
+ 
+    this.availableOrdersCount=await this.orderService.getOrdersCount(this.currentPage-1,this.itemsPerPage).toPromise();
+    console.log(this.availableOrdersCount);
+    this.getOrders();
+  }
 
-    this.orderService.getOrders(0,10).subscribe(orders=>{
-      this.orders=orders.map(order=>new Order(order.id, order.userEmail, order.orderItems,
-        order.shippingInfo, new Date(order.orderDate), new Date(order.processedDate), 
-        new Date(order.inRouteDate), new Date(order.deliveryDate), 
-        new Date(order.deliveryConfirmationDate), new Date(order.cancelationDate)));
+  private getOrders(sort:string[]=['orderDate','desc']) {
+    this.orderService.getOrders(this.currentPage - 1, this.itemsPerPage).pipe(take(1)).subscribe(orders => {
+      this.orders = orders.map(order => new Order(order.id, order.userEmail, order.orderItems, order.shippingInfo, new Date(order.orderDate), new Date(order.processedDate), new Date(order.inRouteDate), new Date(order.deliveryDate), new Date(order.deliveryConfirmationDate), new Date(order.cancelationDate)));
     });
   }
 
@@ -42,16 +48,16 @@ export class OrdersListComponent implements OnInit {
     this.router.navigate(["admin/order/"+id]);
   }
 
-  // changeItemsPerPage($event:string){
-  //   this.itemsPerPage=parseInt($event);
-  //   this.currentPage=1;
-  //   this.productService.loadProducts(this.itemsPerPage,0);
-  // }
+  changeItemsPerPage($event:string){
+    this.itemsPerPage=parseInt($event);
+    this.currentPage=1;
+    this.getOrders(this.sort);
+  }
 
-  // changePageNumber($event:string){
-  //   this.currentPage=parseInt($event);
-  //   this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
-  // }
+  changePageNumber($event:string){
+    this.currentPage=parseInt($event);
+    this.getOrders(this.sort);
+  }
 
   sortBy(sortElement:string){
     ['userEmail','orderDate'].forEach(columnTitle=>{
@@ -62,12 +68,7 @@ export class OrdersListComponent implements OnInit {
         this.sort.push(sortElement);
         this.sort.push(this.sortDirection.get(sortElement));
         this.currentPage=1;
-        this.orderService.getOrders(0,10,this.sort).pipe(take(1)).subscribe(orders=>{
-          this.orders=orders.map(order=>new Order(order.id, order.userEmail, order.orderItems,
-            order.shippingInfo, new Date(order.orderDate), new Date(order.processedDate), 
-            new Date(order.inRouteDate), new Date(order.deliveryDate), 
-            new Date(order.deliveryConfirmationDate), new Date(order.cancelationDate)));
-        });
+        this.getOrders(this.sort);
         this.selectedSortElement=sortElement;
       }
     })

@@ -1,4 +1,4 @@
-<div class="table">
+<div class="table" fxLayout="column" fxLayoutAlign="start center" >
     <table mat-table [dataSource]="orders" class="mat-elevation-z8">
         <ng-container matColumnDef="OrderDate">
             <th mat-header-cell *matHeaderCellDef (click)="sortBy('orderDate')"> 
@@ -75,5 +75,9 @@
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
+    <div class="paginator">
+        <paginator [currentPage]="currentPage" [availableProductCount]="availableOrdersCount"
+            (itemsPerPageEmitter)="changeItemsPerPage($event)" (pageNumberEmitter)="changePageNumber($event)"></paginator>
+    </div>
     
 </div>

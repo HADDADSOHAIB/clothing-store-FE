@@ -21,12 +21,12 @@ export class OrderService {
   }
 
   getOrders(pageNumber:number,pageSize:number,sort:string[]=['orderDate','desc']) {
-    console.log(BACK_END+"orders?page="+pageNumber+"&&size="+pageSize+
-    "&&sort="+sort.join(','));
     return this.httpClient.get(BACK_END+"orders?page="+pageNumber+"&&size="+pageSize+
       "&&sort="+sort.join(',')) as Observable<Order[]>;
   }
-
+  getOrdersCount(pageNumber:number,pageSize:number) {
+    return this.httpClient.get(BACK_END+"orderscount?page="+pageNumber+"&&size="+pageSize) as Observable<number>;
+  }
   getOrdersByUser(userEmail:String) {
     return this.httpClient.get(BACK_END+"orders/email/"+userEmail) as Observable<Order[]>;
   }

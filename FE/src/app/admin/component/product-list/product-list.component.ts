@@ -4,9 +4,7 @@ import { Product } from 'src/app/shared/Models/product';
 import { take } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Category } from 'src/app/shared/Models/category';
-import { CartService } from 'src/app/store/service/cart-service/cart.service';
-import { AccountService } from 'src/app/shared/services/account-service/account.service';
+
 
 @Component({
   selector: 'app-product-list',
