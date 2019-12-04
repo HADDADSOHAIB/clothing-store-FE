@@ -90,6 +90,14 @@ export class ProductsService {
     return this.httpClient.get(BACK_END+"products/"+id) as Observable<Product>;
   }
 
+  getProductsByIds(ids: number[]){
+    let productObs:Product[]=[];
+    if(ids.length!==0){
+      return this.httpClient.get(BACK_END+"products?ids="+ids.join(',')) as Observable<Product[]>
+    }
+    else
+    return of(productObs);
+  }
   addProduct(product:Product){
     return this.httpClient.post(BACK_END+"products",product) as Observable<Product>;
   }

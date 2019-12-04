@@ -5,6 +5,7 @@ import { UserComponent } from './user.component';
 import { AccountComponent } from './component/account/account.component';
 import { MyOrdersComponent } from './component/my-orders/my-orders.component';
 import { OrderInfosComponent } from '../shared/Component/order-infos/order-infos.component';
+import { MyReviewsComponent } from './component/my-reviews/my-reviews.component';
 
 
 const routes: Routes = [
@@ -23,6 +24,10 @@ const routes: Routes = [
       {
         path:'myorders',
         component:MyOrdersComponent
+      },
+      {
+        path:'myreviews',
+        component:MyReviewsComponent
       }
     ]
   }

@@ -35,6 +35,8 @@ import { MatRadioModule } from '@angular/material/radio';
 import { FilterAndSortComponent } from './Component/filter-and-sort/filter-and-sort.component';
 import { OrderStatusComponent } from './Component/order-status/order-status.component';
 import { OrderInfosComponent } from './Component/order-infos/order-infos.component';
+import { ReviewService } from './services/review-service/review.service';
+import { RatingBarComponent } from './Component/rating-bar/rating-bar.component';
 
 @NgModule({
   declarations:[
@@ -43,7 +45,8 @@ import { OrderInfosComponent } from './Component/order-infos/order-infos.compone
     FooterComponent,
     FilterAndSortComponent,
     OrderStatusComponent,
-    OrderInfosComponent
+    OrderInfosComponent,
+    RatingBarComponent
 
   ],
   imports: [
@@ -84,6 +87,7 @@ import { OrderInfosComponent } from './Component/order-infos/order-infos.compone
     FilterAndSortComponent,
     OrderStatusComponent,
     OrderInfosComponent,
+    RatingBarComponent,
     
     
     SharedRoutingModule,
@@ -129,7 +133,8 @@ export class SharedModule {
           multi:true
         },
         OrderService,
-        AccountService
+        AccountService,
+        ReviewService
       ]
     };
   }

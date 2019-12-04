@@ -12,9 +12,9 @@ import { ProductFormComponent } from './component/product-form/product-form.comp
 import { CheckOutComponent } from './component/check-out/check-out.component';
 import { ShippingFormComponent } from './component/shipping-form/shipping-form.component';
 import { SharedModule } from '../shared/shared.module';
-import { ReviewService } from './service/review-service/review.service';
+
 import { HeaderFormaterPipe } from './pipes/header-formater/header-formater.pipe';
-import { RatingBarComponent } from './component/rating-bar/rating-bar.component';
+import { RatingBarComponent } from '../shared/Component/rating-bar/rating-bar.component';
 import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 
@@ -29,8 +29,7 @@ import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angu
     ProductFormComponent,
     CheckOutComponent,
     ShippingFormComponent,
-    HeaderFormaterPipe,
-    RatingBarComponent
+    HeaderFormaterPipe
   ],
   imports: [
     StoreRoutingModule,
@@ -43,7 +42,6 @@ import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angu
   providers: [
     HttpClient,
     CartService,
-    ReviewService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} }
   ]

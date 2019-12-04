@@ -8,6 +8,7 @@ import { AccountComponent } from './component/account/account.component';
 import { MyOrdersComponent } from './component/my-orders/my-orders.component';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MyReviewsComponent } from './component/my-reviews/my-reviews.component';
 
 
 @NgModule({
@@ -15,7 +16,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     UserComponent, 
     UserHeaderComponent, 
     AccountComponent, 
-    MyOrdersComponent, ],
+    MyOrdersComponent, MyReviewsComponent, ],
   imports: [
     CommonModule,
     UserRoutingModule,

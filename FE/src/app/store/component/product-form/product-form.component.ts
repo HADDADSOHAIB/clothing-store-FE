@@ -8,7 +8,7 @@ import { Product } from 'src/app/shared/Models/product';
 import { CartItem } from 'src/app/shared/Models/CartItem';
 import { ProductReview } from 'src/app/shared/Models/product-review';
 import { AccountService } from 'src/app/shared/services/account-service/account.service';
-import { ReviewService } from '../../service/review-service/review.service';
+import { ReviewService } from '../../../shared/services/review-service/review.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { User } from 'src/app/shared/Models/user';
