@@ -20,25 +20,27 @@ export class StoreHeaderComponent implements OnInit{
   cart: Cart;
   user:User;
 
-  categories:Category[]=[];
-  categoriesToFilter:Category[]=[];
-  categoriesToShow:Category[]=[];
+  // categories:Category[]=[];
+  // categoriesToFilter:Category[]=[];
+  // categoriesToShow:Category[]=[];
 
-  showAllCategories=false;
-  showFilters=false;
-  showFilterByCategory=false;
-  showFilterByPrice=false;
-  showSortBy=false;
+  // showAllCategories=false;
+  // showFilters=false;
+  // showFilterByCategory=false;
+  // showFilterByPrice=false;
+  // showSortBy=false;
+  // showSearch=true;
 
-  priceStart:number=0;
-  priceEnd:number=1000000;
-  isFilterByPriceSet:boolean=false;
-  priceFilterForm:FormGroup=new FormGroup({
-    lowerLimit: new FormControl(["",Validators.required]),
-    upperLimit: new FormControl(["",Validators.required]),
-  });
+  // priceStart:number=0;
+  // priceEnd:number=1000000;
+  // isFilterByPriceSet:boolean=false;
+  // priceFilterForm:FormGroup=new FormGroup({
+  //   lowerLimit: new FormControl(["",Validators.required]),
+  //   upperLimit: new FormControl(["",Validators.required]),
+  // });
 
-  sort:string[]=['productName','asc'];
+  // sort:string[]=['productName','asc'];
+  // searchQuery:string="";
   
   constructor(
     private productService:ProductsService,
@@ -51,10 +53,10 @@ export class StoreHeaderComponent implements OnInit{
   ngOnInit() {
     this.cartService.loadCart();
     this.cartService.getCart().subscribe(cart=>this.cart=cart);
-    this.categoryService.getCategories().pipe(take(1)).subscribe(categories=>{
-      this.categories=categories;
-      this.categoriesToShow=this.categories.slice(0,4);
-    });
+    // this.categoryService.getCategories().pipe(take(1)).subscribe(categories=>{
+    //   this.categories=categories;
+    //   this.categoriesToShow=this.categories.slice(0,4);
+    // });
   
   }
 

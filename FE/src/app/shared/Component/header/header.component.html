@@ -32,6 +32,7 @@
 
     </div>
     <div fxFlex fxLayout fxLayoutAlign="end centre" fxHide.xs>
+        <mat-divider [vertical]="true"></mat-divider>
         <ul fxLayout fxLayoutGap="30px" class="navigation-items">
             <li *ngIf="currentUser.userEmail">
                 <a routerLink="/auth/signin" fxLayout="column" fxLayoutAlign="start center">

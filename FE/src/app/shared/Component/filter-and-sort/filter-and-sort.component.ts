@@ -25,6 +25,7 @@ export class FilterAndSortComponent implements OnInit {
   showFilterByCategory=false;
   showFilterByPrice=false;
   showSortBy=false;
+  showSearch=true;
 
   priceStart:number=0;
   priceEnd:number=1000000;
@@ -35,6 +36,9 @@ export class FilterAndSortComponent implements OnInit {
   });
 
   sort:string[]=['productName','asc'];
+  searchQuery:string="";
+  selectedSearchQuery:string="";
+  isQuerySearchSet=false;
   
   constructor(
     private productService:ProductsService,
@@ -151,4 +155,26 @@ export class FilterAndSortComponent implements OnInit {
       categoryList:this.categoriesToFilter
     });
   }
+
+
+  toggleSearch(){
+    this.showSearch=!this.showSearch;
+  }
+
+  search(){
+    this.productService.searchSubject.next(this.searchQuery);
+    this.productService.loadAvailableProductCount();
+    this.productService.loadProducts(10,0);
+    this.selectedSearchQuery=this.searchQuery;
+    this.isQuerySearchSet=true;
+    this.searchQuery="";
+  }
+  clearSearch(){
+    this.selectedSearchQuery="";
+    this.isQuerySearchSet=false;
+    this.productService.searchSubject.next(this.searchQuery);
+    this.productService.loadAvailableProductCount();
+    this.productService.loadProducts(10,0);
+  }
+
 }

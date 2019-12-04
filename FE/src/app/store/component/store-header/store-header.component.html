@@ -8,12 +8,15 @@
             <mat-icon matBadge="{{cart.totalCount()}}" matBadgeColor="accent">local_grocery_store</mat-icon>
             <span class="nav-caption">Checkout</span>
         </a>
+        
         <mat-divider></mat-divider>
-
-       <filter-and-sort></filter-and-sort> 
+        <filter-and-sort></filter-and-sort> 
         <mat-divider></mat-divider>
         <a mat-list-item (click)="sidenav.toggle()" mat-list-item>
             <mat-icon aria-hidden="false">close</mat-icon>
             <span class="nav-caption">Close menu</span>
         </a>
 </mat-nav-list>
+
+
+    

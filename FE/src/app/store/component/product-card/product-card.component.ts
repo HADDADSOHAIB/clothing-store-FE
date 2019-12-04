@@ -72,8 +72,8 @@ export class ProductCardComponent implements OnInit {
   }
 
   details(){
-    this.dialog.open(ProductFormComponent, {
-      width: '90%',
+    const dialogRef=this.dialog.open(ProductFormComponent, {
+      height: '75%',
       data: this.product
     });
   }
