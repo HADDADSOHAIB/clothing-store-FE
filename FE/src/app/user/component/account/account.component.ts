@@ -95,7 +95,10 @@ export class AccountComponent implements OnInit {
         this.snackBar.open("address added","Ok",{duration:2000});
         this.createOrClearAddressForm();
         this.accountService.loadCurrentUser();
-      },error=>this.snackBar.open("Error try later","Ok",{duration:2000}));
+      },error=>{
+        this.snackBar.open("Error try later","Ok",{duration:2000})
+        console.log(error);
+    });
     }
   }
 

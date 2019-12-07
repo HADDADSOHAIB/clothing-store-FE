@@ -61,7 +61,13 @@ export class CartService{
       let cart=new Cart(cartDb.cartId,cartDb.userEmail,cartDb.items);
       this.isCartInDb=true;
       this.cartSubject.next(cart);
-    },error=>console.log(error));
+    },async error=>{
+      console.log(error);
+      let cart= await this.getCart().toPromise();
+      this.isCartInDb=true;
+      this.upLoadCart(cart);
+      this.cartSubject.next(cart);
+    });
   }
   
   getCart(){

@@ -16,7 +16,7 @@ export class Order{
         public deliveryConfirmationDate:Date,
         public cancelationDate:Date,
     ){}
-
+    
     totalPrice(){
         let totalPrice=0;
         this.orderItems.forEach(item=>totalPrice+=item.price*item.quantity);

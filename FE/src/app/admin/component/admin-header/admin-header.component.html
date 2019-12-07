@@ -1,7 +1,7 @@
 
 <mat-nav-list>
 
-    <a mat-list-item routerLink="">
+    <a mat-list-item routerLink="manage">
         <mat-icon>supervisor_account</mat-icon>
         <span class="nav-caption">Manage Store</span>
     </a>
@@ -16,6 +16,10 @@
     <a mat-list-item routerLink="orders">
         <mat-icon>format_list_bulleted</mat-icon>
         <span class="nav-caption">Orders List</span>
+    </a>
+    <a mat-list-item routerLink="users">
+        <mat-icon>person_add</mat-icon>
+        <span class="nav-caption">Users List</span>
     </a>
     <a mat-list-item (click)="sidenav.toggle()" mat-list-item>
         <mat-icon aria-hidden="false">close</mat-icon>

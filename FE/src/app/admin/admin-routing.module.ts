@@ -8,6 +8,7 @@ import { AdminComponent } from './admin.component';
 import { OrdersListComponent } from './component/orders-list/orders-list.component';
 import { OrderInfosComponent } from '../shared/Component/order-infos/order-infos.component';
 import { CategoryFormComponent } from './component/category-form/category-form.component';
+import { UserListComponent } from './component/user-list/user-list.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,14 @@ const routes: Routes = [
       {
         path:"orders",
         component:OrdersListComponent
+      },
+      {
+        path:"users",
+        component:UserListComponent
+      },
+      {
+        path:"manage",
+        component:ManageStoreComponent
       }
     ]
   }

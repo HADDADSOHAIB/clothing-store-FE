@@ -16,7 +16,6 @@ export class OrderService {
   }
 
   placeOrder(order: Order) {
-    console.log(order);
     return this.httpClient.post(BACK_END+"orders",order);
   }
 
@@ -27,6 +26,16 @@ export class OrderService {
   getOrdersCount(pageNumber:number,pageSize:number) {
     return this.httpClient.get(BACK_END+"orderscount?page="+pageNumber+"&&size="+pageSize) as Observable<number>;
   }
+
+  getOrdersByStatus(pageNumber:number,pageSize:number,status:string) {
+    return this.httpClient.get(BACK_END+"ordersbystatus?page="+pageNumber+"&&size="+pageSize+
+      "&&status="+status) as Observable<Order[]>;
+  }
+  getOrdersCountByStatus(pageNumber:number,pageSize:number, status:string) {
+    return this.httpClient.get(BACK_END+"orderscountbystatus?page="+pageNumber+"&&size="+pageSize
+    +"&&status="+status) as Observable<number>;
+  }
+
   getOrdersByUser(userEmail:String) {
     return this.httpClient.get(BACK_END+"orders/email/"+userEmail) as Observable<Order[]>;
   }
