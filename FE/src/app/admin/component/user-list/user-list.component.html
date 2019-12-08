@@ -1,1 +1,31 @@
-<p>Under Construction, here will be user management panel</p>
+<div class="main" fxLayout="column" fxLayoutAlign="start center">
+    <mat-card class="roles-card">
+        <mat-card-content>
+            <div fxLayout="column" fxLayoutAlign="start">
+                <mat-form-field class="role-select">
+                    <mat-label>Select a role</mat-label>
+                    <mat-select (selectionChange)="selectRole($event.value)">
+                        <mat-option *ngFor="let role of roleList" [value]="role.id">
+                            {{role.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <div fxLayout="row" fxLayoutAlign="space-between start">
+                    <mat-nav-list>
+                        <a mat-list-item *ngFor="let privilege of selectedRole.privileges"> 
+                            {{ privilege.name }}
+                            <mat-icon (click)="deletePrivilege(privilege.id)">delete</mat-icon>
+                        </a>
+                    </mat-nav-list>
+                    <mat-nav-list *ngIf="showPrivilegeList">
+                        <a mat-list-item *ngFor="let privilege of privilegeFilteredList">
+                            {{ privilege.name }}
+                            <mat-icon (click)="addPrivilege(privilege.id)">add</mat-icon>
+                        </a>
+                    </mat-nav-list>
+
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

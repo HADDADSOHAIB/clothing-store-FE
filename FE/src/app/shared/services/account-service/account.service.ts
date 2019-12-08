@@ -12,7 +12,7 @@ import { Address } from '../../Models/address';
   providedIn: 'root'
 })
 export class AccountService {
-  subject:BehaviorSubject<User>=new BehaviorSubject<User>(new User(0,'','','','','',[]));
+  subject:BehaviorSubject<User>=new BehaviorSubject<User>(new User(0,'','','','','',[],[]));
   constructor(private httpClient:HttpClient) { }
 
   getCurrentUser(){
@@ -25,7 +25,7 @@ export class AccountService {
       this.subject.next(user);
     },error=>{
       console.log(error);
-      this.subject.next(new User(0,'','','','','',[]));
+      this.subject.next(new User(0,'','','','','',[],[]));
     });
   }
 

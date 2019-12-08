@@ -17,7 +17,7 @@ import { ProductsService } from 'src/app/shared/services/products-service/produc
 export class MyReviewsComponent implements OnInit {
   myReviews:ProductReview[]=[];
   myProducts:Map<number,Product>=new Map<number,Product>();
-  currentUser: User=new User(0,"","","","","",[]);
+  currentUser: User=new User(0,"","","","","",[],[]);
   idOfReviewToModify=0;
   productReviewModified:ProductReview=new ProductReview(0,null,5,"",0);
 

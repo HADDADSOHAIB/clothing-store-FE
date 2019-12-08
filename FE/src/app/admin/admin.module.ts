@@ -13,6 +13,7 @@ import { OrdersListComponent } from './component/orders-list/orders-list.compone
 import { CategoryFormComponent } from './component/category-form/category-form.component';
 import { TitleDescriptionPipe } from './pipes/title-description.pipe';
 import { UserListComponent } from './component/user-list/user-list.component';
+import { RoleService } from './service/role-service/role.service';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { UserListComponent } from './component/user-list/user-list.component';
     SharedModule.forRoot()
   ],
   providers:[
-    CategoryService
+    CategoryService,
+    RoleService
   ]
 })
 export class AdminModule { }
