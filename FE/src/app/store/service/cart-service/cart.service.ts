@@ -80,4 +80,8 @@ export class CartService{
   updateCart(cart: Cart){
     this.cartSubject.next(cart);
   }
+
+  clearCart(){
+    
+  }
 }

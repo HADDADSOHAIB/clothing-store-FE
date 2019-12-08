@@ -77,6 +77,7 @@ export class ShippingFormComponent implements OnInit {
       this.defaultDate)).pipe(take(1)).subscribe(order=>{
         console.log(order);
         this.snackBar.open("Order placed succes","Ok",{duration:2000});
+        this.router.navigate([""]);
       },error=>{
         console.log(error);
         this.snackBar.open("Error try later","Ok",{duration:2000});
