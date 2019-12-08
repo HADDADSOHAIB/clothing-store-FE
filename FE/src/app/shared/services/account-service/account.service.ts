@@ -40,4 +40,8 @@ export class AccountService {
   deleteAddress(id:number){
     return this.httpClient.delete(BACK_END+"addresses/"+id);
   }
+
+  getAllUsers(){
+    return this.httpClient.get(BACK_END+"users") as Observable<User[]>;
+  }
 }

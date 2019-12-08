@@ -5,7 +5,6 @@ import { take } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',

@@ -1,4 +1,31 @@
 <div class="main" fxLayout="column" fxLayoutAlign="start center">
+    <table mat-table [dataSource]="userList">
+        <ng-container matColumnDef="UserEmail">
+            <th mat-header-cell *matHeaderCellDef >
+                <span class="header">User Email</span>
+            </th>
+            <td mat-cell *matCellDef="let user"> {{user.userEmail}}</td>
+        </ng-container>
+    
+        <ng-container matColumnDef="Roles">
+            <th mat-header-cell *matHeaderCellDef>
+                <span class="header">Roles</span>
+            </th>
+            <td mat-cell *matCellDef="let user">
+                <span *ngFor="let role of user.roles">{{role.name}}</span>
+            </td>
+        </ng-container>
+    
+        <ng-container matColumnDef="Options">
+            <th mat-header-cell *matHeaderCellDef class="options">Options</th>
+            <td mat-cell *matCellDef="let user">
+    
+            </td>
+        </ng-container>
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
     <mat-card class="roles-card">
         <mat-card-content>
             <div fxLayout="column" fxLayoutAlign="start">
@@ -10,20 +37,38 @@
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
-                <div fxLayout="row" fxLayoutAlign="space-between start">
-                    <mat-nav-list>
-                        <a mat-list-item *ngFor="let privilege of selectedRole.privileges"> 
-                            {{ privilege.name }}
-                            <mat-icon (click)="deletePrivilege(privilege.id)">delete</mat-icon>
-                        </a>
-                    </mat-nav-list>
-                    <mat-nav-list *ngIf="showPrivilegeList">
-                        <a mat-list-item *ngFor="let privilege of privilegeFilteredList">
-                            {{ privilege.name }}
-                            <mat-icon (click)="addPrivilege(privilege.id)">add</mat-icon>
-                        </a>
-                    </mat-nav-list>
-
+                <div fxLayout="row" fxLayoutAlign="start start">
+                    <div *ngIf="selectedRole.privileges.length!==0">
+                        <p>Privileges granted to the role :</p>
+                        <mat-nav-list>
+                            <a mat-list-item *ngFor="let privilege of selectedRole.privileges" 
+                            class="priv" (click)="deletePrivilege(privilege.id)">
+                                <span>{{ privilege.name }}</span>
+                                <mat-icon >remove</mat-icon>
+                            </a>
+                        </mat-nav-list>
+                    </div>
+                    <div *ngIf="showPrivilegeList">
+                        <p>Other privileges :</p>
+                        <mat-nav-list >
+                            <a mat-list-item *ngFor="let privilege of privilegeFilteredList"
+                            class="priv" (click)="addPrivilege(privilege.id)">
+                                <span>{{ privilege.name }}</span>
+                                <mat-icon >add</mat-icon>
+                            </a>
+                        </mat-nav-list>
+                    </div>
+                </div>
+                <div  fxLayout="row" fxLayoutAlign="space-between center" >
+                    <h3 class="new-role">New role</h3>
+                    <mat-divider></mat-divider>
+                </div>
+                <div  fxLayout="row" fxLayoutAlign="space-between center" >
+                    <mat-form-field class="new-role">
+                        <mat-label>New role name</mat-label>
+                        <input matInput placeholder="New role name" [(ngModel)]="newRole.name">
+                    </mat-form-field>
+                    <button mat-button color="primary" class="new-role" (click)="createRole()">Create new role</button>
                 </div>
             </div>
         </mat-card-content>

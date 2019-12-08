@@ -3,6 +3,32 @@
     width: 100%;
 }
 .roles-card{
-    width: 600px;
+    width: 500px;
     margin: 10px;
+}
+
+a.priv{
+    width: 250px;
+}
+
+mat-icon{
+    margin: 10px;
+}
+mat-form-field.new-role{
+    width: 60%;
+}
+.mat-card .mat-divider-horizontal{
+    position: relative;
+}
+
+h3.new-role{
+    width: 100px;
+}
+
+button.new-role{
+    margin: 10px;
+}
+table{
+    width: 520px;
+    margin-top: 10px;
 }

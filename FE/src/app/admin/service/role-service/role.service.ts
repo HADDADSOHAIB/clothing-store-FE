@@ -21,4 +21,12 @@ export class RoleService {
   getPrivileges(){
     return this.httpClient.get(BACK_END+"privileges") as Observable<Privilege[]>;
   }
+
+  updateRole(role:Role){
+    return this.httpClient.put(BACK_END+"roles/"+role.id,role) as Observable<Role>;
+  }
+
+  createRole(role:Role){
+    return this.httpClient.post(BACK_END+"roles",role) as Observable<Role>;
+  }
 }
