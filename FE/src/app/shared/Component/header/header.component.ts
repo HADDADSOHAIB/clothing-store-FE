@@ -15,7 +15,13 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.accountService.loadCurrentUser();
-    this.accountService.getCurrentUser().subscribe(user=>this.currentUser=user);
+    this.accountService.getCurrentUser().subscribe(user=>{
+      this.currentUser=user;
+    });
   }
 
+  logout(){
+    localStorage.removeItem("token");
+    this.accountService.loadCurrentUser();
+  }
 }

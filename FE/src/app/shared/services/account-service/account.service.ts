@@ -13,20 +13,31 @@ import { Address } from '../../Models/address';
 })
 export class AccountService {
   subject:BehaviorSubject<User>=new BehaviorSubject<User>(new User(0,'','','','','',[],[]));
-  constructor(private httpClient:HttpClient) { }
+  user:User=new User(0,'','','','','',[],[]);
+  constructor(private httpClient:HttpClient) { 
+    console.log("bonjour");
+  }
 
   getCurrentUser(){
     return this.subject;
   }
- 
+  getCurrentUserObject(){
+    return this.user;
+  }
   loadCurrentUser(){
     let token=new Token(localStorage.getItem('token'));
-    this.httpClient.post(BACK_END+"users",token).pipe(take(1)).subscribe((user:User)=>{
-      this.subject.next(user);
-    },error=>{
-      console.log(error);
+    if(token.token){
+      this.httpClient.post(BACK_END+"users",token).pipe(take(1)).subscribe((user:User)=>{
+        this.user=user;
+        this.subject.next(user);
+      },error=>{
+        console.log(error);
+      });
+    }
+    else{
+      this.user=new User(0,'','','','','',[],[]);
       this.subject.next(new User(0,'','','','','',[],[]));
-    });
+    }
   }
 
   updateUserProfile(user:User){

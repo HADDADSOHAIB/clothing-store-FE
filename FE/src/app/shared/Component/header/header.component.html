@@ -35,7 +35,7 @@
         <mat-divider [vertical]="true"></mat-divider>
         <ul fxLayout fxLayoutGap="30px" class="navigation-items">
             <li *ngIf="currentUser.userEmail">
-                <a routerLink="/auth/signin" fxLayout="column" fxLayoutAlign="start center">
+                <a routerLink="" (click)="logout()" fxLayout="column" fxLayoutAlign="start center">
                     <mat-icon aria-hidden="false">fingerprint</mat-icon>
                     <span class="nav-caption">Logout</span>
                 </a>

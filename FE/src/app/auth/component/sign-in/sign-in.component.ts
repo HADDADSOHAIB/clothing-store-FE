@@ -3,6 +3,7 @@ import { Credentials } from '../../../shared/Models/credentials';
 import { Router } from '@angular/router';
 import { AuthService } from '../../service/auth-service/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { AccountService } from 'src/app/shared/services/account-service/account.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -17,13 +18,16 @@ export class SignInComponent {
 
   constructor(
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private accountService: AccountService
+  
   ) { }
 
   Login(){
     let credentials=new Credentials(this.form.get('email').value,this.form.get('password').value);
     this.authService.login(credentials).subscribe(resp=>{
       localStorage.setItem('token',resp.token);
+      this.accountService.loadCurrentUser();
       this.router.navigate(["/"]);
     },error=>alert(error));
   }
