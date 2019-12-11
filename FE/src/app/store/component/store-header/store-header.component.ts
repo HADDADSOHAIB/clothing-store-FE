@@ -1,15 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CartService } from '../../service/cart-service/cart.service';
-import { take } from 'rxjs/operators';
-import { Cart } from 'src/app/shared/Models/cart';
-import { UUID } from 'angular2-uuid';
-import { User } from 'src/app/shared/Models/user';
-import { AccountService } from 'src/app/shared/services/account-service/account.service';
-import { Category } from 'src/app/shared/Models/category';
-import { ProductsService } from 'src/app/shared/services/products-service/products.service';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CategoryService } from 'src/app/admin/service/category-service/category.service';
+import { Component, OnInit } from '@angular/core';
+import { Cart } from 'src/app/models/cart';
+import { User } from 'src/app/models/user';
+import { CartService } from 'src/app/services/cart-service/cart.service';
 
 @Component({
   selector: 'store-header',
@@ -43,12 +35,7 @@ export class StoreHeaderComponent implements OnInit{
   // searchQuery:string="";
   
   constructor(
-    private productService:ProductsService,
-    private cartService: CartService,
-    private accountService: AccountService,
-    private categoryService: CategoryService,
-    private snackBar: MatSnackBar
-  ) { }
+    private cartService: CartService  ) { }
 
   ngOnInit() {
     this.cartService.loadCart();

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Order } from '../../Models/order';
-import { OrderService } from '../../services/order-service/order.service';
-import { ShippingInfos } from '../../Models/shipping-info';
+import { Order } from 'src/app/models/order';
+import { ShippingInfos } from 'src/app/models/shipping-info';
+import { OrderService } from 'src/app/services/order-service/order.service';
 
 @Component({
   selector: 'app-order-status',

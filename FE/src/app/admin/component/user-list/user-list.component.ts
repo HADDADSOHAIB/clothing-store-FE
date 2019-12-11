@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from 'src/app/shared/Models/role';
-import { Privilege } from 'src/app/shared/Models/privilege';
-import { RoleService } from '../../service/role-service/role.service';
 import { take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RouteConfigLoadEnd } from '@angular/router';
-import { AccountService } from 'src/app/shared/services/account-service/account.service';
-import { User } from 'src/app/shared/Models/user';
+import { Role } from 'src/app/models/role';
+import { Privilege } from 'src/app/models/privilege';
+import { User } from 'src/app/models/user';
+import { RoleService } from 'src/app/services/role-service/role.service';
+import { AccountService } from 'src/app/services/account-service/account.service';
 
 @Component({
   selector: 'app-user-list',

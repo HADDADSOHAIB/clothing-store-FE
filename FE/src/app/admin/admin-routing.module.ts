@@ -9,8 +9,6 @@ import { OrdersListComponent } from './component/orders-list/orders-list.compone
 import { OrderInfosComponent } from '../shared/Component/order-infos/order-infos.component';
 import { CategoryFormComponent } from './component/category-form/category-form.component';
 import { UserListComponent } from './component/user-list/user-list.component';
-import { CategoryGuard } from './guard/category-guard/category.guard';
-import { ProductGuard } from './guard/add-product-guard/product.guard';
 
 
 const routes: Routes = [
@@ -25,22 +23,18 @@ const routes: Routes = [
       {
         path:"categories",
         component:CategoryFormComponent,
-        canActivate:[CategoryGuard]
       },
       {
         path:"product/:id",
         component:ProductManagementFormComponent,
-        canActivate:[ProductGuard]
       },
       {
         path:"product/new",
         component:ProductManagementFormComponent,
-        canActivate:[ProductGuard]
       },
       {
         path:"products",
         component:ProductListComponent,
-        canActivate:[ProductGuard]
       },
       {
         path:"order/:id",

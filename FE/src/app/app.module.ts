@@ -2,15 +2,21 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { SharedModule } from './shared/shared.module';
-import { HeaderComponent } from './shared/Component/header/header.component';
-import { AuthInterceptor } from './shared/interceptors/http.interceptor';
-import { ProductsService } from './shared/services/products-service/products.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { PaginatorComponent } from './shared/Component/paginator/paginator.component';
+import { CartService } from './services/cart-service/cart.service';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { AccountService } from './services/account-service/account.service';
+import { AuthService } from './services/auth-service/auth.service';
+import { CategoryService } from './services/category-service/category.service';
+import { OrderService } from './services/order-service/order.service';
+import { ProductsService } from './services/products-service/products.service';
+import { ReviewService } from './services/review-service/review.service';
+import { RoleService } from './services/role-service/role.service';
+import { AuthInterceptor } from './interceptors/http.interceptor';
 
 @NgModule({
   declarations: [
@@ -22,7 +28,24 @@ import { PaginatorComponent } from './shared/Component/paginator/paginator.compo
     BrowserModule,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    CategoryService,
+    OrderService,
+    ProductsService,
+    ReviewService,
+    RoleService,
+    AccountService,
+    HttpClient,
+    CartService,
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} },
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:AuthInterceptor,
+      multi:true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

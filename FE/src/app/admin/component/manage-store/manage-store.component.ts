@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderService } from 'src/app/shared/services/order-service/order.service';
-import { Order } from 'src/app/shared/Models/order';
 import { take } from 'rxjs/operators';
+import { Order } from 'src/app/models/order';
+import { OrderService } from 'src/app/services/order-service/order.service';
 
 @Component({
   selector: 'app-manage-store',

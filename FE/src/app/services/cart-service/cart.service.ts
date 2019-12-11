@@ -1,11 +1,11 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { Cart } from 'src/app/shared/Models/cart';
 import { UUID } from 'angular2-uuid';
 import { BACK_END } from 'backend';
 import { take, map } from 'rxjs/operators';
-import { AccountService } from 'src/app/shared/services/account-service/account.service';
+import { Cart } from 'src/app/models/cart';
+import { AccountService } from '../account-service/account.service';
 
 @Injectable({
   providedIn: 'root'

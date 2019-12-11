@@ -1,18 +1,18 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { CartService } from '../../service/cart-service/cart.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take, find } from 'rxjs/operators';
-import { ProductsService } from '../../../shared/services/products-service/products.service';
-import { Cart } from 'src/app/shared/Models/cart';
-import { Product } from 'src/app/shared/Models/product';
-import { CartItem } from 'src/app/shared/Models/CartItem';
-import { ProductReview } from 'src/app/shared/Models/product-review';
-import { AccountService } from 'src/app/shared/services/account-service/account.service';
-import { ReviewService } from '../../../shared/services/review-service/review.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { User } from 'src/app/shared/Models/user';
 import { FormGroup, FormControl } from '@angular/forms';
+import { Cart } from 'src/app/models/cart';
+import { Product } from 'src/app/models/product';
+import { ProductReview } from 'src/app/models/product-review';
+import { User } from 'src/app/models/user';
+import { CartService } from 'src/app/services/cart-service/cart.service';
+import { ProductsService } from 'src/app/services/products-service/products.service';
+import { AccountService } from 'src/app/services/account-service/account.service';
+import { ReviewService } from 'src/app/services/review-service/review.service';
+import { CartItem } from 'src/app/models/CartItem';
 
 @Component({
   selector: 'app-product-form',

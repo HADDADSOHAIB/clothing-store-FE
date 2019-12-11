@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ReviewService } from 'src/app/shared/services/review-service/review.service';
-import { ProductReview } from 'src/app/shared/Models/product-review';
-import { AccountService } from 'src/app/shared/services/account-service/account.service';
-import { User } from 'src/app/shared/Models/user';
-import { take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/shared/Models/product';
-import { ProductsService } from 'src/app/shared/services/products-service/products.service';
+import { ProductReview } from 'src/app/models/product-review';
+import { Product } from 'src/app/models/product';
+import { User } from 'src/app/models/user';
+import { ReviewService } from 'src/app/services/review-service/review.service';
+import { AccountService } from 'src/app/services/account-service/account.service';
+import { ProductsService } from 'src/app/services/products-service/products.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-my-reviews',

@@ -1,6 +1,5 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { SharedRoutingModule } from './shared-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatChipsModule } from '@angular/material/chips';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -19,14 +18,10 @@ import { MatTableModule } from '@angular/material/table';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { PaginatorComponent } from './Component/paginator/paginator.component';
 import { HeaderComponent } from './Component/header/header.component';
-import { ProductsService } from './services/products-service/products.service';
-import { AuthInterceptor } from './interceptors/http.interceptor';
-import { OrderService } from './services/order-service/order.service';
-import { AccountService } from './services/account-service/account.service';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
@@ -35,7 +30,6 @@ import { MatRadioModule } from '@angular/material/radio';
 import { FilterAndSortComponent } from './Component/filter-and-sort/filter-and-sort.component';
 import { OrderStatusComponent } from './Component/order-status/order-status.component';
 import { OrderInfosComponent } from './Component/order-infos/order-infos.component';
-import { ReviewService } from './services/review-service/review.service';
 import { RatingBarComponent } from './Component/rating-bar/rating-bar.component';
 
 @NgModule({
@@ -122,20 +116,5 @@ import { RatingBarComponent } from './Component/rating-bar/rating-bar.component'
   ]
 })
 export class SharedModule { 
-  static forRoot(): ModuleWithProviders {
-    return {
-      ngModule: SharedModule,
-      providers: [ 
-        ProductsService,
-        {
-          provide:HTTP_INTERCEPTORS,
-          useClass:AuthInterceptor,
-          multi:true
-        },
-        OrderService,
-        AccountService,
-        ReviewService
-      ]
-    };
-  }
+ 
 }

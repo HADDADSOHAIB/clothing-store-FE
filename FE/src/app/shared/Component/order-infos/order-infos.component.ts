@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from 'src/app/shared/Models/order';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { OrderService } from 'src/app/shared/services/order-service/order.service';
-import { ShippingInfos } from 'src/app/shared/Models/shipping-info';
+import { Order } from 'src/app/models/order';
+import { ShippingInfos } from 'src/app/models/shipping-info';
+import { OrderService } from 'src/app/services/order-service/order.service';
 
 @Component({
   selector: 'app-order-infos',

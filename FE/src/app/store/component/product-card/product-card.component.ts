@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
-import { CartService } from '../../service/cart-service/cart.service';
 import { Router } from '@angular/router';
-import { Product } from 'src/app/shared/Models/product';
-import { Cart } from 'src/app/shared/Models/cart';
-import { CartItem } from 'src/app/shared/Models/CartItem';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductFormComponent } from '../product-form/product-form.component';
+import { Product } from 'src/app/models/product';
+import { Cart } from 'src/app/models/cart';
+import { CartService } from 'src/app/services/cart-service/cart.service';
+import { CartItem } from 'src/app/models/CartItem';
 
 @Component({
   selector: 'product-card',

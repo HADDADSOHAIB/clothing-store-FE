@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Order } from '../../Models/order';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
-import { Cart } from '../../Models/cart';
-import { CartItem } from '../../Models/CartItem';
-import { ShippingInfos } from '../../Models/shipping-info';
 import { HttpClient } from '@angular/common/http';
 import { BACK_END } from 'backend';
+import { Order } from 'src/app/models/order';
 
 @Injectable({
   providedIn: 'root'

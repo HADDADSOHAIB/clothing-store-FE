@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderItem } from 'src/app/shared/Models/order-item';
-import { OrderService } from 'src/app/shared/services/order-service/order.service';
-import { Order } from 'src/app/shared/Models/order';
-import { AccountService } from 'src/app/shared/services/account-service/account.service';
 import { take } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { Order } from 'src/app/models/order';
+import { OrderService } from 'src/app/services/order-service/order.service';
+import { AccountService } from 'src/app/services/account-service/account.service';
 
 @Component({
   selector: 'app-my-orders',

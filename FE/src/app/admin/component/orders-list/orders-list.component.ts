@@ -1,9 +1,9 @@
 import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { Order } from 'src/app/shared/Models/order';
-import { OrderService } from 'src/app/shared/services/order-service/order.service';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
 import { pipe } from 'rxjs';
+import { Order } from 'src/app/models/order';
+import { OrderService } from 'src/app/services/order-service/order.service';
 
 @Component({
   selector: 'app-orders-list',

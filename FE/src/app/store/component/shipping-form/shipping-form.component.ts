@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CartService } from '../../service/cart-service/cart.service';
 import { take } from 'rxjs/operators';
-import { OrderService } from '../../../shared/services/order-service/order.service';
-import { Order } from '../../../shared/Models/order';
 import { Router } from '@angular/router';
-import { Cart } from 'src/app/shared/Models/cart';
-import { ShippingInfos } from 'src/app/shared/Models/shipping-info';
-import { User } from 'src/app/shared/Models/user';
-import { AccountService } from 'src/app/shared/services/account-service/account.service';
-import { Address } from 'src/app/shared/Models/address';
-import { OrderItem } from 'src/app/shared/Models/order-item';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Cart } from 'src/app/models/cart';
+import { ShippingInfos } from 'src/app/models/shipping-info';
+import { User } from 'src/app/models/user';
+import { CartService } from 'src/app/services/cart-service/cart.service';
+import { OrderService } from 'src/app/services/order-service/order.service';
+import { AccountService } from 'src/app/services/account-service/account.service';
+import { Order } from 'src/app/models/order';
+import { OrderItem } from 'src/app/models/order-item';
+import { Address } from 'src/app/models/address';
 
 @Component({
   selector: 'app-shipping-form',

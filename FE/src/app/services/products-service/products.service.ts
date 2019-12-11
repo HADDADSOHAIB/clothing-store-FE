@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Product } from '../../Models/product';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { BACK_END } from 'backend';
 import { take, switchMap } from 'rxjs/operators'
+import { Product } from 'src/app/models/product';
 
 
 @Injectable({

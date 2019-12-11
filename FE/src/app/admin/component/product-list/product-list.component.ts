@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from 'src/app/shared/services/products-service/products.service';
-import { Product } from 'src/app/shared/Models/product';
 import { take } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Product } from 'src/app/models/product';
+import { ProductsService } from 'src/app/services/products-service/products.service';
 
 @Component({
   selector: 'app-product-list',

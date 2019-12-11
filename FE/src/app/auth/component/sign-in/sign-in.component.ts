@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Credentials } from '../../../shared/Models/credentials';
 import { Router } from '@angular/router';
-import { AuthService } from '../../service/auth-service/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AccountService } from 'src/app/shared/services/account-service/account.service';
+import { AuthService } from 'src/app/services/auth-service/auth.service';
+import { AccountService } from 'src/app/services/account-service/account.service';
+import { Credentials } from 'src/app/models/credentials';
 
 @Component({
   selector: 'app-sign-in',

@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BACK_END } from 'backend';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { User } from '../../Models/user';
 import { take } from 'rxjs/operators';
-import { Token } from '../../Models/token';
-import { Address } from '../../Models/address';
-
+import { User } from 'src/app/models/user';
+import { Token } from 'src/app/models/token';
+import { Address } from 'src/app/models/address';
 
 @Injectable({
   providedIn: 'root'

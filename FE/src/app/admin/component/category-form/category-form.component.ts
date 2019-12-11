@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Category } from 'src/app/shared/Models/category';
-import { CategoryService } from '../../service/category-service/category.service';
 import { take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
+import { Category } from 'src/app/models/category';
+import { CategoryService } from 'src/app/services/category-service/category.service';
 
 
 

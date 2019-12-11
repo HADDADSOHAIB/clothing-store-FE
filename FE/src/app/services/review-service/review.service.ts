@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { ProductReview } from 'src/app/shared/Models/product-review';
 import { BACK_END } from 'backend';
 import { Observable, of } from 'rxjs';
-import { User } from '../../Models/user';
+import { ProductReview } from 'src/app/models/product-review';
 
 @Injectable({
   providedIn: 'root'

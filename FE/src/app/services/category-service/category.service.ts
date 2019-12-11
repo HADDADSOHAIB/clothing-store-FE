@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Category } from 'src/app/shared/Models/category';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BACK_END } from 'backend';
+import { Category } from 'src/app/models/category';
 
 @Injectable({
   providedIn: 'root'

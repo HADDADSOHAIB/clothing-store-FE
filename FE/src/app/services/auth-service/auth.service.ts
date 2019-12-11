@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Credentials } from '../../../shared/Models/credentials';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Email } from '../../../shared/Models/email';
-import { Token } from '../../../shared/Models/token';
 import { BACK_END } from 'backend';
+import { Credentials } from 'src/app/models/credentials';
+import { Token } from 'src/app/models/token';
 
 @Injectable({
   providedIn: 'root'

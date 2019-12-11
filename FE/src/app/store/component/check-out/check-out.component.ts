@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CartService } from '../../service/cart-service/cart.service';
 import { Router } from '@angular/router';
-import { Cart } from 'src/app/shared/Models/cart';
 import { take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Cart } from 'src/app/models/cart';
+import { CartService } from 'src/app/services/cart-service/cart.service';
 
 @Component({
   selector: 'app-check-out',

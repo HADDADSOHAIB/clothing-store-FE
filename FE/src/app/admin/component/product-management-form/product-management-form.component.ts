@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from 'src/app/shared/services/products-service/products.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { Product } from 'src/app/shared/Models/product';
-import { Category } from 'src/app/shared/Models/category';
-import { CategoryService } from '../../service/category-service/category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Product } from 'src/app/models/product';
+import { Category } from 'src/app/models/category';
+import { ProductsService } from 'src/app/services/products-service/products.service';
+import { CategoryService } from 'src/app/services/category-service/category.service';
 
 @Component({
   selector: 'app-product-management-form',

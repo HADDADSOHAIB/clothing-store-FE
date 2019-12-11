@@ -1,12 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Category } from '../../Models/category';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ProductsService } from '../../services/products-service/products.service';
-import { CartService } from 'src/app/store/service/cart-service/cart.service';
-import { AccountService } from '../../services/account-service/account.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
-import { CategoryService } from 'src/app/admin/service/category-service/category.service';
+import { Category } from 'src/app/models/category';
+import { ProductsService } from 'src/app/services/products-service/products.service';
+import { CategoryService } from 'src/app/services/category-service/category.service';
 
 @Component({
   selector: 'filter-and-sort',

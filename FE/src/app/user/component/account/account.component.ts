@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/shared/Models/user';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Address } from 'src/app/shared/Models/address';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AccountService } from 'src/app/shared/services/account-service/account.service';
 import { take } from 'rxjs/operators';
+import { User } from 'src/app/models/user';
+import { AccountService } from 'src/app/services/account-service/account.service';
+import { Address } from 'src/app/models/address';
 
 @Component({
   selector: 'app-account',
