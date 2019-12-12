@@ -14,13 +14,13 @@
                     <span class="nav-caption">Store</span>
                 </a>
             </li>
-            <li>
+            <li *ngIf="currentUserRoles.includes('user')">
                 <a routerLink="/user/account" fxLayout="column" fxLayoutAlign="start center">
                     <mat-icon aria-hidden="false">face</mat-icon>
                     <span class="nav-caption">My account</span>
                 </a>
             </li>
-            <li>
+            <li *ngIf="currentUserRoles.includes('admin')">
                 <a routerLink="/admin" fxLayout="column" fxLayoutAlign="start center">
                     <mat-icon>supervisor_account</mat-icon>
                     <span class="nav-caption">Manage Store</span>

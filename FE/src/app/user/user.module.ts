@@ -20,7 +20,7 @@ import { MyReviewsComponent } from './component/my-reviews/my-reviews.component'
   imports: [
     CommonModule,
     UserRoutingModule,
-    SharedModule,
+    SharedModule.forRoot(),
     FormsModule,
     ReactiveFormsModule
   ]

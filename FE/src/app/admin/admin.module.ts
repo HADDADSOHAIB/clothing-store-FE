@@ -29,7 +29,7 @@ import { UserListComponent } from './component/user-list/user-list.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-    SharedModule
+    SharedModule.forRoot()
   ],
   providers:[
   ]

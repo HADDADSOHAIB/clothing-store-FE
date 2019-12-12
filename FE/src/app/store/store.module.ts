@@ -30,7 +30,7 @@ import { MatDialogModule } from '@angular/material/dialog';
   ],
   imports: [
     StoreRoutingModule,
-    SharedModule,
+    SharedModule.forRoot(),
     MatDialogModule
     ],
   entryComponents:[

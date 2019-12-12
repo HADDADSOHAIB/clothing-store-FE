@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { SharedRoutingModule } from './shared-routing.module';
 
 import { MatChipsModule } from '@angular/material/chips';
@@ -18,7 +18,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { PaginatorComponent } from './Component/paginator/paginator.component';
 import { HeaderComponent } from './Component/header/header.component';
@@ -31,6 +31,7 @@ import { FilterAndSortComponent } from './Component/filter-and-sort/filter-and-s
 import { OrderStatusComponent } from './Component/order-status/order-status.component';
 import { OrderInfosComponent } from './Component/order-infos/order-infos.component';
 import { RatingBarComponent } from './Component/rating-bar/rating-bar.component';
+import { AuthInterceptor } from './interceptors/http.interceptor';
 
 @NgModule({
   declarations:[
@@ -116,5 +117,18 @@ import { RatingBarComponent } from './Component/rating-bar/rating-bar.component'
   ]
 })
 export class SharedModule { 
+  static forRoot() : ModuleWithProviders {
+ 
+    return({
+        ngModule: SharedModule,
+        providers: [
+          {
+            provide:HTTP_INTERCEPTORS,
+            useClass:AuthInterceptor,
+            multi:true
+          }
+        ]
+    });
+  }
  
 }

@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { UserGuard } from './guards/user-guard/user.guard';
+import { AdminGuard } from './guards/admin-guard/admin.guard';
 
 
 const routes: Routes = [
@@ -13,11 +15,13 @@ const routes: Routes = [
   },
   {
     path: 'admin', 
-    loadChildren: './admin/admin.module#AdminModule'
+    loadChildren: './admin/admin.module#AdminModule',
+    canActivate:[AdminGuard]
   },
   {
     path: 'user', 
-    loadChildren: './user/user.module#UserModule'
+    loadChildren: './user/user.module#UserModule',
+    canActivate:[UserGuard]
   },
   {
     path: '**', 

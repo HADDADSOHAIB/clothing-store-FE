@@ -16,7 +16,7 @@ import { OrderService } from './services/order-service/order.service';
 import { ProductsService } from './services/products-service/products.service';
 import { ReviewService } from './services/review-service/review.service';
 import { RoleService } from './services/role-service/role.service';
-import { AuthInterceptor } from './interceptors/http.interceptor';
+import { AuthInterceptor } from './shared/interceptors/http.interceptor';
 
 @NgModule({
   declarations: [
@@ -24,7 +24,7 @@ import { AuthInterceptor } from './interceptors/http.interceptor';
   ],
   imports: [
     AppRoutingModule,
-    SharedModule,
+    SharedModule.forRoot(),
     BrowserModule,
     BrowserAnimationsModule
   ],
@@ -39,12 +39,7 @@ import { AuthInterceptor } from './interceptors/http.interceptor';
     HttpClient,
     CartService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {} },
-    {
-      provide:HTTP_INTERCEPTORS,
-      useClass:AuthInterceptor,
-      multi:true
-    }
+    { provide: MatDialogRef, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })

@@ -10,6 +10,7 @@ import { AccountService } from 'src/app/services/account-service/account.service
 export class HeaderComponent implements OnInit {
 
   currentUser:User;
+  currentUserRoles: String[]=[];
 
   constructor(private accountService: AccountService) { }
 
@@ -17,6 +18,7 @@ export class HeaderComponent implements OnInit {
     this.accountService.loadCurrentUser();
     this.accountService.getCurrentUser().subscribe(user=>{
       this.currentUser=user;
+      this.currentUserRoles=this.currentUser.roles.map(role=>role.name);
     });
   }
 
