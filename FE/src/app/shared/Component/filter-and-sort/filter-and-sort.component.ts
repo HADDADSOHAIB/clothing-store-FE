@@ -154,7 +154,6 @@ export class FilterAndSortComponent implements OnInit {
     });
   }
 
-
   toggleSearch(){
     this.showSearch=!this.showSearch;
   }

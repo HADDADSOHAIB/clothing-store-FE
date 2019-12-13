@@ -1,4 +1,25 @@
 <div class="main">
+    <div style="margin-left: 10px;" *ngIf="isFiltersSet">
+        <mat-chip-list #chipList fxLayout="row" fxLayoutAlign="start center">
+            <div *ngIf="filterAndSortOptions.categoryList.length!=0">
+                <mat-chip [selectable]="selectable" [removable]="removable" (click)="clearCategory()"
+                    *ngFor="let categoryId of filterAndSortOptions.categoryList">
+                    {{findCategoryById(categoryId).categoryName}}
+                    <mat-icon matChipRemove (click)="clearFilterByPrice()">cancel</mat-icon>
+                </mat-chip>
+            </div>
+            <mat-chip [selectable]="selectable" [removable]="removable" (click)="clearFilterByPrice()"
+                *ngIf="filterAndSortOptions.prices[0]!=0 || filterAndSortOptions.prices[1]!=1000000">
+                MAD{{filterAndSortOptions.prices[0]}}--MAD{{filterAndSortOptions.prices[1] }}
+                <mat-icon matChipRemove (click)="clearFilterByPrice()">cancel</mat-icon>
+            </mat-chip>
+            <mat-chip [selectable]="selectable" [removable]="removable" (click)="clearSort()"
+                *ngIf="filterAndSortOptions.sort[0]!='productName' || filterAndSortOptions.sort[1]!='asc'">
+                Order by: {{filterAndSortOptions.sort[0]}} -- {{filterAndSortOptions.sort[1] }}
+                <mat-icon matChipRemove (click)="clearFilterByPrice()">cancel</mat-icon>
+            </mat-chip>
+        </mat-chip-list>
+    </div>
     <div class="product-list">
         <product-card *ngFor="let product of products" [product]="product" class="product">
         </product-card>

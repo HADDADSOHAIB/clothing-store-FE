@@ -19,7 +19,6 @@ export class ProductsService {
   searchQuery:string="";
   searchSubject:BehaviorSubject<string>=new BehaviorSubject("");
   
-  
   constructor(private httpClient:HttpClient) {
   }
 
