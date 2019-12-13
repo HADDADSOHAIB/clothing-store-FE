@@ -31,7 +31,8 @@
 <mat-selection-list (selectionChange)="filterCategory($event.option._value,$event.option._selected)"
     *ngIf="showFilters && showFilterByCategory">
     <mat-list-option *ngFor="let category of categoriesToShow" [value]="category.categoryId" 
-        checkboxPosition='before' [selected]="selectedCategory===category.categoryId" class="option">
+        checkboxPosition='before' [selected]="options.categoryList.includes(category.categoryId)" 
+        class="option">
         {{category.categoryName}}
     </mat-list-option>
 </mat-selection-list>
@@ -53,19 +54,19 @@
         <mat-form-field class="price-form" *ngIf="isFilterByPriceSet">
             <mat-chip-list #chipList>
                 <mat-chip [selectable]="selectable" [removable]="removable" (click)="clearFilterByPrice()">
-                    MAD{{priceStart}}--MAD{{priceEnd }}
+                    MAD{{options.prices[0]}}--MAD{{options.prices[1]}}
                     <mat-icon matChipRemove (click)="clearFilterByPrice()">cancel</mat-icon>
                 </mat-chip>
             </mat-chip-list>
         </mat-form-field>
         <mat-form-field appearance="outline" class="price-form">
             <mat-label>Lower limit</mat-label>
-            <input matInput placeholder="Lower limit" type="number" formControlName="lowerLimit" required>
+            <input matInput placeholder="Lower limit" type="number" formControlName="lowerLimit">
             <span matPrefix>MAD&nbsp;</span>
         </mat-form-field>
         <mat-form-field appearance="outline" class="price-form">
             <mat-label>Upper limit</mat-label>
-            <input matInput placeholder="Upper limit" type="number" formControlName="upperLimit" required>
+            <input matInput placeholder="Upper limit" type="number" formControlName="upperLimit">
             <span matPrefix>MAD&nbsp;</span>
         </mat-form-field>
     </form>
@@ -78,13 +79,23 @@
 </a>
 
 <mat-radio-group (change)="sortField($event.value)" fxLayout="column" fxLayoutAlign="start start" *ngIf="showSortBy">
-    <mat-radio-button value="productName" checked>Product Name</mat-radio-button>
-    <mat-radio-button value="price">Product Price</mat-radio-button>
-    <mat-radio-button value="rating">Product Rating</mat-radio-button>
+    <mat-radio-button value="productName" [checked]="options.sort[0]==='productName'">
+        Product Name
+    </mat-radio-button>
+    <mat-radio-button value="price" [checked]="options.sort[0]==='price'">
+        Product Price
+    </mat-radio-button>
+    <mat-radio-button value="rating" [checked]="options.sort[0]==='rating'">
+        Product Rating
+    </mat-radio-button>
 </mat-radio-group>
 <mat-radio-group (change)="sortDirection($event.value)" fxLayout="column" fxLayoutAlign="start start"
     *ngIf="showSortBy">
-    <mat-radio-button value="asc" checked>Ascending</mat-radio-button>
-    <mat-radio-button value="desc">Descending</mat-radio-button>
+    <mat-radio-button value="asc" [checked]="this.options.sort[1]==='asc'">
+        Ascending
+    </mat-radio-button>
+    <mat-radio-button value="desc" [checked]="this.options.sort[1]==='desc'">
+        Descending
+    </mat-radio-button>
 </mat-radio-group>
 </mat-nav-list>

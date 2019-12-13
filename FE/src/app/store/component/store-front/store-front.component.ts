@@ -5,6 +5,7 @@ import { ProductsService } from 'src/app/services/products-service/products.serv
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category-service/category.service';
+import { Options } from 'src/app/models/options';
 
 @Component({
   selector: 'app-store-front',
@@ -17,7 +18,7 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
   products:Product[]=[];
   itemsPerPage:number=10;
   currentPage: number=1;
-  filterAndSortOptions:{prices:number[],sort:string[],categoryList:number[]}={prices:[],sort:[],categoryList:[]};
+  filterAndSortOptions:Options=new Options([0,1000000],['productName','asc'],[]);
   categories:Category[]=[];
   isFiltersSet:boolean=false;
 
@@ -40,9 +41,10 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
         this.isFiltersSet=true;
       else
         this.isFiltersSet=false;
-
-      console.log(options);
     });
+
+    //when I filter or sort, this will push the page number to 1
+    this.productsService.resetPageNumber.subscribe(pageNumber=>this.currentPage=pageNumber);
   }
 
   changeItemsPerPage($event){
@@ -64,6 +66,13 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
   findCategoryById(id:number){
     return this.categories.find(category=>category.categoryId===id);
   }
+
+  clearCategory(categoryId:number){
+    let index=this.filterAndSortOptions.categoryList.indexOf(categoryId);
+    this.filterAndSortOptions.categoryList.splice(index,1);
+    this.productsService.optionSubject.next(this.filterAndSortOptions);
+  }
+
   ngOnDestroy(){
     
   }

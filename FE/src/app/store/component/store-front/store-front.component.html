@@ -2,7 +2,7 @@
     <div style="margin-left: 10px;" *ngIf="isFiltersSet">
         <mat-chip-list #chipList fxLayout="row" fxLayoutAlign="start center">
             <div *ngIf="filterAndSortOptions.categoryList.length!=0">
-                <mat-chip [selectable]="selectable" [removable]="removable" (click)="clearCategory()"
+                <mat-chip [selectable]="selectable" [removable]="removable" (click)="clearCategory(categoryId)"
                     *ngFor="let categoryId of filterAndSortOptions.categoryList">
                     {{findCategoryById(categoryId).categoryName}}
                     <mat-icon matChipRemove (click)="clearFilterByPrice()">cancel</mat-icon>

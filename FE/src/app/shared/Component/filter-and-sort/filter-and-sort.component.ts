@@ -1,10 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
 import { Category } from 'src/app/models/category';
 import { ProductsService } from 'src/app/services/products-service/products.service';
 import { CategoryService } from 'src/app/services/category-service/category.service';
+import { Options } from 'src/app/models/options';
 
 @Component({
   selector: 'filter-and-sort',
@@ -15,7 +16,6 @@ export class FilterAndSortComponent implements OnInit {
   @Input() selectedCategory:number=0;
 
   categories:Category[]=[];
-  categoriesToFilter:number[]=[];
   categoriesToShow:Category[]=[];
 
   showAllCategories=false;
@@ -25,32 +25,36 @@ export class FilterAndSortComponent implements OnInit {
   showSortBy=false;
   showSearch=true;
 
-  priceStart:number=0;
-  priceEnd:number=1000000;
+  
   isFilterByPriceSet:boolean=false;
-  priceFilterForm:FormGroup=new FormGroup({
-    lowerLimit: new FormControl(["",Validators.required]),
-    upperLimit: new FormControl(["",Validators.required]),
-  });
+  priceFilterForm:FormGroup;
 
-  sort:string[]=['productName','asc'];
   searchQuery:string="";
   selectedSearchQuery:string="";
   isQuerySearchSet=false;
-  
+
+  options:Options=new Options([0,1000000],['productName','asc'],[]);
+
   constructor(
     private productService:ProductsService,
     private categoryService: CategoryService,
-    private snackBar: MatSnackBar) { 
+    private snackBar: MatSnackBar,
+    private formBuilder: FormBuilder
+    ) { 
   }
 
   ngOnInit() {
+    this.priceFilterForm=this.formBuilder.group({
+      lowerLimit:[''],
+      upperLimit:['']
+    });
+
     this.categoryService.getCategories().pipe(take(1)).subscribe(categories=>{
       this.categories=categories;
       this.categoriesToShow=this.categories.slice(0,4);
       if(this.selectedCategory!==0){
         let category=this.categories.find(category=>category.categoryId===this.selectedCategory);
-        this.categoriesToFilter.push(category.categoryId);
+        this.options.categoryList.push(category.categoryId);
         this.updateFilterAndSortOptions();
         this.productService.loadAvailableProductCount();
         this.productService.loadProducts(10,0);
@@ -61,25 +65,29 @@ export class FilterAndSortComponent implements OnInit {
         this.categoriesToShow=this.categories;
       }
     });
+
+    this.productService.optionSubject.subscribe(options=>this.options=options);
   }
 
   filterCategory(id:number,selected:boolean){
     
     if(selected){
       let category=this.categories.find(category=>category.categoryId===id);
-      this.categoriesToFilter.push(category.categoryId);
+      this.options.categoryList.push(category.categoryId);
+
       this.updateFilterAndSortOptions();
       this.productService.loadAvailableProductCount();
       this.productService.loadProducts(10,0);
-
+      this.productService.resetPageNumber.next(1);
     }
     else{
-      let index=this.categoriesToFilter.findIndex(categoryId=>categoryId===id);
-      this.categoriesToFilter.splice(index,1);
-      if(this.categoriesToFilter.length===0){}
+      let index=this.options.categoryList.findIndex(categoryId=>categoryId===id);
+      this.options.categoryList.splice(index,1);
+      if(this.options.categoryList.length===0){}
       this.updateFilterAndSortOptions();
       this.productService.loadAvailableProductCount();
       this.productService.loadProducts(10,0);
+      this.productService.resetPageNumber.next(1);
     }
     
   }
@@ -106,54 +114,57 @@ export class FilterAndSortComponent implements OnInit {
 
   filterByPrice(){
     this.isFilterByPriceSet=true;
-    this.priceStart=parseInt(this.priceFilterForm.get('lowerLimit').value);
-    this.priceEnd=parseInt(this.priceFilterForm.get('upperLimit').value);
 
-    this.priceFilterForm.get('lowerLimit').setValue(" ");
-    this.priceFilterForm.get('upperLimit').setValue(" ");
+    
+    if(this.priceFilterForm.get('lowerLimit').value!=="")
+    this.options.prices[0]=parseInt(this.priceFilterForm.get('lowerLimit').value);
+    if(this.priceFilterForm.get('upperLimit').value!=="")
+    this.options.prices[1]=parseInt(this.priceFilterForm.get('upperLimit').value);
 
-    if(this.priceEnd<0 || this.priceStart<0){
+    if(this.options.prices[1]<0 || this.options.prices[0]<0){
       this.snackBar.open("The prices should not be less then 0", "OK",{duration:2000});
     }
-    else if(this.priceEnd<this.priceStart){
+    else if(this.options.prices[1]<this.options.prices[0]){
       this.snackBar.open("The lower limit should always be less then upper limit", "OK",{duration:2000});
     }
     else{
       this.updateFilterAndSortOptions();
       this.productService.loadProducts(10,0);
       this.productService.loadAvailableProductCount();
+      this.productService.resetPageNumber.next(1);
+      this.priceFilterForm.get('lowerLimit').setValue("");
+      this.priceFilterForm.get('upperLimit').setValue("");
     }
   }
   clearFilterByPrice(){
     this.isFilterByPriceSet=false;
-    this.priceStart=0;
-    this.priceEnd=1000000;
+    this.options.prices[0]=0;
+    this.options.prices[1]=1000000;
 
     this.updateFilterAndSortOptions();
     this.productService.loadProducts(10, 0);
     this.productService.loadAvailableProductCount();
+    this.productService.resetPageNumber.next(1);
   }
 
   sortField(sortField:string){
-    this.sort[0]=sortField;
+    this.options.sort[0]=sortField;
     this.updateFilterAndSortOptions();
     this.productService.loadProducts(10, 0);
     this.productService.loadAvailableProductCount();
+    this.productService.resetPageNumber.next(1);
   }
   sortDirection(sortDirection:string){
-    this.sort[1]=sortDirection;
+    this.options.sort[1]=sortDirection;
     this.updateFilterAndSortOptions();
     this.productService.loadProducts(10, 0);
     this.productService.loadAvailableProductCount();
+    this.productService.resetPageNumber.next(1);
   }
   private updateFilterAndSortOptions(){
-    this.productService.optionSubject.next({
-      prices:[this.priceStart,this.priceEnd],
-      sort:this.sort,
-      categoryList:this.categoriesToFilter
-    });
+    this.productService.optionSubject.next(this.options);
   }
-
+  
   toggleSearch(){
     this.showSearch=!this.showSearch;
   }
@@ -162,6 +173,7 @@ export class FilterAndSortComponent implements OnInit {
     this.productService.searchSubject.next(this.searchQuery);
     this.productService.loadAvailableProductCount();
     this.productService.loadProducts(10,0);
+    this.productService.resetPageNumber.next(1);
     this.selectedSearchQuery=this.searchQuery;
     this.isQuerySearchSet=true;
     this.searchQuery="";
@@ -172,6 +184,7 @@ export class FilterAndSortComponent implements OnInit {
     this.productService.searchSubject.next(this.searchQuery);
     this.productService.loadAvailableProductCount();
     this.productService.loadProducts(10,0);
+    this.productService.resetPageNumber.next(1);
   }
 
 }

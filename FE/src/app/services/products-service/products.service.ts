@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { BACK_END } from 'backend';
 import { take, switchMap } from 'rxjs/operators'
 import { Product } from 'src/app/models/product';
+import { Options } from 'src/app/models/options';
 
 
 @Injectable({
@@ -12,10 +13,9 @@ import { Product } from 'src/app/models/product';
 export class ProductsService {
   productSubjects:BehaviorSubject<Product[]>=new BehaviorSubject([]);
   productCountSubject:BehaviorSubject<number>=new BehaviorSubject(0);
-
-  optionSubject:BehaviorSubject<{prices:number[],sort:string[],categoryList:number[]}>
-  =new BehaviorSubject({ prices:[0,1000000],sort:['productName','asc'],categoryList:[]});
-  
+  //when I filter the product, I will this subject to push the page to 1
+  resetPageNumber:BehaviorSubject<number>=new BehaviorSubject(1);
+  optionSubject:BehaviorSubject<Options> =new BehaviorSubject(new Options([0,1000000],['productName','asc'],[]));
   searchQuery:string="";
   searchSubject:BehaviorSubject<string>=new BehaviorSubject("");
   
