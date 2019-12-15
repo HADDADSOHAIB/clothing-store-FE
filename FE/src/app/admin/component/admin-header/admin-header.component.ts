@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SidenavService } from 'src/app/services/sidenav-service/sidenav.service';
 
 @Component({
   selector: 'admin-header',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminHeaderComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private sidenavService:SidenavService
+  ) { }
 
   ngOnInit() {
   }
 
+  closeSidenave(){
+    this.sidenavService.showSidenave.next(false);
+  }
 }

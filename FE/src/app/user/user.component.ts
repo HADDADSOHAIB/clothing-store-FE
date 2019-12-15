@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SidenavService } from '../services/sidenav-service/sidenav.service';
 
 @Component({
   selector: 'app-user',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserComponent implements OnInit {
 
-  constructor() { }
+  showSidenav:boolean=true;
+
+  constructor(
+    private sidenavService: SidenavService
+  ) { }
 
   ngOnInit() {
+    this.sidenavService.showSidenave.subscribe(bool=>this.showSidenav=bool);
   }
 
 }

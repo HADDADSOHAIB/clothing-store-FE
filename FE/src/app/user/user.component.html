@@ -1,9 +1,9 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav opened="true" mode="side">
-        <user-header></user-header> 
+    <mat-sidenav #sidenav [opened]="showSidenav" mode="side">
+        <user-navbar></user-navbar> 
     </mat-sidenav>
     <mat-sidenav-content>
-        <div style="height: 88vh;">
+        <div style="height: 86vh;">
             <router-outlet></router-outlet>
         </div>
     </mat-sidenav-content>
