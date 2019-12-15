@@ -71,6 +71,25 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
     let index=this.filterAndSortOptions.categoryList.indexOf(categoryId);
     this.filterAndSortOptions.categoryList.splice(index,1);
     this.productsService.optionSubject.next(this.filterAndSortOptions);
+    this.productsService.loadAvailableProductCount();
+    this.productsService.loadProducts(10,0);
+    this.productsService.resetPageNumber.next(1);
+  }
+
+  clearSort(){
+    this.filterAndSortOptions.sort=['productName','asc'];
+    this.productsService.optionSubject.next(this.filterAndSortOptions);
+    this.productsService.loadAvailableProductCount();
+    this.productsService.loadProducts(10,0);
+    this.productsService.resetPageNumber.next(1);
+  }
+
+  clearFilterByPrice(){
+    this.filterAndSortOptions.prices=[0,1000000];
+    this.productsService.optionSubject.next(this.filterAndSortOptions);
+    this.productsService.loadAvailableProductCount();
+    this.productsService.loadProducts(10,0);
+    this.productsService.resetPageNumber.next(1);
   }
 
   ngOnDestroy(){

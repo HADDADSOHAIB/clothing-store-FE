@@ -5,7 +5,7 @@
                 <mat-chip [selectable]="selectable" [removable]="removable" (click)="clearCategory(categoryId)"
                     *ngFor="let categoryId of filterAndSortOptions.categoryList">
                     {{findCategoryById(categoryId).categoryName}}
-                    <mat-icon matChipRemove (click)="clearFilterByPrice()">cancel</mat-icon>
+                    <mat-icon matChipRemove (click)="clearCategory(categoryId)">cancel</mat-icon>
                 </mat-chip>
             </div>
             <mat-chip [selectable]="selectable" [removable]="removable" (click)="clearFilterByPrice()"
@@ -16,7 +16,7 @@
             <mat-chip [selectable]="selectable" [removable]="removable" (click)="clearSort()"
                 *ngIf="filterAndSortOptions.sort[0]!='productName' || filterAndSortOptions.sort[1]!='asc'">
                 Order by: {{filterAndSortOptions.sort[0]}} -- {{filterAndSortOptions.sort[1] }}
-                <mat-icon matChipRemove (click)="clearFilterByPrice()">cancel</mat-icon>
+                <mat-icon matChipRemove (click)="clearSort()">cancel</mat-icon>
             </mat-chip>
         </mat-chip-list>
     </div>
