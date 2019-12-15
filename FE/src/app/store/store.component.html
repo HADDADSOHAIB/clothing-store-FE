@@ -1,6 +1,6 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav opened="true" mode="side">
-        <store-header></store-header>
+    <mat-sidenav [opened]="showSidenav" mode="side">
+        <store-navbar></store-navbar>
     </mat-sidenav>
     <mat-sidenav-content>
         <div style="height: 86vh;">

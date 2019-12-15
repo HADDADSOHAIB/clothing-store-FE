@@ -18,7 +18,7 @@ const routes: Routes = [
     children:[
       {
         path:"",
-        component:ManageStoreComponent
+        component:ProductListComponent
       },
       {
         path:"categories",

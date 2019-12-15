@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SidenavService } from '../services/sidenav-service/sidenav.service';
 
 @Component({
   selector: 'app-store',
@@ -6,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./store.component.scss']
 })
 export class StoreComponent implements OnInit {
-  constructor() { }
+
+  showSidenav:boolean=true;
+
+  constructor(
+    private sidenavService: SidenavService
+  ) { }
 
   ngOnInit() {
+    this.sidenavService.showSidenave.subscribe(bool=>this.showSidenav=bool);
   }
 
 }

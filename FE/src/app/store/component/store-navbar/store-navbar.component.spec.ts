@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StoreHeaderComponent } from './store-header.component';
+import { StoreHeaderComponent } from './store-navbar.component';
 
 xdescribe('StoreHeaderComponent', () => {
   let component: StoreHeaderComponent;

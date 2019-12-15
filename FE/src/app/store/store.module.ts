@@ -4,7 +4,7 @@ import { StoreFrontComponent } from './component/store-front/store-front.compone
 
 import { ProductCardComponent } from './component/product-card/product-card.component';
 
-import { StoreHeaderComponent } from './component/store-header/store-header.component';
+import { StoreHeaderComponent } from './component/store-navbar/store-navbar.component';
 import { StoreComponent } from './store.component';
 import { ProductFormComponent } from './component/product-form/product-form.component';
 import { CheckOutComponent } from './component/check-out/check-out.component';

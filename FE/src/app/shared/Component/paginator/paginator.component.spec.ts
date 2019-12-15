@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreFrontComponent } from 'src/app/store/component/store-front/store-front.component';
 import { ProductCardComponent } from 'src/app/store/component/product-card/product-card.component';
-import { StoreHeaderComponent } from 'src/app/store/component/store-header/store-header.component';
+import { StoreHeaderComponent } from 'src/app/store/component/store-navbar/store-navbar.component';
 import { StoreComponent } from 'src/app/store/store.component';
 import { ProductFormComponent } from 'src/app/store/component/product-form/product-form.component';
 import { CheckOutComponent } from 'src/app/store/component/check-out/check-out.component';

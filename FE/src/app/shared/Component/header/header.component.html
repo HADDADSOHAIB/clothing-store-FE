@@ -1,6 +1,11 @@
 <mat-toolbar color="primary">
     <div>
-        <ul fxLayout fxLayoutGap="30px" class="navigation-items">
+        <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+            <li class="home">
+                <a>
+                    <mat-icon class="menu" (click)="toggleSidenav()">menu</mat-icon>
+                </a>
+            </li>
             <li class="home">
                 <a routerLink="/store">
                     <mat-icon aria-hidden="false">shopping_basket</mat-icon>

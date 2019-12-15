@@ -17,6 +17,7 @@ import { ProductsService } from './services/products-service/products.service';
 import { ReviewService } from './services/review-service/review.service';
 import { RoleService } from './services/role-service/role.service';
 import { AuthInterceptor } from './shared/interceptors/http.interceptor';
+import { SidenavService } from './services/sidenav-service/sidenav.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { AuthInterceptor } from './shared/interceptors/http.interceptor';
     HttpClient,
     CartService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {} }
+    { provide: MatDialogRef, useValue: {} },
+    SidenavService
   ],
   bootstrap: [AppComponent]
 })

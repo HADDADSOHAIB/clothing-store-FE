@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { AccountService } from 'src/app/services/account-service/account.service';
+import { SidenavService } from 'src/app/services/sidenav-service/sidenav.service';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'header',
@@ -12,7 +14,10 @@ export class HeaderComponent implements OnInit {
   currentUser:User;
   currentUserRoles: String[]=[];
 
-  constructor(private accountService: AccountService) { }
+  constructor(
+    private accountService: AccountService,
+    private sidenavService: SidenavService
+    ) { }
 
   ngOnInit() {
     this.accountService.loadCurrentUser();
@@ -25,5 +30,10 @@ export class HeaderComponent implements OnInit {
   logout(){
     localStorage.removeItem("token");
     this.accountService.loadCurrentUser();
+  }
+
+  toggleSidenav(){
+    this.sidenavService.showSidenave.pipe(take(1)).subscribe(bool=>
+      this.sidenavService.showSidenave.next(!bool));
   }
 }
