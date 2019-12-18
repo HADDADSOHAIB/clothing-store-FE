@@ -50,7 +50,7 @@
     </a>
     <div fxLayout="column" fxLayoutAlign="start center" *ngIf="showFilters && showFilterByPrice">
         <form [formGroup]="priceFilterForm" class="price-form">
-            <mat-form-field class="price-form" *ngIf="isFilterByPriceSet">
+            <mat-form-field class="price-form" *ngIf="isFilterByPriceSet && (filterAndSortOptions.prices[0]!=0 || filterAndSortOptions.prices[1]!=1000000)">
                 <mat-chip-list #chipList>
                     <mat-chip [selectable]="selectable" [removable]="removable" (click)="clearFilterByPrice()">
                         MAD{{options.prices[0]}}--MAD{{options.prices[1]}}

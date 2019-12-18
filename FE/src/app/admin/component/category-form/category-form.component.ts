@@ -16,11 +16,9 @@ import { CategoryService } from 'src/app/services/category-service/category.serv
 export class CategoryFormComponent implements OnInit {
   displayedColumns: string[] = ['Category', 'Products N°','Options'];
   newCategoryForm:FormGroup;
-  manageCategoryForm:FormGroup;
-
-
-  categories:Category[]=[];
-  productsNumber:Map<number,number>=new Map<number,number>();
+  updateOrDeleteCategoryForm:FormGroup;
+  allCategories:Category[]=[];
+  productCountByCategory:Map<number,number>=new Map<number,number>();
 
   constructor(
     private formeBuilder:FormBuilder,
@@ -32,7 +30,7 @@ export class CategoryFormComponent implements OnInit {
     this.newCategoryForm=this.formeBuilder.group({
       category:['']
     });
-    this.manageCategoryForm=this.formeBuilder.group({
+    this.updateOrDeleteCategoryForm=this.formeBuilder.group({
       categoryId:[''],
       categoryName:['']
     });
@@ -40,71 +38,47 @@ export class CategoryFormComponent implements OnInit {
   }
 
   private async loadCategories() {
-    this.categories = await this.categoryService.getCategories().toPromise();
-    this.categories.forEach(async category=>{
+    this.allCategories = await this.categoryService.getCategories().toPromise();
+    this.allCategories.forEach(async category=>{
       let productsNumber=await this.categoryService.getProductsNumberOfCategory(category.categoryId).toPromise();
-      this.productsNumber.set(category.categoryId,productsNumber);
+      this.productCountByCategory.set(category.categoryId,productsNumber);
     });
   }
 
   create(){
-    let name=this.newCategoryForm.get('category').value as string;
-    if (!name.trim())
-      this.snackBar.open("Entre a valid name", 'Ok', {
-        duration: 2000,
-      });
+    let name=this.newCategoryForm.get('category').value;
+    if (!name.trim()) 
+      this.snackBar.open("Entre a valid name", 'Ok',{duration: 2000,});
     else {
       let category = new Category(0, name);
       this.categoryService.addCategory(category).pipe(take(1)).subscribe(category => {
         this.newCategoryForm.get('category').setValue('');
-        this.snackBar.open("category: " + category.categoryName + " is added successfully", 'Ok', {
-          duration: 2000,
-        });
+        this.snackBar.open("category: " + category.categoryName + " is added successfully", 'Ok',
+          {duration: 2000});
         this.loadCategories();
-      }, error => {
-        this.snackBar.open("Error server down try later again", 'Ok', {
-          duration: 2000,
-        });
-      });
+      }, error =>this.snackBar.open("Error server down try later again", 'Ok', {duration: 2000}));
     }
   }
   delete(){
-    let id=parseInt(this.manageCategoryForm.get('categoryId').value);
+    let id=parseInt(this.updateOrDeleteCategoryForm.get('categoryId').value);
     this.categoryService.deleteCategory(id).pipe(take(1)).subscribe(resp=>{
-      this.snackBar.open("deleted successfully", 'Ok', {
-        duration: 2000,
-      });
+      this.snackBar.open("deleted successfully", 'Ok', {duration: 2000});
       this.loadCategories();
-    },error=>{
-      this.snackBar.open("error try later again", 'Ok', {
-        duration: 2000,
-      });
-    });
+    },error=>this.snackBar.open("error try later again", 'Ok', {duration: 2000}));
   }
   update(){
-    let id=parseInt(this.manageCategoryForm.get('categoryId').value);
-    let name=this.manageCategoryForm.get('categoryName').value as string;
-    if(!id){
-      this.snackBar.open("select a category", 'Ok', {
-        duration: 2000,
-      });
-    }
+    let id=parseInt(this.updateOrDeleteCategoryForm.get('categoryId').value);
+    let name=this.updateOrDeleteCategoryForm.get('categoryName').value as string;
+    if(!id) 
+      this.snackBar.open("select a category", 'Ok', {duration: 2000});
     else if(!name.trim())
-      this.snackBar.open("Entre a valid name", 'Ok', {
-        duration: 2000,
-      });
+      this.snackBar.open("Entre a valid name", 'Ok', {duration: 2000});
     else{
       this.categoryService.updateCategory(new Category(id,name)).pipe(take(1)).subscribe(category=>{
-        this.snackBar.open("Category: "+category.categoryName+" is updated", 'Ok', {
-          duration: 2000,
-        });
+        this.snackBar.open("Category: "+category.categoryName+" is updated", 'Ok', {duration: 2000});
         this.loadCategories();
-        this.manageCategoryForm.get('categoryName').setValue('');
-      }, error => {
-        this.snackBar.open("error try later again", 'Ok', {
-          duration: 2000,
-        });
-      });
+        this.updateOrDeleteCategoryForm.get('categoryName').setValue('');
+      }, error => this.snackBar.open("error try later again", 'Ok', {duration: 2000}));
     }
   }
 }

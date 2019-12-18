@@ -28,14 +28,17 @@ export class ProductsService {
 
   async loadAvailableProductCount() {
     this.searchSubject.pipe(take(1)).subscribe(searchQuery=>{
-      this.searchQuery=searchQuery;
       this.optionSubject.pipe(take(1)).subscribe(options=>{
+
+        this.searchQuery=searchQuery;
         let requestPrice=options.prices.join(",");
+
         if(options.categoryList.length!==0){
         let request=options.categoryList.join(",");
+
         (this.httpClient.get(BACK_END+"productscount?categories="+request+"&&prices="+requestPrice+
-        "&&search="+this.searchQuery) as Observable<number>).pipe(take(1))
-        .subscribe(count=>this.productCountSubject.next(count));
+        "&&search="+this.searchQuery) as Observable<number>).pipe(take(1)).subscribe(count=>
+          this.productCountSubject.next(count));
         }
         else
         (this.httpClient.get(BACK_END+"productscount?"+"prices="+requestPrice+"&&search="+
@@ -47,35 +50,26 @@ export class ProductsService {
 
   loadProducts(itemsPerPage: number,pageNumber: number) {
     this.searchSubject.pipe(take(1)).subscribe(searchQuery=>{
-      this.searchQuery=searchQuery;
       this.optionSubject.pipe(take(1)).subscribe(options=>{
+
+        this.searchQuery=searchQuery;
         let requestPrice=options.prices.join(",");
-        if(options.categoryList.length!==0 && options.sort.length!==0){
+        let requestSort=options.sort.join(",");
+
+        if(options.categoryList.length!==0){
           let requestCategory=options.categoryList.join(",");
-          let requestSort=options.sort.join(",");
+
           (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="
             +itemsPerPage+"&&categories="+requestCategory+"&&sort="+requestSort+"&&prices="
             +requestPrice+"&&search="+this.searchQuery) as Observable<Product[]>)
             .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
         }
-        else if(options.sort.length!==0 && options.categoryList.length===0){
-          let requestSort=options.sort.join(",");
+        else{
           (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="
             +itemsPerPage+"&&sort="+requestSort+"&&prices="+requestPrice+"&&search="+
             this.searchQuery) as Observable<Product[]>).pipe(take(1))
             .subscribe(productList=>this.productSubjects.next(productList));
         }
-        else if(options.categoryList.length!==0 && options.sort.length===0){
-          let requestCategory=options.categoryList.join(",");
-          (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="
-            +itemsPerPage+"&&categories="+requestCategory+"&&prices="+requestPrice+
-            "&&search="+this.searchQuery) as Observable<Product[]>).pipe(take(1))
-            .subscribe(productList=>this.productSubjects.next(productList));
-        }
-        else
-        (this.httpClient.get(BACK_END+"productspaged?page="+pageNumber+"&&size="+itemsPerPage
-          +"&&prices="+requestPrice+"&&search="+this.searchQuery) as Observable<Product[]>)
-          .pipe(take(1)).subscribe(productList=>this.productSubjects.next(productList));
       });
     });
     
