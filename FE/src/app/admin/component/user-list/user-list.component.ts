@@ -15,8 +15,9 @@ import { AccountService } from 'src/app/services/account-service/account.service
 })
 export class UserListComponent implements OnInit {
  
-  userList:{userId:number, userEmail:String, roles:String}[]=[];
-  displayedColumns: string[] = ['UserEmail', 'Roles','Options'];
+  userList:User[]=[];
+
+  displayedColumns: string[] = ['First Name','Last Name','Phone Number','UserEmail', 'Roles','Options'];
   constructor(
     private snackBar:MatSnackBar,
     private accountService:AccountService,
@@ -25,21 +26,21 @@ export class UserListComponent implements OnInit {
 
   ngOnInit() {
     this.accountService.getAllUsers().pipe(take(1)).subscribe(users=>{
-      this.userList=[];
-      users.forEach(user=>this.userList.push({userId:user.id,userEmail:user.userEmail,
-        roles:user.roles.map(role=>role.name).join(", ")}));
+      this.userList=users;
+      console.log(users);
     });
   }
 
   upgradeToAdmin(userEmail:String){
     this.roleService.upgradeUser(userEmail).pipe(take(1)).subscribe(response=>{
-      console.log(response);
       this.accountService.getAllUsers().pipe(take(1)).subscribe(users=>{
-        this.userList=[];
-        users.forEach(user=>this.userList.push({userId:user.id,userEmail:user.userEmail,
-          roles:user.roles.map(role=>role.name).join(", ")}));
+        this.userList=users;
       });
     },
     error=>console.log(error));
+  }
+
+  getRoles(id:number){
+    return this.userList.find(user=>user.id===id).roles.map(role=>role.name).join(", ");
   }
 }
