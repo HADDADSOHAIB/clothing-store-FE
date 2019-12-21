@@ -18,6 +18,7 @@ import { ReviewService } from './services/review-service/review.service';
 import { RoleService } from './services/role-service/role.service';
 import { AuthInterceptor } from './shared/interceptors/http.interceptor';
 import { SidenavService } from './services/sidenav-service/sidenav.service';
+import { UploadFilesService } from './services/upload-files-service/upload-files.service';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SidenavService } from './services/sidenav-service/sidenav.service';
     CartService,
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
-    SidenavService
+    SidenavService,
+    UploadFilesService
   ],
   bootstrap: [AppComponent]
 })

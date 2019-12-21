@@ -12,6 +12,7 @@ import { OrdersListComponent } from './component/orders-list/orders-list.compone
 import { CategoryFormComponent } from './component/category-form/category-form.component';
 import { TitleDescriptionPipe } from './pipes/title-description.pipe';
 import { UserListComponent } from './component/user-list/user-list.component';
+import { DragDropDirective } from './directives/drag-drop.directive';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { UserListComponent } from './component/user-list/user-list.component';
     OrdersListComponent,
     CategoryFormComponent,
     TitleDescriptionPipe,
-    UserListComponent
+    UserListComponent,
+    DragDropDirective
   ],
   imports: [
     CommonModule,

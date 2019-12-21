@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="center stretch">
+<div fxLayout="row" fxLayoutAlign="center stretch" class="main">
     <mat-card class="form-card" fxLayout="column" fxLayoutAlign="space-around centre">
         <mat-card-header class="form-card">
             <mat-card-title>Product Details</mat-card-title>
@@ -46,6 +46,20 @@
                 <mat-form-field class="form-card">
                     <input matInput placeholder="Image url" formControlName="image" (keyup)="updateProduct()">
                 </mat-form-field>
+
+                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+                    <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+                    <p>Drag and drop an image</p>
+                </div>
+                <div class="files-list" *ngFor="let file of files;let i= index">
+                    <p> {{ file }} </p>
+                    <button class="delete-file" (click)="deleteAttachment(i)">
+                        <mat-icon>clear</mat-icon>
+                    </button>
+                </div>
+
+
+
             </form>
         </mat-card-content>
         <div>
