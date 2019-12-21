@@ -8,7 +8,7 @@ export class Product{
     price: number;
     categories: Category[]=[];
     rating:number=2.5;
-    image:string;
+    images:String[];
     reviews: ProductReview[]=[];
     quantity: number;
     
@@ -16,7 +16,7 @@ export class Product{
         this.productId=0;
         this.productName="";
         this.description="";
-        this.image="";
+        this.images=[];
         this.price=0;
         this.rating=0;
         this.quantity=0;

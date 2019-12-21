@@ -6,6 +6,7 @@ import { CartService } from 'src/app/services/cart-service/cart.service';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category-service/category.service';
 import { Options } from 'src/app/models/options';
+import { UploadFilesService } from 'src/app/services/upload-files-service/upload-files.service';
 
 @Component({
   selector: 'app-store-front',
@@ -25,7 +26,8 @@ export class StoreFrontComponent implements OnInit, OnDestroy {
   constructor(
     private productsService: ProductsService,
     private cartService: CartService,
-    private categoryService:CategoryService
+    private categoryService:CategoryService,
+    private fileService:UploadFilesService
     ) { }
 
   ngOnInit() {
