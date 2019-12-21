@@ -43,16 +43,17 @@
                     </mat-chip-list>
                 </mat-form-field>
 
-                <mat-form-field class="form-card">
+                <!-- <mat-form-field class="form-card">
                     <input matInput placeholder="Image url" formControlName="image" (keyup)="updateProduct()">
-                </mat-form-field>
+                </mat-form-field> -->
 
-                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
-                    <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)"
+                >
+                    <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)" >
                     <p>Drag and drop an image</p>
                 </div>
-                <div class="files-list" *ngFor="let file of files;let i= index">
-                    <p> {{ file }} </p>
+                <div class="files-list" *ngFor="let file of files;index as i">
+                    <p> {{ file.name }} </p>
                     <button class="delete-file" (click)="deleteAttachment(i)">
                         <mat-icon>clear</mat-icon>
                     </button>

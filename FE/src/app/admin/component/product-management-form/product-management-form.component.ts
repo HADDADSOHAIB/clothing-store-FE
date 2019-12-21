@@ -83,10 +83,22 @@ export class ProductManagementFormComponent implements OnInit {
   }
 
   save(){
-    for(let file of this.files) {
-      this.formData.append("files", file);
-  }
-    this.uploadFileService.uploadFiles(this.formData).subscribe(resp=>console.log(resp),error=>console.log(error));
+    this.uploadFileService.uploadFiles(this.formData).subscribe(resp=>{
+      console.log(resp);
+    //   if(this.id===0)
+    // this.productService.addProduct(this.product).pipe(take(1)).subscribe(product=>{
+    //   this.snackBar.open("saved succesfully", 'OK', {
+    //     duration: 2000,
+    //   });
+    //   this.product=new Product();
+    //   this.updateForm();
+    // },error=>{
+    //   this.snackBar.open("error try later", 'OK', {
+    //     duration: 2000,
+    //   });
+    // });
+
+    },error=>console.log(error));
 
     // if(this.id===0)
     // this.productService.addProduct(this.product).pipe(take(1)).subscribe(product=>{
@@ -134,13 +146,16 @@ export class ProductManagementFormComponent implements OnInit {
   //file upload
 
   uploadFile(event) {
-    for (let index = 0; index < event.length; index++) {
-      const element = event[index];
-      this.files.push(element)
-    }  
+    console.log(event);
+    for(let file of event){
+    this.files.push(file);
+    }
+    this.formData = new FormData();
+    for(let file of this.files)
+    this.formData.append("files", file);
+    console.log(this.formData.get("files"));
   }
-  deleteAttachment(index) {
-    this.files.splice(index, 1)
+  deleteAttachment(i:number) {
+    this.files.splice(i,1);
   }
-
 }

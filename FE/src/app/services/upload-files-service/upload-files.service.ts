@@ -12,7 +12,6 @@ export class UploadFilesService {
   ) { }
 
   uploadFiles(formData:FormData){
-
-    return this.httpClient.post(BACK_END+"images/uploadFile",formData);
+    return this.httpClient.post(BACK_END+"images/uploadMultipleFiles",formData);
   }
 }
