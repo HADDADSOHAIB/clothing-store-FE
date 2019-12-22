@@ -64,8 +64,19 @@ export class ProductListComponent implements OnInit {
   delete(id: number){
     this.productService.deleteProduct(id).pipe(take(1)).subscribe(response=>{
       this.snackBar.open("deleted succesfully", 'OK', {duration: 2000});
-      this.productService.loadProducts(this.itemsPerPage,0);
-      this.productService.resetPageNumber.next(1);
+      if(this.availableProductCount===1){
+        this.router.navigate(["admin","product","new"]);
+      }
+      else if(this.currentPage===Math.trunc(this.availableProductCount/this.itemsPerPage)+1 && this.availableProductCount%this.itemsPerPage===1){
+        this.currentPage=this.currentPage-1;
+        this.productService.resetPageNumber.next(this.currentPage);
+        this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
+        this.productService.loadAvailableProductCount();
+      }
+      else{
+        this.productService.loadProducts(this.itemsPerPage,this.currentPage-1);
+        this.productService.loadAvailableProductCount();
+      }
     },error=>this.snackBar.open("error", 'OK', {duration: 2000}));
   }
 

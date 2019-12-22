@@ -37,10 +37,10 @@
   margin-top: 0px;
   margin-bottom: 0px;
   height: 250px;
+  box-sizing: border-box;
 }
-.first{
+.mat-card-image:first-child {
   margin-top: 0px;
-  margin-left: 0px;
 }
 mat-card.card-actions{
   margin-bottom:10px;
