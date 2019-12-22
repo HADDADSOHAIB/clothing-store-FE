@@ -1,6 +1,6 @@
 mat-card.form-card{
     width:400px;
-    margin: 7px;
+    margin: 10px;
     height: fit-content;
 }
 
@@ -37,7 +37,7 @@ mat-card.card-image{
 }
 mat-card.card-info{
     width:400px;
-    margin: 7px;
+    margin: 10px;
 
 }
 
@@ -49,7 +49,7 @@ mat-card.card-info{
     background-repeat: no-repeat;
     background-size: 100px;
     background-position: center;
-    height: 100px;
+    height: 70px;
     width: 80%;
     margin: 20px auto;
     border: 2px dashed #1C8ADB;
@@ -64,17 +64,16 @@ mat-card.card-info{
     opacity: 0.8;
 }
 
-.files-list {
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    margin: 10px auto;
-    background: #ffffff;
-    border: 1px dashed;
-    border-radius: 12px;
-    padding: 5px;
-    color: #1c8adb;
-}
+// .files-list {
+//     margin: 1px;
+//     background: #ffffff;
+//     border: 1px dashed;
+//     border-radius: 12px;
+//     color: #1c8adb;
+//     display: flex;
+//     flex-direction: row;
+//     flex-wrap: wrap;
+// }
 
 .files-list .delete-file {
     background: transparent;
@@ -89,3 +88,49 @@ mat-card.card-info{
 .main{
     max-height: none;
 }
+
+
+.container{
+    display: flex;
+    flex-direction:column;
+    flex-wrap: wrap;
+}
+img.image{
+    width: 400px;
+    height: 220px;
+}
+
+mat-card.image{
+    margin-top:10px;
+    margin-right: 10px;
+}
+
+mat-icon.delete{
+    cursor: pointer;
+}
+// .section-one{
+//     grid-area: one;
+//     width: 100%;
+//     box-sizing: border-box;
+//     padding: 0px;
+//     border: 1px solid lightgray;
+//     display: flex;
+//     overflow-x: scroll;
+//     scroll-snap-type: x mandatory;
+// }
+
+
+// .image {
+//     scroll-snap-align: center;
+//     border-radius: 3px;
+//     font-size: 0;
+//     margin-left: 5px;
+//     margin-right: 5px;
+//     margin-top: 0px;
+//     margin-bottom: 0px;
+//     height: 250px;
+//   }
+//   .first{
+//     margin-top: 0px;
+//     margin-left: 0px;
+//   }

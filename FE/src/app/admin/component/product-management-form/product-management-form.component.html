@@ -6,7 +6,7 @@
         <mat-card-content >
             <form [formGroup]="form" fxLayout="column" fxLayoutAlign="space-between centre" >
                 <mat-form-field class="form-card">
-                    <input matInput placeholder="Name" formControlName="name" (keyup)="updateProduct()">
+                    <input matInput placeholder="Name" formControlName="name">
                 </mat-form-field>
 
                 <mat-form-field class="form-card">
@@ -17,15 +17,15 @@
 
                 <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
                     <mat-form-field class="form-card">
-                        <input matInput placeholder="Price" formControlName="price" (keyup)="updateProduct()">
+                        <input matInput placeholder="Price" formControlName="price" >
                     </mat-form-field>
                     <mat-form-field class="form-card">
-                        <input matInput placeholder="Quantity" formControlName="quantity" (keyup)="updateProduct()">
+                        <input matInput placeholder="Quantity" formControlName="quantity" >
                     </mat-form-field>
                 </div>
                 <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
                     <mat-form-field class="form-card-category">
-                        <mat-select placeholder="Select Category" formControlName="category" (selectionChange)="updateProduct()">
+                        <mat-select placeholder="Select Category" formControlName="category" >
                             <mat-option value="{{category.categoryId}}" *ngFor="let category of categories">
                                 {{category.categoryName}}</mat-option>
                         </mat-select>
@@ -43,23 +43,16 @@
                     </mat-chip-list>
                 </mat-form-field>
 
-                <!-- <mat-form-field class="form-card">
-                    <input matInput placeholder="Image url" formControlName="image" (keyup)="updateProduct()">
-                </mat-form-field> -->
-
-                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)"
-                >
+                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
                     <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)" >
                     <p>Drag and drop an image</p>
                 </div>
-                <div class="files-list" *ngFor="let file of files;index as i">
-                    <p> {{ file.name }} </p>
-                    <button class="delete-file" (click)="deleteAttachment(i)">
-                        <mat-icon>clear</mat-icon>
+                <div>
+                    <button  mat-button class="delete-file" *ngFor="let file of files;index as i">
+                    <mat-icon matTooltip="{{ file.name }}">photo</mat-icon>
+                    <mat-icon matTooltip="delete" (click)="deleteAttachment(i)" color="warn">clear</mat-icon>
                     </button>
                 </div>
-
-
 
             </form>
         </mat-card-content>
@@ -68,19 +61,14 @@
             <button class="card-form" mat-raised-button color="warn" (click)="delete()">delete</button>
         </div>
     </mat-card>
-    <div fxLayout="column" fxLayoutAlign="space-between center" >
-        <mat-card class="card-title" *ngIf="product.productName">
-            <mat-card-header>
-                <mat-card-title>{{product.productName}}</mat-card-title>
-            </mat-card-header>
-        </mat-card>
-        <mat-card class="card-image" *ngIf="product.image">
-            <img mat-card-image src="{{product.image}}" class="card-image">
-        </mat-card>
-        <mat-card class="card-info" *ngIf="product.price || product.description">
+
+    <div class="container">
+        <mat-card *ngFor="let url of imageUrls;index as i"  class="image">
             <mat-card-content>
-            <div *ngIf="product.price">{{product.price | currency:'MAD'}}</div>
-            <div *ngIf="product.description">{{product.description | formatTitleDescription:''}}</div>
+                <div>
+                    <mat-icon (click)="deleteImage(i)" class="delete" matTooltip="delete">clear</mat-icon>
+                </div>
+                <img mat-card-image [src]="url"  alt="product image" class="image">
             </mat-card-content>
         </mat-card>
     </div>

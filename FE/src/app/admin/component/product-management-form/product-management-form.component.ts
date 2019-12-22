@@ -18,6 +18,7 @@ export class ProductManagementFormComponent implements OnInit {
   form: FormGroup;
   id: number=0;
   product: Product=new Product();
+  imageUrls:String[]=[];
   categories: Category[]=[];
 
   files:File[]=[];
@@ -29,7 +30,7 @@ export class ProductManagementFormComponent implements OnInit {
     private categoryService: CategoryService,
     private router:Router,
     private snackBar: MatSnackBar,
-    private uploadFileService: UploadFilesService
+    private fileService: UploadFilesService
   ) { }
 
   ngOnInit() {
@@ -48,7 +49,12 @@ export class ProductManagementFormComponent implements OnInit {
   private loadProduct() {
     this.productService.getProduct(this.id).pipe(take(1)).subscribe(prod => {
       this.product = prod;
+      this.imageUrls=[];
       this.updateForm();
+      this.product.images.forEach((imageId,i)=>this.fileService.downloadFile(imageId)
+        .pipe(take(1)).subscribe(reader=>reader.addEventListener("load", () =>{
+          this.imageUrls=[...this.imageUrls.slice(0,i),reader.result.toString(),...this.imageUrls.slice(i+1)];
+      }, false)));
     });
   }
 
@@ -58,7 +64,6 @@ export class ProductManagementFormComponent implements OnInit {
       description:[this.product.description],
       price:[this.product.price],
       quantity:[this.product.quantity],
-      // image:[this.product.image],
       category:['']
     });
   }
@@ -67,7 +72,6 @@ export class ProductManagementFormComponent implements OnInit {
     this.product.description=this.form.get("description").value;
     this.product.quantity=parseInt(this.form.get("quantity").value);
     this.product.price=parseInt(this.form.get("price").value);
-    // this.product.image=this.form.get("image").value;
     let categoryId=parseInt(this.form.get('category').value);
     if(categoryId){
       let category=this.categories.find(category=>category.categoryId===categoryId);
@@ -83,8 +87,8 @@ export class ProductManagementFormComponent implements OnInit {
   }
 
   save(){
-    this.uploadFileService.uploadFiles(this.formData).subscribe(idsList=>{
-      console.log(idsList);
+    this.updateProduct();
+    this.fileService.uploadFiles(this.formData).subscribe(idsList=>{
       if(this.id===0){
         this.product.images=idsList;
         this.productService.addProduct(this.product).pipe(take(1)).subscribe(product=>{
@@ -93,46 +97,37 @@ export class ProductManagementFormComponent implements OnInit {
           });
           this.product=new Product();
           this.updateForm();
+          this.files=[];
         },error=>{
           this.snackBar.open("error try later", 'OK', {
             duration: 2000,
           });
         });
       }
+      else{
+        this.product.productId=this.id;
+        idsList.forEach(id=>this.product.images.push(id));
+        this.productService.updateProduct(this.product).pipe(take(1)).subscribe(product=>{
+          this.snackBar.open("saved succesfully", 'OK', {duration: 2000});
+          this.loadProduct();
+          this.updateForm();
+          this.files=[];
+        },error=>this.snackBar.open("error try later", 'OK', {duration: 2000}));
+      }
     },error=>console.log(error));
-
-
-
-
-    // if(this.id===0){
-    //   this.productService.addProduct(this.product).pipe(take(1)).subscribe(product=>{
-
-    //     this.snackBar.open("saved succesfully", 'OK', {
-    //       duration: 2000,
-    //     });
-    //     this.product=new Product();
-    //     this.updateForm();
-    //   },error=>{
-    //     this.snackBar.open("error try later", 'OK', {
-    //       duration: 2000,
-    //     });
-    //   });
-    // }
-    // else{
-    //   this.product.productId=this.id;
-    //   this.productService.updateProduct(this.product).pipe(take(1)).subscribe(product=>{
-    //     this.snackBar.open("saved succesfully", 'OK', {
-    //       duration: 2000,
-    //     });
-    //     this.loadProduct();
-    //     this.updateForm();
-    //   },error=>{
-    //     this.snackBar.open("error try later", 'OK', {
-    //       duration: 2000,
-    //     });
-    //   });
-    // }
   }
+
+
+  deleteImage(i:number){
+      this.fileService.deletFile(this.product.images[i]).pipe(take(1)).subscribe(res=>{
+        this.snackBar.open("Image Deleted","OK",{duration:2000});
+        this.loadProduct();
+      },error=>{
+        console.log(error);
+        this.snackBar.open("error","OK",{duration:2000})
+      });
+  }
+
   delete(){
     this.productService.deleteProduct(this.id).pipe(take(1)).subscribe(resp=>{
       this.snackBar.open("Delete success", 'OK', {

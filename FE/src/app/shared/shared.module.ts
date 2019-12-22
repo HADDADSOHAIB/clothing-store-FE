@@ -32,6 +32,7 @@ import { OrderStatusComponent } from './Component/order-status/order-status.comp
 import { OrderInfosComponent } from './Component/order-infos/order-infos.component';
 import { RatingBarComponent } from './Component/rating-bar/rating-bar.component';
 import { AuthInterceptor } from './interceptors/http.interceptor';
+import { MatTooltipModule } from '@angular/material/tooltip'
 
 @NgModule({
   declarations:[
@@ -73,7 +74,8 @@ import { AuthInterceptor } from './interceptors/http.interceptor';
     MatSliderModule,
     MatSidenavModule,
     MatListModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule
   ],
   exports:[
     PaginatorComponent,
@@ -113,7 +115,8 @@ import { AuthInterceptor } from './interceptors/http.interceptor';
     MatSliderModule,
     MatSidenavModule,
     MatListModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule
   ]
 })
 export class SharedModule { 

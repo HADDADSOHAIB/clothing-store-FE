@@ -27,6 +27,9 @@ export class UploadFilesService {
       .pipe(map(blob=>this.createImageFromBlob(blob)));  
   }
 
+  deletFile(id:String){
+    return this.httpClient.delete(BACK_END+"images/deleteFile/"+id);
+  }
   private createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     // let imageBlobUrl="";
