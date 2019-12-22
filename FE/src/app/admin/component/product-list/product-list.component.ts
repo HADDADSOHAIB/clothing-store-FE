@@ -65,6 +65,7 @@ export class ProductListComponent implements OnInit {
     this.productService.deleteProduct(id).pipe(take(1)).subscribe(response=>{
       this.snackBar.open("deleted succesfully", 'OK', {duration: 2000});
       this.productService.loadProducts(this.itemsPerPage,this.currentPage);
+      this.productService.resetPageNumber.next(1);
     },error=>this.snackBar.open("error", 'OK', {duration: 2000}));
   }
 

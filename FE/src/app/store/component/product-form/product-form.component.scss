@@ -1,7 +1,93 @@
+.body{
+  margin: 20px;
+}
 
-.image{
+.product-section{
+  display: grid;
+  grid-gap: 5px;
+  grid-template-columns: 1fr 500px;
+  grid-template-areas:
+    'one two'
+    'one two';
+}
+
+.section-one{
+  grid-area: one;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0px;
+  border: 1px solid lightgray;
+  display: flex;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+}
+
+.section-two{
+  grid-area: two;
+  width: 100%;
+  box-sizing:border-box;
+}
+
+.image {
+  scroll-snap-align: center;
+  border-radius: 3px;
+  font-size: 0;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-top: 0px;
+  margin-bottom: 0px;
   height: 250px;
 }
+.first{
+  margin-top: 0px;
+  margin-left: 0px;
+}
+mat-card.card-actions{
+  margin-bottom:10px;
+  width:100%;
+  box-sizing:border-box;
+}
+
+mat-card.card-description{
+  width:100%;
+  box-sizing:border-box;
+}
+
+@media only screen and (max-width: 1000px) {
+  .product-section{
+    grid-template-areas:
+      'one one'
+      'two two';
+  }
+
+  .section-two{
+    width: 100%;
+  }
+  
+  
+  .section-one {
+    width: 100%;
+  }
+}
+
+// mat-card.card-image{
+//   margin:10px;
+//   width:45%;
+// }
+
+// mat-card.card-actions{
+//   margin:10px;
+//   width:100%;
+// }
+
+// mat-card.card-description{
+//   margin:10px;
+//   width:100%;
+// }
+
+// div.card-options{
+// width: 45%;
+// }
 
 .btn{
   width:100%;
@@ -25,11 +111,6 @@
   width:100%;
   margin-bottom:2px;
 }
-mat-card{
-  margin:10px;
-  width:400px;
-}
-
 .mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
   margin: 0 0px;
 }
@@ -38,7 +119,8 @@ mat-card{
 }
 
 mat-card.reviews-section{
-  width:845px;
+  width:100%;
+  box-sizing:border-box;
   margin:0.5px;
 }
 mat-form-field,mat-slider{

@@ -1,12 +1,10 @@
-<mat-dialog-content class="body">
-    <div *ngIf="this.data.productId!=undefined">
-        <mat-icon (click)="close()" class="close">close</mat-icon>
-    </div>
-    <div class="main" fxLayout="row" fxLayoutAlign="center stretch">
-        <mat-card class="card-image">
-            <img mat-card-image src="{{product.image}}" alt="Photo of a Shiba Inu" class="image">
+<div class="body">
+    
+    <div  class="product-section">
+        <mat-card class="section-one">
+            <img mat-card-image [src]="url" *ngFor="let url of imageUrls;index as i" alt="product image" class="image" [class.first]="i===0">
         </mat-card>
-        <div fxLayout="column" fxLayoutAlign="space-between center">
+        <div class="section-two">
             <mat-card class="card-actions">
                 <mat-card-header>
                     <mat-card-title>{{product.productName}}</mat-card-title>
@@ -154,4 +152,4 @@
         </mat-card>
     </div>
 
-</mat-dialog-content>
+</div>

@@ -13,6 +13,7 @@ import { ProductsService } from 'src/app/services/products-service/products.serv
 import { AccountService } from 'src/app/services/account-service/account.service';
 import { ReviewService } from 'src/app/services/review-service/review.service';
 import { CartItem } from 'src/app/models/CartItem';
+import { UploadFilesService } from 'src/app/services/upload-files-service/upload-files.service';
 
 @Component({
   selector: 'app-product-form',
@@ -26,6 +27,7 @@ export class ProductFormComponent implements OnInit {
   productReviewModified:ProductReview=new ProductReview(0,null,5,"",0);
   currentUser:User;
   idOfReviewToModify=0;
+  imageUrls:String[]=[];
 
   constructor(
     private cartService: CartService,
@@ -35,34 +37,31 @@ export class ProductFormComponent implements OnInit {
     private reviewService: ReviewService,
     private snackBar:MatSnackBar,
     private router: Router,
-    public dialogRef: MatDialogRef<ProductFormComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: Product
+    private fileService:UploadFilesService
   ) {}
 
   ngOnInit() {
     this.accountService.loadCurrentUser();
     this.accountService.getCurrentUser().subscribe(user=>{
       this.currentUser=user;
-      if(this.data.productId==undefined){
         this.activatedRoute.paramMap.pipe(take(1)).subscribe(params=>{
-          if(params.get('id'))
+          if(params.get('id')){
             this.productService.getProduct(parseInt(params.get('id'))).pipe(take(1)).subscribe(product=>{
               this.product=product;
+              this.product.images.forEach((imageId,i)=>this.fileService.downloadFile(imageId)
+                .pipe(take(1)).subscribe(reader=>reader.addEventListener("loadend", () =>{
+                  this.imageUrls=[...this.imageUrls.slice(0,i),reader.result.toString(),...this.imageUrls.slice(i+1)];
+              }, false)));
             });
+          }
         });
-      }
-      else{
-        this.product=this.data;
-      }
+      
     });
     this.cartService.getCart().subscribe(cart=>{
       this.cart=cart;
     });
   }
 
-  close(){
-    this.dialogRef.close();
-  }
   addToCart(){
     this.cart.items.push(new CartItem(
       0,
@@ -158,3 +157,4 @@ export class ProductFormComponent implements OnInit {
     this.productReviewModified=new ProductReview(0,null,5,"",0);
   }
 }
+

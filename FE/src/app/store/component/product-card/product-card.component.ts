@@ -8,6 +8,7 @@ import { Product } from 'src/app/models/product';
 import { Cart } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { CartItem } from 'src/app/models/CartItem';
+import { UploadFilesService } from 'src/app/services/upload-files-service/upload-files.service';
 
 @Component({
   selector: 'product-card',
@@ -18,16 +19,23 @@ export class ProductCardComponent implements OnInit {
   @Input() product: Product;
   cart: Cart;
   itemIndex: number=-1;
+  imageUrl="";
 
   constructor(
     private cartService: CartService,
     private router: Router,
     private snackBar: MatSnackBar,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private uploadFileService: UploadFilesService
   ) {
    }
 
   ngOnInit() {
+    console.log(this.product.images)
+    this.uploadFileService.downloadFile(this.product.images[0]).pipe(take(1)).subscribe(reader=>{
+      reader.addEventListener('load',()=>this.imageUrl=reader.result.toString(),false);
+    });
+
     this.cartService.loadCart();
     this.cartService.getCart().subscribe(cart=>{
       this.cart=cart;
@@ -72,9 +80,11 @@ export class ProductCardComponent implements OnInit {
   }
 
   details(){
-    const dialogRef=this.dialog.open(ProductFormComponent, {
-      height: '75%',
-      data: this.product
-    });
+    // const dialogRef=this.dialog.open(ProductFormComponent, {
+    //   height: '85%',
+    //   data: this.product
+    // });
+
+    this.router.navigate(["store","product",this.product.productId]);
   }
 }

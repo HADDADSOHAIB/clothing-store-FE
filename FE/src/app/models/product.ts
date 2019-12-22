@@ -18,7 +18,7 @@ export class Product{
         this.description="";
         this.images=[];
         this.price=0;
-        this.rating=0;
+        this.rating=5;
         this.quantity=0;
     }
 

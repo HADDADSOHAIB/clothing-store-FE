@@ -84,6 +84,7 @@ export class ProductManagementFormComponent implements OnInit {
 
   save(){
     this.uploadFileService.uploadFiles(this.formData).subscribe(idsList=>{
+      console.log(idsList);
       if(this.id===0){
         this.product.images=idsList;
         this.productService.addProduct(this.product).pipe(take(1)).subscribe(product=>{
@@ -98,7 +99,6 @@ export class ProductManagementFormComponent implements OnInit {
           });
         });
       }
-    
     },error=>console.log(error));
 
 

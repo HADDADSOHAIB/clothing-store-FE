@@ -27,7 +27,7 @@ export class UploadFilesService {
       .pipe(map(blob=>this.createImageFromBlob(blob)));  
   }
 
-  createImageFromBlob(image: Blob) {
+  private createImageFromBlob(image: Blob) {
     let reader = new FileReader();
     // let imageBlobUrl="";
     // reader.addEventListener("load", () => {
