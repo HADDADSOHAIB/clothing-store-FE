@@ -21,7 +21,7 @@ export class UserGuard implements CanActivate {
     state: RouterStateSnapshot
     ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.accountService.getCurrentUser().pipe(map(user=>{
-      if(user.roles.map(role=>role.name).includes('user'))
+      if(user.roles.map(role=>role.name).includes('User'))
         return true;
       else{
         this.snackBar.open("Only users are allowed","Ok");

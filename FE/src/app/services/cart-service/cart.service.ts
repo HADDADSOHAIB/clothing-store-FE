@@ -28,19 +28,21 @@ export class CartService{
   }
 
   loadCart(){
-    if(localStorage.getItem('cartId')){
-      this.loadCartById(localStorage.getItem('cartId'));
-    }
-
     this.accountService.loadCurrentUser();
     this.accountService.getCurrentUser().subscribe(user=>{
       if(user.userEmail)
-        this.loadCartByUserEmail(user.userEmail);
+      this.loadCartByUserEmail(user.userEmail);
+      else if(localStorage.getItem('cartId'))
+      this.loadCartById(localStorage.getItem('cartId'));
+      else
+      this.getCart().pipe(take(1)).subscribe(cart=>{
+        this.upLoadCart(cart);
+        this.isCartInDb=true;
+      });
     });
-
   }
 
-  private loadCartByUserEmail(email:String) {
+  private loadCartByUserEmail(email:string) {
     this.httpClient.get(BACK_END+"carts/email/"+email).pipe(take(1)).subscribe((cartDb: Cart)=>{
       let cart=new Cart(cartDb.cartId,cartDb.userEmail,cartDb.items);
       this.isCartInDb=true;
@@ -48,10 +50,8 @@ export class CartService{
     }, error=>{
       console.log(error);
       this.getCart().pipe(take(1)).subscribe(cartDb=>{
-        let cart=new Cart(cartDb.cartId,email.toString(),cartDb.items);
-        this.isCartInDb=true;
-        this.upLoadCart(cart);
-        this.cartSubject.next(cart);
+        cartDb.userEmail=email;
+        this.upLoadCart(cartDb);
       });
     });
   }
@@ -61,12 +61,11 @@ export class CartService{
       let cart=new Cart(cartDb.cartId,cartDb.userEmail,cartDb.items);
       this.isCartInDb=true;
       this.cartSubject.next(cart);
-    },async error=>{
-      console.log(error);
-      let cart= await this.getCart().toPromise();
-      this.isCartInDb=true;
-      this.upLoadCart(cart);
-      this.cartSubject.next(cart);
+    },error=>{
+      this.getCart().pipe(take(1)).subscribe(cart=>{
+        this.isCartInDb=true;
+        this.upLoadCart(cart);
+      });
     });
   }
   

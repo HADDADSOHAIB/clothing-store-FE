@@ -21,7 +21,7 @@ export class AdminGuard {
     state: RouterStateSnapshot
     ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
     return this.accountService.getCurrentUser().pipe(map(user=>{
-      if(user.roles.map(role=>role.name).includes('admin'))
+      if(user.roles.map(role=>role.name).includes('Admin'))
         return true;
       else{
         this.snackBar.open("Only admins are allowed","Ok");
