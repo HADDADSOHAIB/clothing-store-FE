@@ -14,9 +14,6 @@ https://github.com/HADDADSOHAIB/ec-spring-boot <br />
 
 
 ## deployement:
-A demo is deploy and hosted in firebase service in the following domains: <br />
-
-https://be-agile-demo.firebaseapp.com/ <br />
-https://be-agile-demo.web.app/ <br />
+this web site is not deploy yet
 
 
