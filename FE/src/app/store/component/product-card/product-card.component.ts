@@ -31,7 +31,6 @@ export class ProductCardComponent implements OnInit {
    }
 
   ngOnInit() {
-    console.log(this.product.images)
     this.uploadFileService.downloadFile(this.product.images[0]).pipe(take(1)).subscribe(reader=>{
       reader.addEventListener('load',()=>this.imageUrl=reader.result.toString(),false);
     });

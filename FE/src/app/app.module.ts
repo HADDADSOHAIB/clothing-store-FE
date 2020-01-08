@@ -43,7 +43,12 @@ import { UploadFilesService } from './services/upload-files-service/upload-files
     { provide: MAT_DIALOG_DATA, useValue: {} },
     { provide: MatDialogRef, useValue: {} },
     SidenavService,
-    UploadFilesService
+    UploadFilesService,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:AuthInterceptor,
+      multi:true
+    }
   ],
   bootstrap: [AppComponent]
 })

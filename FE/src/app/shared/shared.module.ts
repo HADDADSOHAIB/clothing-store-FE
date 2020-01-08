@@ -125,11 +125,7 @@ export class SharedModule {
     return({
         ngModule: SharedModule,
         providers: [
-          {
-            provide:HTTP_INTERCEPTORS,
-            useClass:AuthInterceptor,
-            multi:true
-          }
+          
         ]
     });
   }
