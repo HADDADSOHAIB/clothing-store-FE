@@ -12,52 +12,52 @@ import { UserListComponent } from './component/user-list/user-list.component';
 
 
 const routes: Routes = [
-  {
-    path: '',
-    component: AdminComponent,
-    children: [
-      {
-        path: '',
-        component: ProductListComponent
-      },
-      {
-        path: 'categories',
-        component: CategoryFormComponent,
-      },
-      {
-        path: 'product/:id',
-        component: ProductManagementFormComponent,
-      },
-      {
-        path: 'product/new',
-        component: ProductManagementFormComponent,
-      },
-      {
-        path: 'products',
-        component: ProductListComponent,
-      },
-      {
-        path: 'order/:id',
-        component: OrderInfosComponent
-      },
-      {
-        path: 'orders',
-        component: OrdersListComponent
-      },
-      {
-        path: 'users',
-        component: UserListComponent
-      },
-      {
-        path: 'manage',
-        component: ManageStoreComponent
-      }
-    ]
-  }
+	{
+		path: '',
+		component: AdminComponent,
+		children: [
+			{
+				path: '',
+				component: ProductListComponent
+			},
+			{
+				path: 'categories',
+				component: CategoryFormComponent,
+			},
+			{
+				path: 'product/:id',
+				component: ProductManagementFormComponent,
+			},
+			{
+				path: 'product/new',
+				component: ProductManagementFormComponent,
+			},
+			{
+				path: 'products',
+				component: ProductListComponent,
+			},
+			{
+				path: 'order/:id',
+				component: OrderInfosComponent
+			},
+			{
+				path: 'orders',
+				component: OrdersListComponent
+			},
+			{
+				path: 'users',
+				component: UserListComponent
+			},
+			{
+				path: 'manage',
+				component: ManageStoreComponent
+			}
+		]
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 export class AdminRoutingModule { }

@@ -35,99 +35,99 @@ import { AuthInterceptor } from './interceptors/http.interceptor';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations: [
-    PaginatorComponent,
-    HeaderComponent,
-    FooterComponent,
-    FilterAndSortComponent,
-    OrderStatusComponent,
-    OrderInfosComponent,
-    RatingBarComponent
+	declarations: [
+		PaginatorComponent,
+		HeaderComponent,
+		FooterComponent,
+		FilterAndSortComponent,
+		OrderStatusComponent,
+		OrderInfosComponent,
+		RatingBarComponent
 
-  ],
-  imports: [
-    SharedRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    CommonModule,
+	],
+	imports: [
+		SharedRoutingModule,
+		ReactiveFormsModule,
+		FormsModule,
+		HttpClientModule,
+		CommonModule,
 
-    FlexLayoutModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatBadgeModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatInputModule,
-    MatTableModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatCardModule,
-    MatStepperModule,
-    MatSnackBarModule,
-    MatChipsModule,
-    MatSliderModule,
-    MatSidenavModule,
-    MatListModule,
-    MatRadioModule,
-    MatTooltipModule
-  ],
-  exports: [
-    PaginatorComponent,
-    HeaderComponent,
-    FooterComponent,
-    FilterAndSortComponent,
-    OrderStatusComponent,
-    OrderInfosComponent,
-    RatingBarComponent,
+		FlexLayoutModule,
+		MatCardModule,
+		MatButtonModule,
+		MatIconModule,
+		MatSelectModule,
+		MatGridListModule,
+		MatFormFieldModule,
+		MatBadgeModule,
+		MatToolbarModule,
+		MatDividerModule,
+		MatExpansionModule,
+		MatInputModule,
+		MatTableModule,
+		FlexLayoutModule,
+		MatButtonModule,
+		MatCardModule,
+		MatStepperModule,
+		MatSnackBarModule,
+		MatChipsModule,
+		MatSliderModule,
+		MatSidenavModule,
+		MatListModule,
+		MatRadioModule,
+		MatTooltipModule
+	],
+	exports: [
+		PaginatorComponent,
+		HeaderComponent,
+		FooterComponent,
+		FilterAndSortComponent,
+		OrderStatusComponent,
+		OrderInfosComponent,
+		RatingBarComponent,
 
 
-    SharedRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    CommonModule,
+		SharedRoutingModule,
+		ReactiveFormsModule,
+		FormsModule,
+		HttpClientModule,
+		CommonModule,
 
-    FlexLayoutModule,
-    MatCardModule,
-    MatButtonModule,
-    MatIconModule,
-    MatSelectModule,
-    MatGridListModule,
-    MatFormFieldModule,
-    MatBadgeModule,
-    MatToolbarModule,
-    MatDividerModule,
-    MatExpansionModule,
-    MatInputModule,
-    MatTableModule,
-    FlexLayoutModule,
-    MatButtonModule,
-    MatCardModule,
-    MatStepperModule,
-    MatSnackBarModule,
-    MatChipsModule,
-    MatSliderModule,
-    MatSidenavModule,
-    MatListModule,
-    MatRadioModule,
-    MatTooltipModule
-  ]
+		FlexLayoutModule,
+		MatCardModule,
+		MatButtonModule,
+		MatIconModule,
+		MatSelectModule,
+		MatGridListModule,
+		MatFormFieldModule,
+		MatBadgeModule,
+		MatToolbarModule,
+		MatDividerModule,
+		MatExpansionModule,
+		MatInputModule,
+		MatTableModule,
+		FlexLayoutModule,
+		MatButtonModule,
+		MatCardModule,
+		MatStepperModule,
+		MatSnackBarModule,
+		MatChipsModule,
+		MatSliderModule,
+		MatSidenavModule,
+		MatListModule,
+		MatRadioModule,
+		MatTooltipModule
+	]
 })
 export class SharedModule {
-  static forRoot(): ModuleWithProviders {
+	static forRoot(): ModuleWithProviders {
 
-    return({
-        ngModule: SharedModule,
-        providers: [
+		return({
+				ngModule: SharedModule,
+				providers: [
 
-        ]
-    });
-  }
+				]
+		});
+	}
 
 }

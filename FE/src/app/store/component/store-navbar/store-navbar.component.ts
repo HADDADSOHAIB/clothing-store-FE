@@ -5,26 +5,26 @@ import { CartService } from 'src/app/services/cart-service/cart.service';
 import { SidenavService } from 'src/app/services/sidenav-service/sidenav.service';
 
 @Component({
-  selector: 'store-navbar',
-  templateUrl: './store-navbar.component.html',
-  styleUrls: ['./store-navbar.component.scss']
+	selector: 'store-navbar',
+	templateUrl: './store-navbar.component.html',
+	styleUrls: ['./store-navbar.component.scss']
 })
 export class StoreHeaderComponent implements OnInit {
 
-  cart: Cart;
-  user: User;
+	cart: Cart;
+	user: User;
 
-  constructor(
-    private cartService: CartService,
-    private sidenavService: SidenavService
-    ) { }
+	constructor(
+		private cartService: CartService,
+		private sidenavService: SidenavService
+		) { }
 
-  ngOnInit() {
-    this.cartService.loadCart();
-    this.cartService.getCart().subscribe(cart => this.cart = cart);
-  }
+	ngOnInit() {
+		this.cartService.loadCart();
+		this.cartService.getCart().subscribe(cart => this.cart = cart);
+	}
 
-  sidenavClose() {
-    this.sidenavService.showSidenave.next(false);
-  }
+	sidenavClose() {
+		this.sidenavService.showSidenave.next(false);
+	}
 }

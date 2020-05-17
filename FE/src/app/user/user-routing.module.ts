@@ -8,32 +8,32 @@ import { MyReviewsComponent } from './component/my-reviews/my-reviews.component'
 
 
 const routes: Routes = [
-  {
-    path: '',
-    component: UserComponent,
-    children: [
-      {
-        path: 'account',
-        component: AccountComponent
-      },
-      {
-        path: 'myorders/:id',
-        component: OrderInfosComponent
-      },
-      {
-        path: 'myorders',
-        component: MyOrdersComponent
-      },
-      {
-        path: 'myreviews',
-        component: MyReviewsComponent
-      }
-    ]
-  }
+	{
+		path: '',
+		component: UserComponent,
+		children: [
+			{
+				path: 'account',
+				component: AccountComponent
+			},
+			{
+				path: 'myorders/:id',
+				component: OrderInfosComponent
+			},
+			{
+				path: 'myorders',
+				component: MyOrdersComponent
+			},
+			{
+				path: 'myreviews',
+				component: MyReviewsComponent
+			}
+		]
+	}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 export class UserRoutingModule { }

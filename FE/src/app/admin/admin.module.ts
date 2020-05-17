@@ -16,24 +16,24 @@ import { DragDropDirective } from './directives/drag-drop.directive';
 
 
 @NgModule({
-  declarations: [
-    ProductListComponent,
-    ProductManagementFormComponent,
-    AdminHeaderComponent,
-    AdminComponent,
-    ManageStoreComponent,
-    OrdersListComponent,
-    CategoryFormComponent,
-    TitleDescriptionPipe,
-    UserListComponent,
-    DragDropDirective
-  ],
-  imports: [
-    CommonModule,
-    AdminRoutingModule,
-    SharedModule.forRoot()
-  ],
-  providers: [
-  ]
+	declarations: [
+		ProductListComponent,
+		ProductManagementFormComponent,
+		AdminHeaderComponent,
+		AdminComponent,
+		ManageStoreComponent,
+		OrdersListComponent,
+		CategoryFormComponent,
+		TitleDescriptionPipe,
+		UserListComponent,
+		DragDropDirective
+	],
+	imports: [
+		CommonModule,
+		AdminRoutingModule,
+		SharedModule.forRoot()
+	],
+	providers: [
+	]
 })
 export class AdminModule { }

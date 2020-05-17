@@ -12,17 +12,17 @@ import { MyReviewsComponent } from './component/my-reviews/my-reviews.component'
 
 
 @NgModule({
-  declarations: [
-    UserComponent,
-    UserHeaderComponent,
-    AccountComponent,
-    MyOrdersComponent, MyReviewsComponent, ],
-  imports: [
-    CommonModule,
-    UserRoutingModule,
-    SharedModule.forRoot(),
-    FormsModule,
-    ReactiveFormsModule
-  ]
+	declarations: [
+		UserComponent,
+		UserHeaderComponent,
+		AccountComponent,
+		MyOrdersComponent, MyReviewsComponent, ],
+	imports: [
+		CommonModule,
+		UserRoutingModule,
+		SharedModule.forRoot(),
+		FormsModule,
+		ReactiveFormsModule
+	]
 })
 export class UserModule { }

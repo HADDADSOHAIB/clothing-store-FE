@@ -21,35 +21,35 @@ import { SidenavService } from './services/sidenav-service/sidenav.service';
 import { UploadFilesService } from './services/upload-files-service/upload-files.service';
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    AppRoutingModule,
-    SharedModule.forRoot(),
-    BrowserModule,
-    BrowserAnimationsModule
-  ],
-  providers: [
-    AuthService,
-    CategoryService,
-    OrderService,
-    ProductsService,
-    ReviewService,
-    RoleService,
-    AccountService,
-    HttpClient,
-    CartService,
-    { provide: MAT_DIALOG_DATA, useValue: {} },
-    { provide: MatDialogRef, useValue: {} },
-    SidenavService,
-    UploadFilesService,
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true
-    }
-  ],
-  bootstrap: [AppComponent]
+	declarations: [
+		AppComponent
+	],
+	imports: [
+		AppRoutingModule,
+		SharedModule.forRoot(),
+		BrowserModule,
+		BrowserAnimationsModule
+	],
+	providers: [
+		AuthService,
+		CategoryService,
+		OrderService,
+		ProductsService,
+		ReviewService,
+		RoleService,
+		AccountService,
+		HttpClient,
+		CartService,
+		{ provide: MAT_DIALOG_DATA, useValue: {} },
+		{ provide: MatDialogRef, useValue: {} },
+		SidenavService,
+		UploadFilesService,
+		{
+			provide: HTTP_INTERCEPTORS,
+			useClass: AuthInterceptor,
+			multi: true
+		}
+	],
+	bootstrap: [AppComponent]
 })
 export class AppModule { }

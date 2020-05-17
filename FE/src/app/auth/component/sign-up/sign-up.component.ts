@@ -10,95 +10,95 @@ import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { Credentials } from 'src/app/models/credentials';
 
 @Component({
-  selector: 'app-sign-up',
-  templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.scss']
+	selector: 'app-sign-up',
+	templateUrl: './sign-up.component.html',
+	styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-  credentials: Credentials;
-  emailForm: FormGroup;
-  passwordForm: FormGroup;
-  emailOk = false;
-  emailDisabled = false;
-  accountCreated = false;
-  creationResult$: Subject<string> = new Subject<string>();
+	credentials: Credentials;
+	emailForm: FormGroup;
+	passwordForm: FormGroup;
+	emailOk = false;
+	emailDisabled = false;
+	accountCreated = false;
+	creationResult$: Subject<string> = new Subject<string>();
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private authService: AuthService,
-    private snackBar: MatSnackBar,
-    private router: Router
-  ) {  }
+	constructor(
+		private formBuilder: FormBuilder,
+		private authService: AuthService,
+		private snackBar: MatSnackBar,
+		private router: Router
+	) {  }
 
-  ngOnInit() {
-    this.emailForm = this.formBuilder.group({
-      email: ['', [Validators.required, Validators.email]]
-    });
+	ngOnInit() {
+		this.emailForm = this.formBuilder.group({
+			email: ['', [Validators.required, Validators.email]]
+		});
 
-    this.passwordForm = this.formBuilder.group({
-      password: ['', [Validators.required, Validators.minLength(6),
-        mustContainUpperCase, mustContainNumber, mustContainLowerCase,
-        mustContainSpecialCaracter]],
-      confirmPassword: ['', Validators.required]
-    },
-    {
-      validator: MustMatch('password', 'confirmPassword')
-    });
-  }
+		this.passwordForm = this.formBuilder.group({
+			password: ['', [Validators.required, Validators.minLength(6),
+				mustContainUpperCase, mustContainNumber, mustContainLowerCase,
+				mustContainSpecialCaracter]],
+			confirmPassword: ['', Validators.required]
+		},
+		{
+			validator: MustMatch('password', 'confirmPassword')
+		});
+	}
 
-  checkEmail() {
-    this.credentials = new Credentials(
-      this.emailForm.get('email').value,
-      this.passwordForm.get('password').value
-    );
-    this.authService.checkEmail(this.credentials)
-      .pipe(take(1)).subscribe(resp => {
-        this.emailOk = true;
-        this.emailDisabled = true;
-        this.openSnackBar('email OK');
-      },
-      error => {
-        console.log(error);
-        this.emailOk = false;
-        this.openSnackBar('Email Not OK');
-      });
-  }
+	checkEmail() {
+		this.credentials = new Credentials(
+			this.emailForm.get('email').value,
+			this.passwordForm.get('password').value
+		);
+		this.authService.checkEmail(this.credentials)
+			.pipe(take(1)).subscribe(resp => {
+				this.emailOk = true;
+				this.emailDisabled = true;
+				this.openSnackBar('email OK');
+			},
+			error => {
+				console.log(error);
+				this.emailOk = false;
+				this.openSnackBar('Email Not OK');
+			});
+	}
 
-  changeEmail() {
-    this.emailOk = false;
-    this.emailDisabled = false;
-  }
-  createAccount() {
-    this.credentials = new Credentials(
-      this.emailForm.get('email').value,
-      this.passwordForm.get('password').value
-    );
+	changeEmail() {
+		this.emailOk = false;
+		this.emailDisabled = false;
+	}
+	createAccount() {
+		this.credentials = new Credentials(
+			this.emailForm.get('email').value,
+			this.passwordForm.get('password').value
+		);
 
-    if (!this.emailOk) {
-      this.openSnackBar('Email is not Ok');
-    } else {
-      this.authService.createAccount(this.credentials)
-      .pipe(take(1)).subscribe(resp => {
-        this.accountCreated = true;
-        localStorage.setItem('token', resp.token);
-        this.creationResult$.next('Account created, un email is sent to your inbox for verification');
-      },
-      error => {
-        console.log(error);
-        this.accountCreated = false;
-        this.creationResult$.next('Unexpected error, please check your internet connection or try later');
-      });
-    }
+		if (!this.emailOk) {
+			this.openSnackBar('Email is not Ok');
+		} else {
+			this.authService.createAccount(this.credentials)
+			.pipe(take(1)).subscribe(resp => {
+				this.accountCreated = true;
+				localStorage.setItem('token', resp.token);
+				this.creationResult$.next('Account created, un email is sent to your inbox for verification');
+			},
+			error => {
+				console.log(error);
+				this.accountCreated = false;
+				this.creationResult$.next('Unexpected error, please check your internet connection or try later');
+			});
+		}
 
-  }
+	}
 
-  openSnackBar(message: string) {
-    this.snackBar.open(message, 'Ok', {
-      duration: 5000
-  });
-  }
+	openSnackBar(message: string) {
+		this.snackBar.open(message, 'Ok', {
+			duration: 5000
+	});
+	}
 
-  routeToHome() {
-    this.router.navigate(['/']);
-  }
+	routeToHome() {
+		this.router.navigate(['/']);
+	}
 }

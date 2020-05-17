@@ -5,35 +5,35 @@ import { SidenavService } from 'src/app/services/sidenav-service/sidenav.service
 import { take } from 'rxjs/operators';
 
 @Component({
-  selector: 'header',
-  templateUrl: './header.component.html',
-  styleUrls: ['./header.component.scss']
+	selector: 'header',
+	templateUrl: './header.component.html',
+	styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
 
-  currentUser: User;
-  currentUserRoles: String[] = [];
+	currentUser: User;
+	currentUserRoles: String[] = [];
 
-  constructor(
-    private accountService: AccountService,
-    private sidenavService: SidenavService
-    ) { }
+	constructor(
+		private accountService: AccountService,
+		private sidenavService: SidenavService
+		) { }
 
-  ngOnInit() {
-    this.accountService.loadCurrentUser();
-    this.accountService.getCurrentUser().subscribe(user => {
-      this.currentUser = user;
-      this.currentUserRoles = this.currentUser.roles.map(role => role.name);
-    });
-  }
+	ngOnInit() {
+		this.accountService.loadCurrentUser();
+		this.accountService.getCurrentUser().subscribe(user => {
+			this.currentUser = user;
+			this.currentUserRoles = this.currentUser.roles.map(role => role.name);
+		});
+	}
 
-  logout() {
-    localStorage.removeItem('token');
-    this.accountService.loadCurrentUser();
-  }
+	logout() {
+		localStorage.removeItem('token');
+		this.accountService.loadCurrentUser();
+	}
 
-  toggleSidenav() {
-    this.sidenavService.showSidenave.pipe(take(1)).subscribe(bool =>
-      this.sidenavService.showSidenave.next(!bool));
-  }
+	toggleSidenav() {
+		this.sidenavService.showSidenave.pipe(take(1)).subscribe(bool =>
+			this.sidenavService.showSidenave.next(!bool));
+	}
 }

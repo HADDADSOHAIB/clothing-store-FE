@@ -1,8 +1,8 @@
 export class Category {
 
-    constructor(
-        public categoryId: number,
-        public categoryName: String
-    ) {}
+		constructor(
+				public categoryId: number,
+				public categoryName: String
+		) {}
 
 }

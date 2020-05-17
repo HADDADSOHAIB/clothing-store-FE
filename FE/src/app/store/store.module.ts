@@ -18,26 +18,26 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
-  declarations: [
-    StoreFrontComponent,
-    ProductCardComponent,
-    StoreHeaderComponent,
-    StoreComponent,
-    ProductFormComponent,
-    CheckOutComponent,
-    ShippingFormComponent,
-    HeaderFormaterPipe
-  ],
-  imports: [
-    StoreRoutingModule,
-    SharedModule.forRoot(),
-    MatDialogModule
-    ],
-  entryComponents: [
-    ProductFormComponent
-  ],
-  providers: [
+	declarations: [
+		StoreFrontComponent,
+		ProductCardComponent,
+		StoreHeaderComponent,
+		StoreComponent,
+		ProductFormComponent,
+		CheckOutComponent,
+		ShippingFormComponent,
+		HeaderFormaterPipe
+	],
+	imports: [
+		StoreRoutingModule,
+		SharedModule.forRoot(),
+		MatDialogModule
+		],
+	entryComponents: [
+		ProductFormComponent
+	],
+	providers: [
 
-  ]
+	]
 })
 export class StoreModule { }

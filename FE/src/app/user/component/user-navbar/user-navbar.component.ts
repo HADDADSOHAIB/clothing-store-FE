@@ -3,20 +3,20 @@ import { SidenavService } from 'src/app/services/sidenav-service/sidenav.service
 
 
 @Component({
-  selector: 'user-navbar',
-  templateUrl: './user-navbar.component.html',
-  styleUrls: ['./user-navbar.component.scss']
+	selector: 'user-navbar',
+	templateUrl: './user-navbar.component.html',
+	styleUrls: ['./user-navbar.component.scss']
 })
 export class UserHeaderComponent implements OnInit {
 
-  constructor(
-    private sidenaveService: SidenavService
-  ) { }
+	constructor(
+		private sidenaveService: SidenavService
+	) { }
 
-  ngOnInit() {
-  }
+	ngOnInit() {
+	}
 
-  closeNavbar() {
-    this.sidenaveService.showSidenave.next(false);
-  }
+	closeNavbar() {
+		this.sidenaveService.showSidenave.next(false);
+	}
 }

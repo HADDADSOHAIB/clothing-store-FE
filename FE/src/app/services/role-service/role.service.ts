@@ -6,19 +6,19 @@ import { Role } from 'src/app/models/role';
 import { Privilege } from 'src/app/models/privilege';
 
 @Injectable({
-  providedIn: 'root'
+	providedIn: 'root'
 })
 export class RoleService {
 
-  constructor(
-    private httpClient: HttpClient
-  ) { }
+	constructor(
+		private httpClient: HttpClient
+	) { }
 
-  getRoles() {
-    return this.httpClient.get(BACK_END + 'roles') as Observable<Role[]>;
-  }
+	getRoles() {
+		return this.httpClient.get(BACK_END + 'roles') as Observable<Role[]>;
+	}
 
-  upgradeUser(email: String) {
-    return this.httpClient.get(BACK_END + 'roles/upgrade/' + email);
-  }
+	upgradeUser(email: String) {
+		return this.httpClient.get(BACK_END + 'roles/upgrade/' + email);
+	}
 }
