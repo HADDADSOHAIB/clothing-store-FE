@@ -13,9 +13,9 @@ import { MyReviewsComponent } from './component/my-reviews/my-reviews.component'
 
 @NgModule({
   declarations: [
-    UserComponent, 
-    UserHeaderComponent, 
-    AccountComponent, 
+    UserComponent,
+    UserHeaderComponent,
+    AccountComponent,
     MyOrdersComponent, MyReviewsComponent, ],
   imports: [
     CommonModule,

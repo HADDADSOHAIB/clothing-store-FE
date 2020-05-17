@@ -1,4 +1,4 @@
-export class Address{
+export class Address {
 
     constructor(
         public id: number,
@@ -8,5 +8,5 @@ export class Address{
         public state: string,
         public country: string,
         public zipCode: string
-    ){}
+    ) {}
 }

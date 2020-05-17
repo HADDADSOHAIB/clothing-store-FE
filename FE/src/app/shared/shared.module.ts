@@ -32,10 +32,10 @@ import { OrderStatusComponent } from './Component/order-status/order-status.comp
 import { OrderInfosComponent } from './Component/order-infos/order-infos.component';
 import { RatingBarComponent } from './Component/rating-bar/rating-bar.component';
 import { AuthInterceptor } from './interceptors/http.interceptor';
-import { MatTooltipModule } from '@angular/material/tooltip'
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
-  declarations:[
+  declarations: [
     PaginatorComponent,
     HeaderComponent,
     FooterComponent,
@@ -77,7 +77,7 @@ import { MatTooltipModule } from '@angular/material/tooltip'
     MatRadioModule,
     MatTooltipModule
   ],
-  exports:[
+  exports: [
     PaginatorComponent,
     HeaderComponent,
     FooterComponent,
@@ -85,8 +85,8 @@ import { MatTooltipModule } from '@angular/material/tooltip'
     OrderStatusComponent,
     OrderInfosComponent,
     RatingBarComponent,
-    
-    
+
+
     SharedRoutingModule,
     ReactiveFormsModule,
     FormsModule,
@@ -119,15 +119,15 @@ import { MatTooltipModule } from '@angular/material/tooltip'
     MatTooltipModule
   ]
 })
-export class SharedModule { 
-  static forRoot() : ModuleWithProviders {
- 
+export class SharedModule {
+  static forRoot(): ModuleWithProviders {
+
     return({
         ngModule: SharedModule,
         providers: [
-          
+
         ]
     });
   }
- 
+
 }

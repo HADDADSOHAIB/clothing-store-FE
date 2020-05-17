@@ -18,8 +18,8 @@ import { UploadFilesService } from 'src/app/services/upload-files-service/upload
 export class ProductCardComponent implements OnInit {
   @Input() product: Product;
   cart: Cart;
-  itemIndex: number=-1;
-  imageUrl="";
+  itemIndex = -1;
+  imageUrl = '';
 
   constructor(
     private cartService: CartService,
@@ -31,18 +31,18 @@ export class ProductCardComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.uploadFileService.downloadFile(this.product.images[0]).pipe(take(1)).subscribe(reader=>{
-      reader.addEventListener('load',()=>this.imageUrl=reader.result.toString(),false);
+    this.uploadFileService.downloadFile(this.product.images[0]).pipe(take(1)).subscribe(reader => {
+      reader.addEventListener('load', () => this.imageUrl = reader.result.toString(), false);
     });
 
     this.cartService.loadCart();
-    this.cartService.getCart().subscribe(cart=>{
-      this.cart=cart;
+    this.cartService.getCart().subscribe(cart => {
+      this.cart = cart;
       this.findOrUpdateIndex();
     });
   }
 
-  addToCart(){
+  addToCart() {
     this.cart.items.push(new CartItem(
       0,
       this.product.price,
@@ -53,37 +53,37 @@ export class ProductCardComponent implements OnInit {
     this.cartService.updateCart(this.cart);
   }
 
-  increment(){
+  increment() {
     this.findOrUpdateIndex();
-    if(this.cart.items[this.itemIndex].itemQuantity<this.product.quantity){
+    if (this.cart.items[this.itemIndex].itemQuantity < this.product.quantity) {
       this.cart.items[this.itemIndex].itemQuantity++;
       this.cartService.upLoadCart(this.cart);
       this.cartService.updateCart(this.cart);
-    }
-    else{
-      this.snackBar.open("Stock out, there is no more items","Ok",{duration:2000});
+    } else {
+      this.snackBar.open('Stock out, there is no more items', 'Ok', {duration: 2000});
     }
   }
 
-  decrement(){
+  decrement() {
     this.findOrUpdateIndex();
     this.cart.items[this.itemIndex].itemQuantity--;
-    if(this.cart.items[this.itemIndex].itemQuantity===0)
-      this.cart.items.splice(this.itemIndex,1);
+    if (this.cart.items[this.itemIndex].itemQuantity === 0) {
+      this.cart.items.splice(this.itemIndex, 1);
+    }
     this.cartService.upLoadCart(this.cart);
     this.cartService.updateCart(this.cart);
   }
 
-  private findOrUpdateIndex(){
-    this.itemIndex=this.cart.items.findIndex(item=>item.product.productId===this.product.productId);
+  private findOrUpdateIndex() {
+    this.itemIndex = this.cart.items.findIndex(item => item.product.productId === this.product.productId);
   }
 
-  details(){
+  details() {
     // const dialogRef=this.dialog.open(ProductFormComponent, {
     //   height: '85%',
     //   data: this.product
     // });
 
-    this.router.navigate(["store","product",this.product.productId]);
+    this.router.navigate(['store', 'product', this.product.productId]);
   }
 }

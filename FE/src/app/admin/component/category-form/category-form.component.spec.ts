@@ -32,7 +32,7 @@ describe('CategoryFormComponent', () => {
   let fixture: ComponentFixture<CategoryFormComponent>;
 
   let debugElement: DebugElement;
-  let cart:CartService;
+  let cart: CartService;
   let router: Router;
   let compiled: any;
 
@@ -55,7 +55,7 @@ describe('CategoryFormComponent', () => {
         RouterTestingModule,
         SharedModule.forRoot()
       ],
-      providers:[
+      providers: [
         AuthService,
         CategoryService,
         OrderService,
@@ -77,7 +77,7 @@ describe('CategoryFormComponent', () => {
     fixture = TestBed.createComponent(CategoryFormComponent);
     component = fixture.componentInstance;
     debugElement = fixture.debugElement;
-    compiled=debugElement.nativeElement;
+    compiled = debugElement.nativeElement;
     fixture.detectChanges();
   });
 

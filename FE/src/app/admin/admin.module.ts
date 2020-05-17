@@ -33,7 +33,7 @@ import { DragDropDirective } from './directives/drag-drop.directive';
     AdminRoutingModule,
     SharedModule.forRoot()
   ],
-  providers:[
+  providers: [
   ]
 })
 export class AdminModule { }

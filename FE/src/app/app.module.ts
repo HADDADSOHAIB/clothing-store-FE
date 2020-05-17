@@ -45,9 +45,9 @@ import { UploadFilesService } from './services/upload-files-service/upload-files
     SidenavService,
     UploadFilesService,
     {
-      provide:HTTP_INTERCEPTORS,
-      useClass:AuthInterceptor,
-      multi:true
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
     }
   ],
   bootstrap: [AppComponent]

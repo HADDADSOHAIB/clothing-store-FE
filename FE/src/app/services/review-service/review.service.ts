@@ -10,24 +10,24 @@ import { ProductReview } from 'src/app/models/product-review';
 export class ReviewService {
 
   constructor(
-    private httpClient:HttpClient
+    private httpClient: HttpClient
   ) { }
 
-  getReviewsByUser(email:string){
-    if(email==""){
+  getReviewsByUser(email: string) {
+    if (email == '') {
       return of([]);
+    } else {
+    return this.httpClient.get(BACK_END + 'reviews?email=' + email) as Observable<ProductReview[]>;
     }
-    else
-    return this.httpClient.get(BACK_END+"reviews?email="+email) as Observable<ProductReview[]>;
   }
-  addReview(productReview: ProductReview){
-    return this.httpClient.post(BACK_END+"reviews",productReview) as Observable<ProductReview>;
+  addReview(productReview: ProductReview) {
+    return this.httpClient.post(BACK_END + 'reviews', productReview) as Observable<ProductReview>;
   }
 
-  updateReview(productReview: ProductReview){
-    return this.httpClient.put(BACK_END+"reviews/"+productReview.id,productReview) as Observable<ProductReview>;
+  updateReview(productReview: ProductReview) {
+    return this.httpClient.put(BACK_END + 'reviews/' + productReview.id, productReview) as Observable<ProductReview>;
   }
-  deleteReview(reviewId: number){
-    return this.httpClient.delete(BACK_END+"reviews/"+reviewId);
+  deleteReview(reviewId: number) {
+    return this.httpClient.delete(BACK_END + 'reviews/' + reviewId);
   }
 }

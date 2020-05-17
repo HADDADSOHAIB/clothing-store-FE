@@ -9,13 +9,13 @@ import { SidenavService } from 'src/app/services/sidenav-service/sidenav.service
 export class AdminHeaderComponent implements OnInit {
 
   constructor(
-    private sidenavService:SidenavService
+    private sidenavService: SidenavService
   ) { }
 
   ngOnInit() {
   }
 
-  closeSidenave(){
+  closeSidenave() {
     this.sidenavService.showSidenave.next(false);
   }
 }

@@ -18,7 +18,7 @@ const routes: Routes = [
         path: 'product/:id', component: ProductFormComponent
       },
       {
-        path: 'checkout', component: CheckOutComponent, canActivate:[UserGuard]
+        path: 'checkout', component: CheckOutComponent, canActivate: [UserGuard]
       },
       {
         path: 'shipping', component: ShippingFormComponent, canActivate: [UserGuard]

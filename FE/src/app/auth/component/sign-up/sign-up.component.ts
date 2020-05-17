@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms'
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '../../custom-validators/password-must-match';
 import { mustContainUpperCase, mustContainNumber, mustContainLowerCase, mustContainSpecialCaracter } from '../../custom-validators/password-pattern';
 import { take } from 'rxjs/operators';
@@ -18,10 +18,10 @@ export class SignUpComponent implements OnInit {
   credentials: Credentials;
   emailForm: FormGroup;
   passwordForm: FormGroup;
-  emailOk:boolean=false;
-  emailDisabled:boolean=false;
-  accountCreated:boolean=false;
-  creationResult$:Subject<string>=new Subject<string>();
+  emailOk = false;
+  emailDisabled = false;
+  accountCreated = false;
+  creationResult$: Subject<string> = new Subject<string>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,75 +31,74 @@ export class SignUpComponent implements OnInit {
   ) {  }
 
   ngOnInit() {
-    this.emailForm=this.formBuilder.group({
-      email: ['',[Validators.required,Validators.email]]
+    this.emailForm = this.formBuilder.group({
+      email: ['', [Validators.required, Validators.email]]
     });
 
-    this.passwordForm=this.formBuilder.group({
-      password: ['',[Validators.required,Validators.minLength(6),
-        mustContainUpperCase,mustContainNumber,mustContainLowerCase,
+    this.passwordForm = this.formBuilder.group({
+      password: ['', [Validators.required, Validators.minLength(6),
+        mustContainUpperCase, mustContainNumber, mustContainLowerCase,
         mustContainSpecialCaracter]],
-      confirmPassword: ['',Validators.required]
+      confirmPassword: ['', Validators.required]
     },
     {
       validator: MustMatch('password', 'confirmPassword')
     });
   }
 
-  checkEmail(){
-    this.credentials=new Credentials(
+  checkEmail() {
+    this.credentials = new Credentials(
       this.emailForm.get('email').value,
       this.passwordForm.get('password').value
     );
     this.authService.checkEmail(this.credentials)
-      .pipe(take(1)).subscribe(resp=>{
-        this.emailOk=true;
-        this.emailDisabled=true;
+      .pipe(take(1)).subscribe(resp => {
+        this.emailOk = true;
+        this.emailDisabled = true;
         this.openSnackBar('email OK');
       },
-      error=>{
+      error => {
         console.log(error);
-        this.emailOk=false;
+        this.emailOk = false;
         this.openSnackBar('Email Not OK');
       });
   }
 
-  changeEmail(){
-    this.emailOk=false;
-    this.emailDisabled=false;
+  changeEmail() {
+    this.emailOk = false;
+    this.emailDisabled = false;
   }
-  createAccount(){
-    this.credentials=new Credentials(
+  createAccount() {
+    this.credentials = new Credentials(
       this.emailForm.get('email').value,
       this.passwordForm.get('password').value
     );
-    
-    if(!this.emailOk){
-      this.openSnackBar("Email is not Ok");
-    }
-    else{
+
+    if (!this.emailOk) {
+      this.openSnackBar('Email is not Ok');
+    } else {
       this.authService.createAccount(this.credentials)
-      .pipe(take(1)).subscribe(resp=>{
-        this.accountCreated=true;
-        localStorage.setItem("token",resp.token);
-        this.creationResult$.next("Account created, un email is sent to your inbox for verification");
+      .pipe(take(1)).subscribe(resp => {
+        this.accountCreated = true;
+        localStorage.setItem('token', resp.token);
+        this.creationResult$.next('Account created, un email is sent to your inbox for verification');
       },
-      error=>{
+      error => {
         console.log(error);
-        this.accountCreated=false;
-        this.creationResult$.next("Unexpected error, please check your internet connection or try later");
+        this.accountCreated = false;
+        this.creationResult$.next('Unexpected error, please check your internet connection or try later');
       });
     }
-    
+
   }
 
-  openSnackBar(message:string) {
-    this.snackBar.open(message, "Ok", {
+  openSnackBar(message: string) {
+    this.snackBar.open(message, 'Ok', {
       duration: 5000
   });
   }
 
-  routeToHome(){
-    this.router.navigate(["/"]);
+  routeToHome() {
+    this.router.navigate(['/']);
   }
 }

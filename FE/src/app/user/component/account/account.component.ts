@@ -12,21 +12,21 @@ import { Address } from 'src/app/models/address';
   styleUrls: ['./account.component.scss']
 })
 export class AccountComponent implements OnInit {
-  user:User;
-  addAddressForm:FormGroup;
-  profileForm:FormGroup;
-  addressesForm:FormGroup[]=[];
-  showAddressForm:boolean=false;
+  user: User;
+  addAddressForm: FormGroup;
+  profileForm: FormGroup;
+  addressesForm: FormGroup[] = [];
+  showAddressForm = false;
   constructor(
-    private formBuilder:FormBuilder,
+    private formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
     private accountService: AccountService
     ) { }
 
   ngOnInit() {
     this.accountService.loadCurrentUser();
-    this.accountService.getCurrentUser().subscribe(user=>{
-      this.user=user;
+    this.accountService.getCurrentUser().subscribe(user => {
+      this.user = user;
       this.updateProfileForm();
     });
 
@@ -53,20 +53,20 @@ export class AccountComponent implements OnInit {
     });
   }
 
-  updateProfile(){
+  updateProfile() {
     this.updateUser();
-    this.accountService.updateUserProfile(this.user).pipe(take(1)).subscribe(user=>{
+    this.accountService.updateUserProfile(this.user).pipe(take(1)).subscribe(user => {
       this.accountService.loadCurrentUser();
       console.log(user);
-      this.snackBar.open("updated success","OK", {
-        duration:2000
+      this.snackBar.open('updated success', 'OK', {
+        duration: 2000
       });
-    },error=>{
+    }, error => {
       console.log(error);
-      this.snackBar.open("error try later","OK", {
-        duration:2000
+      this.snackBar.open('error try later', 'OK', {
+        duration: 2000
       });
-    })
+    });
   }
 
   private updateUser() {
@@ -76,12 +76,11 @@ export class AccountComponent implements OnInit {
     this.user.phoneNumber = this.profileForm.get('phoneNumber').value;
   }
 
-  saveAddress(){
-    if(this.showValidationMessage()){
+  saveAddress() {
+    if (this.showValidationMessage()) {
       return;
-    }
-    else{
-      let address=new Address(
+    } else {
+      const address = new Address(
         0,
         this.addAddressForm.get('firstLine').value,
         this.addAddressForm.get('secondLine').value,
@@ -91,61 +90,61 @@ export class AccountComponent implements OnInit {
         this.addAddressForm.get('zipCode').value
       );
 
-      this.accountService.addAddress(this.user.id,address).pipe(take(1)).subscribe(address=>{
-        this.snackBar.open("address added","Ok",{duration:2000});
+      this.accountService.addAddress(this.user.id, address).pipe(take(1)).subscribe(address => {
+        this.snackBar.open('address added', 'Ok', {duration: 2000});
         this.createOrClearAddressForm();
         this.accountService.loadCurrentUser();
-      },error=>{
-        this.snackBar.open("Error try later","Ok",{duration:2000})
+      }, error => {
+        this.snackBar.open('Error try later', 'Ok', {duration: 2000});
         console.log(error);
     });
     }
   }
 
-  private showValidationMessage(){
-    if(!(this.addAddressForm.get('firstLine').value as string).trim()){
-      this.snackBar.open("first line address is required","ok",{
-        duration:2000
-      }); 
+  private showValidationMessage() {
+    if (!(this.addAddressForm.get('firstLine').value as string).trim()) {
+      this.snackBar.open('first line address is required', 'ok', {
+        duration: 2000
+      });
       return true;
     }
-    if(!(this.addAddressForm.get('city').value as string).trim()){
-      this.snackBar.open("city is required","ok",{
-        duration:2000
-      }); 
+    if (!(this.addAddressForm.get('city').value as string).trim()) {
+      this.snackBar.open('city is required', 'ok', {
+        duration: 2000
+      });
       return true;
     }
-    if(!(this.addAddressForm.get('state').value as string).trim()){
-      this.snackBar.open("state is required","ok",{
-        duration:2000
+    if (!(this.addAddressForm.get('state').value as string).trim()) {
+      this.snackBar.open('state is required', 'ok', {
+        duration: 2000
       });
-      return true; 
+      return true;
     }
-    if(!(this.addAddressForm.get('country').value as string).trim()){
-      this.snackBar.open("country is required","ok",{
-        duration:2000
+    if (!(this.addAddressForm.get('country').value as string).trim()) {
+      this.snackBar.open('country is required', 'ok', {
+        duration: 2000
       });
-      return true; 
+      return true;
     }
-    if(!(this.addAddressForm.get('zipCode').value as string).trim()){
-      this.snackBar.open("zip code is required","ok",{
-        duration:2000
+    if (!(this.addAddressForm.get('zipCode').value as string).trim()) {
+      this.snackBar.open('zip code is required', 'ok', {
+        duration: 2000
       });
-      return true; 
+      return true;
     }
     return false;
-  } 
-
-  deleteAddress(id:number){
-    this.accountService.deleteAddress(id).pipe(take(1)).subscribe(address=>{
-      this.accountService.loadCurrentUser();
-      this.snackBar.open("deleted succes","OK",{duration:2000});
-    },error=>this.snackBar.open("error try later","OK",{duration:2000}));
-    
   }
 
-  toggleAddressForm(){
-    this.showAddressForm=!this.showAddressForm;
+  deleteAddress(id: number) {
+    this.accountService.deleteAddress(id).pipe(take(1)).subscribe(address => {
+      this.accountService.loadCurrentUser();
+      this.snackBar.open('deleted succes', 'OK', {duration: 2000});
+    }, error => this.snackBar.open('error try later', 'OK', {duration: 2000}));
+
+  }
+
+  toggleAddressForm() {
+    this.showAddressForm = !this.showAddressForm;
   }
 }
 

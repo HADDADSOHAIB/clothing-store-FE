@@ -11,16 +11,16 @@ import { Token } from 'src/app/models/token';
 export class AuthService {
 
   createAccount(credentials: Credentials) {
-    return this.http.post(BACK_END+"register",credentials) as Observable<Token>;
+    return this.http.post(BACK_END + 'register', credentials) as Observable<Token>;
   }
   login(credentials: Credentials) {
-    return this.http.post(BACK_END+"authenticate",credentials) as Observable<Token>;
+    return this.http.post(BACK_END + 'authenticate', credentials) as Observable<Token>;
 }
   checkEmail(credentials: Credentials) {
-      return this.http.post(BACK_END+"isemailok",credentials) as Observable<any>;
+      return this.http.post(BACK_END + 'isemailok', credentials) as Observable<any>;
   }
 
   constructor(
-    private http:HttpClient
+    private http: HttpClient
   ) { }
 }

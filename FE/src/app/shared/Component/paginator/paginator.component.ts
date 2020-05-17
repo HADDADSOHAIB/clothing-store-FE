@@ -5,59 +5,61 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
   templateUrl: './paginator.component.html',
   styleUrls: ['./paginator.component.scss']
 })
-export class PaginatorComponent implements OnChanges{
+export class PaginatorComponent implements OnChanges {
 
-  @Input() currentPage:number=1;
-  @Input() availableProductCount:number=0;
-  @Output() itemsPerPageEmitter:EventEmitter<number>=new EventEmitter<number>();
-  @Output() pageNumberEmitter:EventEmitter<number>=new EventEmitter<number>();
-  itemsPerPage:string="10";
-  availablePagesList:string[]=[];
+  @Input() currentPage = 1;
+  @Input() availableProductCount = 0;
+  @Output() itemsPerPageEmitter: EventEmitter<number> = new EventEmitter<number>();
+  @Output() pageNumberEmitter: EventEmitter<number> = new EventEmitter<number>();
+  itemsPerPage = '10';
+  availablePagesList: string[] = [];
   constructor() { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.availableProductCount) {
-      this.availablePagesList=[];
-      for(let i=1;i<=(this.availableProductCount/parseInt(this.itemsPerPage))+1;i++)
+      this.availablePagesList = [];
+      for (let i = 1; i <= (this.availableProductCount / parseInt(this.itemsPerPage)) + 1; i++) {
         this.availablePagesList.push(i.toString());
-    }  
+      }
+    }
   }
-  emitItemsPerPage(){
+  emitItemsPerPage() {
     this.itemsPerPageEmitter.emit(parseInt(this.itemsPerPage));
-    this.availablePagesList=[];
-      for(let i=1;i<=(this.availableProductCount/parseInt(this.itemsPerPage))+1;i++)
+    this.availablePagesList = [];
+    for (let i = 1; i <= (this.availableProductCount / parseInt(this.itemsPerPage)) + 1; i++) {
         this.availablePagesList.push(i.toString());
+    }
   }
 
-  emitPageNumber(){
+  emitPageNumber() {
     this.pageNumberEmitter.emit(this.currentPage);
   }
 
-  firstPage(){
-    this.currentPage=1;
+  firstPage() {
+    this.currentPage = 1;
     this.emitPageNumber();
   }
 
-  beforePage(){
-    if(this.currentPage===1)
+  beforePage() {
+    if (this.currentPage === 1) {
       this.emitPageNumber();
-    else{
+    } else {
       this.currentPage--;
       this.emitPageNumber();
     }
   }
 
-  nextPage(){
-    if(this.currentPage==parseInt(this.availablePagesList[this.availablePagesList.length-1]))
+  nextPage() {
+    if (this.currentPage == parseInt(this.availablePagesList[this.availablePagesList.length - 1])) {
       this.emitPageNumber();
-    else{
+    } else {
       this.currentPage++;
       this.emitPageNumber();
     }
   }
 
-  lastPage(){
-    this.currentPage=parseInt(this.availablePagesList[this.availablePagesList.length-1]);
+  lastPage() {
+    this.currentPage = parseInt(this.availablePagesList[this.availablePagesList.length - 1]);
     this.emitPageNumber();
   }
 }

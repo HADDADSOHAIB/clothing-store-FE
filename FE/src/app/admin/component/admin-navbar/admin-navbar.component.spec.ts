@@ -31,7 +31,7 @@ describe('AdminHeaderComponent', () => {
   let component: AdminHeaderComponent;
   let fixture: ComponentFixture<AdminHeaderComponent>;
   let debugElement: DebugElement;
-  let cart:CartService;
+  let cart: CartService;
   let router: Router;
   let compiled: any;
 
@@ -54,7 +54,7 @@ describe('AdminHeaderComponent', () => {
       RouterTestingModule,
       SharedModule.forRoot()
     ],
-    providers:[
+    providers: [
       AuthService,
       CategoryService,
       OrderService,
@@ -76,7 +76,7 @@ describe('AdminHeaderComponent', () => {
     fixture = TestBed.createComponent(AdminHeaderComponent);
     component = fixture.componentInstance;
     debugElement = fixture.debugElement;
-    compiled=debugElement.nativeElement;
+    compiled = debugElement.nativeElement;
     fixture.detectChanges();
   });
 

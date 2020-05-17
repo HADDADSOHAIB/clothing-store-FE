@@ -17,12 +17,12 @@ import { ShippingFormComponent } from 'src/app/store/component/shipping-form/shi
 describe('PaginatorComponent', () => {
   let component: PaginatorComponent;
   let fixture: ComponentFixture<PaginatorComponent>;
-  let compiled:any;
+  let compiled: any;
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        StoreFrontComponent, 
-        ProductCardComponent, 
+        StoreFrontComponent,
+        ProductCardComponent,
         PaginatorComponent,
         StoreHeaderComponent,
         StoreComponent,
@@ -46,12 +46,12 @@ describe('PaginatorComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(PaginatorComponent);
     component = fixture.componentInstance;
-    component.availableProductCount=80;
-    component.currentPage=3;
+    component.availableProductCount = 80;
+    component.currentPage = 3;
 
-    spyOn(component,'emitPageNumber').and.callThrough();
+    spyOn(component, 'emitPageNumber').and.callThrough();
 
-    compiled=fixture.debugElement.nativeElement;
+    compiled = fixture.debugElement.nativeElement;
     fixture.detectChanges();
   });
 
@@ -71,9 +71,9 @@ describe('PaginatorComponent', () => {
   });
 
   it('beforePage() should set the current page to previous page ', () => {
-    let page=component.currentPage;
+    const page = component.currentPage;
     component.beforePage();
-    expect(component.currentPage).toEqual(page-1);
+    expect(component.currentPage).toEqual(page - 1);
   });
 
   it('beforePage() should call emitPageNumber()', () => {
@@ -82,9 +82,9 @@ describe('PaginatorComponent', () => {
   });
 
   it('nextPage() should set the current page to the next page ', () => {
-    let page=component.currentPage;
+    const page = component.currentPage;
     component.nextPage();
-    expect(component.currentPage).toEqual(page+1);
+    expect(component.currentPage).toEqual(page + 1);
   });
 
   it('nextPage() should call emitPageNumber()', () => {
@@ -93,7 +93,7 @@ describe('PaginatorComponent', () => {
   });
 
   it('lastPage() should set the current page to the last page ', () => {
-    let lastPage=component.availablePagesList[component.availablePagesList.length-1];
+    const lastPage = component.availablePagesList[component.availablePagesList.length - 1];
     component.lastPage();
     expect(component.currentPage).toEqual(parseInt(lastPage));
   });
@@ -104,20 +104,20 @@ describe('PaginatorComponent', () => {
   });
 
   it('emitPageNumber() should emit using pageNumberEmitter the current page whent called', () => {
-    spyOn(component.pageNumberEmitter,'emit');
-    component.currentPage=5;
+    spyOn(component.pageNumberEmitter, 'emit');
+    component.currentPage = 5;
     component.emitPageNumber();
     expect(component.pageNumberEmitter.emit).toHaveBeenCalledWith(5);
   });
 
   it('emitItemsPerPage() should emit using ItemsPerPageEmitter the itemsPerPage whent called', () => {
-    spyOn(component.itemsPerPageEmitter,'emit');
+    spyOn(component.itemsPerPageEmitter, 'emit');
     component.emitItemsPerPage();
     expect(component.itemsPerPageEmitter.emit).toHaveBeenCalledWith(parseInt(component.itemsPerPage));
   });
 
   it('should render a list with all pages options', () => {
-    let options=compiled.querySelectorAll(".page-options");
+    const options = compiled.querySelectorAll('.page-options');
     expect(options.length).toEqual(component.availablePagesList.length);
   });
 });

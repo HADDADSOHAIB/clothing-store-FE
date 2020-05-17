@@ -14,33 +14,33 @@ import { AccountService } from 'src/app/services/account-service/account.service
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent implements OnInit {
- 
-  userList:User[]=[];
 
-  displayedColumns: string[] = ['First Name','Last Name','Phone Number','UserEmail', 'Roles','Options'];
+  userList: User[] = [];
+
+  displayedColumns: string[] = ['First Name', 'Last Name', 'Phone Number', 'UserEmail', 'Roles', 'Options'];
   constructor(
-    private snackBar:MatSnackBar,
-    private accountService:AccountService,
+    private snackBar: MatSnackBar,
+    private accountService: AccountService,
     private roleService: RoleService
   ) { }
 
   ngOnInit() {
-    this.accountService.getAllUsers().pipe(take(1)).subscribe(users=>{
-      this.userList=users;
+    this.accountService.getAllUsers().pipe(take(1)).subscribe(users => {
+      this.userList = users;
       console.log(users);
     });
   }
 
-  upgradeToAdmin(userEmail:String){
-    this.roleService.upgradeUser(userEmail).pipe(take(1)).subscribe(response=>{
-      this.accountService.getAllUsers().pipe(take(1)).subscribe(users=>{
-        this.userList=users;
+  upgradeToAdmin(userEmail: String) {
+    this.roleService.upgradeUser(userEmail).pipe(take(1)).subscribe(response => {
+      this.accountService.getAllUsers().pipe(take(1)).subscribe(users => {
+        this.userList = users;
       });
     },
-    error=>console.log(error));
+    error => console.log(error));
   }
 
-  getRoles(id:number){
-    return this.userList.find(user=>user.id===id).roles.map(role=>role.name).join(", ");
+  getRoles(id: number) {
+    return this.userList.find(user => user.id === id).roles.map(role => role.name).join(', ');
   }
 }

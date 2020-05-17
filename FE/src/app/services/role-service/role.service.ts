@@ -14,11 +14,11 @@ export class RoleService {
     private httpClient: HttpClient
   ) { }
 
-  getRoles(){
-    return this.httpClient.get(BACK_END+"roles") as Observable<Role[]>;
+  getRoles() {
+    return this.httpClient.get(BACK_END + 'roles') as Observable<Role[]>;
   }
 
-  upgradeUser(email:String){
-    return this.httpClient.get(BACK_END+"roles/upgrade/"+email);
+  upgradeUser(email: String) {
+    return this.httpClient.get(BACK_END + 'roles/upgrade/' + email);
   }
 }

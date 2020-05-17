@@ -9,11 +9,11 @@ import { SidenavService } from 'src/app/services/sidenav-service/sidenav.service
   templateUrl: './store-navbar.component.html',
   styleUrls: ['./store-navbar.component.scss']
 })
-export class StoreHeaderComponent implements OnInit{
+export class StoreHeaderComponent implements OnInit {
 
   cart: Cart;
-  user:User;
-  
+  user: User;
+
   constructor(
     private cartService: CartService,
     private sidenavService: SidenavService
@@ -21,10 +21,10 @@ export class StoreHeaderComponent implements OnInit{
 
   ngOnInit() {
     this.cartService.loadCart();
-    this.cartService.getCart().subscribe(cart=>this.cart=cart);
+    this.cartService.getCart().subscribe(cart => this.cart = cart);
   }
 
-  sidenavClose(){
+  sidenavClose() {
     this.sidenavService.showSidenave.next(false);
   }
 }

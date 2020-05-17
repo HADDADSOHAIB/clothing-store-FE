@@ -1,8 +1,8 @@
-export class Privilege{
+export class Privilege {
     constructor(
-        public id:number,
-        public name:string
-    ){
+        public id: number,
+        public name: string
+    ) {
 
     }
 }

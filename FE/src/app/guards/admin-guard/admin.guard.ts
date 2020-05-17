@@ -9,7 +9,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AdminGuard {
-  
+
   constructor(
     private accountService: AccountService,
     private router: Router,
@@ -17,17 +17,17 @@ export class AdminGuard {
     ) { }
 
   canActivate(
-    route: ActivatedRouteSnapshot, 
+    route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
     ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    return this.accountService.getCurrentUser().pipe(map(user=>{
-      if(user.roles.map(role=>role.name).includes('Admin'))
+    return this.accountService.getCurrentUser().pipe(map(user => {
+      if (user.roles.map(role => role.name).includes('Admin')) {
         return true;
-      else{
-        this.snackBar.open("Only admins are allowed","Ok");
-        this.router.navigate(["auth","signin"]);
+      } else {
+        this.snackBar.open('Only admins are allowed', 'Ok');
+        this.router.navigate(['auth', 'signin']);
         return false;
       }
-    }))
+    }));
   }
 }

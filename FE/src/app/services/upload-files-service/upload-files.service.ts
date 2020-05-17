@@ -13,25 +13,25 @@ export class UploadFilesService {
     private httpClient: HttpClient
   ) { }
 
-  uploadFiles(formData:FormData){
-    return this.httpClient.post(BACK_END+"images/uploadMultipleFiles",formData) as Observable<String[]>;
+  uploadFiles(formData: FormData) {
+    return this.httpClient.post(BACK_END + 'images/uploadMultipleFiles', formData) as Observable<String[]>;
   }
 
-  downloadFile(id:String){
+  downloadFile(id: String) {
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Accept': 'application/json'      
+      Accept: 'application/json'
     });
-    return (this.httpClient.get<Blob>(BACK_END+"images/downloadFile/"+id,
-      {headers: headers, responseType: 'blob' as 'json' }) as Observable<File>)
-      .pipe(map(blob=>this.createImageFromBlob(blob)));  
+    return (this.httpClient.get<Blob>(BACK_END + 'images/downloadFile/' + id,
+      {headers, responseType: 'blob' as 'json' }) as Observable<File>)
+      .pipe(map(blob => this.createImageFromBlob(blob)));
   }
 
-  deletFile(id:String){
-    return this.httpClient.delete(BACK_END+"images/deleteFile/"+id);
+  deletFile(id: String) {
+    return this.httpClient.delete(BACK_END + 'images/deleteFile/' + id);
   }
   private createImageFromBlob(image: Blob) {
-    let reader = new FileReader();
+    const reader = new FileReader();
     // let imageBlobUrl="";
     // reader.addEventListener("load", () => {
     //   imageBlobUrl = reader.result.toString();

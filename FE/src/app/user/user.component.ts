@@ -8,14 +8,14 @@ import { SidenavService } from '../services/sidenav-service/sidenav.service';
 })
 export class UserComponent implements OnInit {
 
-  showSidenav:boolean=true;
+  showSidenav = true;
 
   constructor(
     private sidenavService: SidenavService
   ) { }
 
   ngOnInit() {
-    this.sidenavService.showSidenave.subscribe(bool=>this.showSidenav=bool);
+    this.sidenavService.showSidenave.subscribe(bool => this.showSidenav = bool);
   }
 
 }

@@ -11,8 +11,8 @@ import { take } from 'rxjs/operators';
 })
 export class HeaderComponent implements OnInit {
 
-  currentUser:User;
-  currentUserRoles: String[]=[];
+  currentUser: User;
+  currentUserRoles: String[] = [];
 
   constructor(
     private accountService: AccountService,
@@ -21,19 +21,19 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
     this.accountService.loadCurrentUser();
-    this.accountService.getCurrentUser().subscribe(user=>{
-      this.currentUser=user;
-      this.currentUserRoles=this.currentUser.roles.map(role=>role.name);
+    this.accountService.getCurrentUser().subscribe(user => {
+      this.currentUser = user;
+      this.currentUserRoles = this.currentUser.roles.map(role => role.name);
     });
   }
 
-  logout(){
-    localStorage.removeItem("token");
+  logout() {
+    localStorage.removeItem('token');
     this.accountService.loadCurrentUser();
   }
 
-  toggleSidenav(){
-    this.sidenavService.showSidenave.pipe(take(1)).subscribe(bool=>
+  toggleSidenav() {
+    this.sidenavService.showSidenave.pipe(take(1)).subscribe(bool =>
       this.sidenavService.showSidenave.next(!bool));
   }
 }

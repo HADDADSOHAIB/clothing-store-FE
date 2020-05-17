@@ -13,44 +13,44 @@ import { UserListComponent } from './component/user-list/user-list.component';
 
 const routes: Routes = [
   {
-    path:"",
-    component:AdminComponent,
-    children:[
+    path: '',
+    component: AdminComponent,
+    children: [
       {
-        path:"",
-        component:ProductListComponent
+        path: '',
+        component: ProductListComponent
       },
       {
-        path:"categories",
-        component:CategoryFormComponent,
+        path: 'categories',
+        component: CategoryFormComponent,
       },
       {
-        path:"product/:id",
-        component:ProductManagementFormComponent,
+        path: 'product/:id',
+        component: ProductManagementFormComponent,
       },
       {
-        path:"product/new",
-        component:ProductManagementFormComponent,
+        path: 'product/new',
+        component: ProductManagementFormComponent,
       },
       {
-        path:"products",
-        component:ProductListComponent,
+        path: 'products',
+        component: ProductListComponent,
       },
       {
-        path:"order/:id",
-        component:OrderInfosComponent
+        path: 'order/:id',
+        component: OrderInfosComponent
       },
       {
-        path:"orders",
-        component:OrdersListComponent
+        path: 'orders',
+        component: OrdersListComponent
       },
       {
-        path:"users",
-        component:UserListComponent
+        path: 'users',
+        component: UserListComponent
       },
       {
-        path:"manage",
-        component:ManageStoreComponent
+        path: 'manage',
+        component: ManageStoreComponent
       }
     ]
   }

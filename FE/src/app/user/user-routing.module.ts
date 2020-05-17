@@ -9,24 +9,24 @@ import { MyReviewsComponent } from './component/my-reviews/my-reviews.component'
 
 const routes: Routes = [
   {
-    path:'',
-    component:UserComponent,
-    children:[
+    path: '',
+    component: UserComponent,
+    children: [
       {
-        path:'account',
-        component:AccountComponent
+        path: 'account',
+        component: AccountComponent
       },
       {
-        path:'myorders/:id',
-        component:OrderInfosComponent
+        path: 'myorders/:id',
+        component: OrderInfosComponent
       },
       {
-        path:'myorders',
-        component:MyOrdersComponent
+        path: 'myorders',
+        component: MyOrdersComponent
       },
       {
-        path:'myreviews',
-        component:MyReviewsComponent
+        path: 'myreviews',
+        component: MyReviewsComponent
       }
     ]
   }

@@ -19,8 +19,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
-    StoreFrontComponent, 
-    ProductCardComponent, 
+    StoreFrontComponent,
+    ProductCardComponent,
     StoreHeaderComponent,
     StoreComponent,
     ProductFormComponent,
@@ -33,11 +33,11 @@ import { MatDialogModule } from '@angular/material/dialog';
     SharedModule.forRoot(),
     MatDialogModule
     ],
-  entryComponents:[
+  entryComponents: [
     ProductFormComponent
   ],
   providers: [
-    
+
   ]
 })
 export class StoreModule { }

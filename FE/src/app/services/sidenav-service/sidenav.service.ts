@@ -5,6 +5,6 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class SidenavService {
-  showSidenave:BehaviorSubject<boolean>=new BehaviorSubject(true);
+  showSidenave: BehaviorSubject<boolean> = new BehaviorSubject(true);
   constructor() { }
 }

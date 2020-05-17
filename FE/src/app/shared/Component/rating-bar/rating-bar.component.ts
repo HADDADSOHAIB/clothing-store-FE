@@ -5,12 +5,12 @@ import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChange
   templateUrl: './rating-bar.component.html',
   styleUrls: ['./rating-bar.component.scss']
 })
-export class RatingBarComponent implements OnInit,OnChanges {
- 
-  @Input() rating:number=4;
-  @Input() readOnly:boolean=false;
-  @Output() ratingChange:EventEmitter<number>=new EventEmitter();
-  ratingSelected:number;
+export class RatingBarComponent implements OnInit, OnChanges {
+
+  @Input() rating = 4;
+  @Input() readOnly = false;
+  @Output() ratingChange: EventEmitter<number> = new EventEmitter();
+  ratingSelected: number;
 
   constructor() {}
 
@@ -18,24 +18,24 @@ export class RatingBarComponent implements OnInit,OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if(changes.rating){
-     this.ratingSelected=this.rating; 
-    }
-  }
-  
-
-  changeRating(rating:string){
-    if(!this.readOnly){
-      this.ratingSelected=parseInt(rating);
+    if (changes.rating) {
+     this.ratingSelected = this.rating;
     }
   }
 
-  resetRating(){
-    this.ratingSelected=this.rating;
+
+  changeRating(rating: string) {
+    if (!this.readOnly) {
+      this.ratingSelected = parseInt(rating);
+    }
   }
 
-  commitChange(){
-    this.rating=this.ratingSelected;
+  resetRating() {
+    this.ratingSelected = this.rating;
+  }
+
+  commitChange() {
+    this.rating = this.ratingSelected;
     this.ratingChange.emit(this.rating);
   }
 }

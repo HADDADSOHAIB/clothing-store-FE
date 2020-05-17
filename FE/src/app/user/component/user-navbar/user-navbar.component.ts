@@ -10,13 +10,13 @@ import { SidenavService } from 'src/app/services/sidenav-service/sidenav.service
 export class UserHeaderComponent implements OnInit {
 
   constructor(
-    private sidenaveService:SidenavService
+    private sidenaveService: SidenavService
   ) { }
 
   ngOnInit() {
   }
 
-  closeNavbar(){
+  closeNavbar() {
     this.sidenaveService.showSidenave.next(false);
   }
 }

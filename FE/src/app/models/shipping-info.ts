@@ -1,10 +1,10 @@
 import { Address } from './address';
 
-export class ShippingInfos{
-    
+export class ShippingInfos {
+
     constructor(
-        public id:number,
-        public firstName:string,
+        public id: number,
+        public firstName: string,
         public lastName: string,
         public phoneNumber: string,
         public firstLine: string,
@@ -13,5 +13,5 @@ export class ShippingInfos{
         public state: string,
         public country: string,
         public zipCode: string
-    ){}
+    ) {}
 }
