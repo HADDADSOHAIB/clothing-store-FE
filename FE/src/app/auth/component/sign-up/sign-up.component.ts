@@ -1,18 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '../../custom-validators/password-must-match';
-import {
-  mustContainUpperCase,
-  mustContainNumber,
-  mustContainLowerCase,
-  mustContainSpecialCaracter,
-} from '../../custom-validators/password-pattern';
-import { take } from 'rxjs/operators';
+
+import { take, last } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
-import { Credentials } from 'src/app/models/credentials';
+import { User } from 'src/app/models/user';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,7 +16,7 @@ import { Credentials } from 'src/app/models/credentials';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  credentials: Credentials;
+  credentials: User;
   form: FormGroup;
   emailOk = false;
   emailDisabled = false;
@@ -31,7 +27,8 @@ export class SignUpComponent implements OnInit {
     private formBuilder: FormBuilder,
     private authService: AuthService,
     private snackBar: MatSnackBar,
-    private router: Router
+    private router: Router,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit() {
@@ -51,50 +48,43 @@ export class SignUpComponent implements OnInit {
     );
   }
 
-  // checkEmail() {
-  // 	this.credentials = new Credentials(
-  // 		this.emailForm.get('email').value,
-  // 		this.passwordForm.get('password').value
-  // 	);
-  // 	this.authService.checkEmail(this.credentials)
-  // 		.pipe(take(1)).subscribe(resp => {
-  // 			this.emailOk = true;
-  // 			this.emailDisabled = true;
-  // 			this.openSnackBar('email OK');
-  // 		},
-  // 		error => {
-  // 			console.log(error);
-  // 			this.emailOk = false;
-  // 			this.openSnackBar('Email Not OK');
-  // 		});
-  // }
-
-  changeEmail() {
-    this.emailOk = false;
-    this.emailDisabled = false;
-  }
   createAccount() {
-    // this.credentials = new Credentials(
-    // 	this.emailForm.get('email').value,
-    // 	this.passwordForm.get('password').value
-    // );
-
-    if (!this.emailOk) {
-      this.openSnackBar('Email is not Ok');
+    if (!this.form.valid) {
+      this.openSnackBar('please fill or fix the red fields');
     } else {
+      const { userEmail, userName, firstName, lastName, phoneNumber, password, passwordConfirmation } = this.form.value;
+      const newUser = new User(
+        null,
+        userEmail,
+        userName,
+        firstName,
+        lastName,
+        phoneNumber,
+        null,
+        null,
+        password,
+        passwordConfirmation
+      );
+
       this.authService
-        .createAccount(this.credentials)
+        .createAccount(newUser)
         .pipe(take(1))
         .subscribe(
-          (resp) => {
-            this.accountCreated = true;
-            localStorage.setItem('token', resp.token);
-            this.creationResult$.next('Account created, un email is sent to your inbox for verification');
+          (res) => {
+            this.cookieService.set("token", res.token, 30);
+            this.openSnackBar("Account Created sucessfully");
+            this.router.navigate(['/']);
           },
-          (error) => {
-            console.log(error);
-            this.accountCreated = false;
-            this.creationResult$.next('Unexpected error, please check your internet connection or try later');
+          (err) => {
+            let message = "Error.";
+            if(err.error.includes("Email already exist")){
+              message += " Email already exist."
+            }
+            if(err.error.includes(" User name already exist")){
+              message += " User name already exist."
+            }
+
+            this.openSnackBar(message);
           }
         );
     }
@@ -104,10 +94,6 @@ export class SignUpComponent implements OnInit {
     this.snackBar.open(message, 'Ok', {
       duration: 5000,
     });
-  }
-
-  routeToHome() {
-    this.router.navigate(['/']);
   }
 
   checkValidity(controleName, error) {

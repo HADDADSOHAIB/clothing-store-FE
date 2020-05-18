@@ -4,7 +4,7 @@
       <mat-card-title>Sign Up</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <form [formGroup]="form" (ngSubmit)="Login()">
+      <form [formGroup]="form" (ngSubmit)="createAccount()">
         <p class="form-field">
           <mat-form-field appearance="outline">
             <mat-label>User Email</mat-label>
@@ -57,6 +57,9 @@
           <mat-form-field appearance="outline">
             <mat-label>Password Confirmation</mat-label>
             <input type="password" matInput formControlName="passwordConfirmation">
+            <mat-error *ngIf="checkValidity('passwordConfirmation', 'required')">
+              password confirmation is required.
+            </mat-error>
             <mat-error *ngIf="checkValidity('passwordConfirmation', 'mustMatch')">
               password confirmation is not a match
             </mat-error>

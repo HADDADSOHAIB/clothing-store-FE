@@ -16,9 +16,9 @@ import { OrderService } from './services/order-service/order.service';
 import { ProductsService } from './services/products-service/products.service';
 import { ReviewService } from './services/review-service/review.service';
 import { RoleService } from './services/role-service/role.service';
-import { AuthInterceptor } from './shared/interceptors/http.interceptor';
 import { SidenavService } from './services/sidenav-service/sidenav.service';
 import { UploadFilesService } from './services/upload-files-service/upload-files.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
 	declarations: [
@@ -44,11 +44,7 @@ import { UploadFilesService } from './services/upload-files-service/upload-files
 		{ provide: MatDialogRef, useValue: {} },
 		SidenavService,
 		UploadFilesService,
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: AuthInterceptor,
-			multi: true
-		}
+		CookieService
 	],
 	bootstrap: [AppComponent]
 })
