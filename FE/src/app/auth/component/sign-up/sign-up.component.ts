@@ -2,10 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MustMatch } from '../../custom-validators/password-must-match';
 
-import { take, last } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { User } from 'src/app/models/user';
 import { CookieService } from 'ngx-cookie-service';
@@ -16,12 +15,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrls: ['./sign-up.component.scss'],
 })
 export class SignUpComponent implements OnInit {
-  credentials: User;
   form: FormGroup;
-  emailOk = false;
-  emailDisabled = false;
-  accountCreated = false;
-  creationResult$: Subject<string> = new Subject<string>();
 
   constructor(
     private formBuilder: FormBuilder,

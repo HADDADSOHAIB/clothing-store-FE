@@ -1,15 +1,15 @@
 <mat-card>
   <mat-card-title>Login</mat-card-title>
   <mat-card-content>
-    <form [formGroup]="form" (ngSubmit)="Login()">
+    <form [formGroup]="form" (ngSubmit)="login()">
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Email address</mat-label>
           <input type="text" matInput placeholder="Email" formControlName="email">
-          <mat-error *ngIf="form.get('email').touched && form.get('email').hasError('required')">
+          <mat-error *ngIf="checkValidity('email','required')">
             Email is required.
           </mat-error>
-          <mat-error *ngIf="form.get('email').touched && form.get('email').hasError('email')">
+          <mat-error *ngIf="checkValidity('email','email')">
             Email not valid.
           </mat-error>
         </mat-form-field>
@@ -18,13 +18,16 @@
         <mat-form-field appearance="outline">
           <mat-label>Password</mat-label>
           <input type="password" matInput placeholder="Password" formControlName="password">
-          <mat-error *ngIf="form.get('password').touched && form.get('password').hasError('required')">
+          <mat-error *ngIf="checkValidity('password','required')">
             Password is required.
+          </mat-error>
+          <mat-error *ngIf="checkValidity('password', 'minlength')">
+            password should be longer then 6 characters.
           </mat-error>
         </mat-form-field>
       </p>
       <div class="button">
-        <button type="submit" [disabled]="!form.valid" mat-raised-button color="primary">
+        <button type="submit" mat-raised-button color="primary">
           Login
         </button>
       </div>
