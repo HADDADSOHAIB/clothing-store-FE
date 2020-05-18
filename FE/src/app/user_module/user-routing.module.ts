@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { UserComponent } from './user.component';
 import { AccountComponent } from './component/account/account.component';
 import { MyOrdersComponent } from './component/my-orders/my-orders.component';
-import { OrderInfosComponent } from '../shared/Component/order-infos/order-infos.component';
+import { OrderInfosComponent } from '../shared/component/order-infos/order-infos.component';
 import { MyReviewsComponent } from './component/my-reviews/my-reviews.component';
 
 
