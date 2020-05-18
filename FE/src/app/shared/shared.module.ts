@@ -31,7 +31,6 @@ import { FilterAndSortComponent } from './Component/filter-and-sort/filter-and-s
 import { OrderStatusComponent } from './Component/order-status/order-status.component';
 import { OrderInfosComponent } from './Component/order-infos/order-infos.component';
 import { RatingBarComponent } from './Component/rating-bar/rating-bar.component';
-import { AuthInterceptor } from './interceptors/http.interceptor';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
