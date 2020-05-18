@@ -1,75 +1,74 @@
 <div fxLayout="row" fxLayoutAlign="center stretch" class="main">
-    <mat-card class="form-card" fxLayout="column" fxLayoutAlign="space-around centre">
-        <mat-card-header class="form-card">
-            <mat-card-title>Product Details</mat-card-title>
-        </mat-card-header>
-        <mat-card-content >
-            <form [formGroup]="form" fxLayout="column" fxLayoutAlign="space-between centre" >
-                <mat-form-field class="form-card">
-                    <input matInput placeholder="Name" formControlName="name">
-                </mat-form-field>
+  <mat-card class="form-card" fxLayout="column" fxLayoutAlign="space-around centre">
+    <mat-card-header class="form-card">
+      <mat-card-title>Product Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" fxLayout="column" fxLayoutAlign="space-between centre">
+        <mat-form-field class="form-card">
+          <input matInput placeholder="Name" formControlName="name">
+        </mat-form-field>
 
-                <mat-form-field class="form-card">
-                    <textarea matInput placeholder="Description" formControlName="description"
-                        (keyup)="updateProduct()">
+        <mat-form-field class="form-card">
+          <textarea matInput placeholder="Description" formControlName="description" (keyup)="updateProduct()">
                     </textarea>
-                </mat-form-field>
+        </mat-form-field>
 
-                <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
-                    <mat-form-field class="form-card">
-                        <input matInput placeholder="Price" formControlName="price" >
-                    </mat-form-field>
-                    <mat-form-field class="form-card">
-                        <input matInput placeholder="Quantity" formControlName="quantity" >
-                    </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
-                    <mat-form-field class="form-card-category">
-                        <mat-select placeholder="Select Category" formControlName="category" >
-                            <mat-option value="{{category.categoryId}}" *ngFor="let category of categories">
-                                {{category.categoryName}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <button mat-raised-button (click)="goCategories()">Add category</button>
-                </div>
-                
-                <mat-form-field class="form-card">
-                    <mat-chip-list >
-                        <mat-chip color="primary" *ngFor="let category of product.categories" [removable]="true"
-                            (removed)="removeCategory(category.categoryId)" [selectable]="true">
-                            {{category.categoryName}}
-                            <mat-icon matChipRemove>cancel</mat-icon>
-                        </mat-chip>
-                    </mat-chip-list>
-                </mat-form-field>
-
-                <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
-                    <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)" >
-                    <p>Drag and drop an image</p>
-                </div>
-                <div>
-                    <button  mat-button class="delete-file" *ngFor="let file of files;index as i">
-                    <mat-icon matTooltip="{{ file.name }}">photo</mat-icon>
-                    <mat-icon matTooltip="delete" (click)="deleteAttachment(i)" color="warn">clear</mat-icon>
-                    </button>
-                </div>
-
-            </form>
-        </mat-card-content>
-        <div>
-            <button class="card-form" mat-raised-button color="primary" (click)="save()">Save</button>
-            <button class="card-form" mat-raised-button color="warn" (click)="delete()">delete</button>
+        <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
+          <mat-form-field class="form-card">
+            <input matInput placeholder="Price" formControlName="price">
+          </mat-form-field>
+          <mat-form-field class="form-card">
+            <input matInput placeholder="Quantity" formControlName="quantity">
+          </mat-form-field>
         </div>
-    </mat-card>
+        <div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
+          <mat-form-field class="form-card-category">
+            <mat-select placeholder="Select Category" formControlName="category">
+              <mat-option value="{{category.categoryId}}" *ngFor="let category of categories">
+                {{category.categoryName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-raised-button (click)="goCategories()">Add category</button>
+        </div>
 
-    <div class="container">
-        <mat-card *ngFor="let url of imageUrls;index as i"  class="image">
-            <mat-card-content>
-                <div>
-                    <mat-icon (click)="deleteImage(i)" class="delete" matTooltip="delete">clear</mat-icon>
-                </div>
-                <img mat-card-image [src]="url"  alt="product image" class="image">
-            </mat-card-content>
-        </mat-card>
+        <mat-form-field class="form-card">
+          <mat-chip-list>
+            <mat-chip color="primary" *ngFor="let category of product.categories" [removable]="true"
+              (removed)="removeCategory(category.categoryId)" [selectable]="true">
+              {{category.categoryName}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-form-field>
+
+        <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+          <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+          <p>Drag and drop an image</p>
+        </div>
+        <div>
+          <button mat-button class="delete-file" *ngFor="let file of files;index as i">
+            <mat-icon matTooltip="{{ file.name }}">photo</mat-icon>
+            <mat-icon matTooltip="delete" (click)="deleteAttachment(i)" color="warn">clear</mat-icon>
+          </button>
+        </div>
+
+      </form>
+    </mat-card-content>
+    <div>
+      <button class="card-form" mat-raised-button color="primary" (click)="save()">Save</button>
+      <button class="card-form" mat-raised-button color="warn" (click)="delete()">delete</button>
     </div>
+  </mat-card>
+
+  <div class="container">
+    <mat-card *ngFor="let url of imageUrls;index as i" class="image">
+      <mat-card-content>
+        <div>
+          <mat-icon (click)="deleteImage(i)" class="delete" matTooltip="delete">clear</mat-icon>
+        </div>
+        <img mat-card-image [src]="url" alt="product image" class="image">
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>

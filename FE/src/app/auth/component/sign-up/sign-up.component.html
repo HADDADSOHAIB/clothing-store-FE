@@ -1,80 +1,73 @@
-<div fxLayout="row" fxLayoutAlign="center center">
-    <mat-card class="card">
-        <mat-card-header class="header">
-            <mat-card-title class="header-title">Create New Acount</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <mat-vertical-stepper [linear]="true" #stepper>
-                <mat-step [stepControl]="emailForm">
-                    <form [formGroup]="emailForm">
-                        <ng-template matStepLabel>Fill out your Email</ng-template>
-                        <mat-form-field class="email-form" >
-                            <input matInput placeholder="Email" formControlName="email" (keyup)="changeEmail()" required>
-                        </mat-form-field>
-                        <mat-error *ngIf="emailForm.get('email').hasError('required') && emailForm.touched">
-                            Email required
-                        </mat-error>
-                        <mat-error *ngIf="emailForm.get('email').hasError('email') && emailForm.touched">
-                            Email invalid
-                        </mat-error>
-                        <div>
-                            <button mat-raised-button color="warn" (click)="checkEmail()" 
-                            [disabled]="emailForm.invalid" class="btn" >
-                                Check email
-                            </button>
-                            <button mat-raised-button color="primary" matStepperNext class="btn"
-                                [disabled]="!emailOk">Next</button>
-                        </div>
-                    </form>
-                </mat-step>
-                <mat-step [stepControl]="passwordForm">
-                    <form [formGroup]="passwordForm">
-                        <ng-template matStepLabel>Fill out your password</ng-template>
-                        <mat-form-field class="password-form">
-                            <input matInput placeholder="password" formControlName="password" type="password" required>
-                        </mat-form-field>
-                        <mat-form-field class="password-form">
-                            <input matInput placeholder="password" formControlName="confirmPassword" type="password" required>
-                        </mat-form-field>
-                        <div>
-                            <mat-error *ngIf="passwordForm.get('password').hasError('required') && passwordForm.touched">
-                                Password required
-                            </mat-error>
-                            <mat-error *ngIf="passwordForm.get('password').hasError('minlength') && passwordForm.touched">
-                                Minimum length is six caracter
-                            </mat-error>
-                            <mat-error *ngIf="passwordForm.get('password').hasError('mustContainUpperCase') && passwordForm.touched">
-                                Must Contain An Upper Case
-                            </mat-error>
-                            <mat-error *ngIf="passwordForm.get('password').hasError('mustContainLowerCase') && passwordForm.touched">
-                                Must Contain A Lower Case
-                            </mat-error>
-                            <mat-error *ngIf="passwordForm.get('password').hasError('mustContainNumber') && passwordForm.touched">
-                                Must Contain A Number
-                            </mat-error>
-                            <mat-error *ngIf="passwordForm.get('password').hasError('mustContainSpecialCaracter') && passwordForm.touched">
-                                Must Contain Special Caracter
-                            </mat-error>
-                            <mat-error *ngIf="passwordForm.get('confirmPassword').hasError('mustMatch') && passwordForm.touched">
-                                Password Must Match
-                            </mat-error>
-                        </div>
-                        <div>
-                            <button mat-raised-button color="warn" matStepperPrevious class="btn">Back</button>
-                            <button mat-raised-button color="primary" matStepperNext (click)="createAccount()" class="btn">Create Account</button>
-                        </div>
-                    </form>
-                </mat-step>
-                <mat-step>
-                    <ng-template matStepLabel>Done</ng-template>
-                    <div class="message">
-                        {{creationResult$ | async}}
-                    </div>
-                    <div>
-                        <button mat-raised-button color="primary" (click)="routeToHome()" class="btn">Home Page</button>
-                    </div>
-                </mat-step>
-            </mat-vertical-stepper>
-        </mat-card-content>
-    </mat-card>
+<div class="sign-up-container">
+  <mat-card class="sign-up-card">
+    <mat-card-header>
+      <mat-card-title>Sign Up</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form" (ngSubmit)="Login()">
+        <p class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>User Email</mat-label>
+            <input type="email" matInput formControlName="userEmail">
+            <mat-error *ngIf="checkValidity('userEmail', 'required')">
+              user email is required.
+            </mat-error>
+            <mat-error *ngIf="checkValidity('userEmail', 'email')">
+              user email is not valid.
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>User Name</mat-label>
+            <input type="text" matInput formControlName="userName">
+            <mat-error *ngIf="checkValidity('userName', 'required')">
+              user name is required.
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <p class="two-form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput formControlName="firstName">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput formControlName="lastName">
+          </mat-form-field>
+        </p>
+        <p class="form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Phone Number</mat-label>
+            <input type="text" matInput formControlName="phoneNumber">
+          </mat-form-field>
+        </p>
+        <p class="two-form-field">
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password">
+            <mat-error *ngIf="checkValidity('password', 'required')">
+              password is required.
+            </mat-error>
+            <mat-error *ngIf="checkValidity('password', 'minlength')">
+              password should be longer then 6 characters.
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Password Confirmation</mat-label>
+            <input type="password" matInput formControlName="passwordConfirmation">
+            <mat-error *ngIf="checkValidity('passwordConfirmation', 'mustMatch')">
+              password confirmation is not a match
+            </mat-error>
+          </mat-form-field>
+        </p>
+        <div class="button">
+          <button type="submit" mat-raised-button color="primary">
+            Sign-up
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>
