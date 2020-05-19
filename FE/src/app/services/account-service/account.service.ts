@@ -5,41 +5,34 @@ import { Observable, BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
 import { Address } from 'src/app/models/address';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AccountService {
-  subject: BehaviorSubject<User>;
-  user: User;
-  constructor(private httpClient: HttpClient) {
-    console.log('bonjour');
+  currentUser$: BehaviorSubject<User> = new BehaviorSubject(undefined);
+
+  constructor(
+    private httpClient: HttpClient,
+    private cookieService: CookieService  
+  ) {
   }
 
-  getCurrentUser() {
-    return this.subject;
-  }
-  getCurrentUserObject() {
-    return this.user;
-  }
   loadCurrentUser() {
-    const token = '';
+    const token = this.cookieService.get('token');
+
     if (token) {
-      this.httpClient
-        .post(BACK_END + 'users', token)
-        .pipe(take(1))
+      this.httpClient.post(BACK_END + 'users/token', { token }).pipe(take(1))
         .subscribe(
-          (user: User) => {
-            this.user = user;
-            this.subject.next(user);
+          (res) => {
+            const { id, userEmail, userName, firstName, lastName, phoneNumber, role } = res['data'];
+            this.currentUser$.next(new User(id, userEmail, userName, firstName, lastName, phoneNumber, null, role, null, null));
           },
-          (error) => {
-            console.log(error);
+          (err) => {
+            this.currentUser$.next(undefined);
           }
         );
-    } else {
-      // this.user = new User(0, '', '', '', '', '', [], []);
-      // this.subject.next(new User(0, '', '', '', '', '', [], []));
     }
   }
 
@@ -56,6 +49,6 @@ export class AccountService {
   }
 
   getAllUsers() {
-    return this.httpClient.get(BACK_END + 'users') as Observable<User[]>;
+    return this.httpClient.get(BACK_END + 'users') as Observable<any>;
   }
 }

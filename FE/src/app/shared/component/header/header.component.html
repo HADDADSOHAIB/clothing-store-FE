@@ -1,57 +1,52 @@
 <mat-toolbar color="primary">
   <div>
-    <ul fxLayout fxLayoutGap="15px" class="navigation-items">
+    <ul class="navigation-items">
       <li class="home">
         <a>
           <mat-icon class="menu" (click)="toggleSidenav()">menu</mat-icon>
-        </a>
-      </li>
-      <li class="home">
-        <a routerLink="/store">
-          <span class="home">MARKET</span>
+          <span class="title">MARKET</span>
         </a>
       </li>
       <mat-divider [vertical]="true"></mat-divider>
-      <li>
-        <a routerLink="/store" fxLayout="column" fxLayoutAlign="start center">
+      <li class="nav">
+        <a routerLink="/store">
           <mat-icon>store</mat-icon>
           <span class="nav-caption">Store</span>
         </a>
       </li>
-      <li *ngIf="currentUserRoles.includes('User')">
-        <a routerLink="/user/account" fxLayout="column" fxLayoutAlign="start center">
+      <li class="nav" *ngIf="currentUser$ | async">
+        <a routerLink="/user/account">
           <mat-icon aria-hidden="false">face</mat-icon>
           <span class="nav-caption">My account</span>
         </a>
       </li>
-      <li *ngIf="currentUserRoles.includes('Admin')">
-        <a routerLink="/admin" fxLayout="column" fxLayoutAlign="start center">
+      <li class="nav" *ngIf="(currentUser$ | async) && (currentUser$ | async).role.includes('admin')">
+        <a routerLink="/admin">
           <mat-icon>supervisor_account</mat-icon>
           <span class="nav-caption">Manage Store</span>
         </a>
       </li>
       <mat-divider [vertical]="true"></mat-divider>
-
     </ul>
 
   </div>
-  <div fxFlex fxLayout fxLayoutAlign="end centre">
+  <div class="auth-option">
     <mat-divider [vertical]="true"></mat-divider>
     <ul fxLayout fxLayoutGap="30px" class="navigation-items">
-      <li>
-        <a routerLink="" (click)="logout()" fxLayout="column" fxLayoutAlign="start center">
+      <li class="nav" *ngIf="(currentUser$ | async)">
+        <a routerLink="/store" (click)="logout()">
           <mat-icon aria-hidden="false">fingerprint</mat-icon>
           <span class="nav-caption">Logout</span>
         </a>
       </li>
-      <li>
-        <a routerLink="/auth/signin" fxLayout="column" fxLayoutAlign="start center">
+      <li class="nav" *ngIf="!(currentUser$ | async)">
+        <a routerLink="/auth/signin">
           <mat-icon aria-hidden="false">fingerprint</mat-icon>
           <span class="nav-caption">Login</span>
         </a>
       </li>
-      <li>
-        <a routerLink="/auth/signup" fxLayout="column" fxLayoutAlign="start center">
+      <li class="nav" *ngIf="!(currentUser$ | async)">
+        <a routerLink="/auth/signup">
           <mat-icon aria-hidden="false">account_box</mat-icon>
           <span class="nav-caption">Register</span>
         </a>

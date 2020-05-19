@@ -16,12 +16,12 @@ const routes: Routes = [
 	{
 		path: 'admin',
 		loadChildren: './admin_module/admin.module#AdminModule',
-		canActivate: [AdminGuard]
+		// canActivate: [AdminGuard]
 	},
 	{
 		path: 'user',
 		loadChildren: './user_module/user.module#UserModule',
-		canActivate: [UserGuard]
+		// canActivate: [UserGuard]
 	},
 	{
 		path: '**',
