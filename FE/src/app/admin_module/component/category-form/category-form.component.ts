@@ -46,10 +46,6 @@ export class CategoryFormComponent implements OnInit {
       });
   }
 
-  checkValidity(controleName, error, form) {
-    return form.get(controleName).dirty && form.get(controleName).hasError(error);
-  }
-
   create() {
     if (this.newCategoryForm.valid) {
       const newCategory = new Category(null, this.newCategoryForm.value.name);
@@ -79,21 +75,25 @@ export class CategoryFormComponent implements OnInit {
     }
   }
 
+  checkValidity(controleName, error, form) {
+    return form.get(controleName).dirty && form.get(controleName).hasError(error);
+  }
+
   delete(id) {
-    this.categoryService
-      .deleteCategory(id)
-      .pipe(take(1))
-      .subscribe(
-        (res) => {
-          const index = this.categories.findIndex((cat) => cat.id === parseInt(id, 10));
-          if (index !== -1) {
+    const index = this.categories.findIndex((cat) => cat.id === parseInt(id, 10));
+    if (index !== -1 && confirm(`Are you sure to delete ${this.categories[index].name}`)) {
+      this.categoryService
+        .deleteCategory(id)
+        .pipe(take(1))
+        .subscribe(
+          (res) => {
             this.categories.splice(index, 1);
             this.categories$.next(this.categories);
             this.snackBar.open('Category deleted successfully', 'Ok', { duration: 2000 });
-          }
-        },
-        (err) => this.snackBar.open('Unexpected error try later', 'Ok', { duration: 2000 })
-      );
+          },
+          (err) => this.snackBar.open('Unexpected error try later', 'Ok', { duration: 2000 })
+        );
+    }
   }
 
   showUpdateForm(id) {

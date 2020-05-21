@@ -7,28 +7,33 @@ import { CheckOutComponent } from './component/check-out/check-out.component';
 import { ShippingFormComponent } from './component/shipping-form/shipping-form.component';
 import { UserGuard } from '../guards/user-guard/user.guard';
 
-
 const routes: Routes = [
-	{
-		path: '', component: StoreComponent, children: [
-			{
-				path: '', component: StoreFrontComponent
-			},
-			{
-				path: 'product/:id', component: ProductFormComponent
-			},
-			{
-				path: 'checkout', component: CheckOutComponent, canActivate: [UserGuard]
-			},
-			{
-				path: 'shipping', component: ShippingFormComponent, canActivate: [UserGuard]
-			}
-		]
-	}
+  {
+    path: '',
+    component: StoreComponent,
+    children: [
+      {
+        path: '',
+        component: StoreFrontComponent,
+      },
+      {
+        path: 'product/:id',
+        component: ProductFormComponent,
+      },
+      {
+        path: 'checkout',
+        component: CheckOutComponent,
+      },
+      {
+        path: 'shipping',
+        component: ShippingFormComponent,
+      },
+    ],
+  },
 ];
 
 @NgModule({
-	imports: [RouterModule.forChild(routes)],
-	exports: [RouterModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
-export class StoreRoutingModule { }
+export class StoreRoutingModule {}

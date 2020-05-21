@@ -1,0 +1,28 @@
+.form-card {
+  width: 400px;
+  margin: 20px;
+
+  mat-card-header {
+    display: flex;
+    justify-content: center;
+  }
+
+  .full {
+    width: 100%;
+  }
+
+  .category {
+    display: flex;
+    justify-content: space-around;
+    align-items: start;
+
+    button {
+      margin-top: 10px;
+    }
+  }
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}

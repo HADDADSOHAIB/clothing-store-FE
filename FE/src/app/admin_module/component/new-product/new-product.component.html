@@ -1,0 +1,82 @@
+<div class="main">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>Product Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>product name</mat-label>
+          <input matInput placeholder="name..." formControlName="name">
+          <mat-error *ngIf="checkValidity('name', 'required', form)">
+            name is required.
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>product description</mat-label>
+          <textarea matInput placeholder="description ..." formControlName="description">
+          </textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="full">
+          <mat-label>product price</mat-label>
+          <input type="number" matInput placeholder="price ..." formControlName="price">
+          <mat-error *ngIf="checkValidity('price', 'required', form)">
+            price is required.
+          </mat-error>
+        </mat-form-field>
+
+        <div class="full category">
+          <mat-form-field appearance="outline">
+            <mat-label>categories</mat-label>
+            <mat-select placeholder="select category" (selectionChange)="selectCategroy($event)"
+              formControleName="category">
+              <mat-option value="{{category.id}}" *ngFor="let category of categories">
+                {{category.name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <button mat-raised-button (click)="goCategories()">add category</button>
+        </div>
+
+        <mat-form-field class="full">
+          <mat-chip-list>
+            <mat-chip color="primary" *ngFor="let category of product.categories" [removable]="true"
+              (removed)="removeCategory(category.id)" [selectable]="true">
+              {{category.name}}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+        </mat-form-field>
+
+        <!-- <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
+          <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
+          <p>Drag and drop an image</p>
+        </div>
+        <div>
+          <button mat-button class="delete-file" *ngFor="let file of files;index as i">
+            <mat-icon matTooltip="{{ file.name }}">photo</mat-icon>
+            <mat-icon matTooltip="delete" (click)="deleteAttachment(i)" color="warn">clear</mat-icon>
+          </button>
+        </div> -->
+
+      </form>
+    </mat-card-content>
+    <div>
+      <button class="card-form" mat-raised-button color="primary" (click)="save()">Save</button>
+      <button class="card-form" mat-raised-button color="warn">delete</button>
+    </div>
+  </mat-card>
+
+  <!-- <div class="container">
+    <mat-card *ngFor="let url of imageUrls;index as i" class="image">
+      <mat-card-content>
+        <div>
+          <mat-icon (click)="deleteImage(i)" class="delete" matTooltip="delete">clear</mat-icon>
+        </div>
+        <img mat-card-image [src]="url" alt="product image" class="image">
+      </mat-card-content>
+    </mat-card>
+  </div> -->
+</div>

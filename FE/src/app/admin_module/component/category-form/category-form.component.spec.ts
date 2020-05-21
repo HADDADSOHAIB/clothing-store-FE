@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CategoryFormComponent } from './category-form.component';
 import { ProductListComponent } from '../product-list/product-list.component';
-import { ProductManagementFormComponent } from '../product-management-form/product-management-form.component';
+import { NewProductComponent } from '../new-product/new-product.component';
 import { AdminHeaderComponent } from '../admin-navbar/admin-navbar.component';
 import { AdminComponent } from '../../admin.component';
 import { ManageStoreComponent } from '../manage-store/manage-store.component';
@@ -28,60 +28,54 @@ import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('CategoryFormComponent', () => {
-	let component: CategoryFormComponent;
-	let fixture: ComponentFixture<CategoryFormComponent>;
+  let component: CategoryFormComponent;
+  let fixture: ComponentFixture<CategoryFormComponent>;
 
-	let debugElement: DebugElement;
-	let cart: CartService;
-	let router: Router;
-	let compiled: any;
+  let debugElement: DebugElement;
+  let cart: CartService;
+  let router: Router;
+  let compiled: any;
 
-	beforeEach(async(() => {
-		TestBed.configureTestingModule({
-			declarations: [
-				ProductListComponent,
-				ProductManagementFormComponent,
-				AdminHeaderComponent,
-				AdminComponent,
-				ManageStoreComponent,
-				OrdersListComponent,
-				CategoryFormComponent,
-				TitleDescriptionPipe,
-				UserListComponent
-			],
-			imports: [
-				CommonModule,
-				AdminRoutingModule,
-				RouterTestingModule,
-				SharedModule.forRoot()
-			],
-			providers: [
-				AuthService,
-				CategoryService,
-				OrderService,
-				ProductsService,
-				ReviewService,
-				RoleService,
-				AccountService,
-				HttpClient,
-				CartService,
-				{ provide: MAT_DIALOG_DATA, useValue: {} },
-				{ provide: MatDialogRef, useValue: {} },
-				SidenavService
-			]
-		})
-		.compileComponents();
-	}));
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        ProductListComponent,
+        NewProductComponent,
+        AdminHeaderComponent,
+        AdminComponent,
+        ManageStoreComponent,
+        OrdersListComponent,
+        CategoryFormComponent,
+        TitleDescriptionPipe,
+        UserListComponent,
+      ],
+      imports: [CommonModule, AdminRoutingModule, RouterTestingModule, SharedModule.forRoot()],
+      providers: [
+        AuthService,
+        CategoryService,
+        OrderService,
+        ProductsService,
+        ReviewService,
+        RoleService,
+        AccountService,
+        HttpClient,
+        CartService,
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        { provide: MatDialogRef, useValue: {} },
+        SidenavService,
+      ],
+    }).compileComponents();
+  }));
 
-	beforeEach(() => {
-		fixture = TestBed.createComponent(CategoryFormComponent);
-		component = fixture.componentInstance;
-		debugElement = fixture.debugElement;
-		compiled = debugElement.nativeElement;
-		fixture.detectChanges();
-	});
+  beforeEach(() => {
+    fixture = TestBed.createComponent(CategoryFormComponent);
+    component = fixture.componentInstance;
+    debugElement = fixture.debugElement;
+    compiled = debugElement.nativeElement;
+    fixture.detectChanges();
+  });
 
-	it('the component should be created', () => {
-		expect(component).toBeTruthy();
-	});
+  it('the component should be created', () => {
+    expect(component).toBeTruthy();
+  });
 });
