@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatTable } from '@angular/material/table';
 import { Category } from 'src/app/models/category';
 import { CategoryService } from 'src/app/services/category-service/category.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-category-form',
@@ -12,11 +13,13 @@ import { CategoryService } from 'src/app/services/category-service/category.serv
   styleUrls: ['./category-form.component.scss'],
 })
 export class CategoryFormComponent implements OnInit {
-  updateCategoryForm: FormGroup;
-
+  editCategoryForm: FormGroup;
+  oldName: string = '';
   categories: Category[] = [];
+  categories$: BehaviorSubject<Category[]> = new BehaviorSubject(this.categories);
   productsPerCategory: any = {};
   newCategoryForm: FormGroup;
+  show: boolean = false;
 
   constructor(
     private formeBuilder: FormBuilder,
@@ -28,9 +31,9 @@ export class CategoryFormComponent implements OnInit {
     this.newCategoryForm = this.formeBuilder.group({
       name: ['', Validators.required],
     });
-    this.updateCategoryForm = this.formeBuilder.group({
-      categoryId: [''],
-      categoryName: [''],
+    this.editCategoryForm = this.formeBuilder.group({
+      id: [''],
+      newName: ['', Validators.required],
     });
 
     this.categoryService
@@ -39,70 +42,97 @@ export class CategoryFormComponent implements OnInit {
       .subscribe((res) => {
         this.categories = res.categories;
         this.productsPerCategory = res.productsPerCategory;
+        this.categories$.next(this.categories);
       });
   }
 
   checkValidity(controleName, error, form) {
-    return form.get(controleName).touched && form.get(controleName).hasError(error);
+    return form.get(controleName).dirty && form.get(controleName).hasError(error);
   }
 
   create() {
-    console.log(this.newCategoryForm);
+    if (this.newCategoryForm.valid) {
+      const newCategory = new Category(null, this.newCategoryForm.value.name);
+      this.categoryService
+        .createCategory(newCategory)
+        .pipe(take(1))
+        .subscribe(
+          (res) => {
+            this.newCategoryForm.reset({ name: '' });
+
+            newCategory.id = res.data.id;
+            this.categories.push(newCategory);
+            this.productsPerCategory[newCategory.id] = 0;
+            this.categories$.next(this.categories);
+            this.snackBar.open('Category created successfully', 'Ok', { duration: 2000 });
+          },
+          (err) => this.snackBar.open('Unexpected error try later', 'Ok', { duration: 2000 })
+        );
+    } else {
+      this.newCategoryForm.get('name').markAsDirty();
+    }
   }
 
-  // create() {
-  //   const name = this.newCategoryForm.get('category').value;
-  //   if (!name.trim()) {
-  //     this.snackBar.open('Entre a valid name', 'Ok', { duration: 2000 });
-  //   } else {
-  //     const category = new Category(0, name);
-  //     this.categoryService
-  //       .addCategory(category)
-  //       .pipe(take(1))
-  //       .subscribe(
-  //         (category) => {
-  //           this.newCategoryForm.get('category').setValue('');
-  //           this.snackBar.open('category: ' + category.categoryName + ' is added successfully', 'Ok', {
-  //             duration: 2000,
-  //           });
-  //           this.loadCategories();
-  //         },
-  //         (error) => this.snackBar.open('Error server down try later again', 'Ok', { duration: 2000 })
-  //       );
-  //   }
-  // }
-  delete() {
-    const id = parseInt(this.updateCategoryForm.get('categoryId').value);
+  checkFormStatus(form, controleName) {
+    if (form.get(controleName).pristine) {
+      form.reset({ [controleName]: '' });
+    }
+  }
+
+  delete(id) {
     this.categoryService
       .deleteCategory(id)
       .pipe(take(1))
       .subscribe(
-        (resp) => {
-          this.snackBar.open('deleted successfully', 'Ok', { duration: 2000 });
-          // this.loadCategories();
+        (res) => {
+          const index = this.categories.findIndex((cat) => cat.id === parseInt(id, 10));
+          if (index !== -1) {
+            this.categories.splice(index, 1);
+            this.categories$.next(this.categories);
+            this.snackBar.open('Category deleted successfully', 'Ok', { duration: 2000 });
+          }
         },
-        (error) => this.snackBar.open('error try later again', 'Ok', { duration: 2000 })
+        (err) => this.snackBar.open('Unexpected error try later', 'Ok', { duration: 2000 })
       );
   }
-  // update() {
-  //   const id = parseInt(this.updateOrDeleteCategoryForm.get('categoryId').value);
-  //   const name = this.updateOrDeleteCategoryForm.get('categoryName').value as string;
-  //   if (!id) {
-  //     this.snackBar.open('select a category', 'Ok', { duration: 2000 });
-  //   } else if (!name.trim()) {
-  //     this.snackBar.open('Entre a valid name', 'Ok', { duration: 2000 });
-  //   } else {
-  //     this.categoryService
-  //       .updateCategory(new Category(id, name))
-  //       .pipe(take(1))
-  //       .subscribe(
-  //         (category) => {
-  //           this.snackBar.open('Category: ' + category.categoryName + ' is updated', 'Ok', { duration: 2000 });
-  //           this.loadCategories();
-  //           this.updateOrDeleteCategoryForm.get('categoryName').setValue('');
-  //         },
-  //         (error) => this.snackBar.open('error try later again', 'Ok', { duration: 2000 })
-  //       );
-  //   }
-  // }
+
+  showUpdateForm(id) {
+    let editCategory = this.categories.find((cat) => cat.id === parseInt(id, 10));
+    if (editCategory) {
+      this.oldName = editCategory.name;
+      this.show = true;
+      this.editCategoryForm.get('id').setValue(id);
+    }
+  }
+
+  hideUpdateForm() {
+    this.show = false;
+    this.oldName = '';
+    this.editCategoryForm.get('id').setValue('');
+  }
+
+  update() {
+    if (this.editCategoryForm.valid) {
+      const editCategory = new Category(this.editCategoryForm.value.id, this.editCategoryForm.value.newName);
+
+      this.categoryService
+        .updateCategory(editCategory)
+        .pipe(take(1))
+        .subscribe(
+          (res) => {
+            const index = this.categories.findIndex((cat) => cat.id === editCategory.id);
+            if (index !== -1) {
+              this.categories[index].name = editCategory.name;
+              this.categories$.next(this.categories);
+              this.snackBar.open('Category updated successfully', 'Ok', { duration: 2000 });
+              this.editCategoryForm.reset({ id: '', newName: '' });
+              this.show = false;
+            }
+          },
+          (err) => this.snackBar.open('Unexpected error try later', 'Ok', { duration: 2000 })
+        );
+    } else {
+      this.editCategoryForm.get('newName').markAsDirty();
+    }
+  }
 }
