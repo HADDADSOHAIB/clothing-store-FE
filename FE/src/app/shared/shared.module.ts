@@ -20,18 +20,17 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { PaginatorComponent } from './Component/paginator/paginator.component';
-import { HeaderComponent } from './Component/header/header.component';
+import { PaginatorComponent } from './component/paginator/paginator.component';
+import { HeaderComponent } from './component/header/header.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
-import { FooterComponent } from './Component/footer/footer.component';
+import { FooterComponent } from './component/footer/footer.component';
 import { MatRadioModule } from '@angular/material/radio';
-import { FilterAndSortComponent } from './Component/filter-and-sort/filter-and-sort.component';
-import { OrderStatusComponent } from './Component/order-status/order-status.component';
-import { OrderInfosComponent } from './Component/order-infos/order-infos.component';
-import { RatingBarComponent } from './Component/rating-bar/rating-bar.component';
-import { AuthInterceptor } from './interceptors/http.interceptor';
+import { FilterAndSortComponent } from './component/filter-and-sort/filter-and-sort.component';
+import { OrderStatusComponent } from './component/order-status/order-status.component';
+import { OrderInfosComponent } from './component/order-infos/order-infos.component';
+import { RatingBarComponent } from './component/rating-bar/rating-bar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({

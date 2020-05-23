@@ -1,0 +1,21 @@
+a {
+    text-decoration: none;
+    color: white;
+
+    .sidenav-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+}
+ 
+a:hover, a:active{
+    color: lightgray;
+}
+
+.nav-caption{
+    display: inline-block;
+    font-size: small;
+}
