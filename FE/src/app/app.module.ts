@@ -13,7 +13,7 @@ import { AccountService } from './services/account-service/account.service';
 import { AuthService } from './services/auth-service/auth.service';
 import { CategoryService } from './services/category-service/category.service';
 import { OrderService } from './services/order-service/order.service';
-import { ProductsService } from './services/products-service/products.service';
+import { ProductService } from './services/product-service/product.service';
 import { ReviewService } from './services/review-service/review.service';
 import { RoleService } from './services/role-service/role.service';
 import { SidenavService } from './services/sidenav-service/sidenav.service';
@@ -21,31 +21,24 @@ import { UploadFilesService } from './services/upload-files-service/upload-files
 import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
-	declarations: [
-		AppComponent
-	],
-	imports: [
-		AppRoutingModule,
-		SharedModule.forRoot(),
-		BrowserModule,
-		BrowserAnimationsModule
-	],
-	providers: [
-		AuthService,
-		CategoryService,
-		OrderService,
-		ProductsService,
-		ReviewService,
-		RoleService,
-		AccountService,
-		HttpClient,
-		CartService,
-		{ provide: MAT_DIALOG_DATA, useValue: {} },
-		{ provide: MatDialogRef, useValue: {} },
-		SidenavService,
-		UploadFilesService,
-		CookieService
-	],
-	bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  imports: [AppRoutingModule, SharedModule.forRoot(), BrowserModule, BrowserAnimationsModule],
+  providers: [
+    AuthService,
+    CategoryService,
+    OrderService,
+    ProductService,
+    ReviewService,
+    RoleService,
+    AccountService,
+    HttpClient,
+    CartService,
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: MatDialogRef, useValue: {} },
+    SidenavService,
+    UploadFilesService,
+    CookieService,
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

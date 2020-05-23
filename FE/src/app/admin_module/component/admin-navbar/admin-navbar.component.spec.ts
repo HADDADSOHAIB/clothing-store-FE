@@ -18,7 +18,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { CategoryService } from 'src/app/services/category-service/category.service';
 import { OrderService } from 'src/app/services/order-service/order.service';
-import { ProductsService } from 'src/app/services/products-service/products.service';
+import { ProductService } from 'src/app/services/product-service/product.service';
 import { ReviewService } from 'src/app/services/review-service/review.service';
 import { RoleService } from 'src/app/services/role-service/role.service';
 import { AccountService } from 'src/app/services/account-service/account.service';
@@ -53,7 +53,7 @@ describe('AdminHeaderComponent', () => {
         AuthService,
         CategoryService,
         OrderService,
-        ProductsService,
+        ProductService,
         ReviewService,
         RoleService,
         AccountService,

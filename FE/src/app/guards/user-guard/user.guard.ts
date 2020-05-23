@@ -11,20 +11,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class UserGuard implements CanActivate {
   constructor(private accountService: AccountService, private router: Router, private snackBar: MatSnackBar) {}
 
-  // canActivate(
-  //   route: ActivatedRouteSnapshot,
-  //   state: RouterStateSnapshot
-  // ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-  //   return this.accountService.getCurrentUser().pipe(
-  //     map((user) => {
-  //       if (user.role.includes('user')) {
-  //         return true;
-  //       } else {
-  //         this.snackBar.open('Only users are allowed', 'Ok');
-  //         this.router.navigate(['auth', 'signin']);
-  //         return false;
-  //       }
-  //     })
-  //   );
-  // }
+  canActivate(
+    route: ActivatedRouteSnapshot,
+    state: RouterStateSnapshot
+  ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
+    return true;
+    // return this.accountService.getCurrentUser().pipe(
+    //     map((user) => {
+    //       if (user.role.includes('user')) {
+    //         return true;
+    //       } else {
+    //         this.snackBar.open('Only users are allowed', 'Ok');
+    //         this.router.navigate(['auth', 'signin']);
+    //         return false;
+    //       }
+    //     })
+    //   );
+  }
 }

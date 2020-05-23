@@ -5,7 +5,7 @@ import { take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Product } from 'src/app/models/product';
 import { Category } from 'src/app/models/category';
-import { ProductsService } from 'src/app/services/products-service/products.service';
+import { ProductService } from 'src/app/services/product-service/product.service';
 import { CategoryService } from 'src/app/services/category-service/category.service';
 import { UploadFilesService } from 'src/app/services/upload-files-service/upload-files.service';
 
@@ -16,7 +16,6 @@ import { UploadFilesService } from 'src/app/services/upload-files-service/upload
 })
 export class NewProductComponent implements OnInit {
   imageUrls: String[] = [];
-  categories: Category[] = [];
 
   // files: File[] = [];
   // formData: FormData = new FormData();
@@ -24,9 +23,10 @@ export class NewProductComponent implements OnInit {
   id: number = 0;
   form: FormGroup;
   product: Product = new Product(null, null, null, null, [], null, null, null, null);
+  categories: Category[] = [];
 
   constructor(
-    private productService: ProductsService,
+    private productService: ProductService,
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
@@ -89,7 +89,7 @@ export class NewProductComponent implements OnInit {
             });
             this.product.categories = [];
 
-            this.snackBar.open('Product created successfully', 'Ok', { duration: 2000 });
+            this.snackBar.open('Product saved successfully', 'Ok', { duration: 2000 });
             if (this.id !== 0) {
               this.router.navigate(['admin', 'products']);
             }
@@ -102,75 +102,6 @@ export class NewProductComponent implements OnInit {
   checkValidity(controleName, error, form) {
     return form.get(controleName).touched && form.get(controleName).hasError(error);
   }
-
-  // private updateForm() {
-  //   this.form = this.formBuilder.group({
-  //     name: [this.product.productName],
-  //     description: [this.product.description],
-  //     price: [this.product.price],
-  //     quantity: [this.product.quantity],
-  //     category: [''],
-  //   });
-  // }
-  // updateProduct() {
-  //   this.product.productName = this.form.get('name').value;
-  //   this.product.description = this.form.get('description').value;
-  //   this.product.quantity = parseInt(this.form.get('quantity').value);
-  //   this.product.price = parseInt(this.form.get('price').value);
-  //   const categoryId = parseInt(this.form.get('category').value);
-  //   if (categoryId) {
-  //     const category = this.categories.find((category) => category.id === categoryId);
-  //     const index = this.product.categories.findIndex((category) => category.id == categoryId);
-  //     if (index == -1) {
-  //       this.product.categories.push(category);
-  //     }
-  //   }
-  // }
-
-  // save() {
-  //   this.updateProduct();
-  //   this.fileService.uploadFiles(this.formData).subscribe(
-  //     (idsList) => {
-  //       if (this.id === 0) {
-  //         this.product.images = idsList;
-  //         this.productService
-  //           .addProduct(this.product)
-  //           .pipe(take(1))
-  //           .subscribe(
-  //             (product) => {
-  //               this.snackBar.open('saved succesfully', 'OK', {
-  //                 duration: 2000,
-  //               });
-  //               this.product = new Product();
-  //               this.updateForm();
-  //               this.files = [];
-  //             },
-  //             (error) => {
-  //               this.snackBar.open('error try later', 'OK', {
-  //                 duration: 2000,
-  //               });
-  //             }
-  //           );
-  //       } else {
-  //         this.product.productId = this.id;
-  //         idsList.forEach((id) => this.product.images.push(id));
-  //         this.productService
-  //           .updateProduct(this.product)
-  //           .pipe(take(1))
-  //           .subscribe(
-  //             (product) => {
-  //               this.snackBar.open('saved succesfully', 'OK', { duration: 2000 });
-  //               this.loadProduct();
-  //               this.updateForm();
-  //               this.files = [];
-  //             },
-  //             (error) => this.snackBar.open('error try later', 'OK', { duration: 2000 })
-  //           );
-  //       }
-  //     },
-  //     (error) => console.log(error)
-  //   );
-  // }
 
   // deleteImage(i: number) {
   //   this.fileService
@@ -188,26 +119,8 @@ export class NewProductComponent implements OnInit {
   //     );
   // }
 
-  // delete() {
-  //   this.productService
-  //     .deleteProduct(this.id)
-  //     .pipe(take(1))
-  //     .subscribe(
-  //       (resp) => {
-  //         this.snackBar.open('Delete success', 'OK', {
-  //           duration: 2000,
-  //         });
-  //         this.router.navigate(['admin/products']);
-  //       },
-  //       (error) => {
-  //         this.snackBar.open('error try later', 'OK', {
-  //           duration: 2000,
-  //         });
-  //       }
-  //     );
-  // }
   goCategories() {
-    this.router.navigate(['/admin/categories']);
+    this.router.navigate(['admin', 'categories']);
   }
 
   // file upload

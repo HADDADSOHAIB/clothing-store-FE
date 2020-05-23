@@ -1,78 +1,80 @@
-<div class="table">
-    <mat-card>
-        <mat-card-content>
-            <filter-and-sort [selectedCategory]="selectedCategory"></filter-and-sort>
-        </mat-card-content>
-    </mat-card>
-    <table mat-table [dataSource]="products" class="mat-elevation-z8">
-        <ng-container matColumnDef="ProductName">
-            <th mat-header-cell *matHeaderCellDef (click)="sortBy('productName')" class="header"> 
-                <span class="header">Product</span>
-                <mat-icon class="header" *ngIf="selectedSortElement!=='productName'">
-                    sort
-                </mat-icon>
-                <mat-icon class="header" *ngIf="selectedSortElement==='productName' && sortDirection.get('productName')==='asc'">
-                    arrow_drop_up
-                </mat-icon>
-                <mat-icon class="header" *ngIf="selectedSortElement==='productName' && sortDirection.get('productName')==='desc'">
-                    arrow_drop_down
-                </mat-icon>
-            </th>
-            <td mat-cell *matCellDef="let product"> {{product.productName | formatTitleDescription: product.description}} </td>
-        </ng-container>
+<div class="products">
+  <mat-card>
+    <mat-card-content>
+      <filter-and-sort></filter-and-sort>
+    </mat-card-content>
+  </mat-card>
+  <div class="table">
+    <table mat-table [dataSource]="products$" class="mat-elevation-z8">
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef class="header">
+          <span class="header">product</span>
+          <!-- <mat-icon class="header" *ngIf="selectedSortElement!=='productName'">
+            sort
+          </mat-icon>
+          <mat-icon class="header"
+            *ngIf="selectedSortElement==='productName' && sortDirection.get('productName')==='asc'">
+            arrow_drop_up
+          </mat-icon>
+          <mat-icon class="header"
+            *ngIf="selectedSortElement==='productName' && sortDirection.get('productName')==='desc'">
+            arrow_drop_down
+          </mat-icon> -->
+        </th>
+        <td mat-cell *matCellDef="let product"> {{product.name | formatTitleDescription: product.description}}
+        </td>
+      </ng-container>
 
-        <ng-container matColumnDef="Price">
-            <th mat-header-cell *matHeaderCellDef (click)="sortBy('price')"> 
-                <span class="header">Price</span>
-                <mat-icon class="header" *ngIf="selectedSortElement!=='price'">
-                    sort
-                </mat-icon>
-                <mat-icon class="header" *ngIf="selectedSortElement==='price' && sortDirection.get('price')==='asc'">
-                    arrow_drop_up
-                </mat-icon>
-                <mat-icon class="header" *ngIf="selectedSortElement==='price' && sortDirection.get('price')==='desc'">
-                    arrow_drop_down
-                </mat-icon>
-            </th>
-            <td mat-cell *matCellDef="let product">{{product.price | currency:'MAD'}}</td>
-        </ng-container>
-        
-        <ng-container matColumnDef="Quantity">
-            <th mat-header-cell *matHeaderCellDef class="quantity" (click)="sortBy('quantity')">
-                <span class="header">quantity</span>
-                <mat-icon class="header" *ngIf="selectedSortElement!=='quantity'">
-                    sort
-                </mat-icon>
-                <mat-icon class="header" *ngIf="selectedSortElement==='quantity' && sortDirection.get('quantity')==='asc'">
-                    arrow_drop_up
-                </mat-icon>
-                <mat-icon class="header" *ngIf="selectedSortElement==='quantity' && sortDirection.get('quantity')==='desc'">
-                    arrow_drop_down
-                </mat-icon>
-            </th>
-            <td mat-cell *matCellDef="let product">{{product.quantity}}</td>
-        </ng-container>
+      <ng-container matColumnDef="price">
+        <th mat-header-cell *matHeaderCellDef>
+          <span class="header">price</span>
+          <!-- <mat-icon class="header" *ngIf="selectedSortElement!=='price'">
+            sort
+          </mat-icon>
+          <mat-icon class="header" *ngIf="selectedSortElement==='price' && sortDirection.get('price')==='asc'">
+            arrow_drop_up
+          </mat-icon>
+          <mat-icon class="header" *ngIf="selectedSortElement==='price' && sortDirection.get('price')==='desc'">
+            arrow_drop_down
+          </mat-icon> -->
+        </th>
+        <td mat-cell *matCellDef="let product">{{product.price | currency:'MAD'}}</td>
+      </ng-container>
 
-        <ng-container matColumnDef="Options">
-            <th mat-header-cell *matHeaderCellDef class="options">Options</th>
-            <td mat-cell *matCellDef="let product">
-                <button mat-button color="warn" fxFlex (click)="edit(product.productId)">
-                    Edit
-                </button>
-                <button mat-button color="accent" fxFlex (click)="delete(product.productId)">
-                    Delete
-                </button>
-            </td>
-        </ng-container>
+      <ng-container matColumnDef="quantity">
+        <th mat-header-cell *matHeaderCellDef class="quantity">
+          <span class="header">quantity</span>
+          <!-- <mat-icon class="header" *ngIf="selectedSortElement!=='quantity'">
+            sort
+          </mat-icon>
+          <mat-icon class="header" *ngIf="selectedSortElement==='quantity' && sortDirection.get('quantity')==='asc'">
+            arrow_drop_up
+          </mat-icon>
+          <mat-icon class="header" *ngIf="selectedSortElement==='quantity' && sortDirection.get('quantity')==='desc'">
+            arrow_drop_down
+          </mat-icon> -->
+        </th>
+        <td mat-cell *matCellDef="let product">{{product.quantity}}</td>
+      </ng-container>
 
-        <tr mat-header-row *matHeaderRowDef="displayedColumns" class="header"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <ng-container matColumnDef=" ">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let product">
+          <div class="options">
+            <mat-icon class='option add' matTooltip="add quantity">add</mat-icon>
+            <mat-icon class='option edit' matTooltip="edit product">edit</mat-icon>
+            <mat-icon class='option clear' matTooltip="delete product">clear</mat-icon>
+          </div>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['name', 'price', 'quantity', ' ']" class="header"></tr>
+      <tr mat-row *matRowDef="let row; columns: ['name', 'price', 'quantity', ' '];"></tr>
     </table>
+  </div>
 </div>
 <div class="paginator">
-    <paginator [currentPage]="currentPage" (itemsPerPageEmitter)="changeItemsPerPage($event)"
-        [availableProductCount]="availableProductCount" (pageNumberEmitter)="changePageNumber($event)">
-    </paginator>
+  <!-- <paginator [currentPage]="currentPage" (itemsPerPageEmitter)="itemsPerPage($event)"
+    [availableProductCount]="productsCount" (pageNumberEmitter)="changePage($event)">
+  </paginator> -->
 </div>
-
-

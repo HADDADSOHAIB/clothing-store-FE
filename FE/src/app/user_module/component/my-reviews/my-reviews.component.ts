@@ -6,7 +6,7 @@ import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
 import { ReviewService } from 'src/app/services/review-service/review.service';
 import { AccountService } from 'src/app/services/account-service/account.service';
-import { ProductsService } from 'src/app/services/products-service/products.service';
+import { ProductService } from 'src/app/services/product-service/product.service';
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -26,7 +26,7 @@ export class MyReviewsComponent implements OnInit {
     private accountService: AccountService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private productService: ProductsService
+    private productService: ProductService
   ) {}
 
   ngOnInit() {

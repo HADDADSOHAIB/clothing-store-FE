@@ -21,7 +21,7 @@
 
         <mat-form-field appearance="outline" class="full">
           <mat-label>product price</mat-label>
-          <input type="number" matInput placeholder="price ..." formControlName="price">
+          <input type="number" min="0" matInput placeholder="price ..." formControlName="price">
           <mat-error *ngIf="checkValidity('price', 'required', form)">
             price is required.
           </mat-error>
@@ -63,9 +63,8 @@
 
       </form>
     </mat-card-content>
-    <div>
-      <button class="card-form" mat-raised-button color="primary" (click)="save()">Save</button>
-      <button class="card-form" mat-raised-button color="warn">delete</button>
+    <div class="btns">
+      <button mat-raised-button color="primary" (click)="save()">Save</button>
     </div>
   </mat-card>
 
