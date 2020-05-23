@@ -29,7 +29,7 @@ export class CartService {
 
 	loadCart() {
 		this.accountService.loadCurrentUser();
-		this.accountService.getCurrentUser().subscribe(user => {
+		this.accountService.currentUser$.subscribe(user => {
 			if (user.userEmail) {
 			this.loadCartByUserEmail(user.userEmail);
 			} else if (localStorage.getItem('cartId')) {

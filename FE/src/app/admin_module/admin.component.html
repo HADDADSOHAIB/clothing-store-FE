@@ -1,0 +1,8 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav [opened]="showSidenav" mode="side">
+        <admin-navbar></admin-navbar>
+    </mat-sidenav>
+    <mat-sidenav-content class="main-content">
+        <router-outlet></router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>

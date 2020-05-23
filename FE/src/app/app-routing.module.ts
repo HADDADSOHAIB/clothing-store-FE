@@ -7,21 +7,21 @@ import { AdminGuard } from './guards/admin-guard/admin.guard';
 const routes: Routes = [
 	{
 		path: 'auth',
-		loadChildren: './auth/auth.module#AuthModule'
+		loadChildren: './auth_module/auth.module#AuthModule'
 	},
 	{
 		path: 'store',
-		loadChildren: './store/store.module#StoreModule'
+		loadChildren: './store_module/store.module#StoreModule'
 	},
 	{
 		path: 'admin',
-		loadChildren: './admin/admin.module#AdminModule',
-		canActivate: [AdminGuard]
+		loadChildren: './admin_module/admin.module#AdminModule',
+		// canActivate: [AdminGuard]
 	},
 	{
 		path: 'user',
-		loadChildren: './user/user.module#UserModule',
-		canActivate: [UserGuard]
+		loadChildren: './user_module/user.module#UserModule',
+		// canActivate: [UserGuard]
 	},
 	{
 		path: '**',

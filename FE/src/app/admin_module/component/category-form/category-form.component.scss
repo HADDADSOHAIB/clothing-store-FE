@@ -1,0 +1,60 @@
+table {
+  min-width: 400px;
+  box-shadow:
+    0 2px 1px -1px rgba(129, 104, 104, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  text-align: center;
+
+  th {
+    text-align: center;
+  }
+}
+
+.category-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.new-category,
+.edit-category {
+  margin: 0 20px 20px 0;
+}
+
+.edit-form {
+  display: flex;
+  flex-direction: column;
+
+}
+
+.form-container {
+  position: sticky;
+  top: 20px;
+  margin-bottom: 20px;
+}
+
+@media screen and (max-width: 850px) {
+  .category-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
+}
+
+.new-category mat-card-header,
+.edit-category mat-card-header {
+  display: flex;
+  justify-content: center;
+}
+
+.delete-category {
+  color: rgb(255, 0, 0);
+}
+
+mat-icon {
+  cursor: pointer;
+  margin: 0 5px;
+}
