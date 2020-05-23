@@ -1,4 +1,4 @@
-# clothing Store (Front End)
+# Clothing Store (Front End)
 
 This project is a web application for managing an online store, this is the front end part build using the angular framework.
 
