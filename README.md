@@ -1,6 +1,7 @@
 # Clothing Store (Front End)
 
-This project is a web application for managing an online store, this is the front end part build using the angular framework.
+- This project is a web application for managing an online store, this is the front end part build using the angular framework. You can find the backend at this [repository](https://github.com/HADDADSOHAIB/clothing-store-BE).
+- You can manage the full logistic chain, from adding a new product to display and update their quantity once a new inventory is available, also your client can make orders and choose different items.
 
 ### Usage
 
