@@ -34,7 +34,7 @@
     <span class="nav-caption">Sort By</span>
   </a>
   <form class="sort-by" [formGroup]="sortByForm">
-    <mat-radio-group (change)="sortField($event)" formControlName="order" *ngIf="showSortBy">
+    <mat-radio-group formControlName="order" *ngIf="showSortBy">
       <mat-radio-button value="name">
         name
       </mat-radio-button>
@@ -45,7 +45,7 @@
         rating
       </mat-radio-button>
     </mat-radio-group>
-    <mat-radio-group (change)="sortDirection($event)" formControlName="dir" *ngIf="showSortBy">
+    <mat-radio-group formControlName="dir" *ngIf="showSortBy">
       <mat-radio-button value="asc">
         asc
       </mat-radio-button>

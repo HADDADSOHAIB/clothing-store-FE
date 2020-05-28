@@ -1,7 +1,19 @@
 # Clothing Store (Front End)
 
-- This project is a web application for managing an online store, this is the front end part build using the angular framework. You can find the backend at this [repository](https://github.com/HADDADSOHAIB/clothing-store-BE).
-- You can manage the full logistic chain, from adding a new product to display and update their quantity once a new inventory is available, also your client can make orders and choose different items.
+- This project is a web application for managing an online store, this is the front end part build using the angular framework. You can manage the full logistic chain, from adding a new product to display and update their quantity once a new inventory is available, also your client can make orders and choose different items.
+
+- You can find the backend at this [repository](https://github.com/HADDADSOHAIB/clothing-store-BE).
+
+## Live demo
+
+[heroku live site](https://clothing-demostore.herokuapp.com/)
+
+![start](/FE/src/assets/readme/1.png)
+![start](/FE/src/assets/readme/2.png)
+![start](/FE/src/assets/readme/3.png)
+![start](/FE/src/assets/readme/4.png)
+![start](/FE/src/assets/readme/5.png)
+![start](/FE/src/assets/readme/6.png)
 
 ### Usage
 

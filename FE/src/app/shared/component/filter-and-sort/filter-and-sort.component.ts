@@ -15,18 +15,17 @@ import { Options } from 'src/app/models/options';
 export class FilterAndSortComponent implements OnInit {
   @Input() selectedCategory = 0;
 
-  isFilterByPriceSet = false;
-  selectedSearchQuery = '';
-  isQuerySearchSet = false;
-  options: Options = new Options([0, 1000000], ['productName', 'asc'], []);
-
-  searchQuery = '';
-  showFilters = false;
+  showFilters = true;
   categories: Category[] = [];
+  selectedCatgories: Category[] = [];
   priceLimits = { lowerPrice: 0, upperPrice: Infinity };
-  showSortBy = false;
+  showSortBy = true;
   priceFilterForm: FormGroup;
   sortByForm: FormGroup;
+
+  queryParams = {
+    searchQuery: '',
+  };
 
   constructor(
     private productService: ProductService,
@@ -51,12 +50,25 @@ export class FilterAndSortComponent implements OnInit {
       .pipe(take(1))
       .subscribe((res) => (this.categories = res.categories));
 
-    // this.productService.optionSubject.subscribe((options) => (this.options = options));
+    this.productService.queryParams$.next({
+      page: 1,
+      size: 10,
+      ...this.sortByForm.value,
+    });
+
+    this.productService.queryParams$.subscribe((res) => {
+      this.queryParams = res;
+      console.log(this.queryParams);
+    });
   }
 
   search() {
-    console.log(this.searchQuery);
-    this.searchQuery = '';
+    console.log(this.queryParams.searchQuery);
+    this.queryParams = {
+      ...this.queryParams,
+      searchQuery: '',
+    };
+    this.productService.queryParams$.next(this.queryParams);
   }
 
   toggleFilters() {
@@ -80,10 +92,13 @@ export class FilterAndSortComponent implements OnInit {
   }
 
   sortField(e) {
-    console.log(e);
+    this.productService.queryParams$.next({});
+    console.log(this.sortByForm);
   }
+
   sortDirection(e) {
     console.log(e);
+    console.log(this.sortByForm);
   }
 
   // clearFilterByPrice() {
