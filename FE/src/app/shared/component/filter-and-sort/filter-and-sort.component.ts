@@ -107,6 +107,7 @@ export class FilterAndSortComponent implements OnInit {
 
   sortField(e) {
     this.options.sort[0] = e.value;
+    if (this.options.sort[1] === '') this.options.sort[1] = 'asc';
     this.productService.options.next(this.options);
   }
 

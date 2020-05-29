@@ -15,7 +15,6 @@ import { BehaviorSubject } from 'rxjs';
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
   products$: BehaviorSubject<Product[]> = new BehaviorSubject([]);
-  options: Options;
 
   constructor(
     private productService: ProductService,
@@ -25,6 +24,10 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.productService.options.subscribe((opt) => this.loadProducts());
+  }
+
+  private loadProducts() {
     this.productService
       .getProducts()
       .pipe(take(1))
