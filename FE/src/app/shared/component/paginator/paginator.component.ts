@@ -1,65 +1,78 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { ProductService } from 'src/app/services/product-service/product.service';
+import { take } from 'rxjs/operators';
+import { Options } from 'src/app/models/options';
 
 @Component({
-	selector: 'paginator',
-	templateUrl: './paginator.component.html',
-	styleUrls: ['./paginator.component.scss']
+  selector: 'paginator',
+  templateUrl: './paginator.component.html',
+  styleUrls: ['./paginator.component.scss'],
 })
-export class PaginatorComponent implements OnChanges {
+export class PaginatorComponent implements OnInit {
+  pagesList: number[] = [];
 
-	@Input() currentPage = 1;
-	@Input() availableProductCount = 0;
-	@Output() itemsPerPageEmitter: EventEmitter<number> = new EventEmitter<number>();
-	@Output() pageNumberEmitter: EventEmitter<number> = new EventEmitter<number>();
-	itemsPerPage = '10';
-	availablePagesList: string[] = [];
-	constructor() { }
+  count: number = 0;
+  current: number = 1;
+  size: string = '10';
+  options: Options;
 
-	ngOnChanges(changes: SimpleChanges) {
-		if (changes.availableProductCount) {
-			this.availablePagesList = [];
-			for (let i = 1; i <= (this.availableProductCount / parseInt(this.itemsPerPage)) + 1; i++) {
-				this.availablePagesList.push(i.toString());
-			}
-		}
-	}
-	emitItemsPerPage() {
-		this.itemsPerPageEmitter.emit(parseInt(this.itemsPerPage));
-		this.availablePagesList = [];
-		for (let i = 1; i <= (this.availableProductCount / parseInt(this.itemsPerPage)) + 1; i++) {
-				this.availablePagesList.push(i.toString());
-		}
-	}
+  constructor(public productService: ProductService) {}
 
-	emitPageNumber() {
-		this.pageNumberEmitter.emit(this.currentPage);
-	}
+  ngOnInit() {
+    this.productService
+      .getCount()
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.count = res.data.count;
+        for (let i = 1; i <= Math.ceil(this.count / parseInt(this.size)); i++) {
+          this.pagesList.push(i);
+        }
+      });
 
-	firstPage() {
-		this.currentPage = 1;
-		this.emitPageNumber();
-	}
+    this.productService.options.subscribe((opt) => {
+      this.current = opt.page;
+      this.size = `${opt.size}`;
+      this.options = opt;
+    });
+  }
 
-	beforePage() {
-		if (this.currentPage === 1) {
-			this.emitPageNumber();
-		} else {
-			this.currentPage--;
-			this.emitPageNumber();
-		}
-	}
+  changeSize(e) {
+    this.size = e.value;
+    this.options.page = 1;
+    this.options.size = parseInt(this.size);
+    this.productService.options.next(this.options);
+  }
 
-	nextPage() {
-		if (this.currentPage == parseInt(this.availablePagesList[this.availablePagesList.length - 1])) {
-			this.emitPageNumber();
-		} else {
-			this.currentPage++;
-			this.emitPageNumber();
-		}
-	}
+  changePageNumber(e) {
+    this.current = parseInt(e.value);
+    this.options.page = this.current;
+    this.productService.options.next(this.options);
+  }
 
-	lastPage() {
-		this.currentPage = parseInt(this.availablePagesList[this.availablePagesList.length - 1]);
-		this.emitPageNumber();
-	}
+  firstPage() {
+    this.options.page = 1;
+    this.productService.options.next(this.options);
+  }
+
+  beforePage() {
+    if (this.current !== 1) {
+      this.current -= 1;
+      this.options.page = this.current;
+      this.productService.options.next(this.options);
+    }
+  }
+
+  nextPage() {
+    if (this.current !== this.pagesList[this.pagesList.length - 1]) {
+      this.current += 1;
+      this.options.page = this.current;
+      this.productService.options.next(this.options);
+    }
+  }
+
+  lastPage() {
+    this.current = this.pagesList[this.pagesList.length - 1];
+    this.options.page = this.current;
+    this.productService.options.next(this.options);
+  }
 }

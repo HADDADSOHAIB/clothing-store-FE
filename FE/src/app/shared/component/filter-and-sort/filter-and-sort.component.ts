@@ -18,7 +18,7 @@ export class FilterAndSortComponent implements OnInit {
   showSortBy = false;
   priceFilterForm: FormGroup;
   sortByForm: FormGroup;
-  options: Options = new Options('', [0, Infinity], ['', ''], []);
+  options: Options = new Options('', [0, Infinity], ['', ''], [], 1, 10);
   searchQuery = '';
 
   constructor(
@@ -44,7 +44,7 @@ export class FilterAndSortComponent implements OnInit {
       .pipe(take(1))
       .subscribe((res) => (this.categories = res.categories));
 
-    this.productService.options.next(this.options);
+    this.productService.options.subscribe((options) => (this.options = options));
   }
 
   search() {

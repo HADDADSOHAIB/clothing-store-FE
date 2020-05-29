@@ -10,7 +10,7 @@ import { Options } from 'src/app/models/options';
   providedIn: 'root',
 })
 export class ProductService {
-  options: BehaviorSubject<Options> = new BehaviorSubject(new Options('', [0, Infinity], ['', ''], []));
+  options: BehaviorSubject<Options> = new BehaviorSubject(new Options('', [0, Infinity], ['', ''], [], 1, 10));
 
   constructor(private httpClient: HttpClient) {}
 
@@ -22,6 +22,10 @@ export class ProductService {
           .pipe(map((res) => this.processProducts(res)));
       })
     ) as Observable<any>;
+  }
+
+  getCount() {
+    return this.httpClient.get(BACK_END + `products/count`) as Observable<any>;
   }
 
   getProduct(id: number) {

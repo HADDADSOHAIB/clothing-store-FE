@@ -71,10 +71,8 @@
       <tr mat-header-row *matHeaderRowDef="['name', 'price', 'quantity', ' ']" class="header"></tr>
       <tr mat-row *matRowDef="let row; columns: ['name', 'price', 'quantity', ' '];"></tr>
     </table>
+    <div class="paginator">
+      <paginator></paginator>
+    </div>
   </div>
-</div>
-<div class="paginator">
-  <!-- <paginator [currentPage]="currentPage" (itemsPerPageEmitter)="itemsPerPage($event)"
-    [availableProductCount]="productsCount" (pageNumberEmitter)="changePage($event)">
-  </paginator> -->
 </div>
