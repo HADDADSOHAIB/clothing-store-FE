@@ -55,6 +55,8 @@ export class ProductService {
 
   private queryBuilder(options: Options) {
     let query = '';
+    query += options.page ? `page=${options.page}&` : '';
+    query += options.size ? `size=${options.size}&` : '';
     query += options.prices[0] ? `priced=${options.prices[0]}&` : '';
     query += options.prices[1] !== Infinity ? `priceu=${options.prices[1]}&` : '';
     query += options.sort[0] ? `order=${options.sort[0]}&` : '';

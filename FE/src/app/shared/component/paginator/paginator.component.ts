@@ -24,9 +24,7 @@ export class PaginatorComponent implements OnInit {
       .pipe(take(1))
       .subscribe((res) => {
         this.count = res.data.count;
-        for (let i = 1; i <= Math.ceil(this.count / parseInt(this.size)); i++) {
-          this.pagesList.push(i);
-        }
+        this.setPageList();
       });
 
     this.productService.options.subscribe((opt) => {
@@ -36,11 +34,19 @@ export class PaginatorComponent implements OnInit {
     });
   }
 
+  setPageList() {
+    this.pagesList = [];
+    for (let i = 1; i <= Math.ceil(this.count / parseInt(this.size)); i++) {
+      this.pagesList.push(i);
+    }
+  }
+
   changeSize(e) {
     this.size = e.value;
     this.options.page = 1;
     this.options.size = parseInt(this.size);
     this.productService.options.next(this.options);
+    this.setPageList();
   }
 
   changePageNumber(e) {
