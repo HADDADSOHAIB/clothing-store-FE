@@ -13,13 +13,13 @@ import { Options } from 'src/app/models/options';
   styleUrls: ['./filter-and-sort.component.scss'],
 })
 export class FilterAndSortComponent implements OnInit {
-  
   showFilters = false;
   categories: Category[] = [];
   showSortBy = false;
   priceFilterForm: FormGroup;
   sortByForm: FormGroup;
-  options: Options = new Options('', [0, Infinity], ['name', 'asc'], []);
+  options: Options = new Options('', [0, Infinity], ['', ''], []);
+  searchQuery = '';
 
   constructor(
     private productService: ProductService,
@@ -30,13 +30,13 @@ export class FilterAndSortComponent implements OnInit {
 
   ngOnInit() {
     this.priceFilterForm = this.formBuilder.group({
-      lowerPrice: [0],
-      upperPrice: [Infinity],
+      lowerPrice: [null],
+      upperPrice: [null],
     });
 
     this.sortByForm = this.formBuilder.group({
-      order: ['name'],
-      dir: ['asc'],
+      order: [''],
+      dir: [''],
     });
 
     this.categoryService
@@ -48,8 +48,16 @@ export class FilterAndSortComponent implements OnInit {
   }
 
   search() {
-    this.productService.options.next(this.options);
+    if (this.searchQuery.trim()) {
+      this.options.searchQuery = this.searchQuery;
+      this.productService.options.next(this.options);
+    }
+    this.searchQuery = '';
+  }
+
+  clearSearch() {
     this.options.searchQuery = '';
+    this.productService.options.next(this.options);
   }
 
   toggleFilters() {
@@ -57,16 +65,40 @@ export class FilterAndSortComponent implements OnInit {
   }
 
   selectCategroy($event) {
-    if(!this.options.categoryList.includes(parseInt($event.value))){
+    if (!this.options.categoryList.includes(parseInt($event.value))) {
       this.options.categoryList.push(parseInt($event.value));
       this.productService.options.next(this.options);
     }
   }
 
+  removeCategory(id) {
+    const index = this.options.categoryList.findIndex((cat) => cat === id);
+    if (index !== -1) {
+      this.options.categoryList.splice(index, 1);
+      this.productService.options.next(this.options);
+    }
+  }
+
   filterByPrice() {
-   const { lowerPrice, upperPrice } = this.priceFilterForm.value;
-   this.options.prices = [lowerPrice, upperPrice],
-   this.productService.options.next(this.options);
+    const { lowerPrice, upperPrice } = this.priceFilterForm.value;
+    if (lowerPrice) this.options.prices[0] = lowerPrice;
+    if (upperPrice) this.options.prices[1] = upperPrice;
+    this.productService.options.next(this.options);
+    this.priceFilterForm.reset();
+  }
+
+  removeMinPrice() {
+    this.options.prices[0] = 0;
+    this.productService.options.next(this.options);
+  }
+
+  removeMaxPrice() {
+    this.options.prices[1] = Infinity;
+    this.productService.options.next(this.options);
+  }
+
+  showMaxPrice() {
+    return this.options.prices[1] !== Infinity;
   }
 
   toggleSortBy() {
@@ -80,6 +112,22 @@ export class FilterAndSortComponent implements OnInit {
 
   sortDirection(e) {
     this.options.sort[1] = e.value;
+    if (this.options.sort[0] === '') this.options.sort[0] = 'name';
     this.productService.options.next(this.options);
+  }
+
+  clearSort() {
+    this.options.sort = ['', ''];
+    this.productService.options.next(this.options);
+    this.sortByForm.reset();
+  }
+
+  selectCategoryName(id) {
+    return this.categories.find((category) => category.id === id).name;
+  }
+
+  showSelectedOption() {
+    const { categoryList, prices, sort, searchQuery } = this.options;
+    return categoryList.length || prices[0] || prices[1] !== Infinity || sort[1] || sort[0] || searchQuery;
   }
 }

@@ -1,4 +1,35 @@
 <mat-nav-list>
+  <mat-form-field class="selected-options" *ngIf="showSelectedOption()">
+    <mat-chip-list>
+      <mat-chip *ngFor="let categoryId of options.categoryList" [selectable]="true" [removable]="true"
+        (removed)="removeCategory(categoryId)">
+        {{selectCategoryName(categoryId)}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip *ngIf="options.prices[0] !== 0" [selectable]="true" [removable]="true" (removed)="removeMinPrice()">
+        min: {{options.prices[0]}} MAD
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip *ngIf="showMaxPrice()" [selectable]="true" [removable]="true" (removed)="removeMaxPrice()">
+        max: {{options.prices[1]}} MAD
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+
+      <mat-chip *ngIf="options.sort[0] !== ''" [selectable]="true" [removable]="true" (removed)="clearSort()">
+        sort by: {{options.sort[0]}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+      <mat-chip *ngIf="options.sort[1] !== ''" [selectable]="true" [removable]="true" (removed)="clearSort()">
+        direction: {{options.sort[1]}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+
+      <mat-chip *ngIf="options.searchQuery !== ''" [selectable]="true" [removable]="true" (removed)="clearSearch()">
+        search: {{options.searchQuery}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </mat-form-field>
   <a mat-list-item (click)="toggleFilters()" class="headers">
     <mat-icon aria-hidden="false">filter_list</mat-icon>
     <span class="nav-caption">Filters</span>
@@ -58,7 +89,7 @@
   <div class="search">
     <mat-form-field appearance="outline">
       <mat-label>Search a product</mat-label>
-      <input matInput placeholder="Search a product" [(ngModel)]="options.searchQuery" (keyup.enter)="search()">
+      <input matInput placeholder="Search a product" [(ngModel)]="searchQuery" (keyup.enter)="search()">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </div>

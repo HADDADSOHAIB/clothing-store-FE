@@ -15,6 +15,7 @@ import { BehaviorSubject } from 'rxjs';
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
   products$: BehaviorSubject<Product[]> = new BehaviorSubject([]);
+  options: Options;
 
   constructor(
     private productService: ProductService,
