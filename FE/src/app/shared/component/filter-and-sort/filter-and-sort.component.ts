@@ -13,20 +13,13 @@ import { Options } from 'src/app/models/options';
   styleUrls: ['./filter-and-sort.component.scss'],
 })
 export class FilterAndSortComponent implements OnInit {
-  @Input() selectedCategory = 0;
-
-  isFilterByPriceSet = false;
-  selectedSearchQuery = '';
-  isQuerySearchSet = false;
-  options: Options = new Options([0, 1000000], ['productName', 'asc'], []);
-
-  searchQuery = '';
+  
   showFilters = false;
   categories: Category[] = [];
-  priceLimits = { lowerPrice: 0, upperPrice: Infinity };
   showSortBy = false;
   priceFilterForm: FormGroup;
   sortByForm: FormGroup;
+  options: Options = new Options('', [0, Infinity], ['name', 'asc'], []);
 
   constructor(
     private productService: ProductService,
@@ -51,12 +44,12 @@ export class FilterAndSortComponent implements OnInit {
       .pipe(take(1))
       .subscribe((res) => (this.categories = res.categories));
 
-    // this.productService.optionSubject.subscribe((options) => (this.options = options));
+    this.productService.options.next(this.options);
   }
 
   search() {
-    console.log(this.searchQuery);
-    this.searchQuery = '';
+    this.productService.options.next(this.options);
+    this.options.searchQuery = '';
   }
 
   toggleFilters() {
@@ -64,15 +57,16 @@ export class FilterAndSortComponent implements OnInit {
   }
 
   selectCategroy($event) {
-    console.log($event);
+    if(!this.options.categoryList.includes(parseInt($event.value))){
+      this.options.categoryList.push(parseInt($event.value));
+      this.productService.options.next(this.options);
+    }
   }
 
   filterByPrice() {
-    this.priceLimits = this.priceFilterForm.value;
-    this.priceFilterForm.reset({
-      lowerPrice: 0,
-      upperPrice: Infinity,
-    });
+   const { lowerPrice, upperPrice } = this.priceFilterForm.value;
+   this.options.prices = [lowerPrice, upperPrice],
+   this.productService.options.next(this.options);
   }
 
   toggleSortBy() {
@@ -80,36 +74,12 @@ export class FilterAndSortComponent implements OnInit {
   }
 
   sortField(e) {
-    console.log(e);
+    this.options.sort[0] = e.value;
+    this.productService.options.next(this.options);
   }
+
   sortDirection(e) {
-    console.log(e);
+    this.options.sort[1] = e.value;
+    this.productService.options.next(this.options);
   }
-
-  // clearFilterByPrice() {
-  //   this.isFilterByPriceSet = false;
-  //   this.options.prices[0] = 0;
-  //   this.options.prices[1] = 1000000;
-
-  //   this.updateFilterAndSortOptions();
-  //   this.productService.loadProducts(10, 0);
-  //   this.productService.loadAvailableProductCount();
-  //   this.productService.resetPageNumber.next(1);
-  // }
-
-  // private updateFilterAndSortOptions() {
-  //   this.productService.optionSubject.next(this.options);
-  // }
-
-  // toggleSearch() {
-  //   this.showSearch = !this.showSearch;
-  // }
-  // clearSearch() {
-  //   this.selectedSearchQuery = '';
-  //   this.isQuerySearchSet = false;
-  //   this.productService.searchSubject.next(this.searchQuery);
-  //   this.productService.loadAvailableProductCount();
-  //   this.productService.loadProducts(10, 0);
-  //   this.productService.resetPageNumber.next(1);
-  // }
 }

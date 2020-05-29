@@ -10,6 +10,8 @@ import { Options } from 'src/app/models/options';
   providedIn: 'root',
 })
 export class ProductService {
+  options: BehaviorSubject<any> = new BehaviorSubject({});
+  
   constructor(private httpClient: HttpClient) {}
 
   getProducts() {

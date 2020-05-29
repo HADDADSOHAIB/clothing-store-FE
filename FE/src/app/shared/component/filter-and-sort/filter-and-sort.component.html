@@ -5,7 +5,7 @@
   </a>
   <mat-form-field appearance="outline" *ngIf="showFilters" class="categories">
     <mat-label>by categories</mat-label>
-    <mat-select placeholder="filter by category" (selectionChange)="selectCategroy($event)" formControleName="category">
+    <mat-select placeholder="filter by category" (selectionChange)="selectCategroy($event)">
       <mat-option value="{{category.id}}" *ngFor="let category of categories">
         {{category.name}}
       </mat-option>
@@ -58,7 +58,7 @@
   <div class="search">
     <mat-form-field appearance="outline">
       <mat-label>Search a product</mat-label>
-      <input matInput placeholder="Search a product" [(ngModel)]="searchQuery" (keyup.enter)="search()">
+      <input matInput placeholder="Search a product" [(ngModel)]="options.searchQuery" (keyup.enter)="search()">
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
   </div>

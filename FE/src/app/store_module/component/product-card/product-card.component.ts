@@ -75,7 +75,7 @@ export class ProductCardComponent implements OnInit {
 	}
 
 	private findOrUpdateIndex() {
-		this.itemIndex = this.cart.items.findIndex(item => item.product.productId === this.product.productId);
+		this.itemIndex = this.cart.items.findIndex(item => item.product.id === this.product.id);
 	}
 
 	details() {
@@ -84,6 +84,6 @@ export class ProductCardComponent implements OnInit {
 		//   data: this.product
 		// });
 
-		this.router.navigate(['store', 'product', this.product.productId]);
+		this.router.navigate(['store', 'product', this.product.id]);
 	}
 }
