@@ -1,10 +1,14 @@
-<mat-sidenav-container>
-    <mat-sidenav [opened]="showSidenav" mode="side">
-        <store-navbar></store-navbar>
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <div style="height: 86vh;">
-            <router-outlet></router-outlet>
-        </div>
-    </mat-sidenav-content>
-</mat-sidenav-container>
+<div class="all-products">
+  <div class="sort-filter">
+    <mat-card>
+      <mat-card-content>
+        <filter-and-sort></filter-and-sort>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="products">
+    <product-card *ngFor="let product of products$ | async" [product]="product">
+    </product-card>
+  </div>
+</div>
+<paginator></paginator>

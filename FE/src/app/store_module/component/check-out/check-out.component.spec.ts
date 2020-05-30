@@ -13,7 +13,7 @@ import { StoreComponent } from '../../store.component';
 import { StoreFrontComponent } from '../store-front/store-front.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { StoreHeaderComponent } from '../store-navbar/store-navbar.component';
-import { ProductFormComponent } from '../product-form/product-form.component';
+import { ProductFormComponent } from '../product-details/product-details.component';
 import { ShippingFormComponent } from '../shipping-form/shipping-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartService } from 'src/app/services/cart-service/cart.service';

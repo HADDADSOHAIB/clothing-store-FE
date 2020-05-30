@@ -1,3 +1,15 @@
-mat-sidenav{
-  width:216px;
+.all-products {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px 20px 0;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+product-card {
+  margin: 0 5px 10px;
 }

@@ -1,21 +1,21 @@
 <mat-card class="card">
-    <h5 (click)="details()">{{product.productName | headerFormater}}</h5>
-    <img mat-card-image src="{{imageUrl}}" alt="Photo of item" (click)="details()">
-    <div class="content" (click)="details()">{{product.price | currency:'MAD'}}</div>
-    <mat-card-actions fxLayout="column" fxLayoutAlign="start start">
-        <div class="divbtn" *ngIf="itemIndex===-1">
-            <button mat-stroked-button color="primary" (click)="addToCart()" class="btn">Buy</button>
-        </div>
-        <div class="divbtn" *ngIf="itemIndex!==-1">
-            <button mat-stroked-button color="primary" (click)="increment()" class="btn-left"
-            matBadge="{{cart.itemCount(this.product.productId)}}" matBadgePosition="below after">
-            +
-            </button>
-            <button mat-stroked-button color="primary" (click)="decrement()" class="btn-right">-</button>
-        </div>
-        <div class="divbtn">
-            <button mat-stroked-button color="warn" class="btn"(click)="details()">Details</button>
-        </div>
-    </mat-card-actions>
+  <h5 (click)="details()">{{product.productName | headerFormater}}</h5>
+  <img mat-card-image src="https://fox26medford.com/wp-content/uploads/2020/04/AprilShoe-720x399-1.jpg"
+    alt="Photo of item" (click)="details()">
+  <div class="content" (click)="details()">{{product.price | currency:'MAD'}}</div>
+  <mat-card-actions fxLayout="column" fxLayoutAlign="start start">
+    <div class="divbtn" *ngIf="itemIndex===-1">
+      <button mat-stroked-button color="primary" (click)="addToCart()" class="btn">Buy</button>
+    </div>
+    <div class="divbtn" *ngIf="itemIndex!==-1">
+      <button mat-stroked-button color="primary" (click)="increment()" class="btn-left"
+        matBadge="{{cart.itemCount(this.product.productId)}}" matBadgePosition="below after">
+        +
+      </button>
+      <button mat-stroked-button color="primary" (click)="decrement()" class="btn-right">-</button>
+    </div>
+    <div class="divbtn">
+      <button mat-stroked-button color="warn" class="btn" (click)="details()">Details</button>
+    </div>
+  </mat-card-actions>
 </mat-card>
-

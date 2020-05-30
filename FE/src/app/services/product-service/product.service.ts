@@ -21,7 +21,7 @@ export class ProductService {
           .get(BACK_END + `products?${this.queryBuilder(options)}`)
           .pipe(map((res) => this.processProducts(res)));
       })
-    ) as Observable<any>;
+    ) as Observable<Product[]>;
   }
 
   getCount() {

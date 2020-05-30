@@ -16,13 +16,13 @@ import { CartItem } from 'src/app/models/CartItem';
 import { UploadFilesService } from 'src/app/services/upload-files-service/upload-files.service';
 
 @Component({
-  selector: 'app-product-form',
-  templateUrl: './product-form.component.html',
-  styleUrls: ['./product-form.component.scss'],
+  selector: 'app-product-details',
+  templateUrl: './product-details.component.html',
+  styleUrls: ['./product-details.component.scss'],
 })
 export class ProductFormComponent implements OnInit {
   cart: Cart;
-  product: Product = new Product();
+  product: Product;
   productReview: ProductReview = new ProductReview(0, null, 5, '', 0);
   productReviewModified: ProductReview = new ProductReview(0, null, 5, '', 0);
   currentUser: User;
@@ -32,7 +32,7 @@ export class ProductFormComponent implements OnInit {
   constructor(
     private cartService: CartService,
     private activatedRoute: ActivatedRoute,
-    private productService: ProductsService,
+    private productService: ProductService,
     private accountService: AccountService,
     private reviewService: ReviewService,
     private snackBar: MatSnackBar,
@@ -42,37 +42,37 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit() {
     this.accountService.loadCurrentUser();
-    this.accountService.getCurrentUser().subscribe((user) => {
-      this.currentUser = user;
-      this.activatedRoute.paramMap.pipe(take(1)).subscribe((params) => {
-        if (params.get('id')) {
-          this.productService
-            .getProduct(parseInt(params.get('id')))
-            .pipe(take(1))
-            .subscribe((product) => {
-              this.product = product;
-              this.product.images.forEach((imageId, i) =>
-                this.fileService
-                  .downloadFile(imageId)
-                  .pipe(take(1))
-                  .subscribe((reader) =>
-                    reader.addEventListener(
-                      'loadend',
-                      () => {
-                        this.imageUrls = [
-                          ...this.imageUrls.slice(0, i),
-                          reader.result.toString(),
-                          ...this.imageUrls.slice(i + 1),
-                        ];
-                      },
-                      false
-                    )
-                  )
-              );
-            });
-        }
-      });
-    });
+    // this.accountService.getCurrentUser().subscribe((user) => {
+    //   this.currentUser = user;
+    //   this.activatedRoute.paramMap.pipe(take(1)).subscribe((params) => {
+    //     if (params.get('id')) {
+    //       this.productService
+    //         .getProduct(parseInt(params.get('id')))
+    //         .pipe(take(1))
+    //         .subscribe((product) => {
+    //           this.product = product;
+    //           this.product.images.forEach((imageId, i) =>
+    //             this.fileService
+    //               .downloadFile(imageId)
+    //               .pipe(take(1))
+    //               .subscribe((reader) =>
+    //                 reader.addEventListener(
+    //                   'loadend',
+    //                   () => {
+    //                     this.imageUrls = [
+    //                       ...this.imageUrls.slice(0, i),
+    //                       reader.result.toString(),
+    //                       ...this.imageUrls.slice(i + 1),
+    //                     ];
+    //                   },
+    //                   false
+    //                 )
+    //               )
+    //           );
+    //         });
+    //     }
+    //   });
+    // });
     this.cartService.getCart().subscribe((cart) => {
       this.cart = cart;
     });
@@ -85,8 +85,8 @@ export class ProductFormComponent implements OnInit {
   }
 
   increment() {
-    if (this.cart.items[this.cart.indexByProduct(this.product.productId)].itemQuantity < this.product.quantity) {
-      this.cart.items[this.cart.indexByProduct(this.product.productId)].itemQuantity++;
+    if (this.cart.items[this.cart.indexByProduct(this.product.id)].itemQuantity < this.product.quantity) {
+      this.cart.items[this.cart.indexByProduct(this.product.id)].itemQuantity++;
       this.cartService.upLoadCart(this.cart);
       this.cartService.updateCart(this.cart);
     } else {
@@ -95,9 +95,9 @@ export class ProductFormComponent implements OnInit {
   }
 
   decrement() {
-    this.cart.items[this.cart.indexByProduct(this.product.productId)].itemQuantity--;
-    if (this.cart.items[this.cart.indexByProduct(this.product.productId)].itemQuantity === 0) {
-      this.cart.items.splice(this.cart.indexByProduct(this.product.productId), 1);
+    this.cart.items[this.cart.indexByProduct(this.product.id)].itemQuantity--;
+    if (this.cart.items[this.cart.indexByProduct(this.product.id)].itemQuantity === 0) {
+      this.cart.items.splice(this.cart.indexByProduct(this.product.id), 1);
     }
     this.cartService.upLoadCart(this.cart);
     this.cartService.updateCart(this.cart);
@@ -112,7 +112,7 @@ export class ProductFormComponent implements OnInit {
 
   saveModifiedReview() {
     this.idOfReviewToModify = 0;
-    this.productReviewModified.productId = this.product.productId;
+    this.productReviewModified.id = this.product.id;
     if (this.currentUser.userEmail) {
       this.productReviewModified.user = this.currentUser;
       this.reviewService
@@ -122,7 +122,7 @@ export class ProductFormComponent implements OnInit {
           (review) => {
             this.snackBar.open('Review Added', 'OK', { duration: 2000 });
             this.productService
-              .getProduct(this.product.productId)
+              .getProduct(this.product.id)
               .pipe(take(1))
               .subscribe((product) => (this.product = product));
             this.productReviewModified = new ProductReview(0, null, 5, '', 0);
@@ -138,7 +138,7 @@ export class ProductFormComponent implements OnInit {
   }
 
   saveReview() {
-    this.productReview.productId = this.product.id;
+    this.productReview.id = this.product.id;
     if (this.currentUser.userEmail) {
       this.productReview.user = this.currentUser;
       this.reviewService
@@ -171,7 +171,7 @@ export class ProductFormComponent implements OnInit {
         (response) => {
           this.snackBar.open('review removed', 'Ok');
           this.productService
-            .getProduct(this.product.productId)
+            .getProduct(this.product.id)
             .pipe(take(1))
             .subscribe((product) => (this.product = product));
         },
