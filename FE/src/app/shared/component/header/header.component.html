@@ -14,6 +14,14 @@
           <span class="nav-caption">Store</span>
         </a>
       </li>
+      <li class="nav">
+        <a routerLink="/store/checkout">
+          <!-- <mat-icon matBadge="{{cart.totalCount()}}" matBadgeColor="accent">local_grocery_store</mat-icon> -->
+          <mat-icon matBadge="2" matBadgePosition="below" matBadgeColor="accent" matBadgeSize="small">
+            local_grocery_store</mat-icon>
+          <span class="nav-caption">Checkout</span>
+        </a>
+      </li>
       <li class="nav" *ngIf="currentUser$ | async">
         <a routerLink="/user/account">
           <mat-icon aria-hidden="false">face</mat-icon>

@@ -5,6 +5,7 @@ import { SidenavService } from 'src/app/services/sidenav-service/sidenav.service
 import { take } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
 import { BehaviorSubject } from 'rxjs';
+import { CartService } from 'src/app/services/cart-service/cart.service';
 
 @Component({
   selector: 'header',
@@ -17,7 +18,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private accountService: AccountService,
     private sidenavService: SidenavService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
@@ -26,7 +28,7 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.cookieService.delete("token");
+    this.cookieService.delete('token');
     this.accountService.currentUser$.next(undefined);
   }
 

@@ -1,5 +1,5 @@
 <mat-card class="card">
-  <h5 (click)="details()">{{product.productName | headerFormater}}</h5>
+  <h5 (click)="details()" class="title">{{product.name | headerFormater}}</h5>
   <img mat-card-image src="https://fox26medford.com/wp-content/uploads/2020/04/AprilShoe-720x399-1.jpg"
     alt="Photo of item" (click)="details()">
   <div class="content" (click)="details()">{{product.price | currency:'MAD'}}</div>
@@ -13,9 +13,6 @@
         +
       </button>
       <button mat-stroked-button color="primary" (click)="decrement()" class="btn-right">-</button>
-    </div>
-    <div class="divbtn">
-      <button mat-stroked-button color="warn" class="btn" (click)="details()">Details</button>
     </div>
   </mat-card-actions>
 </mat-card>

@@ -10,7 +10,6 @@ import { StoreRoutingModule } from '../../store-routing.module';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { StoreComponent } from '../../store.component';
-import { StoreFrontComponent } from '../store-front/store-front.component';
 import { ProductCardComponent } from '../product-card/product-card.component';
 import { StoreHeaderComponent } from '../store-navbar/store-navbar.component';
 import { ProductFormComponent } from '../product-details/product-details.component';
@@ -20,7 +19,7 @@ import { CartService } from 'src/app/services/cart-service/cart.service';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { Cart } from 'src/app/models/cart';
-import { CartItem } from 'src/app/models/CartItem';
+import { CartItem } from 'src/app/models/cartItem';
 
 describe('CheckOutComponent', () => {
   let component: CheckOutComponent;
@@ -33,7 +32,6 @@ describe('CheckOutComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [
-        StoreFrontComponent,
         ProductCardComponent,
         StoreHeaderComponent,
         StoreComponent,

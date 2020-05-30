@@ -12,7 +12,7 @@ import { CartService } from 'src/app/services/cart-service/cart.service';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { AccountService } from 'src/app/services/account-service/account.service';
 import { ReviewService } from 'src/app/services/review-service/review.service';
-import { CartItem } from 'src/app/models/CartItem';
+import { CartItem } from 'src/app/models/cartItem';
 import { UploadFilesService } from 'src/app/services/upload-files-service/upload-files.service';
 
 @Component({

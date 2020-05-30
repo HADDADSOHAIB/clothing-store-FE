@@ -7,7 +7,7 @@ import { ProductFormComponent } from '../product-details/product-details.compone
 import { Product } from 'src/app/models/product';
 import { Cart } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart-service/cart.service';
-import { CartItem } from 'src/app/models/CartItem';
+import { CartItem } from 'src/app/models/cartItem';
 import { UploadFilesService } from 'src/app/services/upload-files-service/upload-files.service';
 
 @Component({
@@ -52,8 +52,8 @@ export class ProductCardComponent implements OnInit {
 
   increment() {
     this.findOrUpdateIndex();
-    if (this.cart.items[this.itemIndex].itemQuantity < this.product.quantity) {
-      this.cart.items[this.itemIndex].itemQuantity++;
+    if (this.cart.items[this.itemIndex].quantity < this.product.quantity) {
+      this.cart.items[this.itemIndex].quantity++;
       this.cartService.upLoadCart(this.cart);
       this.cartService.updateCart(this.cart);
     } else {
@@ -63,8 +63,8 @@ export class ProductCardComponent implements OnInit {
 
   decrement() {
     this.findOrUpdateIndex();
-    this.cart.items[this.itemIndex].itemQuantity--;
-    if (this.cart.items[this.itemIndex].itemQuantity === 0) {
+    this.cart.items[this.itemIndex].quantity--;
+    if (this.cart.items[this.itemIndex].quantity === 0) {
       this.cart.items.splice(this.itemIndex, 1);
     }
     this.cartService.upLoadCart(this.cart);
@@ -72,7 +72,7 @@ export class ProductCardComponent implements OnInit {
   }
 
   private findOrUpdateIndex() {
-    this.itemIndex = this.cart.items.findIndex((item) => item.product.id === this.product.id);
+    this.itemIndex = this.cart.items.findIndex((item) => item.productId === this.product.id);
   }
 
   details() {
