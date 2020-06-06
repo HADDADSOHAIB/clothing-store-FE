@@ -24,6 +24,7 @@ export class SignInComponent {
     private router: Router,
     private cookieService: CookieService,
     private snackBar: MatSnackBar,
+    private accountService: AccountService
   ) {}
 
   openSnackBar(message: string) {
@@ -43,8 +44,9 @@ export class SignInComponent {
         password
       }).pipe(take(1)).subscribe(
         (res) => {
-          this.cookieService.set("token", res.token, 30);
+          this.cookieService.set("token", res.token, 30,'/');
           this.openSnackBar("Logged in sucessfully");
+          this.accountService.loadCurrentUser();
           this.router.navigate(['/']);
         },
         (err) => {

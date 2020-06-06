@@ -16,8 +16,7 @@
       </li>
       <li class="nav">
         <a routerLink="/store/checkout">
-          <!-- <mat-icon matBadge="{{cart.totalCount()}}" matBadgeColor="accent">local_grocery_store</mat-icon> -->
-          <mat-icon matBadge="2" matBadgePosition="below" matBadgeColor="accent" matBadgeSize="small">
+          <mat-icon matBadge="{{(userCart$ | async).totalCount()}}" matBadgePosition="below" matBadgeColor="accent" matBadgeSize="small">
             local_grocery_store</mat-icon>
           <span class="nav-caption">Checkout</span>
         </a>

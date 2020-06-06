@@ -21,9 +21,9 @@ export class CheckOutComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.cartService.getCart().subscribe(cart => {
-			this.cart = cart;
-		});
+		// this.cartService.getCart().subscribe(cart => {
+		// 	this.cart = cart;
+		// });
 	}
 
 	goShipping() {
@@ -33,21 +33,21 @@ export class CheckOutComponent implements OnInit {
 		this.router.navigate(['store']);
 	}
 	increment(id: number) {
-		if (this.cart.items[this.cart.indexByProduct(id)].itemQuantity < this.cart.items[this.cart.indexByProduct(id)].product.quantity) {
-			this.cart.items[this.cart.indexByProduct(id)].itemQuantity++;
-			this.cartService.upLoadCart(this.cart);
-			this.cartService.updateCart(this.cart);
-		} else {
-			this.snackBar.open('Stock out, there is no more items', 'Ok', {duration: 2000});
-		}
+		// if (this.cart.items[this.cart.indexByProduct(id)].itemQuantity < this.cart.items[this.cart.indexByProduct(id)].product.quantity) {
+		// 	this.cart.items[this.cart.indexByProduct(id)].itemQuantity++;
+		// 	this.cartService.upLoadCart(this.cart);
+		// 	this.cartService.updateCart(this.cart);
+		// } else {
+		// 	this.snackBar.open('Stock out, there is no more items', 'Ok', {duration: 2000});
+		// }
 	}
 
 	decrement(id: number) {
-		if (this.cart.items[this.cart.indexByProduct(id)].itemQuantity >= 1) {
-			this.cart.items[this.cart.indexByProduct(id)].itemQuantity--;
-			this.cartService.upLoadCart(this.cart);
-			this.cartService.updateCart(this.cart);
-		}
+		// if (this.cart.items[this.cart.indexByProduct(id)].itemQuantity >= 1) {
+		// 	this.cart.items[this.cart.indexByProduct(id)].itemQuantity--;
+		// 	this.cartService.upLoadCart(this.cart);
+		// 	this.cartService.updateCart(this.cart);
+		// }
 
 	}
 }

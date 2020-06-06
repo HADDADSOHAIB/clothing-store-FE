@@ -1,67 +1,75 @@
-.card {
-  width: 150px;
+.product-card {
+  width: 180px;
+  height: 250px;
+  background-image: url('../../../../assets/hats.png');
+  background-size: cover;
+  border-radius: 5px;
   cursor: pointer;
+  position: relative;
+  box-shadow: 
+    0 2px 1px -1px rgba(0,0,0,.12),
+    0 1px 1px 0 rgba(0,0,0,.14),
+    0 1px 3px 0 rgba(0,0,0,.12);
 }
 
-img {
-  height: 100px;
+.go-details {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }
 
 .content {
-  font-size: small;
-}
-
-button {
-  font-size: small;
-}
-
-.btn {
+  height: 100%;
   width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  display: none;
+  background-color: rgba($color: #ffd06a, $alpha: 0.6);
 }
 
-.mat-card-actions .mat-button,
-.mat-card-actions .mat-raised-button,
-.mat-card-actions .mat-stroked-button {
-  margin: 0 0px;
-}
+.product-card:hover {
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 
-.mat-button,
-.mat-flat-button,
-.mat-icon-button,
-.mat-stroked-button {
-  min-width: 0px;
-}
+    .info {
+      color: #111;
+      font-weight: 800;
+      font-family: 'Architects Daughter', cursive;
+      font-size: 1.1rem;
 
-.btn-left {
-  width: 50%;
-  float: left;
-}
+      p {
+        margin: 0;
+      }
+    }
 
-.btn-right {
-  width: 50%;
-  float: right;
-}
+    .btn-buy {
+      width: 100%;
 
-.btn-mid {
-  width: 20%;
-}
+      button {
+        width: 100%;
 
-.divbtn {
-  width: 100%;
-  margin-bottom: 2px;
-}
+        z-index: 2;
+      }
+    }
 
-@media only screen and (max-width: 260px) {
-  .card {
-    width: 100%;
+    .btn-quantity {
+      width: 100%;
+
+      button {
+        width: 50%;
+
+        &:first-child {
+          z-index: 3;
+        }
+
+        &:last-child {
+          z-index: 2;
+        }
+      }
+    }
   }
-
-  img {
-    height: 100px;
-  }
-}
-
-.title {
-  margin-bottom: 5px;
-  text-align: center;
 }

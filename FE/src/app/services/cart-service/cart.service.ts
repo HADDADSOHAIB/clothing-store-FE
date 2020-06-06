@@ -12,14 +12,30 @@ import { CartItem } from 'src/app/models/cartItem';
   providedIn: 'root',
 })
 export class CartService {
-  private cart$: BehaviorSubject<Cart> = new BehaviorSubject<Cart>(new Cart(null, '', []));
-  constructor(private httpClient: HttpClient, private accountService: AccountService) {}
+  userCart$: BehaviorSubject<Cart>=new BehaviorSubject(new Cart(null, null, []));
+  
+  constructor(
+    private httpClient: HttpClient,
+    private accountService: AccountService
+  ) {}
 
   getCartByUser(id: number) {
     return this.httpClient.get(BACK_END + `users/${id}/cart`).pipe(map((res) => this.proccess(res))) as Observable<
       Cart
     >;
   }
+
+  addItem(productId: number, cartId: number) {
+    return this.httpClient.post(`${BACK_END}carts/${cartId}/items`, { productId });
+  };
+
+  increase(itemId: number) {
+    return this.httpClient.patch(`${BACK_END}cartItems/${itemId}/increase`, {});
+  };
+
+  decrease(itemId: number) {
+    return this.httpClient.patch(`${BACK_END}cartItems/${itemId}/decrease`, {});
+  };
 
   private proccess(res) {
     const items = [];

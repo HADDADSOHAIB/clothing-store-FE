@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy, OnChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
@@ -9,78 +9,85 @@ import { Cart } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { CartItem } from 'src/app/models/cartItem';
 import { UploadFilesService } from 'src/app/services/upload-files-service/upload-files.service';
+import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
   selector: 'product-card',
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss'],
 })
-export class ProductCardComponent implements OnInit {
+export class ProductCardComponent implements OnInit, OnDestroy {
   @Input() product: Product;
-  cart: Cart;
-  itemIndex = -1;
-  imageUrl = '';
+  cart: Cart = new Cart(null, null, []);
+  s: Subscription;
+
 
   constructor(
     private cartService: CartService,
     private router: Router,
     private snackBar: MatSnackBar,
     public dialog: MatDialog,
-    private uploadFileService: UploadFilesService
   ) {}
 
   ngOnInit() {
-    this.uploadFileService
-      .downloadFile(this.product.images[0])
-      .pipe(take(1))
-      .subscribe((reader) => {
-        reader.addEventListener('load', () => (this.imageUrl = reader.result.toString()), false);
-      });
-
-    this.cartService.loadCart();
-    this.cartService.getCart().subscribe((cart) => {
-      this.cart = cart;
-      this.findOrUpdateIndex();
-    });
+    this.s = this.cartService.userCart$.subscribe(
+      cart => this.cart = cart
+    );
   }
 
-  addToCart() {
-    this.cart.items.push(new CartItem(0, this.product.price, 1, this.product));
-    this.cartService.upLoadCart(this.cart);
-    this.cartService.updateCart(this.cart);
-  }
-
-  increment() {
-    this.findOrUpdateIndex();
-    if (this.cart.items[this.itemIndex].quantity < this.product.quantity) {
-      this.cart.items[this.itemIndex].quantity++;
-      this.cartService.upLoadCart(this.cart);
-      this.cartService.updateCart(this.cart);
-    } else {
-      this.snackBar.open('Stock out, there is no more items', 'Ok', { duration: 2000 });
+  addToCart(productId: number, cartId: number) {
+    if(cartId) {
+      this.cartService.addItem(productId, cartId).pipe(take(1)).subscribe(
+        res => {
+          const { id, cartdId, productId, price, quantity } = res['data'];
+          this.cart.addItem(new CartItem(id, price, quantity, productId, cartId));
+          this.cartService.userCart$.next(this.cart);
+        }
+      );
+    }
+    else {
+      this.router.navigate(['auth', 'signup']);
+      this.snackBar.open('You must login/register to buy items', 'Ok', { duration: 3000 });
     }
   }
 
-  decrement() {
-    this.findOrUpdateIndex();
-    this.cart.items[this.itemIndex].quantity--;
-    if (this.cart.items[this.itemIndex].quantity === 0) {
-      this.cart.items.splice(this.itemIndex, 1);
+  increment(productId: number) {
+    const itemId = this.cart.itemIdByProduct(productId);
+    if(itemId) {
+      this.cartService.increase(itemId).pipe(take(1)).subscribe(
+        res => {
+          this.cart.increase(itemId);
+          this.cartService.userCart$.next(this.cart);
+        }
+      );
     }
-    this.cartService.upLoadCart(this.cart);
-    this.cartService.updateCart(this.cart);
+    else {
+      this.router.navigate(['auth', 'signup']);
+      this.snackBar.open('You must login/register to buy items', 'Ok', { duration: 3000 });
+    }
   }
 
-  private findOrUpdateIndex() {
-    this.itemIndex = this.cart.items.findIndex((item) => item.productId === this.product.id);
+  decrement(productId: number) {
+    const itemId = this.cart.itemIdByProduct(productId);
+    if(itemId) {
+      this.cartService.decrease(itemId).pipe(take(1)).subscribe(
+        res => {
+          this.cart.decrease(itemId);
+          this.cartService.userCart$.next(this.cart);
+        }
+      );
+    }
+    else {
+      this.router.navigate(['auth', 'signup']);
+      this.snackBar.open('You must login/register to buy items', 'Ok', { duration: 3000 });
+    }
   }
 
-  details() {
-    // const dialogRef=this.dialog.open(ProductFormComponent, {
-    //   height: '85%',
-    //   data: this.product
-    // });
+  details(id: number) {
+    this.router.navigate(['store', 'product', id]);
+  }
 
-    this.router.navigate(['store', 'product', this.product.id]);
+  ngOnDestroy() {
+    this.s.unsubscribe();
   }
 }
