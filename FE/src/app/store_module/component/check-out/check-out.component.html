@@ -1,8 +1,8 @@
 <div class="table" fxLayout="column" fxLayoutAlign="start center" >
-    <table mat-table [dataSource]="cart.items" class="mat-elevation-z8">
+    <table mat-table [dataSource]="(cart$ | async).items" class="mat-elevation-z8">
         <ng-container matColumnDef="Product">
             <th mat-header-cell *matHeaderCellDef> Product </th>
-            <td mat-cell *matCellDef="let item"> {{item.product.productName}} </td>
+            <td mat-cell *matCellDef="let item"> {{item.id}} </td>
             <td mat-footer-cell *matFooterCellDef></td>
         </ng-container>
 
@@ -10,12 +10,12 @@
             <th mat-header-cell *matHeaderCellDef class="quantity-head"> Quantity </th>
             <td mat-cell *matCellDef="let item" class="quantity-row">
                 <div class="divbtn" fxLayout="row" fxLayoutAlign="start center">
-                    <button mat-button color="primary" (click)="increment(item.product.productId)"
+                    <button mat-button color="primary" (click)="increment(item.productId)"
                         class="btn-left">+</button>
                     <button mat-button class="btn-mid">
-                        <mat-icon matBadge="{{cart.itemCount(item.product.productId)}}" >shopping_cart</mat-icon>
+                        <mat-icon matBadge="{{cart.itemCount(item.productId)}}" >shopping_cart</mat-icon>
                     </button>
-                    <button mat-button color="warn" (click)="decrement(item.product.productId)"
+                    <button mat-button color="warn" (click)="decrement(item.productId)"
                         class="btn-right">-</button>
                 </div>
             </td>
@@ -24,7 +24,7 @@
     
         <ng-container matColumnDef="Price">
             <th mat-header-cell *matHeaderCellDef class="price">Price</th>
-            <td mat-cell *matCellDef="let item" class="price">{{item.itemQuantity*item.itemPrice | currency:'MAD'}}</td>
+            <td mat-cell *matCellDef="let item" class="price">{{item.quantity*item.price | currency:'MAD'}}</td>
             <td mat-footer-cell *matFooterCellDef class="totalPrice"><strong> {{cart.totalPrice() | currency:'MAD'}} </strong></td>
         </ng-container>
 

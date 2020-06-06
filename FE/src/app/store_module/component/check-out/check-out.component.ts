@@ -4,6 +4,7 @@ import { take } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Cart } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart-service/cart.service';
+import { Subscription, BehaviorSubject } from 'rxjs';
 
 @Component({
 	selector: 'app-check-out',
@@ -11,7 +12,9 @@ import { CartService } from 'src/app/services/cart-service/cart.service';
 	styleUrls: ['./check-out.component.scss']
 })
 export class CheckOutComponent implements OnInit {
-	cart: Cart;
+	cart$: BehaviorSubject<Cart> = new BehaviorSubject<Cart>(new Cart(null, null, []));
+	cart: Cart = new Cart(null, null, []);
+  s: Subscription;
 	displayedColumns: string[] = ['Product', 'Quantity', 'Price'];
 
 	constructor(
@@ -21,33 +24,53 @@ export class CheckOutComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		// this.cartService.getCart().subscribe(cart => {
-		// 	this.cart = cart;
-		// });
+		this.cart$ = this.cartService.userCart$;
+		this.s = this.cartService.userCart$.subscribe(
+      cart => this.cart = cart
+    );
 	}
 
 	goShipping() {
 		this.router.navigate(['store/shipping']);
 	}
+
 	goStore() {
 		this.router.navigate(['store']);
 	}
-	increment(id: number) {
-		// if (this.cart.items[this.cart.indexByProduct(id)].itemQuantity < this.cart.items[this.cart.indexByProduct(id)].product.quantity) {
-		// 	this.cart.items[this.cart.indexByProduct(id)].itemQuantity++;
-		// 	this.cartService.upLoadCart(this.cart);
-		// 	this.cartService.updateCart(this.cart);
-		// } else {
-		// 	this.snackBar.open('Stock out, there is no more items', 'Ok', {duration: 2000});
-		// }
-	}
+	
+	increment(productId: number) {
+    const itemId = this.cart.itemIdByProduct(productId);
+    if(itemId) {
+      this.cartService.increase(itemId).pipe(take(1)).subscribe(
+        res => {
+          this.cart.increase(itemId);
+          this.cartService.userCart$.next(this.cart);
+        }
+      );
+    }
+    else {
+      this.router.navigate(['auth', 'signup']);
+      this.snackBar.open('You must login/register to buy items', 'Ok', { duration: 3000 });
+    }
+  }
 
-	decrement(id: number) {
-		// if (this.cart.items[this.cart.indexByProduct(id)].itemQuantity >= 1) {
-		// 	this.cart.items[this.cart.indexByProduct(id)].itemQuantity--;
-		// 	this.cartService.upLoadCart(this.cart);
-		// 	this.cartService.updateCart(this.cart);
-		// }
+  decrement(productId: number) {
+    const itemId = this.cart.itemIdByProduct(productId);
+    if(itemId) {
+      this.cartService.decrease(itemId).pipe(take(1)).subscribe(
+        res => {
+          this.cart.decrease(itemId);
+          this.cartService.userCart$.next(this.cart);
+        }
+      );
+    }
+    else {
+      this.router.navigate(['auth', 'signup']);
+      this.snackBar.open('You must login/register to buy items', 'Ok', { duration: 3000 });
+    }
+  }
 
-	}
+  details(id: number) {
+    this.router.navigate(['store', 'product', id]);
+  }
 }
