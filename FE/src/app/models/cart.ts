@@ -34,7 +34,9 @@ export class Cart {
 
   private deleteItem(id: number) {
     const index = this.items.findIndex(el => el.id === id);
-    if(index !== -1) this.items.splice(index, 1);
+    if(index !== -1){
+      this.items.splice(index, 1);
+    }
   }
 
   itemIdByProduct(productId: number) {

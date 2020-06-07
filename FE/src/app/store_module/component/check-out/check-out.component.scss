@@ -1,25 +1,51 @@
-table{
+.table{
     width:700px;
-    margin:10px;
+    margin: 20px auto 0;
+
+    .name {
+        text-decoration: none;
+        color: #111;
+        font-family: 'Architects Daughter', cursive;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    & table {
+        box-shadow: 
+        0 2px 1px -1px rgba(0,0,0,.2),
+        0 1px 1px 0 rgba(0,0,0,.14),
+        0 1px 3px 0 rgba(0,0,0,.12);
+    }
+
+    .quantity-head {
+        text-align: center;
+        width: 20%;
+    }
+
+    .price {
+        width: 15%;
+        text-align: center;
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+    }
 }
 
-div.btn-nav{
-    width:700px;
-    margin:10px;
-}
 
-div.table{
-    display:flex;
-    justify-content: center;
-}
-
-.price{
-    width:10%;
-}
-
-mat-form-field{
-    width:50%;
-}
 button{
     margin-bottom: 0px;
+}
+
+.options {
+    display: flex;
+    justify-content: center;
+
+    .btn-nav {
+        display: flex;
+        justify-content: space-between;
+        width:700px;
+        margin:10px;
+    }
 }

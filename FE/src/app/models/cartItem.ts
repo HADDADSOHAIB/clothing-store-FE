@@ -6,6 +6,7 @@ export class CartItem {
     public price: number,
     public quantity: number,
     public productId: number,
-    public cartId: number
+    public cartId: number,
+    public name: string
   ) {}
 }

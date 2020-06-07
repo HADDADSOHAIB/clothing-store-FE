@@ -40,8 +40,8 @@ export class CartService {
   private proccess(res) {
     const items = [];
     res.data.items.forEach((item) => {
-      const { id, productId, cartId, price, quantity } = item;
-      items.push(new CartItem(id, price, quantity, productId, cartId));
+      const { id, productId, cartId, price, quantity, name } = item;
+      items.push(new CartItem(id, price, quantity, productId, cartId, name));
     });
     return new Cart(res.data.id, res.data.userId, items);
   }

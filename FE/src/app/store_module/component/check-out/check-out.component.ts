@@ -1,10 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { take } from 'rxjs/operators';
+import { take, switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Cart } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart-service/cart.service';
 import { Subscription, BehaviorSubject } from 'rxjs';
+import { CartItem } from 'src/app/models/cartItem';
 
 @Component({
 	selector: 'app-check-out',
@@ -12,7 +13,7 @@ import { Subscription, BehaviorSubject } from 'rxjs';
 	styleUrls: ['./check-out.component.scss']
 })
 export class CheckOutComponent implements OnInit {
-	cart$: BehaviorSubject<Cart> = new BehaviorSubject<Cart>(new Cart(null, null, []));
+	items$: BehaviorSubject<CartItem[]> = new BehaviorSubject<CartItem[]>([]);
 	cart: Cart = new Cart(null, null, []);
   s: Subscription;
 	displayedColumns: string[] = ['Product', 'Quantity', 'Price'];
@@ -24,9 +25,11 @@ export class CheckOutComponent implements OnInit {
 	) { }
 
 	ngOnInit() {
-		this.cart$ = this.cartService.userCart$;
 		this.s = this.cartService.userCart$.subscribe(
-      cart => this.cart = cart
+      cart => {
+        this.cart = cart;
+        this.items$.next(cart.items);
+      }
     );
 	}
 

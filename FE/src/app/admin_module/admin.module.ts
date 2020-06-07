@@ -12,7 +12,6 @@ import { OrdersListComponent } from './component/orders-list/orders-list.compone
 import { CategoryFormComponent } from './component/category-form/category-form.component';
 import { TitleDescriptionPipe } from './pipes/title-description.pipe';
 import { UserListComponent } from './component/user-list/user-list.component';
-import { DragDropDirective } from './directives/drag-drop.directive';
 
 @NgModule({
   declarations: [
@@ -25,7 +24,6 @@ import { DragDropDirective } from './directives/drag-drop.directive';
     CategoryFormComponent,
     TitleDescriptionPipe,
     UserListComponent,
-    DragDropDirective,
   ],
   imports: [CommonModule, AdminRoutingModule, SharedModule.forRoot()],
   providers: [],

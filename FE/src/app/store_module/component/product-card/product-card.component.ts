@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { take } from 'rxjs/operators';
 import { MatDialog } from '@angular/material/dialog';
-import { ProductFormComponent } from '../product-details/product-details.component';
 import { Product } from 'src/app/models/product';
 import { Cart } from 'src/app/models/cart';
 import { CartService } from 'src/app/services/cart-service/cart.service';
@@ -39,8 +38,8 @@ export class ProductCardComponent implements OnInit, OnDestroy {
     if(cartId) {
       this.cartService.addItem(productId, cartId).pipe(take(1)).subscribe(
         res => {
-          const { id, cartdId, productId, price, quantity } = res['data'];
-          this.cart.addItem(new CartItem(id, price, quantity, productId, cartId));
+          const { id, productId, price, quantity, name } = res['data'];
+          this.cart.addItem(new CartItem(id, price, quantity, productId, cartId, name));
           this.cartService.userCart$.next(this.cart);
         }
       );
@@ -84,7 +83,7 @@ export class ProductCardComponent implements OnInit, OnDestroy {
   }
 
   details(id: number) {
-    this.router.navigate(['store', 'product', id]);
+    this.router.navigate(['store', 'products', id]);
   }
 
   ngOnDestroy() {

@@ -50,16 +50,43 @@
           </mat-chip-list>
         </mat-form-field>
 
-        <!-- <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
-          <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
-          <p>Drag and drop an image</p>
+        <div class="images">
+          <div class="cover-image">
+            <input hidden type="file" #fileCover (change)="selectCover($event)">
+            <p (click)="fileCover.click()">Cover Image</p>
+
+            <div *ngIf="coverImage">
+              <mat-icon matTooltip="{{ coverImage.name }}">photo</mat-icon>
+              <mat-icon matTooltip="delete" class="delete" (click)="deselectCover()" color="warn">clear</mat-icon>
+            </div>
+            <div *ngIf="!coverImage">
+              <small>No Image</small>
+            </div>
+          </div>
+          <div class="product-images">
+            <input hidden type="file" #fileImages (change)="selectImages($event)" multiple>
+            <p (click)="fileImages.click()">Product Images</p>
+
+            <div *ngIf="productImages.length">
+              <div *ngFor="let image of productImages; index as i">
+                <mat-icon matTooltip="{{ image.name }}">photo</mat-icon>
+                <mat-icon matTooltip="delete" class="delete" (click)="deselectImage(i)" color="warn">clear</mat-icon>
+              </div>
+            </div>
+            <div *ngIf="!productImages.length">
+              <small>No Images</small>
+            </div>
+          </div>
         </div>
-        <div>
-          <button mat-button class="delete-file" *ngFor="let file of files;index as i">
+        
+
+        <div class="images">
+         
+          <!-- <button mat-button class="delete-file" *ngFor="let file of files;index as i">
             <mat-icon matTooltip="{{ file.name }}">photo</mat-icon>
             <mat-icon matTooltip="delete" (click)="deleteAttachment(i)" color="warn">clear</mat-icon>
-          </button>
-        </div> -->
+          </button> -->
+        </div>
 
       </form>
     </mat-card-content>

@@ -15,10 +15,11 @@ import { UploadFilesService } from 'src/app/services/upload-files-service/upload
   styleUrls: ['./new-product.component.scss'],
 })
 export class NewProductComponent implements OnInit {
-  imageUrls: String[] = [];
 
   // files: File[] = [];
   // formData: FormData = new FormData();
+  coverImage: File;
+  productImages: File[] = [];
 
   id: number = 0;
   form: FormGroup;
@@ -103,21 +104,36 @@ export class NewProductComponent implements OnInit {
     return form.get(controleName).touched && form.get(controleName).hasError(error);
   }
 
-  // deleteImage(i: number) {
-  //   this.fileService
-  //     .deletFile(this.product.images[i])
-  //     .pipe(take(1))
-  //     .subscribe(
-  //       (res) => {
-  //         this.snackBar.open('Image Deleted', 'OK', { duration: 2000 });
-  //         this.loadProduct();
-  //       },
-  //       (error) => {
-  //         console.log(error);
-  //         this.snackBar.open('error', 'OK', { duration: 2000 });
-  //       }
-  //     );
-  // }
+  selectCover(e) {
+    const isImage = e.target.files[0].type.match(/image/g);
+    if (isImage) {
+      this.coverImage = e.target.files[0];
+    }
+    else {
+      this.snackBar.open('Only images are allowed', 'Ok', { duration: 2000 });
+    }
+  }
+
+  deselectCover() {
+    this.coverImage = undefined;
+  }
+
+  selectImages(e) {
+    Object.values(e.target.files).forEach((file: File) => {
+      const imageInTheList = this.productImages.find(image => image.name === file.name);
+      if (file.type.match(/image/g) && !imageInTheList) {
+        this.productImages.push(file);
+      }
+      else if (!file.type.match(/image/g)) {
+        this.snackBar.open('Only images are allowed', 'Ok', { duration: 2000 });
+      }
+    });
+  }
+
+  deselectImage(i) {
+    this.productImages.splice(i, 1);
+  }
+
 
   goCategories() {
     this.router.navigate(['admin', 'categories']);

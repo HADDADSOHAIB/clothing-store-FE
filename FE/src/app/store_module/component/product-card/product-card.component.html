@@ -6,7 +6,7 @@
       <p>{{product.name | headerFormater}}</p>
     </div>
     <div class="info">
-      <p>Price: {{product.price | currency:'MAD'}}</p>
+      <p>Price: {{product.price | currency:'USD'}}</p>
     </div>
     <div class="btn-buy" *ngIf="!cart.itemInCart(this.product.id)">
       <button mat-raised-button color="primary" 

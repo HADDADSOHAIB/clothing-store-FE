@@ -20,7 +20,7 @@ import { UploadFilesService } from 'src/app/services/upload-files-service/upload
   templateUrl: './product-details.component.html',
   styleUrls: ['./product-details.component.scss'],
 })
-export class ProductFormComponent implements OnInit {
+export class ProductDetails implements OnInit {
   cart: Cart;
   product: Product;
   productReview: ProductReview = new ProductReview(0, null, 5, '', 0);
