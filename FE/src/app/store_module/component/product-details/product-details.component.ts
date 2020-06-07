@@ -73,15 +73,15 @@ export class ProductDetails implements OnInit {
     //     }
     //   });
     // });
-    this.cartService.getCart().subscribe((cart) => {
-      this.cart = cart;
-    });
+    // this.cartService.getCart().subscribe((cart) => {
+    //   this.cart = cart;
+    // });
   }
 
   addToCart() {
-    this.cart.items.push(new CartItem(0, this.product.price, 1, this.product));
-    this.cartService.upLoadCart(this.cart);
-    this.cartService.updateCart(this.cart);
+    // this.cart.items.push(new CartItem(0, this.product.price, 1, this.product));
+    // this.cartService.upLoadCart(this.cart);
+    // this.cartService.updateCart(this.cart);
   }
 
   increment() {
