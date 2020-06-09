@@ -19,10 +19,22 @@ import { RoleService } from './services/role-service/role.service';
 import { SidenavService } from './services/sidenav-service/sidenav.service';
 import { UploadFilesService } from './services/upload-files-service/upload-files.service';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth'
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [AppRoutingModule, SharedModule.forRoot(), BrowserModule, BrowserAnimationsModule],
+  imports: [
+    AppRoutingModule,
+    SharedModule.forRoot(),
+    BrowserModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
+    AngularFireAuthModule
+  ],
   providers: [
     AuthService,
     CategoryService,

@@ -55,9 +55,10 @@
             <input hidden type="file" #fileCover (change)="selectCover($event)">
             <p (click)="fileCover.click()">Cover Image</p>
 
-            <div *ngIf="coverImage">
+            <div *ngIf="coverImage" class="images">
               <mat-icon matTooltip="{{ coverImage.name }}">photo</mat-icon>
               <mat-icon matTooltip="delete" class="delete" (click)="deselectCover()" color="warn">clear</mat-icon>
+              <span *ngIf="coverPer">{{ coverPer }} %</span>
             </div>
             <div *ngIf="!coverImage">
               <small>No Image</small>
@@ -68,9 +69,10 @@
             <p (click)="fileImages.click()">Product Images</p>
 
             <div *ngIf="productImages.length">
-              <div *ngFor="let image of productImages; index as i">
+              <div *ngFor="let image of productImages; index as i" class="images">
                 <mat-icon matTooltip="{{ image.name }}">photo</mat-icon>
                 <mat-icon matTooltip="delete" class="delete" (click)="deselectImage(i)" color="warn">clear</mat-icon>
+                <span *ngIf="imagesPer[i]">{{ imagesPer[i] }} %</span>
               </div>
             </div>
             <div *ngIf="!productImages.length">

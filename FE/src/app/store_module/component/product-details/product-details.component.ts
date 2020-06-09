@@ -85,13 +85,13 @@ export class ProductDetails implements OnInit {
   }
 
   increment() {
-    if (this.cart.items[this.cart.indexByProduct(this.product.id)].itemQuantity < this.product.quantity) {
-      this.cart.items[this.cart.indexByProduct(this.product.id)].itemQuantity++;
-      this.cartService.upLoadCart(this.cart);
-      this.cartService.updateCart(this.cart);
-    } else {
-      this.snackBar.open('Stock out, there is no more items', 'Ok', { duration: 2000 });
-    }
+    // if (this.cart.items[this.cart.indexByProduct(this.product.id)].itemQuantity < this.product.quantity) {
+    //   this.cart.items[this.cart.indexByProduct(this.product.id)].itemQuantity++;
+    //   this.cartService.upLoadCart(this.cart);
+    //   this.cartService.updateCart(this.cart);
+    // } else {
+    //   this.snackBar.open('Stock out, there is no more items', 'Ok', { duration: 2000 });
+    // }
   }
 
   decrement() {
