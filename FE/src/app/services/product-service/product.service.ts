@@ -29,27 +29,51 @@ export class ProductService {
   }
 
   getProduct(id: number) {
-    return this.httpClient.get(BACK_END + `products/${id}`) as Observable<any>;
+    return this.httpClient.get(BACK_END + `products/${id}`)
+      .pipe(map(res => this.processProduct(res['data']))) as Observable<any>;
+  }
+
+  createOrUpdateProduct(product: Product) {
+    return (product.id ? this.updateProduct(product) : this.createProduct(product));
   }
 
   createProduct(product: Product) {
     return this.httpClient.post(BACK_END + 'products', product) as Observable<any>;
   }
 
+  updateProduct(product: Product) {
+    return this.httpClient.put(BACK_END + `products/${product.id}`, product) as Observable<any>;
+  }
+
   private processProducts(res) {
-    return res.data.map(
-      (pr) =>
-        new Product(
-          pr.id,
-          pr.name,
-          pr.description,
-          pr.price,
-          [],
-          Math.round(pr.rating * 100) / 100,
-          [],
-          [],
-          pr.quantity
-        )
+    return res.data.map(pr => this.processProduct(pr));
+  }
+
+  private processProduct(data) {
+    const {
+      id,
+      name,
+      description,
+      price,
+      categories,
+      rating,
+      images,
+      reviews,
+      quantity,
+      coverImage
+    } = data;
+
+    return new Product(
+      id,
+      name,
+      description,
+      price,
+      categories,
+      Math.round(rating * 100) / 100,
+      images,
+      reviews,
+      quantity,
+      coverImage
     );
   }
 

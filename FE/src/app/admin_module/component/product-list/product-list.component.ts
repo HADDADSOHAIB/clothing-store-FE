@@ -36,4 +36,8 @@ export class ProductListComponent implements OnInit {
         this.products$.next(this.products);
       });
   }
+
+  edit(product: Product) {
+    this.router.navigate(['admin/product/', product.id]);
+  }
 }

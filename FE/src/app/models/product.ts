@@ -11,7 +11,8 @@ export class Product {
     public rating: number,
     public images: string[],
     public reviews: ProductReview[],
-    public quantity: number
+    public quantity: number,
+    public coverImage: string,
   ) {}
 
   getReviewsByNumberOfStarsGiving(numberOfStars: number) {

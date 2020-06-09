@@ -15,11 +15,16 @@ export class UploadFilesService {
 
 	uploadFile(files: File[]) {
 		const taskRefs = [];
-		files.forEach(file => {
-			const filePath = `products/${uid(32)}.${file.type.split('/')[1]}`;
-			const ref = this.storage.ref(filePath);
-			const task = this.storage.upload(filePath, file);
-			taskRefs.push({ task, ref });
+		files.forEach((file, i) => {
+			if(file) {
+				const filePath = `products/${uid(32)}.${file.type.split('/')[1]}`;
+				const ref = this.storage.ref(filePath);
+				const task = this.storage.upload(filePath, file);
+				taskRefs.push({ task, ref });
+			}
+			else if(!file && i === 0){
+				taskRefs.push('');
+			}
 		});
 		return taskRefs;
 	}
