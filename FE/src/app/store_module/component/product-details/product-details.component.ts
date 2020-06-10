@@ -97,7 +97,7 @@ export class ProductDetails implements OnInit {
   decrement() {
     this.cart.items[this.cart.indexByProduct(this.product.id)].itemQuantity--;
     if (this.cart.items[this.cart.indexByProduct(this.product.id)].itemQuantity === 0) {
-      this.cart.items.splice(this.cart.indexByProduct(this.product.id), 1);
+      // this.cart.items.splice(this.cart.indexByProduct(this.product.id), 1);
     }
     this.cartService.upLoadCart(this.cart);
     this.cartService.updateCart(this.cart);

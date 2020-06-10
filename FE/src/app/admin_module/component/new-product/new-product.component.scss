@@ -1,6 +1,7 @@
 .form-card {
   width: 400px;
   margin: 20px;
+  height: fit-content;
 
   mat-card-header {
     display: flex;
@@ -63,5 +64,33 @@
   .images {
     display: flex;
     align-items: center;
+  }
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.display-images {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 600px;
+  margin-top: 20px;
+
+  .image {
+    height: 280px;
+    width: 200px;
+    margin: 0 10px 20px;
+    border-radius: 5px;
+    position: relative;
+
+    .options-cover,
+    .options-images {
+      display: flex;
+      justify-content: center;
+      margin-top: 5px;
+    }
   }
 }

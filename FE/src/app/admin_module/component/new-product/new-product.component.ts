@@ -111,7 +111,7 @@ export class NewProductComponent implements OnInit, OnDestroy {
               const { id, categories, rating, reviews, quantity } = this.product;
 
               const coverImage = (coverRef ? await coverRef.getDownloadURL().toPromise() : this.product.coverImage);
-              const images =(imagesRefs.length != 0 ? await Promise.all([...(imagesRefs.map(ref => ref.getDownloadURL().toPromise()))]) : this.product.images);
+              const images =(imagesRefs.length != 0 ? await Promise.all([...(imagesRefs.map(ref => ref.getDownloadURL().toPromise()))]) : []);
     
               this.product = new Product(
                 id,
@@ -120,7 +120,7 @@ export class NewProductComponent implements OnInit, OnDestroy {
                 parseInt(price, 10),
                 categories,
                 rating,
-                images,
+                this.product.images.concat(images),
                 reviews,
                 quantity,
                 coverImage
@@ -139,7 +139,7 @@ export class NewProductComponent implements OnInit, OnDestroy {
                   },
                   (err) => this.snackBar.open('Unexpected error try later', 'Ok', { duration: 2000 })
                 );
-            }, 500);
+            }, 2500);
           }
         }));
       });  
@@ -179,7 +179,7 @@ export class NewProductComponent implements OnInit, OnDestroy {
           this.imagesPer[i] = Math.round(res);
           this.updateUploadStatus(this.coverPer, this.imagesPer, this.uploadDone$);
         }));
-        result.push(taskRef.ref)
+        result.push(taskRef.ref);
       });
     }
 
@@ -231,6 +231,10 @@ export class NewProductComponent implements OnInit, OnDestroy {
 
   goCategories() {
     this.router.navigate(['admin', 'categories']);
+  }
+
+  deleteImage(i: number) {
+    console.log(i);
   }
 
   ngOnDestroy() {
