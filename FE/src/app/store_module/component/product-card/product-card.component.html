@@ -8,26 +8,6 @@
     <div class="info">
       <p>Price: {{product.price | currency:'USD'}}</p>
     </div>
-    <div class="btn-buy" *ngIf="!cart.itemInCart(this.product.id)">
-      <button mat-raised-button color="primary" 
-        (click)="addToCart(this.product.id, cart.id)" 
-        class="btn">
-        Buy
-      </button>
-    </div>
-    <div class="btn-quantity" *ngIf="cart.itemInCart(this.product.id)">
-      <button mat-raised-button
-        (click)="increment(this.product.id)" class="btn-left"
-        matBadge="{{cart.itemCount(this.product.id)}}" 
-        matBadgePosition="below after"
-        matBadgeColor="accent">
-        +
-      </button>
-      <button mat-raised-button
-        (click)="decrement(this.product.id)" 
-        class="btn-right">
-        -
-      </button>
-    </div>
+    <app-cart-actions [productId]="product.id"></app-cart-actions>
   </div>
 </div>

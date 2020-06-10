@@ -1,166 +1,31 @@
-.body{
-  margin: 20px;
-}
-
-.product-section{
-  display: grid;
-  grid-gap: 5px;
-  grid-template-columns: 1fr 500px;
-  grid-template-areas:
-    'one two'
-    'one two';
-}
-
-.section-one{
-  grid-area: one;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 0px;
-  border: 1px solid lightgray;
+.product-section {
   display: flex;
-  overflow-x: scroll;
-  scroll-snap-type: x mandatory;
-}
-
-.section-two{
-  grid-area: two;
-  width: 100%;
-  box-sizing:border-box;
-}
-
-.image {
-  scroll-snap-align: center;
-  border-radius: 3px;
-  font-size: 0;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  height: 250px;
-  box-sizing: border-box;
-}
-.mat-card-image:first-child {
-  margin-top: 0px;
-}
-mat-card.card-actions{
-  margin-bottom:10px;
-  width:100%;
-  box-sizing:border-box;
-}
-
-mat-card.card-description{
-  width:100%;
-  box-sizing:border-box;
-}
-
-@media only screen and (max-width: 1000px) {
-  .product-section{
-    grid-template-areas:
-      'one one'
-      'two two';
-  }
-
-  .section-two{
-    width: 100%;
-  }
-  
-  
-  .section-one {
-    width: 100%;
-  }
-}
-
-// mat-card.card-image{
-//   margin:10px;
-//   width:45%;
-// }
-
-// mat-card.card-actions{
-//   margin:10px;
-//   width:100%;
-// }
-
-// mat-card.card-description{
-//   margin:10px;
-//   width:100%;
-// }
-
-// div.card-options{
-// width: 45%;
-// }
-
-.btn{
-  width:100%;
-}
-
-.btn-left{
-  width:40%;
-  float:left;
-}
-
-.btn-right{
-  width:40%;
-  float:right;
-}
-
-.btn-mid{
-  width:20%;
-}
-
-.divbtn{
-  width:100%;
-  margin-bottom:2px;
-}
-.mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
-  margin: 0 0px;
-}
-.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
-  min-width: 0px;
-}
-
-mat-card.reviews-section{
-  width:100%;
-  box-sizing:border-box;
-  margin:0.5px;
-}
-mat-form-field,mat-slider{
-  width:100%;
-}
-
-div.reviews-section{
-  margin-top: 5px;
-  margin-bottom: 30px;
-}
-
-mat-divider.user-name{
   justify-content: center;
-  display:block;
-  position: relative;
-}
+  margin: 20px 1% 0;
 
-mat-card.add-review{
-  margin-top: 1px;
-  margin-bottom: 30px;
-  width:845px;
-}
+  .display {
+    width: 63%;
+    margin-right: 1%;
+    box-shadow:
+      0 2px 1px -1px rgba(0, 0, 0, .2),
+      0 1px 1px 0 rgba(0, 0, 0, .14),
+      0 1px 3px 0 rgba(0, 0, 0, .12);
+  }
 
-mat-icon.close{
-  cursor: pointer;
-}
+  .options {
+    width: 33%;
 
-mat-form-field.add-review{
-  width: 100%;
-}
+    .card-actions {
+      font-family: 'Architects Daughter', cursive;
 
-mat-card-content.add-review{
-  width: 100%;
-  margin-bottom: 0px;
-}
-mat-card-actions{
-  margin-bottom: 0px;
-}
+      .actions {
+        display: flex;
+        justify-content: center;
 
-mat-card-content.reviews-summary{
-  padding-left: 30px;
-  padding-right: 30px;
+        app-cart-actions {
+          width: 100%;
+        }
+      }
+    }
+  }
 }

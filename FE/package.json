@@ -26,6 +26,7 @@
     "@fortawesome/angular-fontawesome": "^0.6.1",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
+    "@ngmodule/material-carousel": "^0.6.0",
     "angular2-uuid": "^1.1.1",
     "aws-sdk": "^2.691.0",
     "firebase": "^7.15.0",

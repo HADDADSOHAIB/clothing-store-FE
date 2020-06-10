@@ -22,7 +22,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
-import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth'
+import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [AppComponent],
@@ -33,7 +33,7 @@ import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth'
     BrowserAnimationsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireStorageModule,
-    AngularFireAuthModule
+    AngularFireAuthModule,
   ],
   providers: [
     AuthService,

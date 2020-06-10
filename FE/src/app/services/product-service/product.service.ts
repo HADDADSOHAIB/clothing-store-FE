@@ -30,7 +30,7 @@ export class ProductService {
 
   getProduct(id: number) {
     return this.httpClient.get(BACK_END + `products/${id}`)
-      .pipe(map(res => this.processProduct(res['data']))) as Observable<any>;
+      .pipe(map(res => this.processProduct(res['data']))) as Observable<Product>;
   }
 
   createOrUpdateProduct(product: Product) {

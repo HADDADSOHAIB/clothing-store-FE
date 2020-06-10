@@ -12,6 +12,8 @@ import { SharedModule } from '../shared/shared.module';
 
 import { HeaderFormaterPipe } from './pipes/header-formater/header-formater.pipe';
 import { MatDialogModule } from '@angular/material/dialog';
+import { CartActionsComponent } from './component/cart-actions/cart-actions.component';
+import { MatCarouselModule } from '@ngmodule/material-carousel';
 
 @NgModule({
   declarations: [
@@ -22,8 +24,9 @@ import { MatDialogModule } from '@angular/material/dialog';
     CheckOutComponent,
     ShippingFormComponent,
     HeaderFormaterPipe,
+    CartActionsComponent,
   ],
-  imports: [StoreRoutingModule, SharedModule.forRoot(), MatDialogModule],
+  imports: [StoreRoutingModule, SharedModule.forRoot(), MatDialogModule, MatCarouselModule.forRoot()],
   providers: [],
 })
 export class StoreModule {}

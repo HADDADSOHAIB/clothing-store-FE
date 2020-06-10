@@ -6,10 +6,10 @@
   border-radius: 5px;
   cursor: pointer;
   position: relative;
-  box-shadow: 
-    0 2px 1px -1px rgba(0,0,0,.12),
-    0 1px 1px 0 rgba(0,0,0,.14),
-    0 1px 3px 0 rgba(0,0,0,.12);
+  box-shadow:
+    0 2px 1px -1px rgba(0, 0, 0, .12),
+    0 1px 1px 0 rgba(0, 0, 0, .14),
+    0 1px 3px 0 rgba(0, 0, 0, .12);
 }
 
 .go-details {
@@ -44,32 +44,12 @@
       p {
         margin: 0;
       }
-    }
 
-    .btn-buy {
-      width: 100%;
 
-      button {
-        width: 100%;
-
-        z-index: 2;
-      }
-    }
-
-    .btn-quantity {
-      width: 100%;
-
-      button {
-        width: 50%;
-
-        &:first-child {
-          z-index: 3;
-        }
-
-        &:last-child {
-          z-index: 2;
-        }
-      }
     }
   }
+}
+
+app-cart-actions {
+  width: 100%;
 }
