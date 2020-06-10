@@ -1,3 +1,7 @@
+* {
+  font-family: 'Architects Daughter', cursive;
+}
+
 .product-section {
   display: flex;
   justify-content: center;
@@ -14,16 +18,36 @@
 
   .options {
     width: 33%;
+    display: flex;
+    flex-direction: column;
 
-    .card-actions {
-      font-family: 'Architects Daughter', cursive;
+    .card-actions .actions {
+      display: flex;
+      justify-content: center;
 
-      .actions {
-        display: flex;
-        justify-content: center;
+      app-cart-actions {
+        width: 100%;
+      }
+    }
 
-        app-cart-actions {
-          width: 100%;
+    .card-description {
+      padding-top: 10px;
+      height: fit-content;
+
+      mat-card {
+        height: fit-content;
+
+        mat-card-title {
+          margin-bottom: 0;
+        }
+
+        mat-card-header,
+        .categories,
+        .description {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 0;
         }
       }
     }

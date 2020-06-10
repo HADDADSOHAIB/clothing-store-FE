@@ -20,144 +20,26 @@
         <app-cart-actions [productId]="product.id" [cartLogo]="true" *ngIf="product.id"></app-cart-actions>
       </mat-card-actions>
     </mat-card>
+    <div class="card-description">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>About the product:</mat-card-title>
+          <rating-bar [rating]="product.rating" readOnly="true"></rating-bar>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="description">
+            {{ product.description }}
+          </p>
+          <div class="categories">
+            <p>Category:</p>
+            <mat-chip-list>
+              <mat-chip *ngFor="let category of product.categories">
+                {{ category.name }}
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
   </div>
-
-  <!-- 
-  <div class="section-two">
-    <mat-card class="card-actions">
-      <mat-card-header>
-        <mat-card-title>{{ product.productName }}</mat-card-title>
-        <mat-card-subtitle>price: {{ product.price | currency: 'MAD' }}</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-actions>
-        <div class="divbtn" *ngIf="cart.indexByProduct(this.product.productId) === -1">
-          <button mat-raised-button color="primary" (click)="addToCart()" class="btn">Buy</button>
-        </div>
-        <div class="divbtn" *ngIf="cart.indexByProduct(this.product.productId) !== -1">
-          <button mat-raised-button color="primary" (click)="increment()" class="btn-left">+</button>
-          <button mat-button class="btn-mid">
-            <mat-icon matBadge="{{ cart.itemCount(this.product.productId) }}">shopping_cart</mat-icon>
-          </button>
-          <button mat-raised-button color="primary" (click)="decrement()" class="btn-right">-</button>
-        </div>
-      </mat-card-actions>
-    </mat-card>
-    <mat-card class="card-description">
-      <mat-card-header fxLayout="row" fxLayoutAlign="space-between center">
-        <mat-card-title>About the product :</mat-card-title>
-        <rating-bar [rating]="product.rating" readOnly="true"></rating-bar>
-      </mat-card-header>
-      <mat-card-content>
-        <p>
-          {{ this.product.description }}
-        </p>
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="5px">
-          <p>Category:</p>
-          <mat-chip-list>
-            <mat-chip *ngFor="let category of product.categories">
-              {{ category.categoryName }}
-            </mat-chip>
-          </mat-chip-list>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div> -->
-  <!-- <div class="reviews-section" fxLayout="column" fxLayoutAlign="center center">
-    <mat-card class="reviews-section">
-      <mat-card-content class="reviews-summary" fxLayout="row" fxLayoutAlign="space-between center">
-        <div>
-          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-            <button mat-button class="user-name" matBadge="8" matBadgePosition="after" matBadgeColor="accent">
-              Great Product
-            </button>
-            <rating-bar rating="5" readOnly="true"></rating-bar>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-            <button mat-button class="user-name" matBadge="800" matBadgePosition="after" matBadgeColor="accent">
-              Good Product
-            </button>
-            <rating-bar rating="4" readOnly="true"></rating-bar>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-            <button mat-button class="user-name" matBadge="80" matBadgePosition="after" matBadgeColor="accent">
-              Ok Product
-            </button>
-            <rating-bar rating="3" readOnly="true"></rating-bar>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-            <button mat-button class="user-name" matBadge="20" matBadgePosition="after" matBadgeColor="accent">
-              Product Not Good
-            </button>
-            <rating-bar rating="2" readOnly="true"></rating-bar>
-          </div>
-          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="20px">
-            <button mat-button class="user-name" matBadge="10" matBadgePosition="after" matBadgeColor="accent">
-              Bad Product
-            </button>
-            <rating-bar rating="1" readOnly="true"></rating-bar>
-          </div>
-        </div>
-        <mat-divider [vertical]="true"></mat-divider>
-        <div fxLayout="column" fxLayoutAlign="start center">
-          <mat-card-header fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <mat-card-title>Add a review :</mat-card-title>
-            <rating-bar [rating]="productReview.userRating" (ratingChange)="changeRating($event)">
-            </rating-bar>
-          </mat-card-header>
-          <mat-card-content class="add-review">
-            <mat-form-field class="add-review" appearance="outline">
-              <mat-label>Comment about the product</mat-label>
-              <textarea matInput placeholder="Add a comment" cdkTextareaAutosize="true" matTextareaAutosize="true"
-                cdkAutosizeMinRows="6" [(ngModel)]="productReview.userReview"></textarea>
-            </mat-form-field>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button color='primary' style="float: right;" (click)="saveReview()">save</button>
-          </mat-card-actions>
-        </div>
-
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="reviews-section" #reviewCard *ngFor="let review of product.reviews;index as i;">
-      <mat-card-content *ngIf="idOfReviewToModify!=review.id">
-        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-          <button mat-button class="user-name">{{review.user.firstName+" "+review.user.lastName | uppercase}}</button>
-          <rating-bar [rating]="review.userRating" readOnly="true"></rating-bar>
-        </div>
-        <mat-divider class="user-name"></mat-divider>
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <p>{{review.userReview}}</p>
-          <div *ngIf="currentUser.userEmail==review.user.userEmail">
-            <button mat-button (click)="editReview(review.id,i)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-button (click)="deleteReview(review.id)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </div>
-        </div>
-      </mat-card-content>
-      <mat-card-content *ngIf="idOfReviewToModify==review.id">
-        <div fxLayout="column" fxLayoutAlign="start center">
-          <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20px">
-            <button mat-button class="user-name">{{review.user.firstName+" "+review.user.lastName | uppercase}}</button>
-            <rating-bar [rating]="review.userRating" (ratingChange)="modifyRating($event)"></rating-bar>
-          </div>
-          <mat-card-content class="add-review">
-            <mat-form-field class="add-review" appearance="outline">
-              <mat-label>Comment about the product</mat-label>
-              <textarea matInput placeholder="Add a comment" cdkTextareaAutosize="true" matTextareaAutosize="true"
-                cdkAutosizeMinRows="6" [(ngModel)]="productReviewModified.userReview"></textarea>
-            </mat-form-field>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button color='primary' style="float: right;" (click)="saveModifiedReview()">save</button>
-            <button mat-button color='warn' (click)="cancelModification()">cancel</button>
-          </mat-card-actions>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div> -->
 </div>
