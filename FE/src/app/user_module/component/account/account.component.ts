@@ -25,10 +25,10 @@ export class AccountComponent implements OnInit {
 
 	ngOnInit() {
 		this.accountService.loadCurrentUser();
-		this.accountService.getCurrentUser().subscribe(user => {
-			this.user = user;
-			this.updateProfileForm();
-		});
+		// this.accountService.getCurrentUser().subscribe(user => {
+		// 	this.user = user;
+		// 	this.updateProfileForm();
+		// });
 
 		this.createOrClearAddressForm();
 	}

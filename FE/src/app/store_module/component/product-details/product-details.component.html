@@ -43,3 +43,34 @@
     </div>
   </div>
 </div>
+<mat-card class="new-review">
+  <mat-card-header>
+    <mat-card-title>New Review</mat-card-title>
+    <rating-bar [rating]="newReview.rating" (ratingChange)="changeNewRating($event)"></rating-bar>
+  </mat-card-header>
+  <mat-card-actions>
+    <div class="form">
+      <mat-form-field appearance="outline">
+        <mat-label>user review ...</mat-label>
+        <textarea matInput [(ngModel)]="newReview.review" (keydown)="controleNewReview()"></textarea>
+        <mat-hint>{{newReview.review.length}}/50</mat-hint>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="saveNewReview()">save</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="reviews">
+  <mat-card-header>
+    <mat-card-title>Reviews</mat-card-title>
+  </mat-card-header>
+  <mat-card-actions>
+    <div class="reviews-list">
+      <app-product-review *ngFor="let review of product.reviews | paginate: { itemsPerPage: 3, currentPage: p }" [review]="review"></app-product-review>
+    </div>
+    <div class="pagination-review">
+      <pagination-controls (pageChange)="pageReviewChange($event)"></pagination-controls>
+    </div>
+  </mat-card-actions>
+</mat-card>
+

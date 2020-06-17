@@ -20,8 +20,8 @@ export class StoreHeaderComponent implements OnInit {
 		) { }
 
 	ngOnInit() {
-		this.cartService.loadCart();
-		this.cartService.getCart().subscribe(cart => this.cart = cart);
+		// this.cartService.loadCart();
+		// this.cartService.getCart().subscribe(cart => this.cart = cart);
 	}
 
 	sidenavClose() {

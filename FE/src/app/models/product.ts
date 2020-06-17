@@ -16,6 +16,6 @@ export class Product {
   ) {}
 
   getReviewsByNumberOfStarsGiving(numberOfStars: number) {
-    return this.reviews.filter((review) => review.userRating === numberOfStars);
+    return this.reviews.filter((review) => review.rating === numberOfStars);
   }
 }

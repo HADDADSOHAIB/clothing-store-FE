@@ -22,17 +22,17 @@ export class MyOrdersComponent implements OnInit {
 
 	ngOnInit() {
 		this.accountService.loadCurrentUser();
-		this.accountService.getCurrentUser().subscribe(user => {
-			if (user.userEmail !== '') {
-			this.orderService.getOrdersByUser(user.userEmail).pipe(take(1)).subscribe(orders => {
-				this.orders = orders.map(order => new Order(order.id, order.userEmail, order.orderItems,
-					order.shippingInfo, new Date(order.orderDate), new Date(order.processedDate),
-					new Date(order.inRouteDate), new Date(order.deliveryDate),
-					new Date(order.deliveryConfirmationDate), new Date(order.cancelationDate)));
-				console.log(this.orders);
-				console.log('hola');
-			});
-			}
-		});
+		// this.accountService.getCurrentUser().subscribe(user => {
+		// 	if (user.userEmail !== '') {
+		// 	this.orderService.getOrdersByUser(user.userEmail).pipe(take(1)).subscribe(orders => {
+		// 		this.orders = orders.map(order => new Order(order.id, order.userEmail, order.orderItems,
+		// 			order.shippingInfo, new Date(order.orderDate), new Date(order.processedDate),
+		// 			new Date(order.inRouteDate), new Date(order.deliveryDate),
+		// 			new Date(order.deliveryConfirmationDate), new Date(order.cancelationDate)));
+		// 		console.log(this.orders);
+		// 		console.log('hola');
+		// 	});
+		// 	}
+		// });
 	}
 }

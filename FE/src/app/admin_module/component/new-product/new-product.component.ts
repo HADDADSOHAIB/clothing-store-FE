@@ -17,7 +17,6 @@ import { Subscription, forkJoin, Observable, Subject, BehaviorSubject } from 'rx
   styleUrls: ['./new-product.component.scss'],
 })
 export class NewProductComponent implements OnInit, OnDestroy {
-
   coverImage: File;
   coverPer: number = 0;
 
@@ -53,7 +52,7 @@ export class NewProductComponent implements OnInit, OnDestroy {
         this.productService
           .getProduct(this.id)
           .pipe(take(1))
-          .subscribe(res => {
+          .subscribe((res) => {
             this.product = res;
             const { name, description, price } = this.product;
             this.initilizeForm(name, description, price);
@@ -93,56 +92,60 @@ export class NewProductComponent implements OnInit, OnDestroy {
   save() {
     if (this.product.categories.length === 0) {
       this.snackBar.open('Select at least one category', 'Ok', { duration: 2000 });
-    }
-    else if (!this.product.coverImage && !this.coverImage) {
+    } else if (!this.product.coverImage && !this.coverImage) {
       this.snackBar.open('Cover Image is required', 'Ok', { duration: 2000 });
     } else if (this.form.valid) {
-      this.auth.signInAnonymously().then(res => {
+      this.auth.signInAnonymously().then((res) => {
         const [coverRef, ...imagesRefs] = this.uploadImages();
-        
-        if(!coverRef && !imagesRefs.length) {
+
+        if (!coverRef && !imagesRefs.length) {
           this.uploadDone$.next(true);
         }
 
-        this.s.push(this.uploadDone$.subscribe(res => {
-          if (res) {
-            setTimeout(async () => {
-              const { name, description, price } = this.form.value;
-              const { id, categories, rating, reviews, quantity } = this.product;
+        this.s.push(
+          this.uploadDone$.subscribe((res) => {
+            if (res) {
+              setTimeout(async () => {
+                const { name, description, price } = this.form.value;
+                const { id, categories, rating, reviews, quantity } = this.product;
 
-              const coverImage = (coverRef ? await coverRef.getDownloadURL().toPromise() : this.product.coverImage);
-              const images =(imagesRefs.length != 0 ? await Promise.all([...(imagesRefs.map(ref => ref.getDownloadURL().toPromise()))]) : []);
-    
-              this.product = new Product(
-                id,
-                name,
-                description,
-                parseInt(price, 10),
-                categories,
-                rating,
-                this.product.images.concat(images),
-                reviews,
-                quantity,
-                coverImage
-              );
-    
-              this.productService
-                .createOrUpdateProduct(this.product)
-                .pipe(take(1))
-                .subscribe(
-                  (res) => {
-                    this.resetAllFields()
-                    this.snackBar.open('Product saved successfully', 'Ok', { duration: 2000 });
-                    if (this.id !== 0) {
-                      this.router.navigate(['admin', 'products']);
-                    }
-                  },
-                  (err) => this.snackBar.open('Unexpected error try later', 'Ok', { duration: 2000 })
+                const coverImage = coverRef ? await coverRef.getDownloadURL().toPromise() : this.product.coverImage;
+                const images =
+                  imagesRefs.length != 0
+                    ? await Promise.all([...imagesRefs.map((ref) => ref.getDownloadURL().toPromise())])
+                    : [];
+
+                this.product = new Product(
+                  id,
+                  name,
+                  description,
+                  parseInt(price, 10),
+                  categories,
+                  rating,
+                  this.product.images ? this.product.images.concat(images) : images,
+                  reviews,
+                  quantity,
+                  coverImage
                 );
-            }, 2500);
-          }
-        }));
-      });  
+
+                this.productService
+                  .createOrUpdateProduct(this.product)
+                  .pipe(take(1))
+                  .subscribe(
+                    (res) => {
+                      this.resetAllFields();
+                      this.snackBar.open('Product saved successfully', 'Ok', { duration: 2000 });
+                      if (this.id !== 0) {
+                        this.router.navigate(['admin', 'products']);
+                      }
+                    },
+                    (err) => this.snackBar.open('Unexpected error try later', 'Ok', { duration: 2000 })
+                  );
+              }, 2500);
+            }
+          })
+        );
+      });
     }
   }
 
@@ -157,28 +160,31 @@ export class NewProductComponent implements OnInit, OnDestroy {
 
   private uploadImages() {
     const [coverTaskRef, ...imagesTaskRefs] = this.fileService.uploadFile([this.coverImage, ...this.productImages]);
-    const result =[];
+    const result = [];
 
-    if(coverTaskRef){
-      this.s.push(coverTaskRef.task.percentageChanges().subscribe(res =>{
-        this.coverPer = Math.round(res);
-        this.updateUploadStatus(this.coverPer, this.imagesPer, this.uploadDone$);
-      }));
+    if (coverTaskRef) {
+      this.s.push(
+        coverTaskRef.task.percentageChanges().subscribe((res) => {
+          this.coverPer = Math.round(res);
+          this.updateUploadStatus(this.coverPer, this.imagesPer, this.uploadDone$);
+        })
+      );
 
       result.push(coverTaskRef.ref);
-    }
-    else {
+    } else {
       result.push('');
       this.coverPer = 100;
     }
-    
-    if(imagesTaskRefs.length){
+
+    if (imagesTaskRefs.length) {
       imagesTaskRefs.forEach((taskRef, i) => {
         this.imagesPer.push(0);
-        this.s.push(taskRef.task.percentageChanges().subscribe(res => {
-          this.imagesPer[i] = Math.round(res);
-          this.updateUploadStatus(this.coverPer, this.imagesPer, this.uploadDone$);
-        }));
+        this.s.push(
+          taskRef.task.percentageChanges().subscribe((res) => {
+            this.imagesPer[i] = Math.round(res);
+            this.updateUploadStatus(this.coverPer, this.imagesPer, this.uploadDone$);
+          })
+        );
         result.push(taskRef.ref);
       });
     }
@@ -188,10 +194,9 @@ export class NewProductComponent implements OnInit, OnDestroy {
   }
 
   private updateUploadStatus(coverPer, imagesPer = [], uploadDone$) {
-    if(coverPer === 100 && imagesPer.every(imagePer => imagePer === 100)){
+    if (coverPer === 100 && imagesPer.every((imagePer) => imagePer === 100)) {
       uploadDone$.next(true);
-    }
-    else uploadDone$.next(false);
+    } else uploadDone$.next(false);
   }
 
   checkValidity(controleName, error, form) {
@@ -202,8 +207,7 @@ export class NewProductComponent implements OnInit, OnDestroy {
     const isImage = e.target.files[0].type.match(/image/g);
     if (isImage) {
       this.coverImage = e.target.files[0];
-    }
-    else {
+    } else {
       this.snackBar.open('Only images are allowed', 'Ok', { duration: 2000 });
     }
   }
@@ -214,11 +218,10 @@ export class NewProductComponent implements OnInit, OnDestroy {
 
   selectImages(e) {
     Object.values(e.target.files).forEach((file: File) => {
-      const imageInTheList = this.productImages.find(image => image.name === file.name);
+      const imageInTheList = this.productImages.find((image) => image.name === file.name);
       if (file.type.match(/image/g) && !imageInTheList) {
         this.productImages.push(file);
-      }
-      else if (!file.type.match(/image/g)) {
+      } else if (!file.type.match(/image/g)) {
         this.snackBar.open('Only images are allowed', 'Ok', { duration: 2000 });
       }
     });
@@ -227,7 +230,6 @@ export class NewProductComponent implements OnInit, OnDestroy {
   deselectImage(i) {
     this.productImages.splice(i, 1);
   }
-
 
   goCategories() {
     this.router.navigate(['admin', 'categories']);
@@ -238,6 +240,6 @@ export class NewProductComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.s.forEach(s => s.unsubscribe());
+    this.s.forEach((s) => s.unsubscribe());
   }
 }

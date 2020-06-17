@@ -88,13 +88,14 @@
     </div>
   </mat-card>
   <div class="display-images">
-    <div class="image" style ="background-image: url({{product.coverImage}}); background-position: center; background-size: cover;">
+    <div class="image"
+      style="background-image: url({{product.coverImage}}); background-position: center; background-size: cover;">
       <div class="options-cover">
-        <mat-chip>Cover Image</mat-chip>
+        <mat-chip *ngIf="product.coverImage">Cover Image</mat-chip>
       </div>
     </div>
     <div class="image" *ngFor="let image of this.product.images; index as i"
-      style ="background-image: url({{image}}); background-position: center; background-size: cover;">
+      style="background-image: url({{image}}); background-position: center; background-size: cover;">
       <div class="options-images">
         <button mat-mini-fab color="warn" matTooltip="delete" (click)="deleteImage(i)">
           <mat-icon>clear</mat-icon>

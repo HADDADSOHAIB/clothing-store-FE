@@ -1,11 +1,11 @@
 import { User } from './user';
 
 export class ProductReview {
-		constructor(
-				public id: number,
-				public user: User,
-				public userRating: number,
-				public userReview: string,
-				public productId: number
-		) {}
+  constructor(
+    public id: number,
+    public userId: number,
+    public rating: number,
+    public review: string,
+    public productId: number
+  ) {}
 }
