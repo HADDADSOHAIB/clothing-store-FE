@@ -39,9 +39,9 @@ export class OrdersListComponent implements OnInit {
 	}
 
 	private getOrders(sort: string[]= ['orderDate', 'desc']) {
-		this.orderService.getOrders(this.currentPage - 1, this.itemsPerPage, sort).pipe(take(1)).subscribe(orders => {
-			this.orders = orders.map(order => new Order(order.id, order.userEmail, order.orderItems, order.shippingInfo, new Date(order.orderDate), new Date(order.processedDate), new Date(order.inRouteDate), new Date(order.deliveryDate), new Date(order.deliveryConfirmationDate), new Date(order.cancelationDate)));
-		});
+		// this.orderService.getOrders(this.currentPage - 1, this.itemsPerPage, sort).pipe(take(1)).subscribe(orders => {
+		// 	this.orders = orders.map(order => new Order(order.id, order.userEmail, order.orderItems, order.shippingInfo, new Date(order.orderDate), new Date(order.processedDate), new Date(order.inRouteDate), new Date(order.deliveryDate), new Date(order.deliveryConfirmationDate), new Date(order.cancelationDate)));
+		// });
 	}
 
 	goOrder(id: number) {

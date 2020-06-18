@@ -57,24 +57,24 @@ export class MyReviewsComponent implements OnInit {
   }
 
   deleteReview(reviewId: number) {
-    this.reviewService
-      .deleteReview(reviewId)
-      .pipe(take(1))
-      .subscribe(
-        (response) => {
-          this.snackBar.open('review removed', 'Ok');
-          this.reviewService
-            .getReviewsByUser(this.currentUser.userEmail)
-            .pipe(take(1))
-            .subscribe((reviews) => {
-              this.myReviews = reviews;
-            });
-        },
-        (error) => {
-          console.log(error);
-          this.snackBar.open('error try later', 'Ok');
-        }
-      );
+    // this.reviewService
+    //   .deleteReview(reviewId)
+    //   .pipe(take(1))
+    //   .subscribe(
+    //     (response) => {
+    //       this.snackBar.open('review removed', 'Ok');
+    //       this.reviewService
+    //         .getReviewsByUser(this.currentUser.userEmail)
+    //         .pipe(take(1))
+    //         .subscribe((reviews) => {
+    //           this.myReviews = reviews;
+    //         });
+    //     },
+    //     (error) => {
+    //       console.log(error);
+    //       this.snackBar.open('error try later', 'Ok');
+    //     }
+    //   );
   }
 
   modifyRating(rating: number) {

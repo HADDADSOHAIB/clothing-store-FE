@@ -11,7 +11,7 @@ import { OrderService } from 'src/app/services/order-service/order.service';
 	styleUrls: ['./order-infos.component.scss']
 })
 export class OrderInfosComponent implements OnInit {
-	order: Order = new Order(0, '', [], new ShippingInfos(0, '', '', '', '', '', '', '', '', ''),
+	order: Order = new Order(0, 0, [], new ShippingInfos(0, '', '', '', '', '', '', '', '', ''),
 		new Date(2010, 0, 1), new Date(2010, 0, 1), new Date(2010, 0, 1), new Date(2010, 0, 1),
 		new Date(2010, 0, 1), new Date(2010, 0, 1));
 	id: number;
@@ -36,7 +36,7 @@ export class OrderInfosComponent implements OnInit {
 
 	private getOrder() {
 		this.orderService.getOrder(this.id).pipe(take(1)).subscribe(ord => {
-			this.order = new Order(ord.id, ord.userEmail, ord.orderItems,
+			this.order = new Order(ord.id, ord.userId, ord.orderItems,
 				ord.shippingInfo, new Date(ord.orderDate), new Date(ord.processedDate),
 				new Date(ord.inRouteDate), new Date(ord.deliveryDate),
 				new Date(ord.deliveryConfirmationDate), new Date(ord.cancelationDate));

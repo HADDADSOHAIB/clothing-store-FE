@@ -65,11 +65,16 @@
     <mat-card-title>Reviews</mat-card-title>
   </mat-card-header>
   <mat-card-actions>
-    <div class="reviews-list">
-      <app-product-review *ngFor="let review of product.reviews | paginate: { itemsPerPage: 3, currentPage: p }" [review]="review"></app-product-review>
+    <div *ngIf="product.reviews.length">
+      <div class="reviews-list">
+        <app-product-review *ngFor="let review of product.reviews | paginate: { itemsPerPage: 3, currentPage: p }" [review]="review"></app-product-review>
+      </div>
+      <div class="pagination-review">
+        <pagination-controls (pageChange)="pageReviewChange($event)"></pagination-controls>
+      </div>
     </div>
-    <div class="pagination-review">
-      <pagination-controls (pageChange)="pageReviewChange($event)"></pagination-controls>
+    <div class="reviews-list" *ngIf="!product.reviews.length">
+      <p>No reviews are available, be the first</p>
     </div>
   </mat-card-actions>
 </mat-card>
