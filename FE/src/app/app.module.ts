@@ -15,7 +15,6 @@ import { CategoryService } from './services/category-service/category.service';
 import { OrderService } from './services/order-service/order.service';
 import { ProductService } from './services/product-service/product.service';
 import { ReviewService } from './services/review-service/review.service';
-import { RoleService } from './services/role-service/role.service';
 import { SidenavService } from './services/sidenav-service/sidenav.service';
 import { UploadFilesService } from './services/upload-files-service/upload-files.service';
 import { CookieService } from 'ngx-cookie-service';
@@ -41,7 +40,6 @@ import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
     OrderService,
     ProductService,
     ReviewService,
-    RoleService,
     AccountService,
     HttpClient,
     CartService,

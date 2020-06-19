@@ -13,27 +13,33 @@ import { CookieService } from 'ngx-cookie-service';
 export class AccountService {
   currentUser$: BehaviorSubject<User> = new BehaviorSubject(undefined);
 
-  constructor(
-    private httpClient: HttpClient,
-    private cookieService: CookieService  
-  ) {
-  }
+  constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
 
   loadCurrentUser() {
     const token = this.cookieService.get('token');
 
     if (token) {
-      this.httpClient.post(BACK_END + 'users/token', { token }).pipe(take(1))
+      this.httpClient
+        .post(BACK_END + 'users/token', { token })
+        .pipe(take(1))
         .subscribe(
           (res) => {
             const { id, userEmail, userName, firstName, lastName, phoneNumber, role } = res['data'];
-            this.currentUser$.next(new User(id, userEmail, userName, firstName, lastName, phoneNumber, null, role, null, null));
+            this.currentUser$.next(
+              new User(id, userEmail, userName, firstName, lastName, phoneNumber, null, role, null, null)
+            );
           },
           (err) => {
             this.currentUser$.next(undefined);
           }
         );
+    } else {
+      this.currentUser$.next(undefined);
     }
+  }
+
+  getAllUsers() {
+    return this.httpClient.get(BACK_END + 'users') as Observable<any>;
   }
 
   updateUserProfile(user: User) {
@@ -46,9 +52,5 @@ export class AccountService {
 
   deleteAddress(id: number) {
     return this.httpClient.delete(BACK_END + 'addresses/' + id);
-  }
-
-  getAllUsers() {
-    return this.httpClient.get(BACK_END + 'users') as Observable<any>;
   }
 }

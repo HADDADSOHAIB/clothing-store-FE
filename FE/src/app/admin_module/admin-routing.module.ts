@@ -2,13 +2,10 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ProductListComponent } from './component/product-list/product-list.component';
 import { NewProductComponent } from './component/new-product/new-product.component';
-import { AdminHeaderComponent } from './component/admin-navbar/admin-navbar.component';
-import { ManageStoreComponent } from './component/manage-store/manage-store.component';
 import { AdminComponent } from './admin.component';
 import { OrdersListComponent } from './component/orders-list/orders-list.component';
 import { OrderInfosComponent } from '../shared/component/order-infos/order-infos.component';
 import { CategoryFormComponent } from './component/category-form/category-form.component';
-import { UserListComponent } from './component/user-list/user-list.component';
 
 const routes: Routes = [
   {
@@ -42,14 +39,6 @@ const routes: Routes = [
       {
         path: 'orders',
         component: OrdersListComponent,
-      },
-      {
-        path: 'users',
-        component: UserListComponent,
-      },
-      {
-        path: 'manage',
-        component: ManageStoreComponent,
       },
     ],
   },

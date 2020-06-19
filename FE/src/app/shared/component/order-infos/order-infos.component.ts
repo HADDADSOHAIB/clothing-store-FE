@@ -30,11 +30,7 @@ export class OrderInfosComponent implements OnInit {
       this.orderService
         .getOrder(id)
         .pipe(take(1))
-        .subscribe((order) => {
-          this.order = order;
-          console.log(order);
-          console.log(order.status());
-        });
+        .subscribe((order) => (this.order = order));
     });
 
     this.accountService.currentUser$.pipe(take(1)).subscribe((user) => (this.currentUser = user));
