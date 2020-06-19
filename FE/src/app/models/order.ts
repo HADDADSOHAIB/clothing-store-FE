@@ -30,15 +30,15 @@ export class Order {
 
   status() {
     if (this.cancelationDate) {
-      return 'canceled';
-    } else if (this.processedDate) {
-      return 'Proccessed';
-    } else if (this.inRouteDate) {
-      return 'In Route';
-    } else if (this.deliveryDate) {
-      return 'Delivered';
+      return 'Canceled';
     } else if (this.deliveryConfirmationDate) {
       return 'Delivery confirmed';
+    } else if (this.deliveryDate) {
+      return 'Delivered';
+    } else if (this.inRouteDate) {
+      return 'In Route';
+    } else if (this.processedDate) {
+      return 'Proccessed';
     } else {
       return 'Ordered';
     }

@@ -26,6 +26,10 @@ export class OrderService {
       .pipe(map((res) => this.processOrder(res['data']))) as Observable<Order>;
   }
 
+  updateOrder(order: Order) {
+    return this.httpClient.patch(`${BACK_END}orders/${order.id}`, order) as Observable<any>;
+  }
+
   private processOrders(res) {
     return res.data.map((order) => this.processOrder(order));
   }

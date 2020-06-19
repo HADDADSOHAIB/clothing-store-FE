@@ -22,7 +22,6 @@ export class OrderStatusComponent implements OnChanges {
       this.order.deliveryDate = this.order.deliveryDate ? new Date(this.order.deliveryDate) : null;
       this.order.inRouteDate = this.order.inRouteDate ? new Date(this.order.inRouteDate) : null;
       this.order.processedDate = this.order.processedDate ? new Date(this.order.processedDate) : null;
-      console.log(this.order);
     }
   }
 }

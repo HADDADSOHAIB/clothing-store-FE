@@ -52,3 +52,20 @@
     }
   }
 }
+
+.options-card {
+  margin-bottom: 20px;
+  width: 400px;
+
+  mat-card-title {
+    font-family: 'Architects Daughter', cursive;
+  }
+
+  .options {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 10px;
+    width: 100%;
+  }
+}

@@ -49,4 +49,23 @@
     </mat-card-content>
   </mat-card>
   <app-order-status [order]="order"></app-order-status>
+  <mat-card class="options-card"
+    *ngIf="(order && currentUser && adminOption()) || (order && currentUser && userOption())">
+    <mat-card-header>
+      <mat-card-title>
+        Order Options
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="order && currentUser">
+      <mat-divider></mat-divider>
+      <div class="options">
+        <button mat-stroked-button color="primary" (click)="updateOrder('admin')"
+          *ngIf="adminOption() && currentUser.role === 'admin'">{{ adminOption() }}</button>
+        <button mat-stroked-button color="primary" (click)="updateOrder('user')"
+          *ngIf="userOption() && order.userId == currentUser.id">{{ userOption() }}</button>
+        <button mat-stroked-button color="accent" *ngIf="this.order.status() !== 'Canceled'"
+          (click)="cancelOrder()">Cancel Order</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>
