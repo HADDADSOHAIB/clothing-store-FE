@@ -1,34 +1,54 @@
-mat-card-header{
+* {
+  font-family: 'Architects Daughter', cursive;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+
+  mat-card {
+    width: 400px;
+    margin: 0 0 20px;
+  }
+
+  .items {
+    margin-bottom: 5px;
+  }
+
+  .product {
+    display: flex;
+    justify-content: space-between;
+
+    h3,
+    p {
+      margin: 0;
+    }
+  }
+
+  .total {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .shipping {
+    display: flex;
+    justify-content: space-between;
+
+    h3,
+    p {
+      margin: 5px 0;
+    }
+  }
+
+  .address {
+    display: flex;
     justify-content: center;
-}
 
-h3.product-name {
-    margin-block-end: 1px;
-}
-p.product-id {
-    margin-block-end: 1px;
-}
-
-mat-card{
-    width:500px;
-    margin: 2px;
-}
-
-div.main{
-    margin:10px;
-}
-.item{
-    margin:5px;
-}
-.mat-card .mat-divider-horizontal {
-    width: inherit;
-    position: inherit;
-}
-
-mat-form-field.status, div.status{
-    width: 100%;
-}
-
-button.btn-status{
-    width:100%;
+    h3,
+    p {
+      margin: 5px 0;
+    }
+  }
 }

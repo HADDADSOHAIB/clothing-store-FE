@@ -1,81 +1,44 @@
-<div class="table" fxLayout="column" fxLayoutAlign="start center">
-  <table mat-table [dataSource]="orders" class="mat-elevation-z8">
-    <ng-container matColumnDef="OrderDate">
-      <th mat-header-cell *matHeaderCellDef (click)="sortBy('orderDate')">
+<div class="container">
+  <table mat-table [dataSource]="dataSource">
+    <ng-container matColumnDef="Order Date">
+      <th mat-header-cell *matHeaderCellDef>
         <span class="header">Order Date</span>
-        <mat-icon class="header" *ngIf="selectedSortElement!=='orderDate'">
-          sort
-        </mat-icon>
-        <mat-icon class="header" *ngIf="selectedSortElement==='orderDate' && sortDirection.get('orderDate')==='asc'">
-          arrow_drop_up
-        </mat-icon>
-        <mat-icon class="header" *ngIf="selectedSortElement==='orderDate' && sortDirection.get('orderDate')==='desc'">
-          arrow_drop_down
-        </mat-icon>
       </th>
       <td mat-cell *matCellDef="let order"> {{order.orderDate | date:'short'}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="OrderedBy">
-      <th mat-header-cell *matHeaderCellDef (click)="sortBy('userEmail')">
-        <span class="header">Ordered By </span>
-        <mat-icon class="header" *ngIf="selectedSortElement!=='userEmail'">
-          sort
-        </mat-icon>
-        <mat-icon class="header" *ngIf="selectedSortElement==='userEmail' && sortDirection.get('userEmail')==='asc'">
-          arrow_drop_up
-        </mat-icon>
-        <mat-icon class="header" *ngIf="selectedSortElement==='userEmail' && sortDirection.get('userEmail')==='desc'">
-          arrow_drop_down
-        </mat-icon>
+    <ng-container matColumnDef="User">
+      <th mat-header-cell *matHeaderCellDef>
+        <span class="header">User</span>
       </th>
       <td mat-cell *matCellDef="let order">
-        {{order.userEmail}}
+        {{order.user.firstName}} {{order.user.lastName}}
       </td>
     </ng-container>
-
 
     <ng-container matColumnDef="Status">
       <th mat-header-cell *matHeaderCellDef>Order Status</th>
       <td mat-cell *matCellDef="let order">
-        <p *ngIf="order.processedDate.getTime()==defaultDate.getTime() &&
-                    order.cancelationDate.getTime()==defaultDate.getTime()">
-          Not processed yet</p>
-        <p *ngIf="order.processedDate.getTime()!=defaultDate.getTime() &&
-                    order.inRouteDate.getTime()==defaultDate.getTime() &&
-                    order.cancelationDate.getTime()==defaultDate.getTime()">
-          processed, ready to be sent</p>
-        <p *ngIf="order.inRouteDate.getTime()!=defaultDate.getTime() &&
-                    order.deliveryDate.getTime()==defaultDate.getTime() &&
-                    order.cancelationDate.getTime()==defaultDate.getTime()">
-          Package in route</p>
-        <p *ngIf="order.deliveryDate.getTime()!=defaultDate.getTime() &&
-                    order.deliveryConfirmationDate.getTime()==defaultDate.getTime() 
-                    && order.cancelationDate.getTime()==defaultDate.getTime()">
-          Package Delivered</p>
-        <p *ngIf="order.deliveryConfirmationDate.getTime()!=defaultDate.getTime() &&
-                    order.cancelationDate.getTime()==defaultDate.getTime()">
-          Delivery Confirmed</p>
-        <p *ngIf="order.cancelationDate.getTime()!=defaultDate.getTime()">Order Canceled</p>
+        <mat-chip-list>
+          <mat-chip class="status">{{ order.status() }}</mat-chip>
+        </mat-chip-list>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="Options">
-      <th mat-header-cell *matHeaderCellDef class="options">Options</th>
-      <td mat-cell *matCellDef="let order">
-        <div fxFlex>
-          <button mat-button color="warn" (click)="goOrder(order.id)">
-            Details
-          </button>
-        </div>
+      <th mat-header-cell *matHeaderCellDef>Options</th>
+      <td mat-cell *matCellDef="let order" class="options">
+        <button mat-stroked-button color="primary" (click)="goOrder(order.id)">
+          Details
+        </button>
       </td>
       <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-header-row *matHeaderRowDef="['Order Date', 'User', 'Status', 'Options']"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['Order Date', 'User', 'Status', 'Options'];"></tr>
   </table>
   <div class="paginator">
-    <paginator></paginator>
+    <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
   </div>
 </div>

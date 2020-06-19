@@ -27,4 +27,20 @@ export class Order {
     this.orderItems.forEach((item) => (totalQuantity += item.quantity));
     return totalQuantity;
   }
+
+  status() {
+    if (this.cancelationDate) {
+      return 'canceled';
+    } else if (this.processedDate) {
+      return 'Proccessed';
+    } else if (this.inRouteDate) {
+      return 'In Route';
+    } else if (this.deliveryDate) {
+      return 'Delivered';
+    } else if (this.deliveryConfirmationDate) {
+      return 'Delivery confirmed';
+    } else {
+      return 'Ordered';
+    }
+  }
 }

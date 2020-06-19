@@ -8,31 +8,20 @@ import { OrderService } from 'src/app/services/order-service/order.service';
   templateUrl: './order-status.component.html',
   styleUrls: ['./order-status.component.scss'],
 })
-export class OrderStatusComponent implements OnInit, OnChanges {
-  @Input() order: Order = new Order(
-    0,
-    0,
-    [],
-    new ShippingInfos('', '', '', '', '', '', '', '', ''),
-    new Date(2010, 0, 1),
-    new Date(2010, 0, 1),
-    new Date(2010, 0, 1),
-    new Date(2010, 0, 1),
-    new Date(2010, 0, 1),
-    new Date(2010, 0, 1)
-  );
-  defaultDate = new Date(2010, 0, 1);
-  constructor(private orderService: OrderService) {}
+export class OrderStatusComponent implements OnChanges {
+  @Input() order: Order;
+  constructor() {}
 
-  ngOnInit() {}
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.order) {
-      this.order.orderDate = new Date(this.order.orderDate);
-      this.order.cancelationDate = new Date(this.order.cancelationDate);
-      this.order.deliveryConfirmationDate = new Date(this.order.deliveryConfirmationDate);
-      this.order.deliveryDate = new Date(this.order.deliveryDate);
-      this.order.inRouteDate = new Date(this.order.inRouteDate);
-      this.order.processedDate = new Date(this.order.processedDate);
+    if (this.order && changes.order) {
+      this.order.orderDate = this.order.orderDate ? new Date(this.order.orderDate) : null;
+      this.order.cancelationDate = this.order.cancelationDate ? new Date(this.order.cancelationDate) : null;
+      this.order.deliveryConfirmationDate = this.order.deliveryConfirmationDate
+        ? new Date(this.order.deliveryConfirmationDate)
+        : null;
+      this.order.deliveryDate = this.order.deliveryDate ? new Date(this.order.deliveryDate) : null;
+      this.order.inRouteDate = this.order.inRouteDate ? new Date(this.order.inRouteDate) : null;
+      this.order.processedDate = this.order.processedDate ? new Date(this.order.processedDate) : null;
       console.log(this.order);
     }
   }

@@ -1,20 +1,18 @@
-mat-card{
-    margin: 2px;
-    width: 100%;
-}
+mat-card {
+  margin-bottom: 20px;
+  width: 400px;
 
-div.card{
-    width: 500px;
-}
+  mat-card-title {
+    font-family: 'Architects Daughter', cursive;
+  }
 
-.mat-card .mat-divider-horizontal {
-    width: inherit;
-    position: inherit;
-}
+  .element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-mat-card-header{
-    justify-content: center;
-}
-.divider{
-    margin-bottom:10px ;
+    p {
+      width: 50%;
+    }
+  }
 }

@@ -32,6 +32,7 @@ import { OrderStatusComponent } from './component/order-status/order-status.comp
 import { OrderInfosComponent } from './component/order-infos/order-infos.component';
 import { RatingBarComponent } from './component/rating-bar/rating-bar.component';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { ProductReviewComponent } from './component/product-review/product-review.component';
 
 @NgModule({
@@ -76,6 +77,7 @@ import { ProductReviewComponent } from './component/product-review/product-revie
     MatListModule,
     MatRadioModule,
     MatTooltipModule,
+    MatPaginatorModule,
   ],
   exports: [
     PaginatorComponent,
@@ -117,6 +119,7 @@ import { ProductReviewComponent } from './component/product-review/product-revie
     MatListModule,
     MatRadioModule,
     MatTooltipModule,
+    MatPaginatorModule,
   ],
 })
 export class SharedModule {
