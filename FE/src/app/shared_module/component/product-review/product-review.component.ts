@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges } from '@angular/core';
 import { ProductReview } from 'src/app/models/product-review';
 import { User } from 'src/app/models/user';
+import { Product } from 'src/app/models/product';
 
 @Component({
   selector: 'app-product-review',
@@ -11,11 +12,12 @@ export class ProductReviewComponent implements OnInit {
   @Input() review: ProductReview;
   @Input() profil: Boolean = false;
   user: User;
+  product: Product;
 
   constructor() {}
 
   ngOnInit() {
     this.user = this.review['user'];
-    console.log(this.review);
+    this.product = this.review['product'];
   }
 }

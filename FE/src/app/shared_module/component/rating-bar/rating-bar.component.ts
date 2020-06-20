@@ -24,9 +24,9 @@ export class RatingBarComponent implements OnInit, OnChanges {
 	}
 
 
-	changeRating(rating: string) {
+	changeRating(rating: number) {
 		if (!this.readOnly) {
-			this.ratingSelected = parseInt(rating);
+			this.ratingSelected = rating;
 		}
 	}
 
