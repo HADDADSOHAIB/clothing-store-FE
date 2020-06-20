@@ -6,9 +6,12 @@
       </mat-card-content>
     </mat-card>
   </div>
-  <div class="products">
+  <div class="products" *ngIf="(products$ | async).length">
     <product-card *ngFor="let product of products$ | async" [product]="product">
     </product-card>
+  </div>
+  <div class="products" *ngIf="!(products$ | async).length">
+    <p>No products found</p>
   </div>
 </div>
 <paginator></paginator>

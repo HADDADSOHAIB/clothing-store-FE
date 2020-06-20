@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { ProductListComponent } from './component/product-list/product-list.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../shared_module/shared.module';
 import { NewProductComponent } from './component/new-product/new-product.component';
 import { AdminHeaderComponent } from './component/admin-navbar/admin-navbar.component';
 import { AdminComponent } from './admin.component';

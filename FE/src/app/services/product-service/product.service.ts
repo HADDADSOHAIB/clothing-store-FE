@@ -86,6 +86,7 @@ export class ProductService {
     query += options.sort[0] ? `order=${options.sort[0]}&` : '';
     query += options.sort[1] ? `dir=${options.sort[1]}&` : '';
     query += options.categoryList.length === 0 ? '' : `categories=${options.categoryList.join(',')}&`;
+    query += options.searchQuery ? `search=${options.searchQuery}&` : '';
     return query;
   }
 }
