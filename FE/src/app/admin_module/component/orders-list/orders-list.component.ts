@@ -16,20 +16,11 @@ export class OrdersListComponent implements OnInit {
   @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
   dataSource = new MatTableDataSource<Order>([]);
 
-  defaultDate = new Date(2010, 0, 1);
-  currentPage = 1;
-  availableOrdersCount = 0;
-  itemsPerPage = 10;
-
-  sort: string[] = [];
-  sortDirection: Map<string, string> = new Map<string, string>();
-  selectedSortElement = '';
-
   constructor(private orderService: OrderService, private router: Router) {}
 
   ngOnInit() {
     this.orderService
-      .getOrders()
+      .getOrders(null)
       .pipe(take(1))
       .subscribe((res) => {
         this.dataSource = new MatTableDataSource<Order>(res);

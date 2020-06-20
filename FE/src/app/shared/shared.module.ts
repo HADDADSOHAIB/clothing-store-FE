@@ -34,6 +34,7 @@ import { RatingBarComponent } from './component/rating-bar/rating-bar.component'
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { ProductReviewComponent } from './component/product-review/product-review.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
@@ -78,6 +79,7 @@ import { ProductReviewComponent } from './component/product-review/product-revie
     MatRadioModule,
     MatTooltipModule,
     MatPaginatorModule,
+    NgxPaginationModule,
   ],
   exports: [
     PaginatorComponent,
@@ -120,6 +122,7 @@ import { ProductReviewComponent } from './component/product-review/product-revie
     MatRadioModule,
     MatTooltipModule,
     MatPaginatorModule,
+    NgxPaginationModule,
   ],
 })
 export class SharedModule {

@@ -1,9 +1,7 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { ActivatedRoute, Router, ActivatedRouteSnapshot } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { take, find } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { FormGroup, FormControl, FormBuilder, Form } from '@angular/forms';
 import { Cart } from 'src/app/models/cart';
 import { Product } from 'src/app/models/product';
 import { ProductReview } from 'src/app/models/product-review';
@@ -12,8 +10,6 @@ import { CartService } from 'src/app/services/cart-service/cart.service';
 import { ProductService } from 'src/app/services/product-service/product.service';
 import { AccountService } from 'src/app/services/account-service/account.service';
 import { ReviewService } from 'src/app/services/review-service/review.service';
-import { CartItem } from 'src/app/models/cartItem';
-import { UploadFilesService } from 'src/app/services/upload-files-service/upload-files.service';
 import {
   MatCarousel,
   MatCarouselComponent,
@@ -33,14 +29,14 @@ export class ProductDetails implements OnInit {
   newReview: ProductReview = new ProductReview(0, null, 5, '', 0);
 
   currentUser: User;
-  
+
   constructor(
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private accountService: AccountService,
     private reviewService: ReviewService,
     private snackBar: MatSnackBar,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -56,45 +52,38 @@ export class ProductDetails implements OnInit {
     });
   }
 
-  changeNewRating(e){
+  changeNewRating(e) {
     this.newReview.rating = e;
   }
 
-  pageReviewChange(e){
+  pageReviewChange(e) {
     this.p = e;
   }
 
   saveNewReview() {
     console.log(this.newReview);
-    this
-      .accountService
-      .currentUser$
-      .pipe(take(1))
-      .subscribe(user => {
-        if (user) {
-          this.newReview.userId = user.id;
-          this.newReview.productId = this.product.id;
-          this
-            .reviewService
-            .createReview(this.newReview)
-            .pipe(take(1))
-            .subscribe(res => {
-              this.newReview.id = res.data.id;
-              this.newReview['user'] = user;
-              this.product.reviews.unshift(this.newReview);
-              this.newReview = new ProductReview(0, null, 5, '', 0);
-              this.snackBar.open('Review added successfuly', 'Ok', { duration: 3000 });
-            });
-        }
-        else {
-          this.router.navigate(['auth', 'login']);
-          this.snackBar.open('To give a review, you must be logged in', 'Ok', { duration: 3000 });
-        }
-      });
+    this.accountService.currentUser$.pipe(take(1)).subscribe((user) => {
+      if (user) {
+        this.newReview.userId = user.id;
+        this.newReview.productId = this.product.id;
+        this.reviewService
+          .createReview(this.newReview)
+          .pipe(take(1))
+          .subscribe((res) => {
+            this.newReview.id = res.data.id;
+            this.newReview['user'] = user;
+            this.product.reviews.unshift(this.newReview);
+            this.newReview = new ProductReview(0, null, 5, '', 0);
+            this.snackBar.open('Review added successfuly', 'Ok', { duration: 3000 });
+          });
+      } else {
+        this.router.navigate(['auth', 'login']);
+        this.snackBar.open('To give a review, you must be logged in', 'Ok', { duration: 3000 });
+      }
+    });
   }
 
-  controleNewReview(){
-    if(this.newReview.review.length > 99)
-    this.newReview.review = this.newReview.review.slice(0, 99);
+  controleNewReview() {
+    if (this.newReview.review.length > 99) this.newReview.review = this.newReview.review.slice(0, 99);
   }
 }

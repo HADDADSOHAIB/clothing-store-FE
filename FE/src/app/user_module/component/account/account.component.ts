@@ -31,8 +31,6 @@ export class AccountComponent implements OnInit, OnDestroy {
 
   initForm(user: User) {
     this.profileForm = this.formBuilder.group({
-      userEmail: [user ? user.userEmail : '', Validators.required],
-      userName: [user ? user.userName : '', Validators.required],
       firstName: [user ? user.firstName : '', Validators.required],
       lastName: [user ? user.lastName : '', Validators.required],
       phoneNumber: [user ? user.phoneNumber : '', Validators.required],
@@ -40,8 +38,6 @@ export class AccountComponent implements OnInit, OnDestroy {
   }
 
   update() {
-    console.log(this.profileForm);
-
     if (this.profileForm.valid) {
       const { firstName, lastName, phoneNumber } = this.profileForm.value;
       this.user = {

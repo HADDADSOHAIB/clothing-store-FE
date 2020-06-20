@@ -16,8 +16,10 @@ export class OrderService {
     return this.httpClient.post(BACK_END + 'orders', order) as Observable<any>;
   }
 
-  getOrders() {
-    return this.httpClient.get(`${BACK_END}orders`).pipe(map((res) => this.processOrders(res))) as Observable<Order[]>;
+  getOrders(userId: number) {
+    return this.httpClient
+      .get(`${BACK_END}orders?userId=${userId || ''}`)
+      .pipe(map((res) => this.processOrders(res))) as Observable<Order[]>;
   }
 
   getOrder(id: number) {

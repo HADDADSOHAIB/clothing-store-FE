@@ -1,47 +1,23 @@
+.reviews-list {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  width: 100%;
+}
 
-mat-card.reviews-section{
-    width:845px;
-    margin:0.5px;
-  }
-  mat-form-field,mat-slider{
-    width:100%;
-  }
-  
-  div.reviews-section{
-    margin-top: 5px;
-    margin-bottom: 30px;
-  }
-  
-  mat-divider.user-name{
-    justify-content: center;
-    display:block;
-    position: relative;
-  }
-  
-  mat-card.add-review{
-    margin-top: 1px;
-    margin-bottom: 30px;
-    width:845px;
-  }
-  
-  mat-icon.close{
-    cursor: pointer;
-  }
-  
-  mat-form-field.add-review{
-    width: 100%;
-  }
-  
-  mat-card-content.add-review{
-    width: 100%;
-    margin-bottom: 0px;
-  }
-  mat-card-actions{
-    margin-bottom: 0px;
-  }
-  
-  mat-card-content.reviews-summary{
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-  
+.pagination-review {
+  display: flex;
+  justify-content: center;
+}
+
+.reviews {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Architects Daughter', cursive;
+}
+
+.review {
+  cursor: pointer;
+}
