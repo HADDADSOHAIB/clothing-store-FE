@@ -16,12 +16,12 @@ const routes: Routes = [
 	{
 		path: 'admin',
 		loadChildren: () => import('./admin_module/admin.module').then(m => m.AdminModule),
-		// canActivate: [AdminGuard]
+		canActivate: [AdminGuard]
 	},
 	{
 		path: 'user',
 		loadChildren: () => import('./user_module/user.module').then(m => m.UserModule),
-		// canActivate: [UserGuard]
+		canActivate: [UserGuard]
 	},
 	{
 		path: '**',

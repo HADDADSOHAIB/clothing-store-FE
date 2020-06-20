@@ -41,7 +41,7 @@
     <mat-divider [vertical]="true"></mat-divider>
     <ul fxLayout fxLayoutGap="30px" class="navigation-items">
       <li class="nav" *ngIf="(currentUser$ | async)">
-        <a routerLink="/store" (click)="logout()">
+        <a href="#" (click)="logout()">
           <mat-icon aria-hidden="false">fingerprint</mat-icon>
           <span class="nav-caption">Logout</span>
         </a>
