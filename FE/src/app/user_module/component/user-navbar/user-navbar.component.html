@@ -1,21 +1,20 @@
-
 <mat-nav-list>
-
-    <a mat-list-item routerLink="account">
-        <mat-icon aria-hidden="false">face</mat-icon>
-        <span class="nav-caption">My account</span>
-    </a>
-    <a mat-list-item routerLink="myorders">
-        <mat-icon aria-hidden="false">view_compact</mat-icon>
-        <span class="nav-caption">My orders</span>
-    </a>
-    <a mat-list-item routerLink="myreviews">
-        <mat-icon aria-hidden="false">rate_review</mat-icon>
-        <span class="nav-caption">My Reviews</span>
-    </a>
-    <a mat-list-item (click)="closeNavbar()" mat-list-item>
-        <mat-icon aria-hidden="false">close</mat-icon>
-        <span class="nav-caption">Close menu</span>
-    </a>
-
+  <a mat-list-item routerLink="account">
+    <div class="sidenav-item">
+      <mat-icon aria-hidden="false">face</mat-icon>
+      <span class="nav-caption">Profile</span>
+    </div>
+  </a>
+  <a mat-list-item routerLink="myorders">
+    <div class="sidenav-item">
+      <mat-icon aria-hidden="false">view_compact</mat-icon>
+      <span class="nav-caption">My orders</span>
+    </div>
+  </a>
+  <a mat-list-item routerLink="myreviews">
+    <div class="sidenav-item">
+      <mat-icon aria-hidden="false">rate_review</mat-icon>
+      <span class="nav-caption">My Reviews</span>
+    </div>
+  </a>
 </mat-nav-list>

@@ -1,113 +1,40 @@
-<div fxLayout="column" fxLayoutAlign="start center">
-    <mat-card class="account-card" >
-        <mat-card-header class="account-card">
-            <mat-card-title>Profile</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <form  fxLayout="column" fxLayoutAlign="center center" [formGroup]="profileForm">
-                <mat-form-field class="account-card"  appearance="outline">
-                    <mat-label>Email</mat-label>
-                    <input matInput placeholder="Email" [value]="this.user.userEmail" disabled>
-                </mat-form-field>
-
-                <mat-form-field class="account-card"  appearance="outline">
-                    <mat-label>User name</mat-label>
-                    <input matInput placeholder="User name" formControlName="userName">
-                </mat-form-field>
-
-                <div class="account-name">
-                    <mat-form-field class="account-name" fxFlex  appearance="outline">
-                        <mat-label>First name</mat-label>
-                        <input matInput placeholder="First name" formControlName="firstName">
-                    </mat-form-field>
-                    <mat-form-field class="account-name" fxFlex  appearance="outline">
-                        <mat-label>Last name</mat-label>
-                        <input matInput placeholder="Last name" formControlName="lastName">
-                    </mat-form-field>
-                </div>
-
-                <mat-form-field class="account-card"  appearance="outline">
-                    <mat-label>Phone number</mat-label>
-                    <input matInput placeholder="Phone number" formControlName="phoneNumber">
-                </mat-form-field>
-            </form>
-            <div fxLayout="column" fxLayoutAlign="center center">
-                <button  class="account-card" mat-flat-button color='primary'(click)="updateProfile()">Update profile</button>
-            </div>
-        </mat-card-content>
-    </mat-card>
-    <ng-container *ngFor="let address of user.addresses; index as i;">
-        <mat-card class="address-card">
-            <mat-card-header class="address-card">
-                <mat-card-title fxLayout="column" fxLayoutAlign="start center">
-                    <mat-icon>house</mat-icon>
-                    <span class="address-number"> {{i+1}}</span>
-                </mat-card-title>
-            </mat-card-header>
-            <mat-card-content>
-                <div fxLayout="row" fxLayoutAlign="space-between end">
-                    <h4 class="product-name"> Address: </h4>
-                    <p class="product-id"> {{address.firstLine | lowercase}}, {{ address.secondLine | lowercase}}</p>
-                </div>
-                <mat-divider></mat-divider>
-                <div fxLayout="row" fxLayoutAlign="space-between end">
-                    <h4 class="product-name"> City: </h4>
-                    <p class="product-price">{{address.city|lowercase}}, {{address.state|lowercase}}</p>
-                </div>
-                <mat-divider></mat-divider>
-                <div fxLayout="row" fxLayoutAlign="space-between end">
-                    <h4 class="product-name"> Country, zip code: </h4>
-                    <p class="product-price">{{address.country|lowercase}}, {{address.zipCode}}</p>
-                </div>
-                <div fxLayout="column" fxLayoutAlign="center center">
-                    <button class="account-card" mat-flat-button color='warn' (click)="deleteAddress(address.id)">Delete</button>
-                </div>
-            </mat-card-content>
-        </mat-card>
-    </ng-container>
-    <mat-card class="address-form" >
-        <mat-card-header class="address-card">
-            <mat-card-title>
-                <button class="account-card" mat-button color='primary' (click)="toggleAddressForm()">
-                    <mat-icon>add_circle_outline</mat-icon><span>  new address</span>
-                </button>
-            </mat-card-title>
-        </mat-card-header>
-        <mat-card-content *ngIf="showAddressForm">
-            <form fxLayout="column" fxLayoutAlign="center center" [formGroup]="addAddressForm">
-                <mat-form-field class="address-card" appearance="outline">
-                    <mat-label>address first line</mat-label>
-                    <input matInput placeholder="address first line" formControlName="firstLine">
-                </mat-form-field>
-    
-                <mat-form-field class="address-card" appearance="outline">
-                    <mat-label>address second line</mat-label>
-                    <input matInput placeholder="address second line" formControlName="secondLine">
-                </mat-form-field>
-    
-                <div class="address-name">
-                    <mat-form-field class="address-name" fxFlex appearance="outline">
-                        <mat-label>City</mat-label>
-                        <input matInput placeholder="city" formControlName="city">
-                    </mat-form-field>
-                    <mat-form-field class="address-name" fxFlex appearance="outline">
-                        <mat-label>State</mat-label>
-                        <input matInput placeholder="state" formControlName="state">
-                    </mat-form-field>
-                </div>
-                <div class="address-name">
-                    <mat-form-field class="address-name" fxFlex appearance="outline">
-                        <mat-label>Country</mat-label>
-                        <input matInput placeholder="country" formControlName="country">
-                    </mat-form-field>
-                    <mat-form-field class="address-name" fxFlex appearance="outline">
-                        <mat-label>Zip code</mat-label>
-                        <input matInput placeholder="zip code" formControlName="zipCode">
-                    </mat-form-field>
-                </div>
-    
-                <button class="account-card" mat-raised-button color='primary' (click)="saveAddress()">Save Address</button>
-            </form>
-        </mat-card-content>
-    </mat-card>
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Profile</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="profileForm" *ngIf="user">
+        <div class="center">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Email" [value]="user.userEmail" disabled>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>User name</mat-label>
+            <input matInput placeholder="User name" [value]="user.userName" disabled>
+          </mat-form-field>
+        </div>
+        <div class="center">
+          <mat-form-field appearance="outline">
+            <mat-label>First name</mat-label>
+            <input matInput placeholder="First name" formControlName="firstName">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Last name</mat-label>
+            <input matInput placeholder="Last name" formControlName="lastName">
+          </mat-form-field>
+        </div>
+        <div class="center">
+          <mat-form-field appearance="outline">
+            <mat-label>Phone number</mat-label>
+            <input matInput placeholder="Phone number" formControlName="phoneNumber">
+          </mat-form-field>
+        </div>
+        <div class="center">
+          <button mat-flat-button color='primary' (click)="update()">Update profile</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

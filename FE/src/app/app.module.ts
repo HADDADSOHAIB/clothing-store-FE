@@ -22,6 +22,7 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
+import { AuthInterceptor } from './interceptors/http.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -48,6 +49,11 @@ import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
     SidenavService,
     UploadFilesService,
     CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

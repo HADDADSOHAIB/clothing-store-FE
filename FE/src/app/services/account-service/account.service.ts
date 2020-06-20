@@ -38,19 +38,7 @@ export class AccountService {
     }
   }
 
-  getAllUsers() {
-    return this.httpClient.get(BACK_END + 'users') as Observable<any>;
-  }
-
   updateUserProfile(user: User) {
-    return this.httpClient.put(BACK_END + 'users/' + user.id, user) as Observable<User>;
-  }
-
-  addAddress(id: number, address: Address) {
-    return this.httpClient.post(BACK_END + 'addresses/' + id, address);
-  }
-
-  deleteAddress(id: number) {
-    return this.httpClient.delete(BACK_END + 'addresses/' + id);
+    return this.httpClient.patch(BACK_END + 'users/updateme', user) as Observable<any>;
   }
 }

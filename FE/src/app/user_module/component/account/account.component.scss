@@ -1,61 +1,14 @@
-mat-card-header.account-card{
+* {
+  font-family: 'Architects Daughter', cursive;
+}
+
+.container {
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+
+  .center {
+    display: flex;
     justify-content: center;
-}
-
-mat-card.account-card{
-    width: 600px;
-    margin: 10px;
-}
-
-mat-form-field.account-card{
-    width: 80%;
-}
-
-div.account-name{
-    width: 80%;
-}
-
-mat-form-field.account-name{
-    margin: 2px;
-}
-
-mat-card-header.address-card{
-    justify-content: center;
-}
-
-mat-card.address-card{
-    width: 600px;
-    margin: 10px;
-    margin-top: 0px;
-}
-
-mat-form-field.address-card{
-    width: 80%;
-}
-button.account-card{
-    width: 150px;
-}
-div.address-name{
-    width: 80%;
-}
-
-mat-form-field.address-name{
-    margin: 2px;
-}
-
-span.address-number{
-    font-size: small;
-}
-
-.mat-card .mat-divider-horizontal {
-    position: relative;
-}
-
-mat-card.address-icon{
-    margin-bottom: 0px;
-    width: 600px;
-}
-mat-card.address-form{
-    margin-top: 2px;
-    width: 600px;
+  }
 }

@@ -3,7 +3,6 @@ import { StoreRoutingModule } from './store-routing.module';
 
 import { ProductCardComponent } from './component/product-card/product-card.component';
 
-import { StoreHeaderComponent } from './component/store-navbar/store-navbar.component';
 import { StoreComponent } from './store.component';
 import { ProductDetails } from './component/product-details/product-details.component';
 import { CheckOutComponent } from './component/check-out/check-out.component';
@@ -19,7 +18,6 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
 @NgModule({
   declarations: [
     ProductCardComponent,
-    StoreHeaderComponent,
     StoreComponent,
     ProductDetails,
     CheckOutComponent,
@@ -32,7 +30,7 @@ import { MatCarouselModule } from '@ngmodule/material-carousel';
     SharedModule.forRoot(),
     MatDialogModule,
     MatCarouselModule.forRoot(),
-    NgxPaginationModule
+    NgxPaginationModule,
   ],
   providers: [],
 })
