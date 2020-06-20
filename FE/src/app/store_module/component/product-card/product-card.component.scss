@@ -1,64 +1,56 @@
-.card{
-    width:150px;
-    margin:5px;
-    cursor: pointer;
+.product-card {
+  width: 180px;
+  height: 250px;
+  background-image: url('../../../../assets/hats.png');
+  background-size: cover;
+  background-position: center;
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+  box-shadow:
+    0 2px 1px -1px rgba(0, 0, 0, .12),
+    0 1px 1px 0 rgba(0, 0, 0, .14),
+    0 1px 3px 0 rgba(0, 0, 0, .12);
 }
 
-img{
-    height:100px;
-}
-    
-.content{
-    font-size: small;
-}
-
-button{
-    font-size: small;
+.go-details {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 1;
 }
 
-.btn{
-    width:100%;
+.content {
+  height: 100%;
+  width: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+  display: none;
+  background-color: rgba($color: #ffd06a, $alpha: 0.6);
 }
 
-.mat-card-actions .mat-button, .mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
-    margin: 0 0px;
-}
-.mat-button, .mat-flat-button, .mat-icon-button, .mat-stroked-button {
-    min-width: 0px;
-}
+.product-card:hover {
+  .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
 
-.btn-left{
-    width:50%;
-    float:left;
-}
-.btn-right{
-    width:50%;
-    float:right;
-}
-.btn-mid{
-    width:20%;
-}
-.divbtn{
-    width:100%;
-    margin-bottom:2px;
-}
+    .info {
+      color: #111;
+      font-weight: 800;
+      font-family: 'Architects Daughter', cursive;
+      font-size: 1.1rem;
 
-@media only screen and (max-width: 260px) {
-    .card{
-        width: 100%;
-    } 
-    img{
-        height:100px;
+      p {
+        margin: 0;
+      }
+
+
     }
+  }
 }
 
-
-
-
-
-
-
-
-
-
-
+app-cart-actions {
+  width: 100%;
+}

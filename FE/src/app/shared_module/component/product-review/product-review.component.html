@@ -1,0 +1,10 @@
+<div class="review">
+  <div class="header">
+    <span class="name" *ngIf="!profil">{{user.userName}}</span>
+    <span class="name" *ngIf="profil">{{review.product.name}}</span>
+    <rating-bar [rating]="review.rating" readOnly="true"></rating-bar>
+  </div>
+  <div class="user-review">
+    {{review.review}}
+  </div>
+</div>

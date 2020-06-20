@@ -1,6 +1,7 @@
 .form-card {
   width: 400px;
   margin: 20px;
+  height: fit-content;
 
   mat-card-header {
     display: flex;
@@ -30,4 +31,66 @@
 .main {
   display: flex;
   justify-content: center;
+}
+
+.images {
+  display: flex;
+  justify-content: space-evenly;
+
+  & p {
+    background-color: #3f51b5;
+    color: #eeeeee;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: 900;
+    box-shadow:
+      0 2px 1px -1px rgba(0,0,0,.2),
+      0 1px 1px 0 rgba(0,0,0,.14),
+      0 1px 3px 0 rgba(0,0,0,.12);
+  }
+
+  .cover-image,
+  .product-images {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  } 
+
+  .delete {
+    cursor: pointer;
+  }
+
+  .images {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.display-images {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  height: 600px;
+  margin-top: 20px;
+
+  .image {
+    height: 280px;
+    width: 200px;
+    margin: 0 10px 20px;
+    border-radius: 5px;
+    position: relative;
+
+    .options-cover,
+    .options-images {
+      display: flex;
+      justify-content: center;
+      margin-top: 5px;
+    }
+  }
 }

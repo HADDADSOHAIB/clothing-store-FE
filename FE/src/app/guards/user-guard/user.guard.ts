@@ -14,18 +14,17 @@ export class UserGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-    return true;
-    // return this.accountService.getCurrentUser().pipe(
-    //     map((user) => {
-    //       if (user.role.includes('user')) {
-    //         return true;
-    //       } else {
-    //         this.snackBar.open('Only users are allowed', 'Ok');
-    //         this.router.navigate(['auth', 'signin']);
-    //         return false;
-    //       }
-    //     })
-    //   );
+  ) {
+    return this.accountService.currentUser$.pipe(
+        map((user) => {
+          if (user && user.role.includes('user')) {
+            return true;
+          } else {
+            this.snackBar.open('Only users are allowed', 'Ok');
+            this.router.navigate(['auth', 'signin']);
+            return false;
+          }
+        })
+      );
   }
 }

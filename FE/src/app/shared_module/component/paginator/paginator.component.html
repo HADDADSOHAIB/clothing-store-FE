@@ -1,0 +1,33 @@
+<div fxLayout="row" fxLayoutAlign="space-evenly center">
+  <mat-form-field>
+    <mat-label>page size</mat-label>
+    <mat-select [value]="size" (selectionChange)="changeSize($event)">
+      <mat-option value="5">5</mat-option>
+      <mat-option value="10">10</mat-option>
+      <mat-option value="20">20</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <div>
+    <button mat-mini-fab (click)="firstPage()">
+      <mat-icon>first_page</mat-icon>
+    </button>
+    <button mat-mini-fab (click)="beforePage()">
+      <mat-icon>navigate_before</mat-icon>
+    </button>
+    <button mat-button>{{current}}</button>
+    <button mat-mini-fab (click)="nextPage()">
+      <mat-icon>navigate_next</mat-icon>
+    </button>
+    <button mat-mini-fab (click)="lastPage()">
+      <mat-icon>last_page</mat-icon>
+    </button>
+  </div>
+  <mat-form-field>
+    <mat-label>go to page</mat-label>
+    <mat-select [value]="current" (selectionChange)="changePageNumber($event)">
+      <mat-option class="page-options" [value]="page" *ngFor="let page of pagesList">
+        {{page}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>

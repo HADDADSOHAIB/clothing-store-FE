@@ -1,14 +1,22 @@
 a {
-    text-decoration: none;
-    color: white;
-}
- 
-a:hover, a:active{
-    color: lightgray;
+  text-decoration: none;
+  color: white;
+
+  .sidenav-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
 }
 
-.nav-caption{
-    display: inline-block;
-    padding-left: 6px;
-    font-size: large;
+a:hover,
+a:active {
+  color: lightgray;
+}
+
+.nav-caption {
+  display: inline-block;
+  font-size: small;
 }

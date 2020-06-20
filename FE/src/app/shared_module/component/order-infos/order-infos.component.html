@@ -1,0 +1,71 @@
+<div class="container">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Order Items</mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="order">
+      <div *ngFor="let item of order.orderItems" class="items">
+        <div class="product">
+          <h3>{{item.name}}</h3>
+          <p>Product id: {{item.productId}}</p>
+        </div>
+        <mat-divider></mat-divider>
+        <div class="product">
+          <p>Quantity: {{item.quantity}}</p>
+          <p>Total item price: {{item.price | currency:'USD'}}</p>
+        </div>
+      </div>
+      <div class="total">
+        <p>Total of items: {{order.totalQuantity()}}</p>
+        <p>Total price: <strong>{{order.totalPrice() | currency:'USD'}}</strong></p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Shipping Informations</mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="order">
+      <div class="shipping">
+        <h3 class="product-name">{{order.shippingInfos.firstName}}, {{order.shippingInfos.lastName}}</h3>
+        <p class="product-id">Phone number: {{order.shippingInfos.phoneNumber}}</p>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="address">
+        <p>
+          {{order.shippingInfos.firstLine | lowercase}}
+          {{order.shippingInfos.secondLine | lowercase}},
+          {{order.shippingInfos.city | lowercase}}
+        </p>
+      </div>
+      <mat-divider></mat-divider>
+      <div class="address">
+        <p>
+          {{order.shippingInfos.state | lowercase}}
+          {{order.shippingInfos.country | lowercase}}.
+          {{order.shippingInfos.zipCode | lowercase}}
+        </p>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <app-order-status [order]="order"></app-order-status>
+  <mat-card class="options-card"
+    *ngIf="(order && currentUser && adminOption()) || (order && currentUser && userOption())">
+    <mat-card-header>
+      <mat-card-title>
+        Order Options
+      </mat-card-title>
+    </mat-card-header>
+    <mat-card-content *ngIf="order && currentUser">
+      <mat-divider></mat-divider>
+      <div class="options">
+        <button mat-stroked-button color="primary" (click)="updateOrder('admin')"
+          *ngIf="adminOption() && currentUser.role === 'admin'">{{ adminOption() }}</button>
+        <button mat-stroked-button color="primary" (click)="updateOrder('user')"
+          *ngIf="userOption() && order.userId == currentUser.id">{{ userOption() }}</button>
+        <button mat-stroked-button color="accent" *ngIf="this.order.status() !== 'Canceled'"
+          (click)="cancelOrder()">Cancel Order</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+</div>

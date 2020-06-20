@@ -1,28 +1,28 @@
-div.table{
-    display: flex;
-    justify-content: center;
+* {
+  font-family: 'Architects Daughter', cursive;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
 
-table{
-    width:700px;
-    margin:10px;
-}
-.paginator{
-    width:700px;
-    margin:10px;
-}
-button{
-    margin: 5px;
-}
+  table {
+    width: 750px;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2),
+      0 1px 1px 0 rgba(0, 0, 0, .14),
+      0 1px 3px 0 rgba(0, 0, 0, .12);
 
-span.header{
-    margin-top:18px;
-    margin-bottom:18px;
-}
+    .status {
+      padding: 10px;
+    }
+  }
 
-mat-icon.header{
-    margin-left:2px;
-    font-size: 14px;
-    cursor: pointer;
+  .paginator {
+    margin: 20px;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2),
+      0 1px 1px 0 rgba(0, 0, 0, .14),
+      0 1px 3px 0 rgba(0, 0, 0, .12);
+  }
 }

@@ -1,0 +1,24 @@
+.review {
+  font-family: 'Architects Daughter', cursive;
+  margin: 5px;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #111;
+  width: 300px;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .name {
+      font-weight: 900;
+    }
+  }
+
+  .user-review {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+  }
+}

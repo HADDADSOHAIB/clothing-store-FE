@@ -1,0 +1,26 @@
+.btn-buy {
+  width: 100%;
+
+  button {
+    width: 100%;
+
+    z-index: 2;
+  }
+}
+
+.btn-quantity {
+  width: 100%;
+
+  button {
+    width: 50%;
+    margin: 0;
+
+    &:first-child {
+      z-index: 3;
+    }
+
+    &:last-child {
+      z-index: 2;
+    }
+  }
+}

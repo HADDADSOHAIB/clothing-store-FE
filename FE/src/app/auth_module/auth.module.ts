@@ -5,7 +5,7 @@ import { SignUpComponent } from './component/sign-up/sign-up.component';
 
 
 import { SignInComponent } from './component/sign-in/sign-in.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../shared_module/shared.module';
 
 
 @NgModule({

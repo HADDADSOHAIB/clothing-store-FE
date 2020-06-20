@@ -11,10 +11,11 @@ export class Product {
     public rating: number,
     public images: string[],
     public reviews: ProductReview[],
-    public quantity: number
+    public quantity: number,
+    public coverImage: string,
   ) {}
 
   getReviewsByNumberOfStarsGiving(numberOfStars: number) {
-    return this.reviews.filter((review) => review.userRating === numberOfStars);
+    return this.reviews.filter((review) => review.rating === numberOfStars);
   }
 }

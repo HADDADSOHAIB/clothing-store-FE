@@ -3,44 +3,68 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { BACK_END } from 'backend';
 import { Order } from 'src/app/models/order';
+import { ShippingInfos } from 'src/app/models/shipping-info';
+import { map } from 'rxjs/operators';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root',
 })
 export class OrderService {
-	constructor(private httpClient: HttpClient) {
-	}
+  constructor(private httpClient: HttpClient) {}
 
-	placeOrder(order: Order) {
-		return this.httpClient.post(BACK_END + 'orders', order);
-	}
+  placeOrder(order: Order) {
+    return this.httpClient.post(BACK_END + 'orders', order) as Observable<any>;
+  }
 
-	getOrders(pageNumber: number, pageSize: number, sort: string[]= ['orderDate', 'desc']) {
-		return this.httpClient.get(BACK_END + 'orders?page=' + pageNumber + '&&size=' + pageSize +
-			'&&sort=' + sort.join(',')) as Observable<Order[]>;
-	}
-	getOrdersCount(pageNumber: number, pageSize: number) {
-		return this.httpClient.get(BACK_END + 'orderscount?page=' + pageNumber + '&&size=' + pageSize) as Observable<number>;
-	}
+  getOrders(userId: number) {
+    return this.httpClient
+      .get(`${BACK_END}orders?userId=${userId || ''}`)
+      .pipe(map((res) => this.processOrders(res))) as Observable<Order[]>;
+  }
 
-	getOrdersByStatus(pageNumber: number, pageSize: number, status: string) {
-		return this.httpClient.get(BACK_END + 'ordersbystatus?page=' + pageNumber + '&&size=' + pageSize +
-			'&&status=' + status) as Observable<Order[]>;
-	}
-	getOrdersCountByStatus(pageNumber: number, pageSize: number, status: string) {
-		return this.httpClient.get(BACK_END + 'orderscountbystatus?page=' + pageNumber + '&&size=' + pageSize
-		+ '&&status=' + status) as Observable<number>;
-	}
+  getOrder(id: number) {
+    return this.httpClient
+      .get(`${BACK_END}orders/${id}`)
+      .pipe(map((res) => this.processOrder(res['data']))) as Observable<Order>;
+  }
 
-	getOrdersByUser(userEmail: String) {
-		return this.httpClient.get(BACK_END + 'orders/email/' + userEmail) as Observable<Order[]>;
-	}
+  updateOrder(order: Order) {
+    return this.httpClient.patch(`${BACK_END}orders/${order.id}`, order) as Observable<any>;
+  }
 
-	getOrder(id: number) {
-		return this.httpClient.get(BACK_END + 'orders/' + id) as Observable<Order>;
-	}
+  private processOrders(res) {
+    return res.data.map((order) => this.processOrder(order));
+  }
 
-	UpdateOrder(order: Order) {
-		return this.httpClient.put(BACK_END + 'orders/' + order.id, order) as Observable<Order>;
-	}
+  private processOrder(data) {
+    const {
+      id,
+      userId,
+      user,
+      items,
+      shippingInfos,
+      orderDate,
+      processedDate,
+      inRouteDate,
+      deliveryDate,
+      deliveryConfirmationDate,
+      cancelationDate,
+    } = data;
+
+    const order = new Order(
+      id,
+      userId,
+      items,
+      shippingInfos,
+      orderDate,
+      processedDate,
+      inRouteDate,
+      deliveryDate,
+      deliveryConfirmationDate,
+      cancelationDate
+    );
+
+    order['user'] = user;
+    return order;
+  }
 }

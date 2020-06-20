@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+mat-card {
+  margin-bottom: 20px;
+  width: 400px;
+
+  mat-card-title {
+    font-family: 'Architects Daughter', cursive;
+  }
+
+  .element {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    p {
+      width: 50%;
+      font-family: 'Architects Daughter', cursive;
+    }
+  }
+}

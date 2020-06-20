@@ -1,0 +1,22 @@
+<div class="btn-buy" *ngIf="!cart.itemInCart(productId)">
+  <button mat-raised-button color="primary" (click)="addToCart(productId, cart.id)" class="btn">
+    Buy
+  </button>
+</div>
+<div class="btn-quantity" *ngIf="cart.itemInCart(productId) && !cartLogo">
+  <button mat-raised-button (click)="increment(productId)" class="btn-left" matBadge="{{cart.itemCount(productId)}}"
+    matBadgePosition="below after" matBadgeColor="accent" color="primary">
+    +
+  </button>
+  <button mat-raised-button (click)="decrement(productId)" class="btn-right" color="primary">
+    -
+  </button>
+</div>
+
+<div class="btn-quantity" *ngIf="cart.itemInCart(productId) && cartLogo">
+  <button mat-button color="primary" (click)="increment(productId)" class="btn-left" style="width: 33%;">+</button>
+  <button mat-button class="btn-mid" style="width: 33%;">
+    <mat-icon matBadge="{{cart.itemCount(productId)}}">shopping_cart</mat-icon>
+  </button>
+  <button mat-button color="warn" (click)="decrement(productId)" class="btn-right" style="width: 33%;">-</button>
+</div>
