@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "ecom-projet"
+  },
+  "targets": {
+    "ecom-projet": {
+      "hosting": {
+        "ClientApp": [
+          "ecom-projet"
+        ]
+      }
+    }
   }
 }

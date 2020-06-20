@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import { SharedModule } from './shared/shared.module';
+import { SharedModule } from './shared_module/shared.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CartService } from './services/cart-service/cart.service';
@@ -15,21 +15,32 @@ import { CategoryService } from './services/category-service/category.service';
 import { OrderService } from './services/order-service/order.service';
 import { ProductService } from './services/product-service/product.service';
 import { ReviewService } from './services/review-service/review.service';
-import { RoleService } from './services/role-service/role.service';
 import { SidenavService } from './services/sidenav-service/sidenav.service';
 import { UploadFilesService } from './services/upload-files-service/upload-files.service';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireStorageModule } from '@angular/fire/storage';
+import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
+import { AuthInterceptor } from './interceptors/http.interceptor';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [AppRoutingModule, SharedModule.forRoot(), BrowserModule, BrowserAnimationsModule],
+  imports: [
+    AppRoutingModule,
+    SharedModule.forRoot(),
+    BrowserModule,
+    BrowserAnimationsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
+    AngularFireAuthModule,
+  ],
   providers: [
     AuthService,
     CategoryService,
     OrderService,
     ProductService,
     ReviewService,
-    RoleService,
     AccountService,
     HttpClient,
     CartService,
@@ -38,6 +49,11 @@ import { CookieService } from 'ngx-cookie-service';
     SidenavService,
     UploadFilesService,
     CookieService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })

@@ -16,102 +16,25 @@ import { take } from 'rxjs/operators';
 })
 export class MyReviewsComponent implements OnInit {
   myReviews: ProductReview[] = [];
-  myProducts: Map<number, Product> = new Map<number, Product>();
-  currentUser: User;
-  idOfReviewToModify = 0;
-  productReviewModified: ProductReview = new ProductReview(0, null, 5, '', 0);
+  p: number = 1;
 
-  constructor(
-    private reviewService: ReviewService,
-    private accountService: AccountService,
-    private snackBar: MatSnackBar,
-    private router: Router,
-    private productService: ProductService
-  ) {}
+  constructor(private reviewService: ReviewService, private snackBar: MatSnackBar, private router: Router) {}
 
   ngOnInit() {
-    this.accountService.loadCurrentUser();
-    this.accountService.getCurrentUser().subscribe((user) => {
-      this.currentUser = user;
-      this.loadMuReviews();
-    });
-  }
-
-  private loadMuReviews() {
     this.reviewService
-      .getReviewsByUser(this.currentUser.userEmail)
+      .getReviews()
       .pipe(take(1))
-      .subscribe((reviews) => {
-        this.myReviews = reviews;
-        this.myReviews.forEach((review) => this.myProducts.set(review.productId, new Product()));
-        this.productService
-          .getProductsByIds(this.myReviews.map((review) => review.productId))
-          .pipe(take(1))
-          .subscribe((products) => products.forEach((product) => this.myProducts.set(product.productId, product)));
+      .subscribe((res) => {
+        console.log(res);
+        this.myReviews = res.data;
       });
   }
 
-  editReview(reviewId: number) {
-    this.productReviewModified = this.myReviews.find((review) => review.id === reviewId);
-    this.idOfReviewToModify = reviewId;
-  }
-
-  deleteReview(reviewId: number) {
-    this.reviewService
-      .deleteReview(reviewId)
-      .pipe(take(1))
-      .subscribe(
-        (response) => {
-          this.snackBar.open('review removed', 'Ok');
-          this.reviewService
-            .getReviewsByUser(this.currentUser.userEmail)
-            .pipe(take(1))
-            .subscribe((reviews) => {
-              this.myReviews = reviews;
-            });
-        },
-        (error) => {
-          console.log(error);
-          this.snackBar.open('error try later', 'Ok');
-        }
-      );
-  }
-
-  modifyRating(rating: number) {
-    this.productReviewModified.userRating = rating;
-  }
-
-  saveModifiedReview(reviewId: number) {
-    const productId = this.myReviews.find((review) => review.id === reviewId).productId;
-    this.idOfReviewToModify = 0;
-    this.productReviewModified.productId = productId;
-    if (this.currentUser.userEmail) {
-      this.productReviewModified.user = this.currentUser;
-      this.reviewService
-        .updateReview(this.productReviewModified)
-        .pipe(take(1))
-        .subscribe(
-          (review) => {
-            this.snackBar.open('Review Added', 'OK', { duration: 2000 });
-            this.loadMuReviews();
-            this.productReviewModified = new ProductReview(0, null, 5, '', 0);
-          },
-          (error) => {
-            console.log(error);
-            this.snackBar.open('Error, try later', 'Ok', { duration: 2000 });
-          }
-        );
-    } else {
-      this.router.navigate(['auth/signin']);
-    }
-  }
-
-  cancelModification() {
-    this.idOfReviewToModify = 0;
-    this.productReviewModified = new ProductReview(0, null, 5, '', 0);
+  pageReviewChange(e) {
+    this.p = e;
   }
 
   goProduct(productId: number) {
-    this.router.navigate(['store/product/' + productId]);
+    this.router.navigate(['store', 'products', productId]);
   }
 }

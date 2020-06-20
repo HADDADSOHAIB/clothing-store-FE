@@ -50,16 +50,36 @@
           </mat-chip-list>
         </mat-form-field>
 
-        <!-- <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (onFileDropped)="uploadFile($event)">
-          <input hidden type="file" #fileInput (change)="uploadFile($event.target.files)">
-          <p>Drag and drop an image</p>
+        <div class="images">
+          <div class="cover-image">
+            <input hidden type="file" #fileCover (change)="selectCover($event)">
+            <p (click)="fileCover.click()">Cover Image</p>
+
+            <div *ngIf="coverImage" class="images">
+              <mat-icon matTooltip="{{ coverImage.name }}">photo</mat-icon>
+              <mat-icon matTooltip="delete" class="delete" (click)="deselectCover()" color="warn">clear</mat-icon>
+              <span *ngIf="coverPer">{{ coverPer }} %</span>
+            </div>
+            <div *ngIf="!coverImage">
+              <small>No Image</small>
+            </div>
+          </div>
+          <div class="product-images">
+            <input hidden type="file" #fileImages (change)="selectImages($event)" multiple>
+            <p (click)="fileImages.click()">Product Images</p>
+
+            <div *ngIf="productImages.length">
+              <div *ngFor="let image of productImages; index as i" class="images">
+                <mat-icon matTooltip="{{ image.name }}">photo</mat-icon>
+                <mat-icon matTooltip="delete" class="delete" (click)="deselectImage(i)" color="warn">clear</mat-icon>
+                <span *ngIf="imagesPer[i]">{{ imagesPer[i] }} %</span>
+              </div>
+            </div>
+            <div *ngIf="!productImages.length">
+              <small>No Images</small>
+            </div>
+          </div>
         </div>
-        <div>
-          <button mat-button class="delete-file" *ngFor="let file of files;index as i">
-            <mat-icon matTooltip="{{ file.name }}">photo</mat-icon>
-            <mat-icon matTooltip="delete" (click)="deleteAttachment(i)" color="warn">clear</mat-icon>
-          </button>
-        </div> -->
 
       </form>
     </mat-card-content>
@@ -67,15 +87,20 @@
       <button mat-raised-button color="primary" (click)="save()">Save</button>
     </div>
   </mat-card>
-
-  <!-- <div class="container">
-    <mat-card *ngFor="let url of imageUrls;index as i" class="image">
-      <mat-card-content>
-        <div>
-          <mat-icon (click)="deleteImage(i)" class="delete" matTooltip="delete">clear</mat-icon>
-        </div>
-        <img mat-card-image [src]="url" alt="product image" class="image">
-      </mat-card-content>
-    </mat-card>
-  </div> -->
+  <div class="display-images">
+    <div class="image"
+      style="background-image: url({{product.coverImage}}); background-position: center; background-size: cover;">
+      <div class="options-cover">
+        <mat-chip *ngIf="product.coverImage">Cover Image</mat-chip>
+      </div>
+    </div>
+    <div class="image" *ngFor="let image of this.product.images; index as i"
+      style="background-image: url({{image}}); background-position: center; background-size: cover;">
+      <div class="options-images">
+        <button mat-mini-fab color="warn" matTooltip="delete" (click)="deleteImage(i)">
+          <mat-icon>clear</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>

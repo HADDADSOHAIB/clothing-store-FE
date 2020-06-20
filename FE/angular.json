@@ -124,9 +124,16 @@
               "devServerTarget": "ClientApp:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }
   },
-  "defaultProject": "ClientApp"
+  "defaultProject": "ClientApp",
+  "cli": {
+    "analytics": "9d991f78-5aa3-4392-955a-418e56faeac6"
+  }
 }

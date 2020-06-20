@@ -1,64 +1,59 @@
-<div class="main" fxLayout="column" fxLayoutAlign="start center">
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Shipping informations</mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-            <form [formGroup]="form" fxLayout="column" fxLayoutAlign="start start">
-                <div fxLayout="row" fxLayoutAlign="pace-between start" class="sec-field">
-                    <mat-form-field class="sec-field">
-                        <input matInput placeholder="first name" formControlName="firstName" required>
-                    </mat-form-field >
-                    <mat-form-field class="sec-field">
-                        <input matInput placeholder="last name" formControlName="lastName" required>
-                    </mat-form-field>
-                </div>
-                <mat-form-field class="prim-field">
-                    <input matInput placeholder="phone number" formControlName="phoneNumber" required>
-                </mat-form-field>
-                <mat-form-field class="prim-field">
-                    <mat-label>Select an address</mat-label>
-                    <mat-select (selectionChange)="updateForm($event)">
-                        <mat-option *ngFor="let address of user.addresses" [value]="address.id">
-                            {{address.firstLine}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-                <mat-form-field class="prim-field">
-                    <input matInput placeholder="address first line" formControlName="firstLine" required>
-                </mat-form-field>
-
-                <mat-form-field class="prim-field">
-                    <input matInput placeholder="address second line" formControlName="secondLine">
-                </mat-form-field>
-                
-                <div fxLayout="row" fxLayoutAlign="pace-between start" class="sec-field">
-                    <mat-form-field class="sec-field">
-                        <input matInput placeholder="city" formControlName="city" required>
-                    </mat-form-field>
-                    <mat-form-field class="sec-field">
-                        <input matInput placeholder="state" formControlName="state">
-                    </mat-form-field>
-                </div>
-                <div fxLayout="row" fxLayoutAlign="pace-between start" class="sec-field">
-                    <mat-form-field class="sec-field">
-                        <input matInput placeholder="country" formControlName="country">
-                    </mat-form-field>
-                    <mat-form-field class="sec-field">
-                        <input matInput placeholder="zip code" formControlName="zipCode" required>
-                    </mat-form-field>
-                </div>
-            </form>
-        </mat-card-content>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center" >
-            <button mat-button color="primary" (click)="goStore()">
-                <mat-icon>chevron_left</mat-icon>
-                Continue Shopping
-            </button>
-            <button mat-button color="primary" [disabled]="form.invalid" (click)="placeOrder()">
-                Place Order
-                <mat-icon>chevron_right</mat-icon>
-            </button>
-        </mat-card-actions>
-    </mat-card>
+<div class="container">
+  <mat-card class="form-card">
+    <mat-card-header>
+      <mat-card-title>Shipping informations</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="form">
+        <div class="name">
+          <mat-form-field appearance="outline">
+            <mat-label>first name</mat-label>
+            <input matInput placeholder="first name..." type="text" formControlName="firstName" required>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>last name</mat-label>
+            <input matInput placeholder="last name..." type="text" formControlName="lastName" required>
+          </mat-form-field>
+        </div>
+        <mat-form-field appearance="outline" class="phone">
+          <mat-label>phone number</mat-label>
+          <input matInput placeholder="phone number..." type="tel" formControlName="phone" required>
+        </mat-form-field>
+        
+        <mat-form-field appearance="outline" class="address">
+          <mat-label>address first line</mat-label>
+          <input matInput placeholder="address first line..." formControlName="firstLine" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="address">
+          <mat-label>address second line</mat-label>
+          <input matInput placeholder="address second line..." formControlName="secondLine">
+        </mat-form-field>
+        <div class="address-details">
+          <mat-form-field appearance="outline">
+            <mat-label>city</mat-label>
+            <input matInput placeholder="city" formControlName="city" required>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>state</mat-label>
+            <input matInput placeholder="state" formControlName="state">
+          </mat-form-field>
+        </div>
+        <div class="address-details">
+          <mat-form-field appearance="outline">
+            <mat-label>country</mat-label>
+            <input matInput placeholder="country" formControlName="country" required>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>zip code</mat-label>
+            <input matInput placeholder="zip code" formControlName="zipCode" required>
+          </mat-form-field>
+        </div>
+        <div class="options">
+          <button mat-raised-button color="primary" (click)="placeOrder()">
+            Place Order
+          </button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
 </div>

@@ -1,0 +1,81 @@
+<div class="product-section">
+  <div class="display" *ngIf="product.id">
+    <mat-carousel timings="250ms ease-in" [autoplay]="true" interval="5000" color="accent" maxWidth="auto"
+      proportion="50" [slides]="product.images.length + 1" [loop]="true" [hideArrows]="false" [hideIndicators]="false"
+      [useKeyboard]="true" [useMouseWheel]="false" orientation="ltr">
+      <mat-carousel-slide [image]="product.coverImage" overlayColor="#00000040" [hideOverlay]="false">
+      </mat-carousel-slide>
+      <mat-carousel-slide *ngFor="let image of product.images; let i = index" [image]="image" overlayColor="#00000040"
+        [hideOverlay]="false">
+      </mat-carousel-slide>
+    </mat-carousel>
+  </div>
+  <div class="options">
+    <mat-card class="card-actions">
+      <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>price: {{ product.price | currency: 'USD' }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions class="actions">
+        <app-cart-actions [productId]="product.id" [cartLogo]="true" *ngIf="product.id"></app-cart-actions>
+      </mat-card-actions>
+    </mat-card>
+    <div class="card-description">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>About the product:</mat-card-title>
+          <rating-bar [rating]="product.rating" readOnly="true"></rating-bar>
+        </mat-card-header>
+        <mat-card-content>
+          <p class="description">
+            {{ product.description }}
+          </p>
+          <div class="categories">
+            <p>Category:</p>
+            <mat-chip-list>
+              <mat-chip *ngFor="let category of product.categories">
+                {{ category.name }}
+              </mat-chip>
+            </mat-chip-list>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+<mat-card class="new-review">
+  <mat-card-header>
+    <mat-card-title>New Review</mat-card-title>
+    <rating-bar [rating]="newReview.rating" (ratingChange)="changeNewRating($event)"></rating-bar>
+  </mat-card-header>
+  <mat-card-actions>
+    <div class="form">
+      <mat-form-field appearance="outline">
+        <mat-label>user review ...</mat-label>
+        <textarea matInput [(ngModel)]="newReview.review" (keydown)="controleNewReview()"></textarea>
+        <mat-hint>{{newReview.review.length}}/50</mat-hint>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="saveNewReview()">save</button>
+    </div>
+  </mat-card-actions>
+</mat-card>
+
+<mat-card class="reviews">
+  <mat-card-header>
+    <mat-card-title>Reviews</mat-card-title>
+  </mat-card-header>
+  <mat-card-actions>
+    <div *ngIf="product.reviews.length">
+      <div class="reviews-list">
+        <app-product-review *ngFor="let review of product.reviews | paginate: { itemsPerPage: 3, currentPage: p }" [review]="review"></app-product-review>
+      </div>
+      <div class="pagination-review">
+        <pagination-controls (pageChange)="pageReviewChange($event)"></pagination-controls>
+      </div>
+    </div>
+    <div class="reviews-list" *ngIf="!product.reviews.length">
+      <p>No reviews are available, be the first</p>
+    </div>
+  </mat-card-actions>
+</mat-card>
+

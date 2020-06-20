@@ -5,29 +5,16 @@ import { Observable, of } from 'rxjs';
 import { ProductReview } from 'src/app/models/product-review';
 
 @Injectable({
-	providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReviewService {
+  constructor(private httpClient: HttpClient) {}
 
-	constructor(
-		private httpClient: HttpClient
-	) { }
+  createReview(review: ProductReview) {
+    return this.httpClient.post(`${BACK_END}products/${review.productId}/reviews`, review) as Observable<any>;
+  }
 
-	getReviewsByUser(email: string) {
-		if (email == '') {
-			return of([]);
-		} else {
-		return this.httpClient.get(BACK_END + 'reviews?email=' + email) as Observable<ProductReview[]>;
-		}
-	}
-	addReview(productReview: ProductReview) {
-		return this.httpClient.post(BACK_END + 'reviews', productReview) as Observable<ProductReview>;
-	}
-
-	updateReview(productReview: ProductReview) {
-		return this.httpClient.put(BACK_END + 'reviews/' + productReview.id, productReview) as Observable<ProductReview>;
-	}
-	deleteReview(reviewId: number) {
-		return this.httpClient.delete(BACK_END + 'reviews/' + reviewId);
-	}
+  getReviews() {
+    return this.httpClient.get(`${BACK_END}reviews`) as Observable<any>;
+  }
 }

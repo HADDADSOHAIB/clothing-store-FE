@@ -1,10 +1,10 @@
 <mat-sidenav-container>
-    <mat-sidenav #sidenav [opened]="showSidenav" mode="side">
-        <user-navbar></user-navbar> 
-    </mat-sidenav>
-    <mat-sidenav-content>
-        <div style="height: 86vh;">
-            <router-outlet></router-outlet>
-        </div>
-    </mat-sidenav-content>
+  <mat-sidenav #sidenav [opened]="showSidenav" mode="side">
+    <user-navbar></user-navbar>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="main-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
 </mat-sidenav-container>

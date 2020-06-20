@@ -1,0 +1,71 @@
+* {
+  font-family: 'Architects Daughter', cursive;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
+
+  mat-card {
+    width: 400px;
+    margin: 0 0 20px;
+  }
+
+  .items {
+    margin-bottom: 5px;
+  }
+
+  .product {
+    display: flex;
+    justify-content: space-between;
+
+    h3,
+    p {
+      margin: 0;
+    }
+  }
+
+  .total {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .shipping {
+    display: flex;
+    justify-content: space-between;
+
+    h3,
+    p {
+      margin: 5px 0;
+    }
+  }
+
+  .address {
+    display: flex;
+    justify-content: center;
+
+    h3,
+    p {
+      margin: 5px 0;
+    }
+  }
+}
+
+.options-card {
+  margin-bottom: 20px;
+  width: 400px;
+
+  mat-card-title {
+    font-family: 'Architects Daughter', cursive;
+  }
+
+  .options {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-top: 10px;
+    width: 100%;
+  }
+}

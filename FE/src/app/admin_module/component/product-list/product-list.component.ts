@@ -24,6 +24,10 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.productService.options.subscribe((opt) => this.loadProducts());
+  }
+
+  private loadProducts() {
     this.productService
       .getProducts()
       .pipe(take(1))
@@ -31,5 +35,9 @@ export class ProductListComponent implements OnInit {
         this.products = res;
         this.products$.next(this.products);
       });
+  }
+
+  edit(product: Product) {
+    this.router.navigate(['admin/product/', product.id]);
   }
 }

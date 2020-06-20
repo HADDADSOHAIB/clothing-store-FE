@@ -1,76 +1,34 @@
-import { Component, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { take } from 'rxjs/operators';
-import { pipe } from 'rxjs';
+import { pipe, BehaviorSubject } from 'rxjs';
 import { Order } from 'src/app/models/order';
 import { OrderService } from 'src/app/services/order-service/order.service';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
-	selector: 'app-orders-list',
-	templateUrl: './orders-list.component.html',
-	styleUrls: ['./orders-list.component.scss']
+  selector: 'app-orders-list',
+  templateUrl: './orders-list.component.html',
+  styleUrls: ['./orders-list.component.scss'],
 })
 export class OrdersListComponent implements OnInit {
+  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  dataSource = new MatTableDataSource<Order>([]);
 
-	orders: Order[] = [];
-	displayedColumns: string[] = ['OrderDate', 'OrderedBy', 'Status', 'Options'];
-	defaultDate = new Date(2010, 0, 1);
+  constructor(private orderService: OrderService, private router: Router) {}
 
-	currentPage = 1;
-	availableOrdersCount = 0;
-	itemsPerPage = 10;
+  ngOnInit() {
+    this.orderService
+      .getOrders(null)
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.dataSource = new MatTableDataSource<Order>(res);
+        this.dataSource.paginator = this.paginator;
+      });
+  }
 
-	sort: string[] = [];
-	sortDirection: Map<string, string> = new Map<string, string>();
-	selectedSortElement = '';
-
-	constructor(
-		private orderService: OrderService,
-		private router: Router
-	) { }
-
-	async ngOnInit() {
-		this.sortDirection.set('userEmail', 'asc');
-		this.sortDirection.set('orderDate', 'asc');
-
-		this.availableOrdersCount = await this.orderService.getOrdersCount(this.currentPage - 1, this.itemsPerPage).toPromise();
-		console.log(this.availableOrdersCount);
-		this.getOrders();
-	}
-
-	private getOrders(sort: string[]= ['orderDate', 'desc']) {
-		this.orderService.getOrders(this.currentPage - 1, this.itemsPerPage, sort).pipe(take(1)).subscribe(orders => {
-			this.orders = orders.map(order => new Order(order.id, order.userEmail, order.orderItems, order.shippingInfo, new Date(order.orderDate), new Date(order.processedDate), new Date(order.inRouteDate), new Date(order.deliveryDate), new Date(order.deliveryConfirmationDate), new Date(order.cancelationDate)));
-		});
-	}
-
-	goOrder(id: number) {
-		this.router.navigate(['admin/order/' + id]);
-	}
-
-	changeItemsPerPage($event: string) {
-		this.itemsPerPage = parseInt($event);
-		this.currentPage = 1;
-		this.getOrders(this.sort);
-	}
-
-	changePageNumber($event: string) {
-		this.currentPage = parseInt($event);
-		this.getOrders(this.sort);
-	}
-
-	sortBy(sortElement: string) {
-		['userEmail', 'orderDate'].forEach(columnTitle => {
-			if (columnTitle.toLowerCase() === sortElement.toLowerCase()) {
-				this.sortDirection.get(sortElement) === 'asc' ?
-					this.sortDirection.set(sortElement, 'desc') : this.sortDirection.set(sortElement, 'asc');
-				this.sort = [];
-				this.sort.push(sortElement);
-				this.sort.push(this.sortDirection.get(sortElement));
-				this.currentPage = 1;
-				this.getOrders(this.sort);
-				this.selectedSortElement = sortElement;
-			}
-		});
-	}
+  goOrder(id: number) {
+    this.router.navigate(['admin', 'order', id]);
+  }
 }

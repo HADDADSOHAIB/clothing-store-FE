@@ -13,42 +13,32 @@ import { CookieService } from 'ngx-cookie-service';
 export class AccountService {
   currentUser$: BehaviorSubject<User> = new BehaviorSubject(undefined);
 
-  constructor(
-    private httpClient: HttpClient,
-    private cookieService: CookieService  
-  ) {
-  }
+  constructor(private httpClient: HttpClient, private cookieService: CookieService) {}
 
   loadCurrentUser() {
     const token = this.cookieService.get('token');
 
     if (token) {
-      this.httpClient.post(BACK_END + 'users/token', { token }).pipe(take(1))
+      this.httpClient
+        .post(BACK_END + 'users/token', { token })
+        .pipe(take(1))
         .subscribe(
           (res) => {
             const { id, userEmail, userName, firstName, lastName, phoneNumber, role } = res['data'];
-            this.currentUser$.next(new User(id, userEmail, userName, firstName, lastName, phoneNumber, null, role, null, null));
+            this.currentUser$.next(
+              new User(id, userEmail, userName, firstName, lastName, phoneNumber, null, role, null, null)
+            );
           },
           (err) => {
             this.currentUser$.next(undefined);
           }
         );
+    } else {
+      this.currentUser$.next(undefined);
     }
   }
 
   updateUserProfile(user: User) {
-    return this.httpClient.put(BACK_END + 'users/' + user.id, user) as Observable<User>;
-  }
-
-  addAddress(id: number, address: Address) {
-    return this.httpClient.post(BACK_END + 'addresses/' + id, address);
-  }
-
-  deleteAddress(id: number) {
-    return this.httpClient.delete(BACK_END + 'addresses/' + id);
-  }
-
-  getAllUsers() {
-    return this.httpClient.get(BACK_END + 'users') as Observable<any>;
+    return this.httpClient.patch(BACK_END + 'users/updateme', user) as Observable<any>;
   }
 }

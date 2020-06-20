@@ -1,24 +1,28 @@
-div.table{
-    display: flex;
-    justify-content: center;
+* {
+  font-family: 'Architects Daughter', cursive;
 }
 
+.container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 20px;
 
-table{
-    width:650px;
-    margin:10px;
-    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2),
-        0 1px 1px 0 rgba(0,0,0,.14),
-        0 1px 3px 0 rgba(0,0,0,.12);
+  table {
+    width: 750px;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2),
+      0 1px 1px 0 rgba(0, 0, 0, .14),
+      0 1px 3px 0 rgba(0, 0, 0, .12);
 
-}
+    .status {
+      padding: 10px;
+    }
+  }
 
-button{
-    margin: 5px;
-}
-
-a{
-    margin: 16px;
-    display: block;
-    margin-left: 0px;
+  .paginator {
+    margin: 20px;
+    box-shadow: 0 2px 1px -1px rgba(0, 0, 0, .2),
+      0 1px 1px 0 rgba(0, 0, 0, .14),
+      0 1px 3px 0 rgba(0, 0, 0, .12);
+  }
 }

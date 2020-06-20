@@ -1,21 +1,25 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SidenavService } from '../services/sidenav-service/sidenav.service';
+import { ProductService } from '../services/product-service/product.service';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { Product } from '../models/product';
 
 @Component({
-	selector: 'app-store',
-	templateUrl: './store.component.html',
-	styleUrls: ['./store.component.scss']
+  selector: 'app-store',
+  templateUrl: './store.component.html',
+  styleUrls: ['./store.component.scss'],
 })
-export class StoreComponent implements OnInit {
+export class StoreComponent implements OnInit, OnDestroy {
+  products$: BehaviorSubject<Product[]> = new BehaviorSubject([]);
+  s: Subscription;
 
-	showSidenav = true;
+  constructor(private productService: ProductService) {}
 
-	constructor(
-		private sidenavService: SidenavService
-	) { }
+  ngOnInit() {
+    this.s = this.productService.getProducts().subscribe((products) => this.products$.next(products));
+  }
 
-	ngOnInit() {
-		this.sidenavService.showSidenave.subscribe(bool => this.showSidenav = bool);
-	}
-
+  ngOnDestroy() {
+    this.s.unsubscribe();
+  }
 }
