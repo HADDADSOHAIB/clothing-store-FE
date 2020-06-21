@@ -4,7 +4,6 @@ import { BACK_END } from 'backend';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { take } from 'rxjs/operators';
 import { User } from 'src/app/models/user';
-import { Address } from 'src/app/models/address';
 import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({

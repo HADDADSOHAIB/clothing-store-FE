@@ -35,6 +35,9 @@
               <mat-option value="{{category.id}}" *ngFor="let category of categories">
                 {{category.name}}
               </mat-option>
+              <mat-option *ngIf="!categories.length">
+                There is no categories, create a new one.
+              </mat-option>
             </mat-select>
           </mat-form-field>
           <button mat-raised-button (click)="goCategories()">add category</button>
@@ -84,14 +87,18 @@
       </form>
     </mat-card-content>
     <div class="btns">
-      <button mat-raised-button color="primary" (click)="save()">Save</button>
+      <button mat-raised-button color="primary" [disabled]="saveStatus"
+      (click)="save()" matTooltip="{{ saveStatus ? 'waiting for images upload' : 'save the product'}}">
+        Save
+      </button>
     </div>
   </mat-card>
   <div class="display-images">
     <div class="image"
-      style="background-image: url({{product.coverImage}}); background-position: center; background-size: cover;">
+      style="background-image: url({{product.coverImage}}); background-position: center; background-size: cover;"
+      *ngIf="product.coverImage">
       <div class="options-cover">
-        <mat-chip *ngIf="product.coverImage">Cover Image</mat-chip>
+        <mat-chip>Cover Image</mat-chip>
       </div>
     </div>
     <div class="image" *ngFor="let image of this.product.images; index as i"

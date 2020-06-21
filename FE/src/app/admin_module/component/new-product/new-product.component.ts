@@ -31,6 +31,7 @@ export class NewProductComponent implements OnInit, OnDestroy {
   form: FormGroup;
   product: Product = new Product(null, null, null, null, [], null, null, null, null, null);
   categories: Category[] = [];
+  saveStatus: Boolean = false;
 
   constructor(
     private productService: ProductService,
@@ -95,6 +96,7 @@ export class NewProductComponent implements OnInit, OnDestroy {
     } else if (!this.product.coverImage && !this.coverImage) {
       this.snackBar.open('Cover Image is required', 'Ok', { duration: 2000 });
     } else if (this.form.valid) {
+      this.saveStatus = true;
       this.auth.signInAnonymously().then((res) => {
         const [coverRef, ...imagesRefs] = this.uploadImages();
 
@@ -134,14 +136,18 @@ export class NewProductComponent implements OnInit, OnDestroy {
                   .subscribe(
                     (res) => {
                       this.resetAllFields();
+                      this.saveStatus = false;
                       this.snackBar.open('Product saved successfully', 'Ok', { duration: 2000 });
                       if (this.id !== 0) {
                         this.router.navigate(['admin', 'products']);
                       }
                     },
-                    (err) => this.snackBar.open('Unexpected error try later', 'Ok', { duration: 2000 })
+                    (err) =>{
+                      this.snackBar.open('Unexpected error try later', 'Ok', { duration: 2000 });
+                      this.saveStatus = false;
+                    }
                   );
-              }, 2500);
+              }, 500);
             }
           })
         );
@@ -189,7 +195,6 @@ export class NewProductComponent implements OnInit, OnDestroy {
       });
     }
 
-    console.log(result);
     return result;
   }
 

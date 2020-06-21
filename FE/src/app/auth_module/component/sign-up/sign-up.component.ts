@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth-service/auth.service';
 import { User } from 'src/app/models/user';
 import { CookieService } from 'ngx-cookie-service';
+import { AccountService } from 'src/app/services/account-service/account.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -22,7 +23,8 @@ export class SignUpComponent implements OnInit {
     private authService: AuthService,
     private snackBar: MatSnackBar,
     private router: Router,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private accountService: AccountService
   ) {}
 
   ngOnInit() {
@@ -67,6 +69,7 @@ export class SignUpComponent implements OnInit {
           (res) => {
             this.cookieService.set("token", res.token, 30);
             this.openSnackBar("Account Created sucessfully");
+            this.accountService.loadCurrentUser();
             this.router.navigate(['/']);
           },
           (err) => {
@@ -77,7 +80,6 @@ export class SignUpComponent implements OnInit {
             if(err.error.includes(" User name already exist")){
               message += " User name already exist."
             }
-
             this.openSnackBar(message);
           }
         );

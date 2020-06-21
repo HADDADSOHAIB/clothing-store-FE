@@ -1,5 +1,5 @@
 <div class="container">
-  <table mat-table [dataSource]="dataSource">
+  <table mat-table [dataSource]="dataSource" *ngIf="orders.length">
     <ng-container matColumnDef="Order Date">
       <th mat-header-cell *matHeaderCellDef>
         <span class="header">Order Date</span>
@@ -38,7 +38,10 @@
     <tr mat-header-row *matHeaderRowDef="['Order Date', 'User', 'Status', 'Options']"></tr>
     <tr mat-row *matRowDef="let row; columns: ['Order Date', 'User', 'Status', 'Options'];"></tr>
   </table>
-  <div class="paginator">
+  <div class="paginator" *ngIf="orders.length">
     <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+  </div>
+  <div *ngIf="!orders.length">
+    <p>There is no orders yet.</p>
   </div>
 </div>

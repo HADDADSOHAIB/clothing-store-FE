@@ -1,25 +1,14 @@
 <div class="products">
-  <mat-card>
+  <mat-card *ngIf="(products$ | async).length">
     <mat-card-content>
       <filter-and-sort></filter-and-sort>
     </mat-card-content>
   </mat-card>
   <div class="table">
-    <table mat-table [dataSource]="products$" class="mat-elevation-z8">
+    <table mat-table [dataSource]="products$" *ngIf="(products$ | async).length">
       <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef class="header">
           <span class="header">product</span>
-          <!-- <mat-icon class="header" *ngIf="selectedSortElement!=='productName'">
-            sort
-          </mat-icon>
-          <mat-icon class="header"
-            *ngIf="selectedSortElement==='productName' && sortDirection.get('productName')==='asc'">
-            arrow_drop_up
-          </mat-icon>
-          <mat-icon class="header"
-            *ngIf="selectedSortElement==='productName' && sortDirection.get('productName')==='desc'">
-            arrow_drop_down
-          </mat-icon> -->
         </th>
         <td mat-cell *matCellDef="let product"> {{product.name | formatTitleDescription: product.description}}
         </td>
@@ -28,15 +17,6 @@
       <ng-container matColumnDef="price">
         <th mat-header-cell *matHeaderCellDef>
           <span class="header">price</span>
-          <!-- <mat-icon class="header" *ngIf="selectedSortElement!=='price'">
-            sort
-          </mat-icon>
-          <mat-icon class="header" *ngIf="selectedSortElement==='price' && sortDirection.get('price')==='asc'">
-            arrow_drop_up
-          </mat-icon>
-          <mat-icon class="header" *ngIf="selectedSortElement==='price' && sortDirection.get('price')==='desc'">
-            arrow_drop_down
-          </mat-icon> -->
         </th>
         <td mat-cell *matCellDef="let product">{{product.price | currency:'MAD'}}</td>
       </ng-container>
@@ -44,15 +24,6 @@
       <ng-container matColumnDef="quantity">
         <th mat-header-cell *matHeaderCellDef class="quantity">
           <span class="header">quantity</span>
-          <!-- <mat-icon class="header" *ngIf="selectedSortElement!=='quantity'">
-            sort
-          </mat-icon>
-          <mat-icon class="header" *ngIf="selectedSortElement==='quantity' && sortDirection.get('quantity')==='asc'">
-            arrow_drop_up
-          </mat-icon>
-          <mat-icon class="header" *ngIf="selectedSortElement==='quantity' && sortDirection.get('quantity')==='desc'">
-            arrow_drop_down
-          </mat-icon> -->
         </th>
         <td mat-cell *matCellDef="let product">{{product.quantity}}</td>
       </ng-container>
@@ -71,8 +42,11 @@
       <tr mat-header-row *matHeaderRowDef="['name', 'price', 'quantity', ' ']" class="header"></tr>
       <tr mat-row *matRowDef="let row; columns: ['name', 'price', 'quantity', ' '];"></tr>
     </table>
-    <div class="paginator">
+    <div class="paginator" *ngIf="(products$ | async).length">
       <paginator></paginator>
+    </div>
+    <div *ngIf="!(products$ | async).length">
+      <p class="message">There is no products yet.</p>
     </div>
   </div>
 </div>
