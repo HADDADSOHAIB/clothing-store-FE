@@ -17,7 +17,7 @@ export class UserGuard implements CanActivate {
   ) {
     return this.accountService.currentUser$.pipe(
         map((user) => {
-          if (user && user.role.includes('user')) {
+          if (user) {
             return true;
           } else {
             this.snackBar.open('Only users are allowed', 'Ok');

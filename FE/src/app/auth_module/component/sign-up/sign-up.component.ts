@@ -73,12 +73,13 @@ export class SignUpComponent implements OnInit {
             this.router.navigate(['/']);
           },
           (err) => {
+            console.log(err);
             let message = "Error.";
-            if(err.error.includes("Email already exist")){
-              message += " Email already exist."
+            if(err.error.message.includes("Email already exist")){
+              message += "Email already exist."
             }
-            if(err.error.includes(" User name already exist")){
-              message += " User name already exist."
+            if(err.error.message.includes("User name already exist")){
+              message += "User name already exist."
             }
             this.openSnackBar(message);
           }
