@@ -6,7 +6,7 @@
 
 ## Live demo
 
-[heroku live site](https://ecom-projet.web.app/)
+[live site](https://ecom-projet.web.app/)
 
 ![start](/FE/src/assets/readme/1.png)
 ![start](/FE/src/assets/readme/2.png)
