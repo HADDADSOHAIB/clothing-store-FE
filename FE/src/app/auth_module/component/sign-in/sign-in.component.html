@@ -2,6 +2,11 @@
   <mat-card-title>Login</mat-card-title>
   <mat-card-content>
     <form [formGroup]="form" (ngSubmit)="login()">
+      <div class="credentials">
+        <p>To try the admin dashboard, please use:</p>
+        <p>email: 'dev.haddad@gmail.com'</p>
+        <p>password: 'password'</p>
+      </div>
       <p>
         <mat-form-field appearance="outline">
           <mat-label>Email address</mat-label>
