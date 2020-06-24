@@ -6,11 +6,12 @@
 
 ## Live demo
 
-[heroku live site](https://clothing-demostore.herokuapp.com/)
+[heroku live site](https://ecom-projet.web.app/)
 
 ![start](/FE/src/assets/readme/1.png)
 ![start](/FE/src/assets/readme/2.png)
 ![start](/FE/src/assets/readme/3.png)
+![start](/FE/src/assets/readme/4.png)
 ![start](/FE/src/assets/readme/5.png)
 ![start](/FE/src/assets/readme/6.png)
 
